@@ -13,6 +13,10 @@ namespace RiftAuthenticator
             {
                 case "account_not_available":
                     return "Invalid user name or password.";
+                case "account_missing":
+                    return "No RIFT-Account or Device ID doesn't match.";
+                case "account_securityAnswers_incorrect":
+                    return "Security answer(s) incorrect.";
             }
             return string.Format("Unknown error code: {0}", errorCode);
         }
