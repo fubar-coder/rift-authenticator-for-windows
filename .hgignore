@@ -1,0 +1,5 @@
+syntax: glob
+*.suo
+syntax: regexp
+/bin/Debug$
+/obj/x86$
