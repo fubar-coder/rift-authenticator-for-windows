@@ -94,19 +94,20 @@ namespace RiftAuthenticator
             var questions = new string[2];
             foreach (var questionXml in resultXml.SelectNodes("/SecurityQuestions/*").Cast<System.Xml.XmlElement>())
             {
+                var value = (questionXml.InnerText == "null" ? null : questionXml.InnerText);
                 switch (questionXml.LocalName)
                 {
                     case "EmailAddress":
                         // Ignore
                         break;
                     case "FirstQuestion":
-                        questions[0] = questionXml.InnerText;
+                        questions[0] = value;
                         break;
                     case "SecondQuestion":
-                        questions[1] = questionXml.InnerText;
+                        questions[1] = value;
                         break;
                     case "ErrorCode":
-                        throw new TrionServerException(questionXml.InnerText);
+                        throw new TrionServerException(value);
                 }
             }
             return questions;
@@ -131,21 +132,22 @@ namespace RiftAuthenticator
 
         private static void ProcessSecretKeyResult(Configuration config, System.Xml.XmlDocument resultXml)
         {
-            foreach (var questionXml in resultXml.SelectNodes("/DeviceKey/*").Cast<System.Xml.XmlElement>())
+            foreach (var itemXml in resultXml.SelectNodes("/DeviceKey/*").Cast<System.Xml.XmlElement>())
             {
-                switch (questionXml.LocalName)
+                var value = (itemXml.InnerText == "null" ? null : itemXml.InnerText);
+                switch (itemXml.LocalName)
                 {
                     case "DeviceId":
-                        config.DeviceId = questionXml.InnerText;
+                        config.DeviceId = value;
                         break;
                     case "SerialKey":
-                        config.SerialKey = questionXml.InnerText;
+                        config.SerialKey = value;
                         break;
                     case "SecretKey":
-                        config.SecretKey = questionXml.InnerText;
+                        config.SecretKey = value;
                         break;
                     case "ErrorCode":
-                        throw new TrionServerException(questionXml.InnerText);
+                        throw new TrionServerException(value);
                 }
             }
         }
