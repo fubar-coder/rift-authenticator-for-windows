@@ -1,0 +1,164 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+
+namespace RiftAuthenticator
+{
+    /// <summary>
+    /// Interaktionslogik für MainWindow.xaml
+    /// </summary>
+    public partial class MainWindow : Window
+    {
+        Configuration Configuration = new Configuration();
+        System.Windows.Threading.DispatcherTimer Timer;
+
+        public MainWindow()
+        {
+            InitializeComponent();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            Configuration.Load();
+            RefreshToken();
+            Timer = new System.Windows.Threading.DispatcherTimer(System.Windows.Threading.DispatcherPriority.ApplicationIdle, Dispatcher);
+            Timer.Interval = new TimeSpan(0, 0, 0, 0, 200);
+            Timer.Tick += new EventHandler(Timer_Tick);
+            Timer.Start();
+        }
+
+        void RefreshToken()
+        {
+            if (Configuration.IsEmpty)
+            {
+                LoginToken.Text = "No configuration. Initialization required.";
+                SerialKey.Text = string.Empty;
+                RemainingValidTime.Value = 0;
+            }
+            else
+            {
+                if (SerialKey.Text != Configuration.FormattedSerialKey)
+                    SerialKey.Text = Configuration.FormattedSerialKey;
+                var loginToken = Configuration.CalculateToken();
+                if (LoginToken.Text != loginToken.Token)
+                    LoginToken.Text = loginToken.Token;
+                RemainingValidTime.Value = loginToken.RemainingMillis;
+            }
+        }
+
+        void Timer_Tick(object sender, EventArgs e)
+        {
+            if (Configuration.IsEmpty)
+                return;
+            RefreshToken();
+        }
+
+        private void TimeSync_Click(object sender, RoutedEventArgs e)
+        {
+            Configuration.TimeOffset = TrionServer.GetTimeOffset();
+            Configuration.Save();
+            RefreshToken();
+        }
+
+        private void Information_Click(object sender, RoutedEventArgs e)
+        {
+            var dlg = new Information(Configuration) { Owner = this };
+            dlg.ShowDialog();
+        }
+
+        private void Initialize_Click(object sender, RoutedEventArgs e)
+        {
+            if (!Configuration.IsEmpty)
+            {
+                if (MessageBox.Show("Authenticator already initialized!\nReinitialization will make you loose your current configuration!\nContinue?", "R U sure?", MessageBoxButton.OKCancel, MessageBoxImage.Warning) != MessageBoxResult.OK)
+                    return;
+            }
+
+            var dlg = new CreateNewSecretKey() { Owner = this };
+            if (!dlg.ShowDialog().GetValueOrDefault())
+                return;
+
+            var tempConfig = new Configuration()
+            {
+                DeviceId = dlg.DeviceId.Text,
+            };
+            TrionServer.CreateSecurityKey(tempConfig);
+            tempConfig.TimeOffset = TrionServer.GetTimeOffset();
+            tempConfig.Save();
+            Configuration.Load();
+            RefreshToken();
+
+            Clipboard.SetText(Configuration.DeviceId);
+            MessageBox.Show(string.Format("The device id has been copied into your clipboard.\nSave it!\nIt's required to use the restore functionality!\nThe device id is {0}", Configuration.DeviceId), "Remember you device id", MessageBoxButton.OK, MessageBoxImage.Warning);
+        }
+
+        private void Recover_Click(object sender, RoutedEventArgs e)
+        {
+            var dlgDeviceId = new QueryDeviceId() { Owner = this };
+            if (!dlgDeviceId.ShowDialog().GetValueOrDefault())
+                return;
+            var deviceId = dlgDeviceId.DeviceId.Text.Trim();
+            if (string.IsNullOrEmpty(deviceId))
+            {
+                MessageBox.Show("No device ID given.", "Bad boy!", MessageBoxButton.OK);
+                return;
+            }
+            var dlgLogin = new Login() { Owner = this };
+            if (!dlgLogin.ShowDialog().GetValueOrDefault())
+                return;
+            
+            var userEmail = dlgLogin.Email.Text;
+            var userPassword = dlgLogin.Password.Password;
+
+            if (string.IsNullOrEmpty(userEmail) || string.IsNullOrEmpty(userPassword))
+            {
+                MessageBox.Show("No user name or password given.", "Bad boy!", MessageBoxButton.OK);
+                return;
+            }
+
+            var questions = TrionServer.GetSecurityQuestions(userEmail, userPassword);
+
+            var dlgSecurityQuestions = new SecurityQuestions() { Owner = this };
+            dlgSecurityQuestions.SecurityAnswer1.IsEnabled =
+                dlgSecurityQuestions.SecurityQuestion1.IsEnabled = !string.IsNullOrEmpty(questions[0]);
+            dlgSecurityQuestions.SecurityAnswer2.IsEnabled =
+                dlgSecurityQuestions.SecurityQuestion2.IsEnabled = !string.IsNullOrEmpty(questions[1]);
+            dlgSecurityQuestions.SecurityQuestion1.Text = questions[0];
+            dlgSecurityQuestions.SecurityQuestion2.Text = questions[1];
+            if (!string.IsNullOrEmpty(questions[0]))
+            {
+                dlgSecurityQuestions.SecurityAnswer1.Focus();
+            }
+            else if (!string.IsNullOrEmpty(questions[1]))
+            {
+                dlgSecurityQuestions.SecurityAnswer2.Focus();
+            }
+            if (!dlgSecurityQuestions.ShowDialog().GetValueOrDefault())
+                return;
+
+            var securityAnswers = new string[2] {
+                dlgSecurityQuestions.SecurityAnswer1.Text,
+                dlgSecurityQuestions.SecurityAnswer2.Text,
+            };
+            var tempConfig = new Configuration()
+            {
+                DeviceId = deviceId,
+            };
+            TrionServer.RecoverSecurityKey(userEmail, userPassword, securityAnswers, tempConfig);
+            tempConfig.TimeOffset = TrionServer.GetTimeOffset();
+            tempConfig.Save();
+            Configuration.Load();
+            RefreshToken();
+        }
+    }
+}
