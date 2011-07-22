@@ -121,23 +121,24 @@ namespace RiftAuthenticator
 
             try
             {
-                ExecuteInit();
+                if (ExecuteInit())
+                {
+                    Clipboard.SetText(Configuration.DeviceId);
+                    MessageBox.Show(string.Format("The device id has been copied into your clipboard.\nSave it!\nIt's required to use the restore functionality!\nThe device id is {0}", Configuration.DeviceId), "Remember you device id", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-
-            Clipboard.SetText(Configuration.DeviceId);
-            MessageBox.Show(string.Format("The device id has been copied into your clipboard.\nSave it!\nIt's required to use the restore functionality!\nThe device id is {0}", Configuration.DeviceId), "Remember you device id", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
 
-        private void ExecuteInit()
+        private bool ExecuteInit()
         {
             var dlg = new CreateNewSecretKey() { Owner = this };
             if (!dlg.ShowDialog().GetValueOrDefault())
-                return;
+                return false;
 
             var tempConfig = new Configuration()
             {
@@ -148,6 +149,7 @@ namespace RiftAuthenticator
             tempConfig.Save();
             Configuration.Load();
             RefreshToken();
+            return true;
         }
 
         private void ExecuteRecovery()
