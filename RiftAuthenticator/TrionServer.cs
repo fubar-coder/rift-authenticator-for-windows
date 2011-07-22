@@ -1,5 +1,5 @@
 ﻿#define USE_WEB_REQUEST
-//#define USE_HTTP_POST
+#define USE_HTTP_POST
 
 using System;
 using System.Collections.Generic;
@@ -13,6 +13,21 @@ namespace RiftAuthenticator
         const string TrionApiServer = "https://rift.trionworlds.com";
         const string TrionAuthServer = "https://auth.trionworlds.com";
 
+        public static string UserAgent
+        {
+            get
+            {
+                return string.Format("RIFT Mobile Authenticator {0}; Android {1} ({2}); {3}, {4}, {5};",
+                    "1.0.4",    // Authenticator version
+                    "2.3.3",    // Android version
+                    10,         // Android SDK version
+                    "GINGERBREAD",  // Android product (don't know if this is correct...)
+                    "HTC Desire",   // Cell phone model (don't know if this is correct...)
+                    "O2"        // Cell phone brand (don't know if this is correct...)
+                );
+            }
+        }
+
         private static byte[] ExecuteRequest(Uri uri)
         {
             return ExecuteRequest(uri, new Dictionary<string, string>());
@@ -20,7 +35,7 @@ namespace RiftAuthenticator
 
         private static byte[] ExecuteRequest(Uri uri, Dictionary<string, string> postVariables)
         {
-#if !USE_HTTP_POST || !USE_WEB_REQUEST
+#if (!USE_HTTP_POST && !USE_HTTP_HEADER) || !USE_WEB_REQUEST
             var uriBuilder = new UriBuilder(uri);
             var oldQuery = uriBuilder.Query;
             if (oldQuery != null && oldQuery.StartsWith("?"))
@@ -45,19 +60,24 @@ namespace RiftAuthenticator
 #if USE_WEB_REQUEST
             var request = (System.Net.HttpWebRequest)System.Net.WebRequest.Create(uri);
 #if USE_HTTP_POST
-            request.Method = System.Net.WebRequestMethods.Http.Post;
-            using (var requestStream = request.GetRequestStream())
+            if (postVariables.Count != 0)
             {
-                var requestWriter = new System.IO.StreamWriter(requestStream) { NewLine = "&" };
-                foreach (var postVariable in postVariables)
+                request.Method = System.Net.WebRequestMethods.Http.Post;
+                request.ContentType = "application/x-www-form-urlencoded";
+                using (var requestStream = request.GetRequestStream())
                 {
-                    var name = postVariable.Key;
-                    var value = postVariable.Value;
-                    requestWriter.WriteLine("{0}={1}", name, Uri.EscapeDataString(value));
+                    var requestWriter = new System.IO.StreamWriter(requestStream) { NewLine = "&" };
+                    foreach (var postVariable in postVariables)
+                    {
+                        var name = postVariable.Key;
+                        var value = postVariable.Value;
+                        requestWriter.WriteLine("{0}={1}", name, Uri.EscapeDataString(value));
+                    }
+                    requestWriter.Flush();
                 }
-                requestWriter.Flush();
             }
 #endif
+            request.UserAgent = UserAgent;
             var response = (System.Net.HttpWebResponse)request.GetResponse();
             using (var responseStream = response.GetResponseStream())
             {
@@ -67,6 +87,7 @@ namespace RiftAuthenticator
             }
 #else
             var client = new System.Net.WebClient();
+            client.Headers["User-Agent"] = UserAgent;
             return client.DownloadData(uri);
 #endif
         }
