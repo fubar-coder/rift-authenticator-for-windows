@@ -3,3 +3,4 @@ syntax: glob
 syntax: regexp
 /bin/Debug$
 /obj/x86$
+/bin/Release$
