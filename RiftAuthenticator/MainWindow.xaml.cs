@@ -65,6 +65,19 @@ namespace RiftAuthenticator
 
         private void TimeSync_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                ExecuteTimeSync();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+        }
+
+        private void ExecuteTimeSync()
+        {
             Configuration.TimeOffset = TrionServer.GetTimeOffset();
             Configuration.Save();
             RefreshToken();
@@ -84,6 +97,22 @@ namespace RiftAuthenticator
                     return;
             }
 
+            try
+            {
+                ExecuteInit();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            Clipboard.SetText(Configuration.DeviceId);
+            MessageBox.Show(string.Format("The device id has been copied into your clipboard.\nSave it!\nIt's required to use the restore functionality!\nThe device id is {0}", Configuration.DeviceId), "Remember you device id", MessageBoxButton.OK, MessageBoxImage.Warning);
+        }
+
+        private void ExecuteInit()
+        {
             var dlg = new CreateNewSecretKey() { Owner = this };
             if (!dlg.ShowDialog().GetValueOrDefault())
                 return;
@@ -97,12 +126,9 @@ namespace RiftAuthenticator
             tempConfig.Save();
             Configuration.Load();
             RefreshToken();
-
-            Clipboard.SetText(Configuration.DeviceId);
-            MessageBox.Show(string.Format("The device id has been copied into your clipboard.\nSave it!\nIt's required to use the restore functionality!\nThe device id is {0}", Configuration.DeviceId), "Remember you device id", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
 
-        private void Recover_Click(object sender, RoutedEventArgs e)
+        private void ExecuteRecovery()
         {
             var dlgDeviceId = new QueryDeviceId() { Owner = this };
             if (!dlgDeviceId.ShowDialog().GetValueOrDefault())
@@ -116,7 +142,7 @@ namespace RiftAuthenticator
             var dlgLogin = new Login() { Owner = this };
             if (!dlgLogin.ShowDialog().GetValueOrDefault())
                 return;
-            
+
             var userEmail = dlgLogin.Email.Text;
             var userPassword = dlgLogin.Password.Password;
 
@@ -159,6 +185,19 @@ namespace RiftAuthenticator
             tempConfig.Save();
             Configuration.Load();
             RefreshToken();
+        }
+
+        private void Recover_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                ExecuteRecovery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
         }
     }
 }
