@@ -7,12 +7,12 @@ using System.Windows;
 // Allgemeine Informationen über eine Assembly werden über die folgenden 
 // Attribute gesteuert. Ändern Sie diese Attributwerte, um die Informationen zu ändern,
 // die mit einer Assembly verknüpft sind.
-[assembly: AssemblyTitle("RiftAuthenticator")]
+[assembly: AssemblyTitle("RIFT Authenticator for Windows")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("RiftAuthenticator")]
-[assembly: AssemblyCopyright("Copyleft")]
+[assembly: AssemblyProduct("RIFT Authenticator for Windows")]
+[assembly: AssemblyCopyright("Copyright © Rift Authenticator for Windows Project")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
