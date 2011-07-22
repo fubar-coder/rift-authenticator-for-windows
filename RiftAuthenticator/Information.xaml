@@ -31,7 +31,7 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
-            <Button Content="OK" Grid.Column="1" HorizontalAlignment="Left" Name="CloseButton" VerticalAlignment="Top" Width="75" IsDefault="True" IsCancel="True" />
+            <Button Content="OK" Grid.Column="1" HorizontalAlignment="Left" Name="CloseButton" VerticalAlignment="Top" Margin="6" Width="75" IsDefault="True" IsCancel="True" />
         </Grid>
     </Grid>
 </Window>
