@@ -23,6 +23,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Security.Cryptography.X509Certificates;
 
 namespace RiftAuthenticator.Library
 {
@@ -202,6 +203,26 @@ namespace RiftAuthenticator.Library
             var resultXml = new System.Xml.XmlDocument();
             resultXml.Load(result);
             ProcessSecretKeyResult(config, resultXml);
+        }
+
+        public static bool CertificateIsValid(object sender, X509Certificate certificate, X509Chain chain, System.Net.Security.SslPolicyErrors sslPolicyErrors)
+        {
+            if (sslPolicyErrors != System.Net.Security.SslPolicyErrors.None)
+                return false;
+            var cert = certificate as X509Certificate2;
+            var hostName = cert.GetNameInfo(X509NameType.DnsName, false);
+            var validTrionHostNames = new string[] {
+                ".trionworlds.com",
+                ".triongames.com",
+                ".trionworld.priv",
+                ".triongames.priv",
+            };
+            foreach (var validTrionHostName in validTrionHostNames)
+            {
+                if (hostName.EndsWith(validTrionHostName))
+                    return true;
+            }
+            return false;
         }
     }
 }

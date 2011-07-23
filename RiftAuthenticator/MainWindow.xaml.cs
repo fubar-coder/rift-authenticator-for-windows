@@ -48,33 +48,13 @@ namespace RiftAuthenticator
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            System.Net.ServicePointManager.ServerCertificateValidationCallback = CertValidation;
+            System.Net.ServicePointManager.ServerCertificateValidationCallback = Library.TrionServer.CertificateIsValid;
             Configuration.Load();
             RefreshToken();
             Timer = new System.Windows.Threading.DispatcherTimer(System.Windows.Threading.DispatcherPriority.ApplicationIdle, Dispatcher);
             Timer.Interval = new TimeSpan(0, 0, 0, 0, 200);
             Timer.Tick += new EventHandler(Timer_Tick);
             Timer.Start();
-        }
-
-        bool CertValidation(object sender, X509Certificate certificate, X509Chain chain, System.Net.Security.SslPolicyErrors sslPolicyErrors)
-        {
-            if (sslPolicyErrors != System.Net.Security.SslPolicyErrors.None)
-                return false;
-            var cert = certificate as X509Certificate2;
-            var hostName = cert.GetNameInfo(X509NameType.DnsName, false);
-            var validTrionHostNames = new string[] {
-                ".trionworlds.com",
-                ".triongames.com",
-                ".trionworld.priv",
-                ".triongames.priv",
-            };
-            foreach (var validTrionHostName in validTrionHostNames)
-            {
-                if (hostName.EndsWith(validTrionHostName))
-                    return true;
-            }
-            return false;
         }
 
         void RefreshToken()
