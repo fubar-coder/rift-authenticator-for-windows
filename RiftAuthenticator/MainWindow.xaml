@@ -1,7 +1,7 @@
 ﻿<Window x:Class="RiftAuthenticator.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Rift Authenticator" Height="182" Width="619" Loaded="Window_Loaded">
+        Title="RIFT Authenticator" Height="182" Width="619" Loaded="Window_Loaded">
     <Grid>
         <TextBox Height="23" Margin="12,12,12,0" Name="LoginToken" VerticalAlignment="Top" IsReadOnly="True" />
         <ProgressBar Height="26" Margin="12,41,12,0" Name="RemainingValidTime" VerticalAlignment="Top" Maximum="30000" />
