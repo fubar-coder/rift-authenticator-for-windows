@@ -36,9 +36,9 @@ namespace RiftAuthenticator
     /// </summary>
     partial class Information : Window
     {
-        private Configuration Configuration;
+        private Library.Configuration Configuration;
 
-        internal Information(Configuration config)
+        internal Information(Library.Configuration config)
         {
             InitializeComponent();
 

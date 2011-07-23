@@ -24,9 +24,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace RiftAuthenticator
+namespace RiftAuthenticator.Library
 {
-    class Configuration
+    public class Configuration
     {
         static readonly System.Text.Encoding Encoding = System.Text.Encoding.Default;
 

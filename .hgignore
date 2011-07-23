@@ -7,3 +7,5 @@ syntax: regexp
 /obj/x86$
 /bin/Release$
 /publish$
+/obj/Debug$
+/obj/Release$

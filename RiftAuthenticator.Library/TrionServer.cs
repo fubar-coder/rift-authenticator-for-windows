@@ -24,9 +24,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace RiftAuthenticator
+namespace RiftAuthenticator.Library
 {
-    static class TrionServer
+    static public class TrionServer
     {
         const string TrionApiServer = "https://rift.trionworlds.com";
         const string TrionAuthServer = "https://auth.trionworlds.com";

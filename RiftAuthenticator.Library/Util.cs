@@ -18,7 +18,7 @@
 
 using System;
 
-namespace RiftAuthenticator
+namespace RiftAuthenticator.Library
 {
     public static class Util
     {

@@ -38,7 +38,7 @@ namespace RiftAuthenticator
     /// </summary>
     public partial class MainWindow : Window
     {
-        Configuration Configuration = new Configuration();
+        Library.Configuration Configuration = new Library.Configuration();
         System.Windows.Threading.DispatcherTimer Timer;
 
         public MainWindow()
@@ -118,7 +118,7 @@ namespace RiftAuthenticator
 
         private void ExecuteTimeSync()
         {
-            Configuration.TimeOffset = TrionServer.GetTimeOffset();
+            Configuration.TimeOffset = Library.TrionServer.GetTimeOffset();
             Configuration.Save();
             RefreshToken();
         }
@@ -158,12 +158,12 @@ namespace RiftAuthenticator
             if (!dlg.ShowDialog().GetValueOrDefault())
                 return false;
 
-            var tempConfig = new Configuration()
+            var tempConfig = new Library.Configuration()
             {
                 DeviceId = dlg.DeviceId.Text,
             };
-            TrionServer.CreateSecurityKey(tempConfig);
-            tempConfig.TimeOffset = TrionServer.GetTimeOffset();
+            Library.TrionServer.CreateSecurityKey(tempConfig);
+            tempConfig.TimeOffset = Library.TrionServer.GetTimeOffset();
             tempConfig.Save();
             Configuration.Load();
             RefreshToken();
@@ -194,7 +194,7 @@ namespace RiftAuthenticator
                 return;
             }
 
-            var questions = TrionServer.GetSecurityQuestions(userEmail, userPassword);
+            var questions = Library.TrionServer.GetSecurityQuestions(userEmail, userPassword);
 
             var dlgSecurityQuestions = new SecurityQuestions() { Owner = this };
             dlgSecurityQuestions.SecurityAnswer1.IsEnabled =
@@ -218,12 +218,12 @@ namespace RiftAuthenticator
                 dlgSecurityQuestions.SecurityAnswer1.Text,
                 dlgSecurityQuestions.SecurityAnswer2.Text,
             };
-            var tempConfig = new Configuration()
+            var tempConfig = new Library.Configuration()
             {
                 DeviceId = deviceId,
             };
-            TrionServer.RecoverSecurityKey(userEmail, userPassword, securityAnswers, tempConfig);
-            tempConfig.TimeOffset = TrionServer.GetTimeOffset();
+            Library.TrionServer.RecoverSecurityKey(userEmail, userPassword, securityAnswers, tempConfig);
+            tempConfig.TimeOffset = Library.TrionServer.GetTimeOffset();
             tempConfig.Save();
             Configuration.Load();
             RefreshToken();

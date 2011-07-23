@@ -21,17 +21,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace RiftAuthenticator
+namespace RiftAuthenticator.Library
 {
-    class LoginToken
+    class TrionServerException : ApplicationException
     {
-        public LoginToken(string token, long remainingMillis)
+        private static string ErrorCodeToMessage(string errorCode)
         {
-            Token = token;
-            RemainingMillis = remainingMillis;
+            switch (errorCode)
+            {
+                case "account_not_available":
+                    return "Invalid user name or password.";
+                case "account_missing":
+                    return "No RIFT-Account or Device ID doesn't match.";
+                case "account_securityAnswers_incorrect":
+                    return "Security answer(s) incorrect.";
+                case "device_id_missing":
+                    return "Device ID missing.";
+            }
+            return string.Format("Unknown error code: {0}", errorCode);
         }
 
-        public string Token { get; private set; }
-        public long RemainingMillis { get; private set; }
+        public TrionServerException(string errorCode)
+            : base(ErrorCodeToMessage(errorCode))
+        {
+        }
     }
 }
