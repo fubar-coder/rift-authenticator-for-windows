@@ -35,6 +35,8 @@ namespace RiftAuthenticator
                     return "No RIFT-Account or Device ID doesn't match.";
                 case "account_securityAnswers_incorrect":
                     return "Security answer(s) incorrect.";
+                case "device_id_missing":
+                    return "Device ID missing.";
             }
             return string.Format("Unknown error code: {0}", errorCode);
         }
