@@ -91,7 +91,7 @@ namespace RiftAuthenticator
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(this, ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
         }
@@ -113,7 +113,7 @@ namespace RiftAuthenticator
         {
             if (!Configuration.IsEmpty)
             {
-                if (MessageBox.Show("Authenticator already initialized!\nReinitialization will make you loose your current configuration!\nContinue?", "R U sure?", MessageBoxButton.OKCancel, MessageBoxImage.Warning) != MessageBoxResult.OK)
+                if (MessageBox.Show(this, "Authenticator already initialized!\nReinitialization will make you loose your current configuration!\nContinue?", "R U sure?", MessageBoxButton.OKCancel, MessageBoxImage.Warning) != MessageBoxResult.OK)
                     return;
             }
 
@@ -122,12 +122,12 @@ namespace RiftAuthenticator
                 if (ExecuteInit())
                 {
                     Clipboard.SetText(Configuration.DeviceId);
-                    MessageBox.Show(string.Format("The device id has been copied into your clipboard.\nSave it!\nIt's required to use the restore functionality!\nThe device id is {0}", Configuration.DeviceId), "Remember you device id", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show(this, string.Format("The device id has been copied into your clipboard.\nSave it!\nIt's required to use the restore functionality!\nThe device id is {0}", Configuration.DeviceId), "Remember you device id", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(this, ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
         }
@@ -158,7 +158,7 @@ namespace RiftAuthenticator
             var deviceId = dlgDeviceId.DeviceId.Text.Trim();
             if (string.IsNullOrEmpty(deviceId))
             {
-                MessageBox.Show("No device ID given.", "Bad boy!", MessageBoxButton.OK);
+                MessageBox.Show(this, "No device ID given.", "Bad boy!", MessageBoxButton.OK);
                 return;
             }
             var dlgLogin = new Login() { Owner = this };
@@ -170,7 +170,7 @@ namespace RiftAuthenticator
 
             if (string.IsNullOrEmpty(userEmail) || string.IsNullOrEmpty(userPassword))
             {
-                MessageBox.Show("No user name or password given.", "Bad boy!", MessageBoxButton.OK);
+                MessageBox.Show(this, "No user name or password given.", "Bad boy!", MessageBoxButton.OK);
                 return;
             }
 
@@ -217,14 +217,14 @@ namespace RiftAuthenticator
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(this, ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
         }
 
         private void ShowLicense_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(
+            MessageBox.Show(this,
                 "This application is distributed under the terms of GNU General Public License Version 3.\n" +
                 "The application is under copyright of the RIFT Authenticator for Windows project except for " +
                 "some parts which are under the copyright of the following companies/projects:\n" +
