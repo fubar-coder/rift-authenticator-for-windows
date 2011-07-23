@@ -16,6 +16,9 @@
  * <http://www.gnu.org/licenses/>.
  */
 
+// Using .NET AES doesn't work yet. So we'll have to stick with BouncyCastle
+#define USE_BOUNCY_CASTLE
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +30,9 @@ namespace RiftAuthenticator
     {
         static readonly System.Text.Encoding Encoding = System.Text.Encoding.Default;
 
+        const string SecretKeyDigestSeed = "TrionMasterKey_031611";
+
+        const string ConfigVersionKey = "Version";
         const string DeviceIdKey = "DeviceId";
         const string SerialKeyKey = "SerialKey";
         const string SecretKeyKey = "SecretKey";
@@ -73,10 +79,19 @@ namespace RiftAuthenticator
         {
             using (var key = Microsoft.Win32.Registry.CurrentUser.CreateSubKey(AccountRegistryPath))
             {
+                var configVersion = Convert.ToInt32(key.GetValue(ConfigVersionKey, 0));
                 DeviceId = (string)key.GetValue(DeviceIdKey, string.Empty);
                 SerialKey = (string)key.GetValue(SerialKeyKey, string.Empty);
                 SecretKey = (string)key.GetValue(SecretKeyKey, string.Empty);
                 TimeOffset = Convert.ToInt64(key.GetValue(TimeOffsetKey, 0));
+                switch (configVersion)
+                {
+                    case 0:
+                        break;
+                    case 1:
+                        SecretKey = DecryptSecretKey(SecretKey);
+                        break;
+                }
             }
         }
 
@@ -84,12 +99,95 @@ namespace RiftAuthenticator
         {
             using (var key = Microsoft.Win32.Registry.CurrentUser.CreateSubKey(AccountRegistryPath))
             {
+                key.SetValue(ConfigVersionKey, 1);
                 key.SetValue(DeviceIdKey, DeviceId ?? string.Empty);
                 key.SetValue(SerialKeyKey, SerialKey ?? string.Empty);
-                key.SetValue(SecretKeyKey, SecretKey ?? string.Empty);
+                key.SetValue(SecretKeyKey, EncryptSecretKey(SecretKey ?? string.Empty));
                 key.SetValue(TimeOffsetKey, TimeOffset);
             }
         }
+
+        private static byte[] HexToBytes(string hexString)
+        {
+            System.Diagnostics.Debug.Assert((hexString.Length & 1) == 0);
+            var result = new byte[hexString.Length / 2];
+            var resultIndex = 0;
+            for (int i = 0; i != hexString.Length; i += 2)
+                result[resultIndex++] = byte.Parse(hexString.Substring(i, 2), System.Globalization.NumberStyles.AllowHexSpecifier);
+            return result;
+        }
+
+        private static string BytesToHex(byte[] bytes)
+        {
+            var result = new StringBuilder();
+            for (int i = 0; i != bytes.Length; ++i)
+                result.AppendFormat("{0:X02}", bytes[i]);
+            return result.ToString();
+        }
+
+        private string DecryptSecretKey(string encryptedSecretKey)
+        {
+            return DecryptSecretKey(HexToBytes(encryptedSecretKey));
+        }
+
+        private string DecryptSecretKey(byte[] encryptedSecretKey)
+        {
+#if USE_BOUNCY_CASTLE
+            var cipher = CreateCipher(false);
+            var decryptedSecretKey = cipher.DoFinal(encryptedSecretKey);
+#else
+            var aes = CreateCipher();
+            var decryptor = aes.CreateDecryptor();
+            var decryptedSecretKey = decryptor.TransformFinalBlock(encryptedSecretKey, 0, encryptedSecretKey.Length);
+#endif
+            return Encoding.GetString(decryptedSecretKey);
+        }
+
+        private string EncryptSecretKey(string decryptedSecretKey)
+        {
+            return EncryptSecretKey(Encoding.GetBytes(decryptedSecretKey));
+        }
+
+        private string EncryptSecretKey(byte[] decryptedSecretKey)
+        {
+#if USE_BOUNCY_CASTLE
+            var cipher = CreateCipher(true);
+            var encryptedSecretKey = cipher.DoFinal(decryptedSecretKey);
+#else
+            var aes = CreateCipher();
+            var encryptor = aes.CreateEncryptor();
+            var encryptedSecretKey = encryptor.TransformFinalBlock(decryptedSecretKey, 0, decryptedSecretKey.Length);
+#endif
+            return BytesToHex(encryptedSecretKey);
+        }
+
+#if USE_BOUNCY_CASTLE
+        private static Org.BouncyCastle.Crypto.IBufferedCipher CreateCipher(bool forEncryption)
+        {
+            var seed = Encoding.GetBytes(SecretKeyDigestSeed);
+            var prng = new Org.Apache.Harmony.Security.Provider.Crypto.Sha1Prng();
+            prng.AddSeedMaterial(seed);
+            var aesKey = new byte[16];
+            prng.NextBytes(aesKey);
+            var skeySpec = Org.BouncyCastle.Security.ParameterUtilities.CreateKeyParameter("AES", aesKey);
+            var cipher = Org.BouncyCastle.Security.CipherUtilities.GetCipher("AES");
+            cipher.Init(forEncryption, skeySpec);
+            return cipher;
+        }
+#else
+        private static System.Security.Cryptography.Aes CreateCipher()
+        {
+            var seed = Encoding.GetBytes(SecretKeyDigestSeed);
+            var prng = new Org.Apache.Harmony.Security.Provider.Crypto.Sha1Prng();
+            prng.AddSeedMaterial(seed);
+            var aesKey = new byte[16];
+            prng.NextBytes(aesKey);
+            var aes = new System.Security.Cryptography.AesCryptoServiceProvider();
+            aes.KeySize = 128;
+            aes.Key = aesKey;
+            return aes;
+        }
+#endif
 
         public LoginToken CalculateToken()
         {

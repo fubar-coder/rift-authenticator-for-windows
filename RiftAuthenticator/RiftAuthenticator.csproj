@@ -41,6 +41,9 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto">
+      <HintPath>..\Libraries\BouncyCastle\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -69,6 +72,7 @@
     <Compile Include="SecurityQuestions.xaml.cs">
       <DependentUpon>SecurityQuestions.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Sha1Prng.cs" />
     <Compile Include="TrionServer.cs" />
     <Compile Include="TrionServerException.cs" />
     <Compile Include="Util.cs" />

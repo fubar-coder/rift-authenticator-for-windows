@@ -247,7 +247,9 @@ namespace RiftAuthenticator
             MessageBox.Show(
                 "This application is distributed under the terms of GNU General Public License Version 3.\n" +
                 "The application is under copyright of the RIFT Authenticator for Windows project except for " +
-                "some parts which are under the copyright of Novell.", "License stuff", MessageBoxButton.OK, MessageBoxImage.Information);
+                "some parts which are under the copyright of the following companies/projects:\n" +
+                "Novell\n" +
+                "The Apache Software Foundation", "License stuff", MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
 }
