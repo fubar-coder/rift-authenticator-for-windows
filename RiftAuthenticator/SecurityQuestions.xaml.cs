@@ -41,7 +41,7 @@ namespace RiftAuthenticator
             InitializeComponent();
         }
 
-        private void Login_Click(object sender, RoutedEventArgs e)
+        private void DoRecovery_Click(object sender, RoutedEventArgs e)
         {
             DialogResult = true;
             Close();

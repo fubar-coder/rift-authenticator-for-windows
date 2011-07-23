@@ -24,7 +24,7 @@
             <TextBox Grid.Column="1" Grid.Row="2" Margin="0,0,0,0" Name="SecurityQuestion2" IsReadOnly="True" />
             <TextBox Grid.Column="1" Grid.Row="3" Margin="0,0,0,0" Name="SecurityAnswer2" />
         </Grid>
-        <Button Content="Recover" Height="23" HorizontalAlignment="Left" Margin="12,0,0,12" Name="Login" VerticalAlignment="Bottom" Width="75" IsDefault="True" Click="Login_Click" />
+        <Button Content="Recover" Height="23" HorizontalAlignment="Left" Margin="12,0,0,12" Name="DoRecovery" VerticalAlignment="Bottom" Width="75" IsDefault="True" Click="DoRecovery_Click" />
         <Button Content="Cancel" Height="23" HorizontalAlignment="Right" Margin="0,0,12,12" Name="Cancel" VerticalAlignment="Bottom" Width="75" IsCancel="True" />
     </Grid>
 </Window>
