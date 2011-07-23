@@ -33,6 +33,8 @@ namespace RiftAuthenticator.Library
                     return "Invalid user name or password.";
                 case "account_missing":
                     return "No RIFT-Account or Device ID doesn't match.";
+                case "account_securityAnswer_missing":
+                    return "Security answer(s) missing.";
                 case "account_securityAnswers_incorrect":
                     return "Security answer(s) incorrect.";
                 case "device_id_missing":
