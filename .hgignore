@@ -1,6 +1,8 @@
 syntax: glob
 *.suo
+*_TemporaryKey.pfx
 syntax: regexp
 /bin/Debug$
 /obj/x86$
 /bin/Release$
+/publish$
