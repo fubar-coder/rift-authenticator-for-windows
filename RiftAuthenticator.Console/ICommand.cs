@@ -1,0 +1,15 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace RiftAuthenticator.Console
+{
+    interface ICommand
+    {
+        string[] Commands { get; }
+        string Description { get; }
+        void UpdateOptions(NDesk.Options.OptionSet optionSet);
+        void Execute(string[] args);
+    }
+}
