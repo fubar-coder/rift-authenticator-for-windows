@@ -8,8 +8,8 @@
     <ProjectGuid>{D601A1A4-91E2-4870-88C4-2778AC674532}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>RiftAuthenticator.Console</RootNamespace>
-    <AssemblyName>RiftAuthenticator.Console</AssemblyName>
+    <RootNamespace>RiftAuthenticator.CommandLine</RootNamespace>
+    <AssemblyName>RiftAuthenticator.CommandLine</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

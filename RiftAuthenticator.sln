@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual C# Express 2010
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiftAuthenticator", "RiftAuthenticator\RiftAuthenticator.csproj", "{C0156421-FA95-4631-82C1-85AA7CC65B5E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiftAuthenticator.Library", "RiftAuthenticator.Library\RiftAuthenticator.Library.csproj", "{E31E2621-6D52-49A9-B7D4-AC75862518D8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiftAuthenticator.WinForms", "RiftAuthenticator.WinForms\RiftAuthenticator.WinForms.csproj", "{AC8AE1B0-4423-4FAA-9410-8808FA2E6BE4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiftAuthenticator.Console", "RiftAuthenticator.Console\RiftAuthenticator.Console.csproj", "{D601A1A4-91E2-4870-88C4-2778AC674532}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiftAuthenticator.CommandLine", "RiftAuthenticator.Console\RiftAuthenticator.CommandLine.csproj", "{D601A1A4-91E2-4870-88C4-2778AC674532}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
