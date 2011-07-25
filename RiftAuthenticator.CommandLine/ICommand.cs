@@ -8,7 +8,7 @@ namespace RiftAuthenticator.CommandLine
     {
         string[] Commands { get; }
         string Description { get; }
-        void UpdateOptions(NDesk.Options.OptionSet optionSet);
-        void Execute(string[] args);
+        NDesk.Options.OptionSet OptionSet { get; }
+        void Execute(GlobalOptions globalOptions, string[] args);
     }
 }

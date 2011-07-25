@@ -11,6 +11,9 @@ namespace RiftAuthenticator.CommandLine.Commands
             "ts",
             "time-sync",
         };
+        private static NDesk.Options.OptionSet commandOptionSet = new NDesk.Options.OptionSet
+        {
+        };
 
         public string[] Commands
         {
@@ -22,14 +25,21 @@ namespace RiftAuthenticator.CommandLine.Commands
             get { return "Time synchronization with TRION's login server"; }
         }
 
-        public void UpdateOptions(NDesk.Options.OptionSet optionSet)
+        public NDesk.Options.OptionSet OptionSet
         {
-            throw new NotImplementedException();
+            get
+            {
+                return commandOptionSet;
+            }
         }
 
-        public void Execute(string[] args)
+        public void Execute(GlobalOptions globalOptions, string[] args)
         {
-            throw new NotImplementedException();
+            var remainingArgs = OptionSet.Parse(args);
+            if (remainingArgs.Count != 0)
+                throw new CommandArgumentException(this, string.Format("Unknown arguments found: {0}", string.Join(" ", remainingArgs.ToArray())));
+            globalOptions.Configuration.TimeOffset = Library.TrionServer.GetTimeOffset();
+            globalOptions.Configuration.Save();
         }
     }
 }

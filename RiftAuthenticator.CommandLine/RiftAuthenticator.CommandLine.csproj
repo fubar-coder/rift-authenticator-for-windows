@@ -40,11 +40,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommandArgumentException.cs" />
+    <Compile Include="Commands\Help.cs" />
     <Compile Include="Commands\TimeSync.cs" />
+    <Compile Include="GlobalOptions.cs" />
+    <Compile Include="HelpMessageParts.cs" />
     <Compile Include="ICommand.cs" />
     <Compile Include="Options.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RiftAuthenticator.Library\RiftAuthenticator.Library.csproj">
+      <Project>{E31E2621-6D52-49A9-B7D4-AC75862518D8}</Project>
+      <Name>RiftAuthenticator.Library</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
