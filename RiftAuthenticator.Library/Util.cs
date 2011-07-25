@@ -17,6 +17,7 @@
  */
 
 using System;
+using System.Text;
 
 namespace RiftAuthenticator.Library
 {
@@ -52,6 +53,24 @@ namespace RiftAuthenticator.Library
         public static DateTime millisToTime(long millis)
         {
             return new DateTime(millisToTicks(millis), DateTimeKind.Utc).ToLocalTime();
+        }
+
+        internal static byte[] HexToBytes(string hexString)
+        {
+            System.Diagnostics.Debug.Assert((hexString.Length & 1) == 0);
+            var result = new byte[hexString.Length / 2];
+            var resultIndex = 0;
+            for (int i = 0; i != hexString.Length; i += 2)
+                result[resultIndex++] = byte.Parse(hexString.Substring(i, 2), System.Globalization.NumberStyles.AllowHexSpecifier);
+            return result;
+        }
+
+        internal static string BytesToHex(byte[] bytes)
+        {
+            var result = new StringBuilder();
+            for (int i = 0; i != bytes.Length; ++i)
+                result.AppendFormat("{0:X02}", bytes[i]);
+            return result.ToString();
         }
     }
 }

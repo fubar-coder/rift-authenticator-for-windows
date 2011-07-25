@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // Allgemeine Informationen über eine Assembly werden über die folgenden 
 // Attribute gesteuert. Ändern Sie diese Attributwerte, um die Informationen zu ändern,
 // die mit einer Assembly verknüpft sind.
-[assembly: AssemblyTitle("RiftAuthenticator.WinForms")]
+[assembly: AssemblyTitle("RiftAuthenticator.Console")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Microsoft")]
-[assembly: AssemblyProduct("RiftAuthenticator.WinForms")]
+[assembly: AssemblyProduct("RiftAuthenticator.Console")]
 [assembly: AssemblyCopyright("Copyright © Microsoft 2011")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // Die folgende GUID bestimmt die ID der Typbibliothek, wenn dieses Projekt für COM verfügbar gemacht wird
-[assembly: Guid("61f16662-2874-4b51-856d-852f9ad11619")]
+[assembly: Guid("97828ede-cd82-4670-8827-8d506848c211")]
 
 // Versionsinformationen für eine Assembly bestehen aus den folgenden vier Werten:
 //

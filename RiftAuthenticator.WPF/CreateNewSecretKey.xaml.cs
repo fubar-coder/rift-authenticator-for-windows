@@ -49,17 +49,12 @@ namespace RiftAuthenticator
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            DeviceId.Text = CreateDeviceId();
-        }
-
-        public static string CreateDeviceId()
-        {
-            return Guid.NewGuid().ToString().ToUpper().Replace("-", string.Empty);
+            DeviceId.Text = Library.TrionServer.GetOrCreateRandomDeviceId();
         }
 
         private void RecreateDeviceId_Click(object sender, RoutedEventArgs e)
         {
-            DeviceId.Text = CreateDeviceId();
+            DeviceId.Text = Library.TrionServer.CreateRandomDeviceId();
         }
     }
 }
