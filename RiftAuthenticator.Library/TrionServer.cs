@@ -21,7 +21,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Security.Cryptography.X509Certificates;
 
@@ -101,7 +100,7 @@ namespace RiftAuthenticator.Library
             using (var responseStream = response.GetResponseStream())
             {
                 var buffer = new System.IO.MemoryStream();
-                responseStream.CopyTo(buffer);
+                CopyTo(responseStream, buffer);
                 return buffer.ToArray();
             }
 #else
@@ -109,6 +108,15 @@ namespace RiftAuthenticator.Library
             client.Headers["User-Agent"] = UserAgent;
             return client.DownloadData(uri);
 #endif
+        }
+
+        private static void CopyTo(System.IO.Stream src, System.IO.Stream dst)
+        {
+            var bufferSize = 4096;
+            var buffer = new byte[bufferSize];
+            int copySize;
+            while ((copySize = src.Read(buffer, 0, bufferSize)) != 0)
+                dst.Write(buffer, 0, copySize);
         }
 
         public static long GetTimeOffset()
@@ -132,7 +140,7 @@ namespace RiftAuthenticator.Library
             var resultXml = new System.Xml.XmlDocument();
             resultXml.Load(result);
             var questions = new string[2];
-            foreach (var questionXml in resultXml.SelectNodes("/SecurityQuestions/*").Cast<System.Xml.XmlElement>())
+            foreach (System.Xml.XmlElement questionXml in resultXml.SelectNodes("/SecurityQuestions/*"))
             {
                 var value = (questionXml.InnerText == "null" ? null : questionXml.InnerText);
                 switch (questionXml.LocalName)
@@ -172,7 +180,7 @@ namespace RiftAuthenticator.Library
 
         private static void ProcessSecretKeyResult(Configuration config, System.Xml.XmlDocument resultXml)
         {
-            foreach (var itemXml in resultXml.SelectNodes("/DeviceKey/*").Cast<System.Xml.XmlElement>())
+            foreach (System.Xml.XmlElement itemXml in resultXml.SelectNodes("/DeviceKey/*"))
             {
                 var value = (itemXml.InnerText == "null" ? null : itemXml.InnerText);
                 switch (itemXml.LocalName)
