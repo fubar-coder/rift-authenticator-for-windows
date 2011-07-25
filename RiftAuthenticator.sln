@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiftAuthenticator", "RiftAuthenticator\RiftAuthenticator.csproj", "{C0156421-FA95-4631-82C1-85AA7CC65B5E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiftAuthenticator.WPF", "RiftAuthenticator.WPF\RiftAuthenticator.csproj", "{C0156421-FA95-4631-82C1-85AA7CC65B5E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiftAuthenticator.Library", "RiftAuthenticator.Library\RiftAuthenticator.Library.csproj", "{E31E2621-6D52-49A9-B7D4-AC75862518D8}"
 EndProject
