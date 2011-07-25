@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiftAuthenticator.Library",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiftAuthenticator.WinForms", "RiftAuthenticator.WinForms\RiftAuthenticator.WinForms.csproj", "{AC8AE1B0-4423-4FAA-9410-8808FA2E6BE4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiftAuthenticator.CommandLine", "RiftAuthenticator.Console\RiftAuthenticator.CommandLine.csproj", "{D601A1A4-91E2-4870-88C4-2778AC674532}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiftAuthenticator.CommandLine", "RiftAuthenticator.CommandLine\RiftAuthenticator.CommandLine.csproj", "{D601A1A4-91E2-4870-88C4-2778AC674532}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
