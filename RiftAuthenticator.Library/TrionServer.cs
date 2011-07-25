@@ -232,5 +232,41 @@ namespace RiftAuthenticator.Library
             }
             return false;
         }
+
+        public static string GetOrCreateRandomDeviceId()
+        {
+            var deviceId = GetDeviceId();
+            if (deviceId == null)
+                deviceId = CreateRandomDeviceId();
+            return deviceId;
+        }
+
+        public static string CreateRandomDeviceId()
+        {
+            return Guid.NewGuid().ToString().Replace("-", string.Empty).ToUpper();
+        }
+
+        public static string GetDeviceId()
+        {
+            try
+            {
+                using (var regKey = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion"))
+                {
+                    var productId = regKey.GetValue("ProductId");
+                    if (productId != null)
+                    {
+                        var realProductId = Convert.ToString(productId);
+                        var digest = new System.Security.Cryptography.SHA1Managed();
+                        var productIdBytes = Encoding.Default.GetBytes(realProductId);
+                        digest.TransformFinalBlock(productIdBytes, 0, productIdBytes.Length);
+                        return Util.BytesToHex(digest.Hash);
+                    }
+                }
+            }
+            catch
+            {
+            }
+            return null;
+        }
     }
 }

@@ -106,27 +106,9 @@ namespace RiftAuthenticator.Library
             }
         }
 
-        private static byte[] HexToBytes(string hexString)
-        {
-            System.Diagnostics.Debug.Assert((hexString.Length & 1) == 0);
-            var result = new byte[hexString.Length / 2];
-            var resultIndex = 0;
-            for (int i = 0; i != hexString.Length; i += 2)
-                result[resultIndex++] = byte.Parse(hexString.Substring(i, 2), System.Globalization.NumberStyles.AllowHexSpecifier);
-            return result;
-        }
-
-        private static string BytesToHex(byte[] bytes)
-        {
-            var result = new StringBuilder();
-            for (int i = 0; i != bytes.Length; ++i)
-                result.AppendFormat("{0:X02}", bytes[i]);
-            return result.ToString();
-        }
-
         private string DecryptSecretKey(string encryptedSecretKey)
         {
-            return DecryptSecretKey(HexToBytes(encryptedSecretKey));
+            return DecryptSecretKey(Util.HexToBytes(encryptedSecretKey));
         }
 
         private string DecryptSecretKey(byte[] encryptedSecretKey)
@@ -157,7 +139,7 @@ namespace RiftAuthenticator.Library
             var encryptor = aes.CreateEncryptor();
             var encryptedSecretKey = encryptor.TransformFinalBlock(decryptedSecretKey, 0, decryptedSecretKey.Length);
 #endif
-            return BytesToHex(encryptedSecretKey);
+            return Util.BytesToHex(encryptedSecretKey);
         }
 
 #if USE_BOUNCY_CASTLE

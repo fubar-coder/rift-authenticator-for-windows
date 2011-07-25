@@ -38,19 +38,14 @@ namespace RiftAuthenticator.WinForms
             Close();
         }
 
-        public static string CreateDeviceId()
-        {
-            return Guid.NewGuid().ToString().ToUpper().Replace("-", string.Empty);
-        }
-
         private void CreateNewSecretKey_Load(object sender, EventArgs e)
         {
-            DeviceId.Text = CreateDeviceId();
+            DeviceId.Text = Library.TrionServer.GetOrCreateRandomDeviceId();
         }
 
         private void RecreateDeviceId_Click(object sender, EventArgs e)
         {
-            DeviceId.Text = CreateDeviceId();
+            DeviceId.Text = Library.TrionServer.CreateRandomDeviceId();
         }
     }
 }
