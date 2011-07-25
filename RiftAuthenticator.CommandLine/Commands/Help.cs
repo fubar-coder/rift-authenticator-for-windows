@@ -7,8 +7,8 @@ namespace RiftAuthenticator.CommandLine.Commands
     class Help : ICommand
     {
         private static string[] commands = new string[] {
-            "h",
             "help",
+            "h",
         };
         private static NDesk.Options.OptionSet commandOptionSet = new NDesk.Options.OptionSet
         {
@@ -56,7 +56,7 @@ namespace RiftAuthenticator.CommandLine.Commands
             Program.ShowMainHelp(HelpMessageParts.GlobalOptions);
             Console.WriteLine();
             Console.WriteLine("Options for command {0} ({1});", cmd.Commands[0], cmd.Description);
-            OptionSet.WriteOptionDescriptions(Console.Out);
+            cmd.OptionSet.WriteOptionDescriptions(Console.Out);
         }
     }
 }

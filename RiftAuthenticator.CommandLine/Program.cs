@@ -10,6 +10,11 @@ namespace RiftAuthenticator.CommandLine
         internal static List<ICommand> SupportedCommands = new List<ICommand>()
         {
             new Commands.Help(),
+            new Commands.Info(),
+            new Commands.Init(),
+            new Commands.LoginToken(),
+            new Commands.SecretQuestions(),
+            new Commands.Recover(),
             new Commands.TimeSync(),
         };
 
@@ -96,7 +101,22 @@ namespace RiftAuthenticator.CommandLine
                 Console.WriteLine();
                 Console.WriteLine("Commands:");
                 foreach (var cmd in SupportedCommands)
-                    Console.WriteLine("{0}\t{1}", cmd.Commands[0], cmd.Description);
+                    Console.WriteLine("{0,-20}\t{1}", cmd.Commands[0], cmd.Description);
+            }
+        }
+
+        internal static void ShowConfiguration(Library.Configuration config)
+        {
+            if (config.IsEmpty)
+            {
+                Console.Out.WriteLine("Configuration is empty.");
+            }
+            else
+            {
+                Console.Out.WriteLine("Device ID: {0}", config.DeviceId);
+                Console.Out.WriteLine("Serial Key: {0}", config.FormattedSerialKey);
+                Console.Out.WriteLine("Encrypted Secret Key: {0}", config.EncryptedSecretKey);
+                Console.Out.WriteLine("Time Offset: {0}", config.TimeOffset);
             }
         }
     }

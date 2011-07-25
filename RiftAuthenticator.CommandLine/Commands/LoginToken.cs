@@ -4,16 +4,21 @@ using System.Text;
 
 namespace RiftAuthenticator.CommandLine.Commands
 {
-    class TimeSync : ICommand
+    class LoginToken : ICommand
     {
         private static string[] commands = new string[] {
-            "time-sync",
-            "t",
-            "ts",
+            "login-token",
+            "l",
+            "lt",
         };
-        private static NDesk.Options.OptionSet commandOptionSet = new NDesk.Options.OptionSet
+        private NDesk.Options.OptionSet commandOptionSet;
+
+        public LoginToken()
         {
-        };
+            commandOptionSet = new NDesk.Options.OptionSet
+            {
+            };
+        }
 
         public string[] Commands
         {
@@ -22,7 +27,7 @@ namespace RiftAuthenticator.CommandLine.Commands
 
         public string Description
         {
-            get { return "Time synchronization with TRION's login server"; }
+            get { return "Show current login token"; }
         }
 
         public NDesk.Options.OptionSet OptionSet
@@ -38,9 +43,9 @@ namespace RiftAuthenticator.CommandLine.Commands
             var remainingArgs = OptionSet.Parse(args);
             if (remainingArgs.Count != 0)
                 throw new CommandArgumentException(this, string.Format("Unknown arguments found: {0}", string.Join(" ", remainingArgs.ToArray())));
-            globalOptions.Configuration.TimeOffset = Library.TrionServer.GetTimeOffset();
-            globalOptions.Configuration.Save();
-            Console.Out.WriteLine("New time offset: {0}", globalOptions.Configuration.TimeOffset);
+            var loginToken = globalOptions.Configuration.CalculateToken();
+            Console.Out.WriteLine("Login token: {0}", loginToken.Token);
+            Console.Out.WriteLine("Remaining time (ms): {0}", loginToken.RemainingMillis);
         }
     }
 }

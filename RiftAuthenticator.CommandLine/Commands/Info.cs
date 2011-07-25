@@ -4,16 +4,19 @@ using System.Text;
 
 namespace RiftAuthenticator.CommandLine.Commands
 {
-    class TimeSync : ICommand
+    class Info : ICommand
     {
         private static string[] commands = new string[] {
-            "time-sync",
-            "t",
-            "ts",
+            "info",
         };
-        private static NDesk.Options.OptionSet commandOptionSet = new NDesk.Options.OptionSet
+        private NDesk.Options.OptionSet commandOptionSet;
+
+        public Info()
         {
-        };
+            commandOptionSet = new NDesk.Options.OptionSet
+            {
+            };
+        }
 
         public string[] Commands
         {
@@ -22,7 +25,7 @@ namespace RiftAuthenticator.CommandLine.Commands
 
         public string Description
         {
-            get { return "Time synchronization with TRION's login server"; }
+            get { return "Show current configuration"; }
         }
 
         public NDesk.Options.OptionSet OptionSet
@@ -38,9 +41,7 @@ namespace RiftAuthenticator.CommandLine.Commands
             var remainingArgs = OptionSet.Parse(args);
             if (remainingArgs.Count != 0)
                 throw new CommandArgumentException(this, string.Format("Unknown arguments found: {0}", string.Join(" ", remainingArgs.ToArray())));
-            globalOptions.Configuration.TimeOffset = Library.TrionServer.GetTimeOffset();
-            globalOptions.Configuration.Save();
-            Console.Out.WriteLine("New time offset: {0}", globalOptions.Configuration.TimeOffset);
+            Program.ShowConfiguration(globalOptions.Configuration);
         }
     }
 }
