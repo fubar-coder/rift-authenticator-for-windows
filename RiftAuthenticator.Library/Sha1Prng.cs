@@ -305,9 +305,7 @@ namespace Org.Apache.Harmony.Security.Provider.Crypto
             int wordIndex = index >> 2;
             int byteIndex = index & 0x03;
 
-            Console.Out.WriteLine("{0}, {1}, {2}, {3}", intArray[BYTES_OFFSET], index, toByte, fromByte);
             intArray[BYTES_OFFSET] = (uint)((index + toByte - fromByte + 1) & 0x3F);
-            Console.Out.WriteLine("{0}", intArray[BYTES_OFFSET]);
 
             // In general case there are 3 stages :
             // - appending bytes to non-full word,
@@ -526,8 +524,6 @@ namespace Org.Apache.Harmony.Security.Provider.Crypto
                 return; // return because "bytes[]" are filled in
             }
 
-            DumpSeed(seed);
-
             n = (int)(seed[BYTES_OFFSET] & 0x03);
             for (; ; )
             {
@@ -592,8 +588,6 @@ namespace Org.Apache.Harmony.Security.Provider.Crypto
                     break;
                 }
             }
-
-            DumpSeed(seed);
         }
 
         public Sha1Prng()
