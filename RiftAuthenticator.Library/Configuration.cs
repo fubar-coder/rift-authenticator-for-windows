@@ -58,6 +58,18 @@ namespace RiftAuthenticator.Library
             }
         }
 
+        public string EncryptedSecretKey
+        {
+            get
+            {
+                return EncryptSecretKey(SecretKey);
+            }
+            set
+            {
+                SecretKey = DecryptSecretKey(value);
+            }
+        }
+
         public bool IsEmpty
         {
             get
