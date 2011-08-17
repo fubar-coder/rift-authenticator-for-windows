@@ -33,7 +33,7 @@ namespace RiftAuthenticator.CommandLine.Commands
 
         public string Description
         {
-            get { return "Show current login token"; }
+            get { return "Recover the authenticators configuration"; }
         }
 
         public NDesk.Options.OptionSet OptionSet

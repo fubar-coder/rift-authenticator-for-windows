@@ -32,7 +32,7 @@ namespace RiftAuthenticator.CommandLine.Commands
 
         public string Description
         {
-            get { return "Show current login token"; }
+            get { return "Show the users secret question(s)"; }
         }
 
         public NDesk.Options.OptionSet OptionSet
