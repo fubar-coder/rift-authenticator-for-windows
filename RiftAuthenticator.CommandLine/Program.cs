@@ -26,6 +26,7 @@ namespace RiftAuthenticator.CommandLine
 
         static int Main(string[] args)
         {
+            System.Net.ServicePointManager.ServerCertificateValidationCallback = Library.TrionServer.CertificateIsValid;
             try
             {
                 var unknownArgs = GlobalOptionSet.Parse(args);
