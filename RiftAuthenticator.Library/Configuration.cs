@@ -16,9 +16,6 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-// Using .NET AES doesn't work yet. So we'll have to stick with BouncyCastle
-#define USE_BOUNCY_CASTLE
-
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -125,14 +122,9 @@ namespace RiftAuthenticator.Library
 
         private string DecryptSecretKey(byte[] encryptedSecretKey)
         {
-#if USE_BOUNCY_CASTLE
-            var cipher = CreateCipher(false);
-            var decryptedSecretKey = cipher.DoFinal(encryptedSecretKey);
-#else
             var aes = CreateCipher();
             var decryptor = aes.CreateDecryptor();
             var decryptedSecretKey = decryptor.TransformFinalBlock(encryptedSecretKey, 0, encryptedSecretKey.Length);
-#endif
             return Encoding.GetString(decryptedSecretKey);
         }
 
@@ -143,44 +135,26 @@ namespace RiftAuthenticator.Library
 
         private string EncryptSecretKey(byte[] decryptedSecretKey)
         {
-#if USE_BOUNCY_CASTLE
-            var cipher = CreateCipher(true);
-            var encryptedSecretKey = cipher.DoFinal(decryptedSecretKey);
-#else
             var aes = CreateCipher();
             var encryptor = aes.CreateEncryptor();
             var encryptedSecretKey = encryptor.TransformFinalBlock(decryptedSecretKey, 0, decryptedSecretKey.Length);
-#endif
             return Util.BytesToHex(encryptedSecretKey);
         }
 
-#if USE_BOUNCY_CASTLE
-        private static Org.BouncyCastle.Crypto.IBufferedCipher CreateCipher(bool forEncryption)
+        private static System.Security.Cryptography.RijndaelManaged CreateCipher()
         {
             var seed = Encoding.GetBytes(SecretKeyDigestSeed);
             var prng = new Org.Apache.Harmony.Security.Provider.Crypto.Sha1Prng();
             prng.AddSeedMaterial(seed);
             var aesKey = new byte[16];
             prng.NextBytes(aesKey);
-            var skeySpec = Org.BouncyCastle.Security.ParameterUtilities.CreateKeyParameter("AES", aesKey);
-            var cipher = Org.BouncyCastle.Security.CipherUtilities.GetCipher("AES");
-            cipher.Init(forEncryption, skeySpec);
-            return cipher;
-        }
-#else
-        private static System.Security.Cryptography.Aes CreateCipher()
-        {
-            var seed = Encoding.GetBytes(SecretKeyDigestSeed);
-            var prng = new Org.Apache.Harmony.Security.Provider.Crypto.Sha1Prng();
-            prng.AddSeedMaterial(seed);
-            var aesKey = new byte[16];
-            prng.NextBytes(aesKey);
-            var aes = new System.Security.Cryptography.AesCryptoServiceProvider();
+            var aes = new System.Security.Cryptography.RijndaelManaged();
+            aes.IV = new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            aes.Mode = System.Security.Cryptography.CipherMode.ECB;
             aes.KeySize = 128;
             aes.Key = aesKey;
             return aes;
         }
-#endif
 
         public LoginToken CalculateToken()
         {
