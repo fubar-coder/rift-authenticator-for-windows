@@ -22,53 +22,74 @@ along with RIFT Authenticator for Windows.  If not, see
 
     <MediaTemplate CabinetTemplate="media{0}.cab" EmbedCab="yes" />
 
+    <Property Id="ApplicationFolderName" Value="RIFT Authenticator" />
+    <Property Id="WixAppFolder" Value="WixPerUserFolder" />
+    <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT" Value="Launch RIFT Authenticator for Windows" />
+
 		<Directory Id="TARGETDIR" Name="SourceDir">
 			<Directory Id="ProgramFilesFolder">
-				<Directory Id="INSTALLLOCATION" Name="RiftAuthenticator">
+				<Directory Id="APPLICATIONFOLDER" Name="RIFT Authenticator">
+          <Directory Id="Sources" Name="Sources">
+            <Directory Id="Sources.CommandLine" Name="CommandLine" />
+            <Directory Id="Sources.WinForms" Name="WinForms" />
+            <Directory Id="Sources.WPF" Name="WPF" />
+            <Directory Id="Sources.Library" Name="Library" />
+          </Directory>
 				</Directory>
 			</Directory>
 		</Directory>
 
-    <DirectoryRef Id="INSTALLLOCATION">
+    <DirectoryRef Id="APPLICATIONFOLDER">
       <Component Id="AppWpf" Guid="AF2B4E13-A46F-4E5F-BB03-BB09B3E7B402">
-        <File Id="RiftAuthenticator.exe" Source="RiftAuthenticator.exe" KeyPath="yes" Checksum="yes" />
+        <File Id="$(var.RiftAuthenticator.WPF.TargetFileName)" Source="$(var.RiftAuthenticator.WPF.TargetPath)" KeyPath="yes" Checksum="yes" />
       </Component>
       <Component Id="AppWinForms" Guid="B15A5FA5-F78A-448B-8397-5ED08B2BE267">
-        <File Id="RiftAuthenticator.WinForms.exe" Source="RiftAuthenticator.WinForms.exe" KeyPath="yes" Checksum="yes" />
+        <File Id="$(var.RiftAuthenticator.WinForms.TargetFileName)" Source="$(var.RiftAuthenticator.WinForms.TargetPath)" KeyPath="yes" Checksum="yes" />
       </Component>
       <Component Id="AppConsole" Guid="294A6D37-B0B9-4D44-8E44-CDB1CDC88736">
-        <File Id="RiftAuthenticator.CommandLine.exe" Source="RiftAuthenticator.CommandLine.exe" KeyPath="yes" Checksum="yes" />
+        <File Id="$(var.RiftAuthenticator.CommandLine.TargetFileName)" Source="$(var.RiftAuthenticator.CommandLine.TargetPath)" KeyPath="yes" Checksum="yes" />
       </Component>
       <Component Id="AppLibs" Guid="55B45E23-9253-4854-9126-A39038BBB690">
-        <File Id="RiftAuthenticator.Library.dll" Source="RiftAuthenticator.Library.dll" KeyPath="yes" Checksum="yes" />
+        <File Id="$(var.RiftAuthenticator.Library.TargetFileName)" Source="$(var.RiftAuthenticator.Library.TargetPath)" KeyPath="yes" Checksum="yes" />
       </Component>
     </DirectoryRef>
-
-		<Feature Id="FeatureAppWpf" Title="RIFT Authenticator (WPF)" Level="1">
-			<!-- TODO: Remove the comments around this ComponentRef element and the Component above in order to add resources to this installer. -->
-			<ComponentRef Id="AppWpf" />
+    
+    <Feature Id="FeatureAppWPF" Title="RIFT Authenticator (WPF)" Level="1" Absent="disallow" AllowAdvertise="no">
+      <ComponentRef Id="AppWpf" />
       <ComponentRef Id="AppLibs" />
-			
-			<!-- Note: The following ComponentGroupRef is required to pull in generated authoring from project references. -->
-			<ComponentGroupRef Id="Product.Generated" />
-		</Feature>
+    </Feature>
 
     <Feature Id="FeatureAppWinForms" Title="RIFT Authenticator (WinForms)" Level="1">
-      <!-- TODO: Remove the comments around this ComponentRef element and the Component above in order to add resources to this installer. -->
       <ComponentRef Id="AppWinForms" />
       <ComponentRef Id="AppLibs" />
-
-      <!-- Note: The following ComponentGroupRef is required to pull in generated authoring from project references. -->
-      <ComponentGroupRef Id="Product.Generated" />
     </Feature>
 
     <Feature Id="FeatureAppConsole" Title="RIFT Authenticator (Console)" Level="1">
-      <!-- TODO: Remove the comments around this ComponentRef element and the Component above in order to add resources to this installer. -->
       <ComponentRef Id="AppConsole" />
       <ComponentRef Id="AppLibs" />
-
-      <!-- Note: The following ComponentGroupRef is required to pull in generated authoring from project references. -->
-      <ComponentGroupRef Id="Product.Generated" />
     </Feature>
+
+    <Feature Id="FeatureSources" Title="Sources" Level="2" >
+      <ComponentGroupRef Id="RiftAuthenticator.CommandLine.Sources" />
+      <ComponentGroupRef Id="RiftAuthenticator.WPF.Sources" />
+      <ComponentGroupRef Id="RiftAuthenticator.WinForms.Sources" />
+      <ComponentGroupRef Id="RiftAuthenticator.Library.Sources" />
+    </Feature>
+
+    <WixVariable Id="WixUILicenseRtf" Value="license.rtf"/>
+    
+    <UI>
+      <UIRef Id="WixUI_Advanced"/>
+      <Publish Dialog="ExitDialog"
+          Control="Finish"
+          Event="DoAction"
+          Value="LaunchApplication">WIXUI_EXITDIALOGOPTIONALCHECKBOX = 1 and NOT Installed</Publish>
+    </UI>
+
+    <Property Id="WixShellExecTarget" Value="[#$(var.RiftAuthenticator.WPF.TargetFileName)]" />
+    <CustomAction Id="LaunchApplication"
+        BinaryKey="WixCA"
+        DllEntry="WixShellExec"
+        Impersonate="yes" />
   </Product>
 </Wix>
