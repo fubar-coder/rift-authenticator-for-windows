@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
+    <EnableProjectHarvesting>True</EnableProjectHarvesting>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>3.5</ProductVersion>
@@ -15,6 +16,8 @@
     <OutputPath>bin\$(Configuration)\</OutputPath>
     <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
     <DefineConstants>Debug</DefineConstants>
+    <LeaveTemporaryFiles>True</LeaveTemporaryFiles>
+    <VerboseOutput>True</VerboseOutput>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <OutputPath>bin\$(Configuration)\</OutputPath>
@@ -22,6 +25,57 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="RiftAuthenticator.wxs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RiftAuthenticator.CommandLine\RiftAuthenticator.CommandLine.csproj">
+      <Name>RiftAuthenticator.CommandLine</Name>
+      <Project>{d601a1a4-91e2-4870-88c4-2778ac674532}</Project>
+      <Private>True</Private>
+      <RefProjectOutputGroups>Sources</RefProjectOutputGroups>
+      <RefTargetDir>Sources.CommandLine</RefTargetDir>
+      <DoNotHarvest>
+      </DoNotHarvest>
+    </ProjectReference>
+    <ProjectReference Include="..\RiftAuthenticator.Library\RiftAuthenticator.Library.csproj">
+      <Name>RiftAuthenticator.Library</Name>
+      <Project>{e31e2621-6d52-49a9-b7d4-ac75862518d8}</Project>
+      <Private>True</Private>
+      <RefProjectOutputGroups>Sources</RefProjectOutputGroups>
+      <RefTargetDir>Sources.Library</RefTargetDir>
+      <DoNotHarvest>
+      </DoNotHarvest>
+    </ProjectReference>
+    <ProjectReference Include="..\RiftAuthenticator.WinForms\RiftAuthenticator.WinForms.csproj">
+      <Name>RiftAuthenticator.WinForms</Name>
+      <Project>{ac8ae1b0-4423-4faa-9410-8808fa2e6be4}</Project>
+      <Private>True</Private>
+      <RefProjectOutputGroups>Sources</RefProjectOutputGroups>
+      <RefTargetDir>Sources.WinForms</RefTargetDir>
+      <DoNotHarvest>
+      </DoNotHarvest>
+    </ProjectReference>
+    <ProjectReference Include="..\RiftAuthenticator.WPF\RiftAuthenticator.WPF.csproj">
+      <Name>RiftAuthenticator.WPF</Name>
+      <Project>{c0156421-fa95-4631-82c1-85aa7cc65b5e}</Project>
+      <Private>True</Private>
+      <RefProjectOutputGroups>Sources</RefProjectOutputGroups>
+      <RefTargetDir>Sources.WPF</RefTargetDir>
+      <DoNotHarvest>
+      </DoNotHarvest>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WixExtension Include="WixUtilExtension">
+      <HintPath>$(WixExtDir)\WixUtilExtension.dll</HintPath>
+      <Name>WixUtilExtension</Name>
+    </WixExtension>
+    <WixExtension Include="WixUIExtension">
+      <HintPath>$(WixExtDir)\WixUIExtension.dll</HintPath>
+      <Name>WixUIExtension</Name>
+    </WixExtension>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="license.rtf" />
   </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
   <!--
