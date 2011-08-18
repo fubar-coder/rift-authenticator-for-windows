@@ -1,0 +1,11 @@
+syntax: glob
+*.suo
+*_TemporaryKey.pfx
+*.user
+syntax: regexp
+/bin/Debug$
+/obj/x86$
+/bin/Release$
+/publish$
+/obj/Debug$
+/obj/Release$
