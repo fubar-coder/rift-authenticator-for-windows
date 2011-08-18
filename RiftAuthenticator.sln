@@ -10,6 +10,12 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiftAuthenticator.CommandLine", "RiftAuthenticator.CommandLine\RiftAuthenticator.CommandLine.csproj", "{D601A1A4-91E2-4870-88C4-2778AC674532}"
 EndProject
 Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "RiftAuthenticatorSetup", "RiftAuthenticatorSetup\RiftAuthenticatorSetup.wixproj", "{E839ABD9-2570-46D3-95D6-B76BC7AE2978}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E31E2621-6D52-49A9-B7D4-AC75862518D8} = {E31E2621-6D52-49A9-B7D4-AC75862518D8}
+		{C0156421-FA95-4631-82C1-85AA7CC65B5E} = {C0156421-FA95-4631-82C1-85AA7CC65B5E}
+		{D601A1A4-91E2-4870-88C4-2778AC674532} = {D601A1A4-91E2-4870-88C4-2778AC674532}
+		{AC8AE1B0-4423-4FAA-9410-8808FA2E6BE4} = {AC8AE1B0-4423-4FAA-9410-8808FA2E6BE4}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
