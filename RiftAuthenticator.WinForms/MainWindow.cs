@@ -1,18 +1,18 @@
 ﻿/**
- * This file is part of RIFT Authenticator for Windows.
+ * This file is part of RIFT™ Authenticator for Windows.
  *
- * RIFT Authenticator for Windows is free software: you can redistribute 
+ * RIFT™ Authenticator for Windows is free software: you can redistribute 
  * it and/or modify it under the terms of the GNU General Public License 
  * as published by the Free Software Foundation, either version 3 of the 
  * License, or (at your option) any later version.
  *
- * RIFT Authenticator for Windows is distributed in the hope that it will 
+ * RIFT™ Authenticator for Windows is distributed in the hope that it will 
  * be useful, but WITHOUT ANY WARRANTY; without even the implied warranty 
  * of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU 
  * General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with RIFT Authenticator for Windows.  If not, see 
+ * along with RIFT™ Authenticator for Windows.  If not, see 
  * <http://www.gnu.org/licenses/>.
  */
 
@@ -92,7 +92,7 @@ namespace RiftAuthenticator.WinForms
         {
             MessageBox.Show(this,
                 "This application is distributed under the terms of GNU General Public License Version 3.\n" +
-                "The application is under copyright of the RIFT Authenticator for Windows project except for " +
+                "The application is under copyright of the RIFT™ Authenticator for Windows project except for " +
                 "some parts which are under the copyright of the following companies/projects:\n" +
                 "Novell\n" +
                 "The Apache Software Foundation", "License stuff", MessageBoxButtons.OK, MessageBoxIcon.Information);
