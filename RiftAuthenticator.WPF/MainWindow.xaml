@@ -1,16 +1,16 @@
-﻿<Window x:Class="RiftAuthenticator.MainWindow"
+﻿<Window x:Uid="Window_1" x:Class="RiftAuthenticator.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="RIFT™ Authenticator" Height="182" Width="619" Loaded="Window_Loaded" Icon="/RiftAuthenticator;component/RiftLogo.ico">
-    <Grid>
-        <TextBox Height="23" Margin="12,12,12,0" Name="LoginToken" VerticalAlignment="Top" IsReadOnly="True" />
-        <ProgressBar Height="26" Margin="12,41,12,0" Name="RemainingValidTime" VerticalAlignment="Top" Maximum="30000" />
-        <Label Content="Serial Key:" Height="28" HorizontalAlignment="Left" Margin="12,73,0,0" Name="label1" VerticalAlignment="Top" />
-        <TextBox Height="23" Margin="82,75,12,0" Name="SerialKey" VerticalAlignment="Top" IsReadOnly="True" />
-        <Button Content="Initialize" HorizontalAlignment="Left" Margin="12,0,0,12" Name="Initialize" Width="75" Height="23" VerticalAlignment="Bottom" Click="Initialize_Click" />
-        <Button Content="Time Sync" Height="23" HorizontalAlignment="Left" Margin="93,0,0,12" Name="TimeSync" VerticalAlignment="Bottom" Width="75" Click="TimeSync_Click" />
-        <Button Content="Info" HorizontalAlignment="Left" Margin="174,0,0,12" Name="Information" Width="75" Height="23" VerticalAlignment="Bottom" Click="Information_Click" />
-        <Button Content="Recover" HorizontalAlignment="Left" Margin="255,0,0,12" Name="Recover" Width="75" Height="23" VerticalAlignment="Bottom" Click="Recover_Click" />
-        <Button Content="License" Height="23" HorizontalAlignment="Right" Margin="0,0,12,12" Name="ShowLicense" VerticalAlignment="Bottom" Width="75" Click="ShowLicense_Click" />
+    <Grid x:Uid="Grid_1">
+        <TextBox x:Uid="LoginToken" Height="23" Margin="12,12,12,0" Name="LoginToken" VerticalAlignment="Top" IsReadOnly="True" />
+        <ProgressBar x:Uid="RemainingValidTime" Height="26" Margin="12,41,12,0" Name="RemainingValidTime" VerticalAlignment="Top" Maximum="30000" />
+        <Label x:Uid="label1" Content="Serial Key:" Height="28" HorizontalAlignment="Left" Margin="12,73,0,0" Name="label1" VerticalAlignment="Top" />
+        <TextBox x:Uid="SerialKey" Height="23" Margin="82,75,12,0" Name="SerialKey" VerticalAlignment="Top" IsReadOnly="True" />
+        <Button x:Uid="Initialize" Content="Initialize" HorizontalAlignment="Left" Margin="12,0,0,12" Name="Initialize" Width="75" Height="23" VerticalAlignment="Bottom" Click="Initialize_Click" />
+        <Button x:Uid="TimeSync" Content="Time Sync" Height="23" HorizontalAlignment="Left" Margin="93,0,0,12" Name="TimeSync" VerticalAlignment="Bottom" Width="75" Click="TimeSync_Click" />
+        <Button x:Uid="Information" Content="Info" HorizontalAlignment="Left" Margin="174,0,0,12" Name="Information" Width="75" Height="23" VerticalAlignment="Bottom" Click="Information_Click" />
+        <Button x:Uid="Recover" Content="Recover" HorizontalAlignment="Left" Margin="255,0,0,12" Name="Recover" Width="75" Height="23" VerticalAlignment="Bottom" Click="Recover_Click" />
+        <Button x:Uid="ShowLicense" Content="License" Height="23" HorizontalAlignment="Right" Margin="0,0,12,12" Name="ShowLicense" VerticalAlignment="Bottom" Width="75" Click="ShowLicense_Click" />
     </Grid>
 </Window>

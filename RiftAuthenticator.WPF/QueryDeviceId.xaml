@@ -1,11 +1,11 @@
-﻿<Window x:Class="RiftAuthenticator.QueryDeviceId"
+﻿<Window x:Uid="Window_1" x:Class="RiftAuthenticator.QueryDeviceId"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Please enter you Device ID" Height="132" Width="297" Loaded="Window_Loaded" WindowStartupLocation="CenterOwner" Icon="/RiftAuthenticator;component/RiftLogo.ico">
-    <Grid>
-        <TextBox Height="23" Margin="81,14,12,0" Name="DeviceId" VerticalAlignment="Top" />
-        <Label Content="Device ID:" Height="28" HorizontalAlignment="Left" Margin="12,12,0,0" Name="label1" VerticalAlignment="Top" />
-        <Button Content="OK" Height="23" HorizontalAlignment="Left" Margin="12,0,0,12" Name="CreateSecretKey" VerticalAlignment="Bottom" Width="75" IsDefault="True" Click="CreateSecretKey_Click" />
-        <Button Content="Cancel" Height="23" HorizontalAlignment="Right" Margin="0,0,12,12" Name="button1" VerticalAlignment="Bottom" Width="75" IsCancel="True" />
+    <Grid x:Uid="Grid_1">
+        <TextBox x:Uid="DeviceId" Height="23" Margin="81,14,12,0" Name="DeviceId" VerticalAlignment="Top" />
+        <Label x:Uid="label1" Content="Device ID:" Height="28" HorizontalAlignment="Left" Margin="12,12,0,0" Name="label1" VerticalAlignment="Top" />
+        <Button x:Uid="CreateSecretKey" Content="OK" Height="23" HorizontalAlignment="Left" Margin="12,0,0,12" Name="CreateSecretKey" VerticalAlignment="Bottom" Width="75" IsDefault="True" Click="CreateSecretKey_Click" />
+        <Button x:Uid="button1" Content="Cancel" Height="23" HorizontalAlignment="Right" Margin="0,0,12,12" Name="button1" VerticalAlignment="Bottom" Width="75" IsCancel="True" />
     </Grid>
 </Window>
