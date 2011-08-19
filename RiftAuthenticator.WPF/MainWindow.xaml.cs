@@ -153,6 +153,7 @@ namespace RiftAuthenticator
         private void ExecuteRecovery()
         {
             var dlgDeviceId = new QueryDeviceId() { Owner = this };
+            dlgDeviceId.DeviceId.Text = Library.TrionServer.GetDeviceId();
             if (!dlgDeviceId.ShowDialog().GetValueOrDefault())
                 return;
             var deviceId = dlgDeviceId.DeviceId.Text.Trim();
