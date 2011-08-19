@@ -2,6 +2,7 @@ syntax: glob
 *.suo
 *_TemporaryKey.pfx
 *.user
+bin/x86
 syntax: regexp
 /bin/Debug$
 /obj/x86$
