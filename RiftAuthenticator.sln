@@ -17,6 +17,19 @@ Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "RiftAuthenticatorSetup", "R
 		{AC8AE1B0-4423-4FAA-9410-8808FA2E6BE4} = {AC8AE1B0-4423-4FAA-9410-8808FA2E6BE4}
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{B617ECB2-9836-4AF0-80D6-416CE9F6069A}"
+	ProjectSection(SolutionItems) = preProject
+		Images\RiftLogo.ico = Images\RiftLogo.ico
+		Images\RiftLogo.png = Images\RiftLogo.png
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "LicenseStuff", "LicenseStuff", "{11772DD4-180D-45F3-934F-27CFECEA388C}"
+	ProjectSection(SolutionItems) = preProject
+		copying.txt = copying.txt
+		gpl-3.0.txt = gpl-3.0.txt
+		readme.txt = readme.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
