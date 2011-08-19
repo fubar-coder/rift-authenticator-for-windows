@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(QueryDeviceId));
             this.label1 = new System.Windows.Forms.Label();
             this.DeviceId = new System.Windows.Forms.TextBox();
             this.CreateSecretKey = new System.Windows.Forms.Button();
@@ -45,8 +46,8 @@
             // 
             // DeviceId
             // 
-            this.DeviceId.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.DeviceId.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.DeviceId.Location = new System.Drawing.Point(76, 12);
             this.DeviceId.Name = "DeviceId";
             this.DeviceId.Size = new System.Drawing.Size(248, 20);
@@ -86,6 +87,7 @@
             this.Controls.Add(this.CreateSecretKey);
             this.Controls.Add(this.DeviceId);
             this.Controls.Add(this.label1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "QueryDeviceId";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Please enter you Device ID";

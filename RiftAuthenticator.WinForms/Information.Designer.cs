@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Information));
             this.DeviceId = new System.Windows.Forms.TextBox();
             this.SerialKey = new System.Windows.Forms.TextBox();
             this.SecretKey = new System.Windows.Forms.TextBox();
@@ -41,8 +42,8 @@
             // 
             // DeviceId
             // 
-            this.DeviceId.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.DeviceId.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.DeviceId.Location = new System.Drawing.Point(82, 12);
             this.DeviceId.Name = "DeviceId";
             this.DeviceId.ReadOnly = true;
@@ -51,8 +52,8 @@
             // 
             // SerialKey
             // 
-            this.SerialKey.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.SerialKey.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.SerialKey.Location = new System.Drawing.Point(82, 38);
             this.SerialKey.Name = "SerialKey";
             this.SerialKey.ReadOnly = true;
@@ -61,8 +62,8 @@
             // 
             // SecretKey
             // 
-            this.SecretKey.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.SecretKey.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.SecretKey.Location = new System.Drawing.Point(82, 64);
             this.SecretKey.Name = "SecretKey";
             this.SecretKey.ReadOnly = true;
@@ -71,8 +72,8 @@
             // 
             // TimeOffset
             // 
-            this.TimeOffset.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.TimeOffset.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.TimeOffset.Location = new System.Drawing.Point(82, 90);
             this.TimeOffset.Name = "TimeOffset";
             this.TimeOffset.ReadOnly = true;
@@ -142,6 +143,7 @@
             this.Controls.Add(this.SecretKey);
             this.Controls.Add(this.SerialKey);
             this.Controls.Add(this.DeviceId);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Information";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Information";

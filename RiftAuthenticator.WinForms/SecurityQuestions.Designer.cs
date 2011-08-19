@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SecurityQuestions));
             this.SecurityQuestion1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -42,8 +43,8 @@
             // 
             // SecurityQuestion1
             // 
-            this.SecurityQuestion1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.SecurityQuestion1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.SecurityQuestion1.Location = new System.Drawing.Point(118, 12);
             this.SecurityQuestion1.Name = "SecurityQuestion1";
             this.SecurityQuestion1.ReadOnly = true;
@@ -70,8 +71,8 @@
             // 
             // SecurityAnswer1
             // 
-            this.SecurityAnswer1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.SecurityAnswer1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.SecurityAnswer1.Location = new System.Drawing.Point(118, 38);
             this.SecurityAnswer1.Name = "SecurityAnswer1";
             this.SecurityAnswer1.Size = new System.Drawing.Size(452, 20);
@@ -88,8 +89,8 @@
             // 
             // SecurityAnswer2
             // 
-            this.SecurityAnswer2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.SecurityAnswer2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.SecurityAnswer2.Location = new System.Drawing.Point(118, 90);
             this.SecurityAnswer2.Name = "SecurityAnswer2";
             this.SecurityAnswer2.Size = new System.Drawing.Size(452, 20);
@@ -106,8 +107,8 @@
             // 
             // SecurityQuestion2
             // 
-            this.SecurityQuestion2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.SecurityQuestion2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.SecurityQuestion2.Location = new System.Drawing.Point(118, 64);
             this.SecurityQuestion2.Name = "SecurityQuestion2";
             this.SecurityQuestion2.ReadOnly = true;
@@ -154,6 +155,7 @@
             this.Controls.Add(this.SecurityAnswer1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.SecurityQuestion1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SecurityQuestions";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Security Questions";
