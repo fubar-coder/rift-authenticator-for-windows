@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-This file is part of RIFT Authenticator for Windows.
+This file is part of RIFT™ Authenticator for Windows.
 
-RIFT Authenticator for Windows is free software: you can redistribute
+RIFT™ Authenticator for Windows is free software: you can redistribute
 it and/or modify it under the terms of the GNU General Public License
 as published by the Free Software Foundation, either version 3 of the
 License, or (at your option) any later version.
 
-RIFT Authenticator for Windows is distributed in the hope that it will
+RIFT™ Authenticator for Windows is distributed in the hope that it will
 be useful, but WITHOUT ANY WARRANTY; without even the implied warranty
 of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with RIFT Authenticator for Windows.  If not, see
+along with RIFT™ Authenticator for Windows.  If not, see
 <http://www.gnu.org/licenses/>.
 -->
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
   <?define ProductVersion="1.0.6"?>
   <?define UpgradeCode="7336F679-35B0-4BF6-8708-82FBC9E29095"?>
-  <?define Manufacturer="RIFT Authenticator for Windows Project"?>
+  <?define Manufacturer="RIFT™ Authenticator for Windows Project"?>
   <?define ProductCode="910AE6E2-B43A-473B-98EB-0E48AB341DA7"?>
   <?define RTMProductVersion="1.0.5"?>
   
-	<Product Id="$(var.ProductCode)" Name="RIFT Authenticator for Windows" Language="1033" Version="$(var.ProductVersion)" Manufacturer="$(var.Manufacturer)" UpgradeCode="$(var.UpgradeCode)">
+	<Product Id="$(var.ProductCode)" Name="RIFT™ Authenticator for Windows" Language="1033" Version="$(var.ProductVersion)" Manufacturer="$(var.Manufacturer)" UpgradeCode="$(var.UpgradeCode)">
 		<Package InstallerVersion="200" Compressed="yes" Manufacturer="$(var.Manufacturer)" />
 
     <MediaTemplate CabinetTemplate="media{0}.cab" EmbedCab="yes" />
 
 		<Directory Id="TARGETDIR" Name="SourceDir">
 			<Directory Id="ProgramFilesFolder">
-				<Directory Id="APPLICATIONFOLDER" Name="RIFT Authenticator">
+				<Directory Id="APPLICATIONFOLDER" Name="RIFT™ Authenticator">
           <Directory Id="Sources" Name="Sources">
             <Directory Id="Sources.CommandLine" Name="CommandLine" />
             <Directory Id="Sources.WinForms" Name="WinForms" />
@@ -41,26 +41,26 @@ along with RIFT Authenticator for Windows.  If not, see
 			</Directory>
 
       <Directory Id="ProgramMenuFolder">
-        <Directory Id="AppProgramsFolder" Name="RIFT Authenticator for Windows" />
+        <Directory Id="AppProgramsFolder" Name="RIFT™ Authenticator for Windows" />
       </Directory>
 		</Directory>
 
     <DirectoryRef Id="AppProgramsFolder">
       <Component Id="AppShortcutUninstall" Guid="D95E7E04-8C05-49A2-8E39-B98E554E668A">
         <Shortcut Id="UninstallProduct"
-          Name="Uninstall RIFT Authenticator for Windows"
+          Name="Uninstall RIFT™ Authenticator for Windows"
           Target="[SystemFolder]msiexec.exe"
           Arguments="/x [ProductCode]" />
-        <RegistryValue Root="HKCU" Key="Software\RIFT Authenticator for Windows Project\RIFT Authenticator for Windows" Name="Installed" Type="integer" Value="1" KeyPath="yes"/>
+        <RegistryValue Root="HKCU" Key="Software\RIFT™ Authenticator for Windows Project\RIFT™ Authenticator for Windows" Name="Installed" Type="integer" Value="1" KeyPath="yes"/>
         <RemoveFolder Id="AppProgramsFolder" On="uninstall" />
       </Component>
       <Component Id="AppShortcutWpf" Guid="D80AA8CD-956D-419A-9250-3BE911863AB8">
-        <Shortcut Id="AppStartMenuShortcut.Wpf" Name="RIFT Authenticator WPF" Target="[APPLICATIONFOLDER]$(var.RiftAuthenticator.WPF.TargetFileName)" WorkingDirectory="APPLICATIONFOLDER" />
-        <RegistryValue Root="HKCU" Key="Software\RIFT Authenticator for Windows Project\RIFT Authenticator for Windows" Name="WPF.Installed" Type="integer" Value="1" KeyPath="yes"/>
+        <Shortcut Id="AppStartMenuShortcut.Wpf" Name="RIFT™ Authenticator WPF" Target="[APPLICATIONFOLDER]$(var.RiftAuthenticator.WPF.TargetFileName)" WorkingDirectory="APPLICATIONFOLDER" />
+        <RegistryValue Root="HKCU" Key="Software\RIFT™ Authenticator for Windows Project\RIFT™ Authenticator for Windows" Name="WPF.Installed" Type="integer" Value="1" KeyPath="yes"/>
       </Component>
       <Component Id="AppShortcutWinForms" Guid="1B88AE99-0D03-4563-9D2F-742563B2AF5F">
-        <Shortcut Id="AppStartMenuShortcut.WinForms" Name="RIFT Authenticator WinForms" Target="[APPLICATIONFOLDER]$(var.RiftAuthenticator.WinForms.TargetFileName)" WorkingDirectory="APPLICATIONFOLDER" />
-        <RegistryValue Root="HKCU" Key="Software\RIFT Authenticator for Windows Project\RIFT Authenticator for Windows" Name="WinForms.Installed" Type="integer" Value="1" KeyPath="yes"/>
+        <Shortcut Id="AppStartMenuShortcut.WinForms" Name="RIFT™ Authenticator WinForms" Target="[APPLICATIONFOLDER]$(var.RiftAuthenticator.WinForms.TargetFileName)" WorkingDirectory="APPLICATIONFOLDER" />
+        <RegistryValue Root="HKCU" Key="Software\RIFT™ Authenticator for Windows Project\RIFT™ Authenticator for Windows" Name="WinForms.Installed" Type="integer" Value="1" KeyPath="yes"/>
       </Component>
     </DirectoryRef>
 
@@ -79,21 +79,21 @@ along with RIFT Authenticator for Windows.  If not, see
       </Component>
     </DirectoryRef>
     
-    <Feature Id="FeatureAppWPF" Title="RIFT Authenticator (WPF)" Level="1" Absent="disallow" AllowAdvertise="no">
+    <Feature Id="FeatureAppWPF" Title="RIFT™ Authenticator (WPF)" Level="1" Absent="disallow" AllowAdvertise="no">
       <ComponentRef Id="AppWpf" />
       <ComponentRef Id="AppLibs" />
       <ComponentRef Id="AppShortcutWpf"/>
       <ComponentRef Id="AppShortcutUninstall" />
     </Feature>
 
-    <Feature Id="FeatureAppWinForms" Title="RIFT Authenticator (WinForms)" Level="1">
+    <Feature Id="FeatureAppWinForms" Title="RIFT™ Authenticator (WinForms)" Level="1">
       <ComponentRef Id="AppWinForms" />
       <ComponentRef Id="AppLibs" />
       <ComponentRef Id="AppShortcutWinForms"/>
       <ComponentRef Id="AppShortcutUninstall" />
     </Feature>
 
-    <Feature Id="FeatureAppConsole" Title="RIFT Authenticator (Console)" Level="1">
+    <Feature Id="FeatureAppConsole" Title="RIFT™ Authenticator (Console)" Level="1">
       <ComponentRef Id="AppConsole" />
       <ComponentRef Id="AppLibs" />
     </Feature>
@@ -123,10 +123,10 @@ along with RIFT Authenticator for Windows.  If not, see
 
     <WixVariable Id="WixUILicenseRtf" Value="license.rtf"/>
 
-    <Property Id="ApplicationFolderName" Value="RIFT Authenticator" />
+    <Property Id="ApplicationFolderName" Value="RIFT™ Authenticator" />
     <Property Id="WixAppFolder" Value="WixPerUserFolder" />
 
-    <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT" Value="Launch RIFT Authenticator for Windows" />
+    <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT" Value="Launch RIFT™ Authenticator for Windows" />
     <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOX" Value="1" />
     <UI>
       <UIRef Id="WixUI_Advanced"/>

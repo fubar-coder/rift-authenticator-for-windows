@@ -43,8 +43,8 @@
             // 
             // LoginToken
             // 
-            this.LoginToken.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.LoginToken.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.LoginToken.Location = new System.Drawing.Point(12, 12);
             this.LoginToken.Name = "LoginToken";
             this.LoginToken.ReadOnly = true;
@@ -53,8 +53,8 @@
             // 
             // RemainingValidTime
             // 
-            this.RemainingValidTime.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.RemainingValidTime.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.RemainingValidTime.Location = new System.Drawing.Point(12, 38);
             this.RemainingValidTime.Maximum = 30000;
             this.RemainingValidTime.Name = "RemainingValidTime";
@@ -72,8 +72,8 @@
             // 
             // SerialKey
             // 
-            this.SerialKey.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.SerialKey.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.SerialKey.Location = new System.Drawing.Point(75, 67);
             this.SerialKey.Name = "SerialKey";
             this.SerialKey.ReadOnly = true;
@@ -157,7 +157,7 @@
             this.Controls.Add(this.LoginToken);
             this.Name = "MainWindow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "RIFT Authenticator";
+            this.Text = "RIFT™ Authenticator";
             this.Load += new System.EventHandler(this.MainWindow_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
