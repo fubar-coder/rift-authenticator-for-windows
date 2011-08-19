@@ -17,8 +17,14 @@ along with RIFT Authenticator for Windows.  If not, see
 <http://www.gnu.org/licenses/>.
 -->
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-	<Product Id="5DFEFF7F-E05A-4291-BD2B-856607A65E82" Name="RIFT Authenticator for Windows" Language="1033" Version="1.0.5.0" Manufacturer="RIFT Authenticator for Windows Project" UpgradeCode="7336F679-35B0-4BF6-8708-82FBC9E29095">
-		<Package InstallerVersion="200" Compressed="yes" />
+  <?define ProductVersion="1.0.6"?>
+  <?define UpgradeCode="7336F679-35B0-4BF6-8708-82FBC9E29095"?>
+  <?define Manufacturer="RIFT Authenticator for Windows Project"?>
+  <?define ProductCode="910AE6E2-B43A-473B-98EB-0E48AB341DA7"?>
+  <?define RTMProductVersion="1.0.5"?>
+  
+	<Product Id="$(var.ProductCode)" Name="RIFT Authenticator for Windows" Language="1033" Version="$(var.ProductVersion)" Manufacturer="$(var.Manufacturer)" UpgradeCode="$(var.UpgradeCode)">
+		<Package InstallerVersion="200" Compressed="yes" Manufacturer="$(var.Manufacturer)" />
 
     <MediaTemplate CabinetTemplate="media{0}.cab" EmbedCab="yes" />
 
@@ -98,6 +104,22 @@ along with RIFT Authenticator for Windows.  If not, see
       <ComponentGroupRef Id="RiftAuthenticator.WinForms.Sources" />
       <ComponentGroupRef Id="RiftAuthenticator.Library.Sources" />
     </Feature>
+
+    <Upgrade Id="$(var.UpgradeCode)">
+      <UpgradeVersion Minimum="$(var.ProductVersion)" IncludeMinimum="no" OnlyDetect="yes" Language="1033" Property="NEWPRODUCTFOUND" />
+      <UpgradeVersion Minimum="$(var.RTMProductVersion)" IncludeMinimum="yes" Maximum="$(var.ProductVersion)" IncludeMaximum="no" Language="1033" Property="UPGRADEFOUND" />
+    </Upgrade>
+
+    <CustomAction Id="PreventDowngrading" Error="Newer version already installed." />
+
+    <InstallExecuteSequence>
+      <Custom Action="PreventDowngrading" After="FindRelatedProducts">NEWPRODUCTFOUND</Custom>
+      <RemoveExistingProducts After="InstallFinalize" />
+    </InstallExecuteSequence>
+
+    <InstallUISequence>
+      <Custom Action="PreventDowngrading" After="FindRelatedProducts">NEWPRODUCTFOUND</Custom>
+    </InstallUISequence>
 
     <WixVariable Id="WixUILicenseRtf" Value="license.rtf"/>
 
