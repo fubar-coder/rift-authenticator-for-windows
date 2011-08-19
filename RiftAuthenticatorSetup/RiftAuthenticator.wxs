@@ -48,6 +48,49 @@ along with RIFT™ Authenticator for Windows.  If not, see
       </Directory>
 		</Directory>
 
+    <DirectoryRef Id="Sources.WPF">
+      <Component Id="WPF.RiftLogo.ico" Guid="D410698E-EA5F-4282-BCB1-7BCCA1492777">
+        <File Id="RiftLogo.ico" Source="$(var.RiftAuthenticator.WPF.ProjectDir)RiftLogo.ico" />
+      </Component>
+      <Component Id="WPF.app.manifest" Guid="FD756985-81A6-4960-96ED-C5215536CB11">
+        <File Id="app.manifest" Source="$(var.RiftAuthenticator.WPF.ProjectDir)app.manifest" />
+      </Component>
+      <Component Id="WPF.App.xaml" Guid="75FB7162-324F-42AA-AA78-6591526663E1">
+        <File Id="App.xaml" Source="$(var.RiftAuthenticator.WPF.ProjectDir)App.xaml" />
+      </Component>
+      <Component Id="WPF.CreateNewSecretKey.xaml" Guid="352A0476-87B3-4829-A40D-C542F9087FDB">
+        <File Id="CreateNewSecretKey.xaml" Source="$(var.RiftAuthenticator.WPF.ProjectDir)CreateNewSecretKey.xaml" />
+      </Component>
+      <Component Id="WPF.Information.xaml" Guid="70A7AD6C-9F5D-4661-A9A4-97159FEB58F7">
+        <File Id="Information.xaml" Source="$(var.RiftAuthenticator.WPF.ProjectDir)Information.xaml" />
+      </Component>
+      <Component Id="WPF.Login.xaml" Guid="03AA60B9-5102-47C6-A54F-3B8C1A2D7947">
+        <File Id="Login.xaml" Source="$(var.RiftAuthenticator.WPF.ProjectDir)Login.xaml" />
+      </Component>
+      <Component Id="WPF.MainWindow.xaml" Guid="B4CC680B-0259-4E8F-AF26-F543CEC29AB1">
+        <File Id="MainWindow.xaml" Source="$(var.RiftAuthenticator.WPF.ProjectDir)MainWindow.xaml" />
+      </Component>
+      <Component Id="WPF.QueryDeviceId.xaml" Guid="C9E4ED6B-DE01-4E29-A68C-B13B8BCAAF0B">
+        <File Id="QueryDeviceId.xaml" Source="$(var.RiftAuthenticator.WPF.ProjectDir)QueryDeviceId.xaml" />
+      </Component>
+      <Component Id="WPF.SecurityQuestions.xaml" Guid="81464FD9-672F-4EC5-97BA-AD6E97869A41">
+        <File Id="SecurityQuestions.xaml" Source="$(var.RiftAuthenticator.WPF.ProjectDir)SecurityQuestions.xaml" />
+      </Component>
+    </DirectoryRef>
+
+    <!-- Duh! Workaround required because heat doesn't add *.xaml files to RiftAuthenticator.WPF.Sources. -->
+    <ComponentGroup Id="RiftAuthenticator.WPF.MissingContent">
+      <ComponentRef Id="WPF.RiftLogo.ico"/>
+      <ComponentRef Id="WPF.app.manifest"/>
+      <ComponentRef Id="WPF.App.xaml"/>
+      <ComponentRef Id="WPF.CreateNewSecretKey.xaml"/>
+      <ComponentRef Id="WPF.Information.xaml"/>
+      <ComponentRef Id="WPF.Login.xaml"/>
+      <ComponentRef Id="WPF.MainWindow.xaml"/>
+      <ComponentRef Id="WPF.QueryDeviceId.xaml"/>
+      <ComponentRef Id="WPF.SecurityQuestions.xaml"/>
+    </ComponentGroup>
+
     <DirectoryRef Id="AppProgramsFolder">
       <Component Id="AppShortcutUninstall" Guid="D95E7E04-8C05-49A2-8E39-B98E554E668A">
         <Shortcut Id="UninstallProduct"
@@ -109,12 +152,17 @@ along with RIFT™ Authenticator for Windows.  If not, see
     <Feature Id="FeatureSources" Title="Sources" Level="2" AllowAdvertise="no">
       <ComponentGroupRef Id="RiftAuthenticator.CommandLine.Sources" />
       <ComponentGroupRef Id="RiftAuthenticator.CommandLine.Content" />
+      <ComponentGroupRef Id="RiftAuthenticator.CommandLine.Documents" />
       <ComponentGroupRef Id="RiftAuthenticator.WPF.Sources" />
       <ComponentGroupRef Id="RiftAuthenticator.WPF.Content" />
+      <ComponentGroupRef Id="RiftAuthenticator.WPF.Documents" />
+      <ComponentGroupRef Id="RiftAuthenticator.WPF.MissingContent" />
       <ComponentGroupRef Id="RiftAuthenticator.WinForms.Sources" />
       <ComponentGroupRef Id="RiftAuthenticator.WinForms.Content" />
+      <ComponentGroupRef Id="RiftAuthenticator.WinForms.Documents" />
       <ComponentGroupRef Id="RiftAuthenticator.Library.Sources" />
       <ComponentGroupRef Id="RiftAuthenticator.Library.Content" />
+      <ComponentGroupRef Id="RiftAuthenticator.Library.Documents" />
       <ComponentRef Id="AppShortcutSources"/>
     </Feature>
 
