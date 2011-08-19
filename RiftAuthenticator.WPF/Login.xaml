@@ -1,26 +1,26 @@
-﻿<Window x:Class="RiftAuthenticator.Login"
+﻿<Window x:Uid="Window_1" x:Class="RiftAuthenticator.Login"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Login" Height="161" Width="279" WindowStartupLocation="CenterOwner" Loaded="Window_Loaded" Icon="/RiftAuthenticator;component/RiftLogo.ico">
-    <Grid>
-        <Grid Margin="0,0,0,41">
+    <Grid x:Uid="Grid_1">
+        <Grid x:Uid="Grid_2" Margin="0,0,0,41">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="1*" />
+                <ColumnDefinition x:Uid="ColumnDefinition_1" Width="Auto" />
+                <ColumnDefinition x:Uid="ColumnDefinition_2" Width="1*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="1*" />
+                <RowDefinition x:Uid="RowDefinition_1" Height="Auto" />
+                <RowDefinition x:Uid="RowDefinition_2" Height="Auto" />
+                <RowDefinition x:Uid="RowDefinition_3" Height="Auto" />
+                <RowDefinition x:Uid="RowDefinition_4" Height="Auto" />
+                <RowDefinition x:Uid="RowDefinition_5" Height="1*" />
             </Grid.RowDefinitions>
-            <Label Content="Email:" HorizontalAlignment="Left" Name="label1" VerticalAlignment="Top" />
-            <Label Content="Password:" Grid.Row="1" HorizontalAlignment="Left" Name="label2" VerticalAlignment="Top" />
-            <TextBox Grid.Column="1" Margin="0,0,0,0" Name="Email" />
-            <PasswordBox Grid.Column="1" Grid.Row="1" Margin="0,0,0,0" Name="Password" />
+            <Label x:Uid="label1" Content="Email:" HorizontalAlignment="Left" Name="label1" VerticalAlignment="Top" />
+            <Label x:Uid="label2" Content="Password:" Grid.Row="1" HorizontalAlignment="Left" Name="label2" VerticalAlignment="Top" />
+            <TextBox x:Uid="Email" Grid.Column="1" Margin="0,0,0,0" Name="Email" />
+            <PasswordBox x:Uid="Password" Grid.Column="1" Grid.Row="1" Margin="0,0,0,0" Name="Password" />
         </Grid>
-        <Button Content="Login" Height="23" HorizontalAlignment="Left" Margin="12,0,0,12" Name="DoLogin" VerticalAlignment="Bottom" Width="75" IsDefault="True" Click="DoLogin_Click" />
-        <Button Content="Cancel" Height="23" HorizontalAlignment="Right" Margin="0,0,12,12" Name="Cancel" VerticalAlignment="Bottom" Width="75" IsCancel="True" />
+        <Button x:Uid="DoLogin" Content="Login" Height="23" HorizontalAlignment="Left" Margin="12,0,0,12" Name="DoLogin" VerticalAlignment="Bottom" Width="75" IsDefault="True" Click="DoLogin_Click" />
+        <Button x:Uid="Cancel" Content="Cancel" Height="23" HorizontalAlignment="Right" Margin="0,0,12,12" Name="Cancel" VerticalAlignment="Bottom" Width="75" IsCancel="True" />
     </Grid>
 </Window>
