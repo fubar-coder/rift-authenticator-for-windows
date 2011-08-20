@@ -29,17 +29,17 @@ namespace RiftAuthenticator.Library
             switch (errorCode)
             {
                 case "account_not_available":
-                    return "Invalid user name or password.";
+                    return Resources.Strings.Error_account_not_available;
                 case "account_missing":
-                    return "No RIFT-Account or Device ID doesn't match.";
+                    return Resources.Strings.Error_account_missing;
                 case "account_securityAnswer_missing":
-                    return "Security answer(s) missing.";
+                    return Resources.Strings.Error_account_securityAnswer_missing;
                 case "account_securityAnswers_incorrect":
-                    return "Security answer(s) incorrect.";
+                    return Resources.Strings.Error_account_securityAnswers_incorrect;
                 case "device_id_missing":
-                    return "Device ID missing.";
+                    return Resources.Strings.Error_device_id_missing;
             }
-            return string.Format("Unknown error code: {0}", errorCode);
+            return string.Format(Resources.Strings.Error_unknown, errorCode);
         }
 
         public TrionServerException(string errorCode)

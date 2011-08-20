@@ -119,6 +119,12 @@ along with RIFT™ Authenticator for Windows.  If not, see
       <Component Id="AppWpf.de" Guid="14BF4AE9-D0D9-491D-A2FA-44E6B5271780">
         <File Id="de.$(var.RiftAuthenticator.WPF.TargetName).resources.dll" Source="$(var.RiftAuthenticator.WPF.TargetDir)de\$(var.RiftAuthenticator.WPF.TargetName).resources.dll" KeyPath="yes" Checksum="yes" />
       </Component>
+      <Component Id="AppWinForms.de" Guid="0B439E21-B0BE-4AF8-9B81-D67B40E0ACA3">
+        <File Id="de.$(var.RiftAuthenticator.WinForms.TargetName).resources.dll" Source="$(var.RiftAuthenticator.WinForms.TargetDir)de\$(var.RiftAuthenticator.WinForms.TargetName).resources.dll" KeyPath="yes" Checksum="yes" />
+      </Component>
+      <Component Id="AppLibs.de" Guid="7534B1AD-E385-42C0-9ADB-38325809CF23">
+        <File Id="de.$(var.RiftAuthenticator.Library.TargetName).resources.dll" Source="$(var.RiftAuthenticator.Library.TargetDir)de\$(var.RiftAuthenticator.Library.TargetName).resources.dll" KeyPath="yes" Checksum="yes" />
+      </Component>
     </DirectoryRef>
 
     <DirectoryRef Id="APPLICATIONFOLDER">
@@ -140,13 +146,16 @@ along with RIFT™ Authenticator for Windows.  If not, see
       <ComponentRef Id="AppWpf" />
       <ComponentRef Id="AppWpf.de"/>
       <ComponentRef Id="AppLibs" />
+      <ComponentRef Id="AppLibs.de" />
       <ComponentRef Id="AppShortcutWpf"/>
       <ComponentRef Id="AppShortcutUninstall" />
     </Feature>
 
     <Feature Id="FeatureAppWinForms" Title="RIFT™ Authenticator (WinForms)" Level="1" AllowAdvertise="no">
       <ComponentRef Id="AppWinForms" />
+      <ComponentRef Id="AppWinForms.de"/>
       <ComponentRef Id="AppLibs" />
+      <ComponentRef Id="AppLibs.de" />
       <ComponentRef Id="AppShortcutWinForms"/>
       <ComponentRef Id="AppShortcutUninstall" />
     </Feature>
@@ -154,6 +163,7 @@ along with RIFT™ Authenticator for Windows.  If not, see
     <Feature Id="FeatureAppConsole" Title="RIFT™ Authenticator (Console)" Level="1" AllowAdvertise="no">
       <ComponentRef Id="AppConsole" />
       <ComponentRef Id="AppLibs" />
+      <ComponentRef Id="AppLibs.de" />
       <ComponentRef Id="AppShortcutUninstall" />
     </Feature>
 
