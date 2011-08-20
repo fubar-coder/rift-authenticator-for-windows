@@ -155,4 +155,7 @@ Die Geräte-ID lautet {0}.</value>
   <data name="MessageBox_Title_Warning" xml:space="preserve">
     <value>Sind Sie sicher?</value>
   </data>
+  <data name="Status_NoConfig" xml:space="preserve">
+    <value>Keine Einstellungen gefunden. Einrichtung notwendig.</value>
+  </data>
 </root>

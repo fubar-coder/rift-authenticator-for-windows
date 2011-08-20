@@ -157,5 +157,14 @@ namespace RiftAuthenticator.WinForms.Resources {
                 return ResourceManager.GetString("MessageBox_Title_Warning", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die No configuration found. Initialization required. ähnelt.
+        /// </summary>
+        internal static string Status_NoConfig {
+            get {
+                return ResourceManager.GetString("Status_NoConfig", resourceCulture);
+            }
+        }
     }
 }
