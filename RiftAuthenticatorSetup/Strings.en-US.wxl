@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WixLocalization Culture="en-us" xmlns="http://schemas.microsoft.com/wix/2006/localization">
+	<String Id="ProductName">RIFT™ Authenticator for Windows</String>
+  <String Id="AppFolder">RIFT™ Authenticator</String>
+  <String Id="AppProgramsFolder">RIFT™ Authenticator for Windows</String>
+  <String Id="ShortcutAppUninstall">Uninstall RIFT™ Authenticator for Windows</String>
+  <String Id="ShortcutAppWpf">RIFT™ Authenticator WPF</String>
+  <String Id="ShortcutAppWinForms">RIFT™ Authenticator WinForms</String>
+  <String Id="ShortcutAppSource">RIFT™ Authenticator Sourcecode</String>
+  <String Id="LaunchApp">Launch RIFT™ Authenticator for Windows</String>
+  <String Id="ErrorNewerVersionInstalled">Newer version already installed.</String>
+</WixLocalization>
