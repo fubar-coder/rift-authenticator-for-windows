@@ -207,7 +207,7 @@ along with RIFT™ Authenticator for Windows.  If not, see
     <WixVariable Id="WixUILicenseRtf" Value="license.rtf"/>
     <WixVariable Id="WixUIBannerBmp" Value="RiftLogoBanner.bmp"/>
 
-    <Property Id="ApplicationFolderName" Value="RIFT™ Authenticator" />
+    <Property Id="ApplicationFolderName" Value="!(loc.AppFolder)" />
     <Property Id="WixAppFolder" Value="WixPerUserFolder" />
 
     <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT" Value="!(loc.LaunchApp)" />
