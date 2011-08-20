@@ -1,0 +1,234 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="app_commands" xml:space="preserve">
+    <value>Commands:</value>
+  </data>
+  <data name="app_command_line" xml:space="preserve">
+    <value>{0} [global-options] &lt;command-name&gt; [command-options]</value>
+  </data>
+  <data name="app_info_device_id" xml:space="preserve">
+    <value>Device ID: {0}</value>
+  </data>
+  <data name="app_info_encrypted_secret_key" xml:space="preserve">
+    <value>Encrypted Secret Key: {0}</value>
+  </data>
+  <data name="app_info_serial_key" xml:space="preserve">
+    <value>Serial Key: {0}</value>
+  </data>
+  <data name="app_info_time_offset" xml:space="preserve">
+    <value>Time Offset: {0}</value>
+  </data>
+  <data name="app_invalid_command" xml:space="preserve">
+    <value>No valid command specified: {0}</value>
+  </data>
+  <data name="app_no_command" xml:space="preserve">
+    <value>No command name specified.</value>
+  </data>
+  <data name="app_no_config" xml:space="preserve">
+    <value>Configuration is empty.</value>
+  </data>
+  <data name="app_opt_global" xml:space="preserve">
+    <value>Global options:</value>
+  </data>
+  <data name="app_unknown_args" xml:space="preserve">
+    <value>Unknown arguments found: {0}</value>
+  </data>
+  <data name="opt_global_help" xml:space="preserve">
+    <value>Show help</value>
+  </data>
+  <data name="opt_global_verbose" xml:space="preserve">
+    <value>Set verbose level</value>
+  </data>
+  <data name="opt_help_cmd_options" xml:space="preserve">
+    <value>Options for command {0} ({1}):</value>
+  </data>
+  <data name="opt_help_description" xml:space="preserve">
+    <value>Show help for a command</value>
+  </data>
+  <data name="opt_info_description" xml:space="preserve">
+    <value>Show current configuration</value>
+  </data>
+  <data name="opt_init_config_found" xml:space="preserve">
+    <value>A configuration already exists, but the -f (force) option wasn't specified.</value>
+  </data>
+  <data name="opt_init_description" xml:space="preserve">
+    <value>Initialization of a new authenticator</value>
+  </data>
+  <data name="opt_init_opt_device_id" xml:space="preserve">
+    <value>Manually specify a device id</value>
+  </data>
+  <data name="opt_init_opt_force" xml:space="preserve">
+    <value>Force overwrite of current configuration</value>
+  </data>
+  <data name="opt_login_token_description" xml:space="preserve">
+    <value>Show current login token</value>
+  </data>
+  <data name="opt_login_token_login_token" xml:space="preserve">
+    <value>Login token: {0}</value>
+  </data>
+  <data name="opt_login_token_remaining_time" xml:space="preserve">
+    <value>Remaining time (ms): {0}</value>
+  </data>
+  <data name="opt_recover_description" xml:space="preserve">
+    <value>Recover the authenticators configuration</value>
+  </data>
+  <data name="opt_recover_error_no_answer" xml:space="preserve">
+    <value>No answer for security question {0} ({1}) given</value>
+  </data>
+  <data name="opt_recover_error_no_email" xml:space="preserve">
+    <value>No email address (user name) for login specified</value>
+  </data>
+  <data name="opt_recover_error_no_password" xml:space="preserve">
+    <value>No password for login specified</value>
+  </data>
+  <data name="opt_recover_opt_device_id" xml:space="preserve">
+    <value>Manually specify a device id</value>
+  </data>
+  <data name="opt_recover_opt_email" xml:space="preserve">
+    <value>Email address used for login</value>
+  </data>
+  <data name="opt_recover_opt_password" xml:space="preserve">
+    <value>Password used for login</value>
+  </data>
+  <data name="opt_secret_questions_description" xml:space="preserve">
+    <value>Show the users secret question(s)</value>
+  </data>
+  <data name="opt_secret_questions_display" xml:space="preserve">
+    <value>Security question {0}: {1}</value>
+  </data>
+  <data name="opt_secret_questions_error_no_email" xml:space="preserve">
+    <value>No email address (user name) for login specified</value>
+  </data>
+  <data name="opt_secret_questions_error_no_password" xml:space="preserve">
+    <value>No password for login specified</value>
+  </data>
+  <data name="opt_secret_questions_opt_email" xml:space="preserve">
+    <value>Email address used for login</value>
+  </data>
+  <data name="opt_secret_questions_opt_password" xml:space="preserve">
+    <value>Password used for login</value>
+  </data>
+  <data name="opt_time_sync_description" xml:space="preserve">
+    <value>Time synchronization with TRION's login server</value>
+  </data>
+  <data name="opt_time_sync_display" xml:space="preserve">
+    <value>New time offset: {0}</value>
+  </data>
+</root>

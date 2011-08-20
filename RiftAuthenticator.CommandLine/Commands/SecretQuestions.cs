@@ -38,8 +38,8 @@ namespace RiftAuthenticator.CommandLine.Commands
         {
             commandOptionSet = new NDesk.Options.OptionSet
             {
-                { "u|e|email|user|user-name=", "Email address used for login", x => userName = x },
-                { "p|password=", "Password used for login", x => password = x },
+                { "u|e|email|user|user-name=", Resources.Strings.opt_secret_questions_opt_email, x => userName = x },
+                { "p|password=", Resources.Strings.opt_secret_questions_opt_password, x => password = x },
             };
         }
 
@@ -50,7 +50,7 @@ namespace RiftAuthenticator.CommandLine.Commands
 
         public string Description
         {
-            get { return "Show the users secret question(s)"; }
+            get { return Resources.Strings.opt_secret_questions_description; }
         }
 
         public NDesk.Options.OptionSet OptionSet
@@ -65,15 +65,15 @@ namespace RiftAuthenticator.CommandLine.Commands
         {
             var remainingArgs = OptionSet.Parse(args);
             if (remainingArgs.Count != 0)
-                throw new CommandArgumentException(this, string.Format("Unknown arguments found: {0}", string.Join(" ", remainingArgs.ToArray())));
+                throw new CommandArgumentException(this, string.Format(Resources.Strings.app_unknown_args, string.Join(" ", remainingArgs.ToArray())));
             if (string.IsNullOrEmpty(userName))
-                throw new CommandArgumentException(this, "No email address (user name) for login specified");
+                throw new CommandArgumentException(this, Resources.Strings.opt_secret_questions_error_no_email);
             if (string.IsNullOrEmpty(password))
-                throw new CommandArgumentException(this, "No password for login specified");
+                throw new CommandArgumentException(this, Resources.Strings.opt_secret_questions_error_no_password);
             var securityQuestions = Library.TrionServer.GetSecurityQuestions(userName, password);
             for (int i = 0; i != securityQuestions.Length; ++i)
             {
-                Console.Out.WriteLine("Security question {0}: {1}", i + 1, securityQuestions[i]);
+                Console.Out.WriteLine(Resources.Strings.opt_secret_questions_display, i + 1, securityQuestions[i]);
             }
         }
     }

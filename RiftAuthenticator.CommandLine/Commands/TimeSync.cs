@@ -40,7 +40,7 @@ namespace RiftAuthenticator.CommandLine.Commands
 
         public string Description
         {
-            get { return "Time synchronization with TRION's login server"; }
+            get { return Resources.Strings.opt_time_sync_description; }
         }
 
         public NDesk.Options.OptionSet OptionSet
@@ -55,10 +55,10 @@ namespace RiftAuthenticator.CommandLine.Commands
         {
             var remainingArgs = OptionSet.Parse(args);
             if (remainingArgs.Count != 0)
-                throw new CommandArgumentException(this, string.Format("Unknown arguments found: {0}", string.Join(" ", remainingArgs.ToArray())));
+                throw new CommandArgumentException(this, string.Format(Resources.Strings.app_unknown_args, string.Join(" ", remainingArgs.ToArray())));
             globalOptions.Configuration.TimeOffset = Library.TrionServer.GetTimeOffset();
             globalOptions.Configuration.Save();
-            Console.Out.WriteLine("New time offset: {0}", globalOptions.Configuration.TimeOffset);
+            Console.Out.WriteLine(Resources.Strings.opt_time_sync_display, globalOptions.Configuration.TimeOffset);
         }
     }
 }
