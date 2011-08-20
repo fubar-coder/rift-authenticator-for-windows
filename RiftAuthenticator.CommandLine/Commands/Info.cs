@@ -43,7 +43,7 @@ namespace RiftAuthenticator.CommandLine.Commands
 
         public string Description
         {
-            get { return "Show current configuration"; }
+            get { return Resources.Strings.opt_info_description; }
         }
 
         public NDesk.Options.OptionSet OptionSet
@@ -58,7 +58,7 @@ namespace RiftAuthenticator.CommandLine.Commands
         {
             var remainingArgs = OptionSet.Parse(args);
             if (remainingArgs.Count != 0)
-                throw new CommandArgumentException(this, string.Format("Unknown arguments found: {0}", string.Join(" ", remainingArgs.ToArray())));
+                throw new CommandArgumentException(this, string.Format(Resources.Strings.app_unknown_args, string.Join(" ", remainingArgs.ToArray())));
             Program.ShowConfiguration(globalOptions.Configuration);
         }
     }

@@ -37,8 +37,8 @@ namespace RiftAuthenticator.CommandLine.Commands
         {
             commandOptionSet = new NDesk.Options.OptionSet
             {
-                { "f|force", "Force overwrite of current configuration", x => forceOverwriteConfig = x != null },
-                { "d|device-id=", "Manually specify a device id", x => deviceId = x },
+                { "f|force", Resources.Strings.opt_init_opt_force, x => forceOverwriteConfig = x != null },
+                { "d|device-id=", Resources.Strings.opt_init_opt_device_id, x => deviceId = x },
             };
         }
 
@@ -49,7 +49,7 @@ namespace RiftAuthenticator.CommandLine.Commands
 
         public string Description
         {
-            get { return "Initialization of a new authenticator"; }
+            get { return Resources.Strings.opt_init_description; }
         }
 
         public NDesk.Options.OptionSet OptionSet
@@ -64,9 +64,9 @@ namespace RiftAuthenticator.CommandLine.Commands
         {
             var remainingArgs = OptionSet.Parse(args);
             if (remainingArgs.Count != 0)
-                throw new CommandArgumentException(this, string.Format("Unknown arguments found: {0}", string.Join(" ", remainingArgs.ToArray())));
+                throw new CommandArgumentException(this, string.Format(Resources.Strings.app_unknown_args, string.Join(" ", remainingArgs.ToArray())));
             if (!globalOptions.Configuration.IsEmpty && !forceOverwriteConfig)
-                throw new CommandArgumentException(this, "A configuration already exists, but the -f (force) option wasn't specified.");
+                throw new CommandArgumentException(this, Resources.Strings.opt_init_config_found);
             globalOptions.Configuration.DeviceId = deviceId;
             Library.TrionServer.CreateSecurityKey(globalOptions.Configuration);
             globalOptions.Configuration.TimeOffset = Library.TrionServer.GetTimeOffset();

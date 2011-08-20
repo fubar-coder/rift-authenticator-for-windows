@@ -39,7 +39,7 @@ namespace RiftAuthenticator.CommandLine.Commands
 
         public string Description
         {
-            get { return "Show help for a command."; }
+            get { return Resources.Strings.opt_help_description; }
         }
 
         public NDesk.Options.OptionSet OptionSet
@@ -54,7 +54,7 @@ namespace RiftAuthenticator.CommandLine.Commands
         {
             var remainingArgs = OptionSet.Parse(args);
             if (remainingArgs.Count != 1)
-                throw new CommandArgumentException(this, string.Format("Unknown arguments found: {0}", string.Join(" ", remainingArgs.ToArray())));
+                throw new CommandArgumentException(this, string.Format(Resources.Strings.app_unknown_args, string.Join(" ", remainingArgs.ToArray())));
 
             var cmdName = remainingArgs[0];
             ICommand cmd = null;
@@ -70,10 +70,10 @@ namespace RiftAuthenticator.CommandLine.Commands
                 }
             }
             if (cmd == null)
-                throw new CommandArgumentException(this, string.Format("No valid command specified: {0}", cmdName));
+                throw new CommandArgumentException(this, string.Format(Resources.Strings.app_invalid_command, cmdName));
             Program.ShowMainHelp(HelpMessageParts.GlobalOptions);
             Console.WriteLine();
-            Console.WriteLine("Options for command {0} ({1});", cmd.Commands[0], cmd.Description);
+            Console.WriteLine(Resources.Strings.opt_help_cmd_options, cmd.Commands[0], cmd.Description);
             cmd.OptionSet.WriteOptionDescriptions(Console.Out);
         }
     }

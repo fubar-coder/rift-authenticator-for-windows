@@ -38,9 +38,9 @@ namespace RiftAuthenticator.CommandLine.Commands
         {
             commandOptionSet = new NDesk.Options.OptionSet
             {
-                { "d|device-id=", "Manually specify a device id", x => deviceId = x },
-                { "u|e|email|user|user-name=", "Email address used for login", x => userName = x },
-                { "p|password=", "Password used for login", x => password = x },
+                { "d|device-id=", Resources.Strings.opt_recover_opt_device_id, x => deviceId = x },
+                { "u|e|email|user|user-name=", Resources.Strings.opt_recover_opt_email, x => userName = x },
+                { "p|password=", Resources.Strings.opt_recover_opt_password, x => password = x },
             };
         }
 
@@ -51,7 +51,7 @@ namespace RiftAuthenticator.CommandLine.Commands
 
         public string Description
         {
-            get { return "Recover the authenticators configuration"; }
+            get { return Resources.Strings.opt_recover_description; }
         }
 
         public NDesk.Options.OptionSet OptionSet
@@ -66,9 +66,9 @@ namespace RiftAuthenticator.CommandLine.Commands
         {
             var remainingArgs = OptionSet.Parse(args);
             if (string.IsNullOrEmpty(userName))
-                throw new CommandArgumentException(this, "No email address (user name) for login specified");
+                throw new CommandArgumentException(this, Resources.Strings.opt_recover_error_no_email);
             if (string.IsNullOrEmpty(password))
-                throw new CommandArgumentException(this, "No password for login specified");
+                throw new CommandArgumentException(this, Resources.Strings.opt_recover_error_no_password);
             var securityQuestions = Library.TrionServer.GetSecurityQuestions(userName, password);
             var securityAnswers = new string[securityQuestions.Length];
             var argIndex = 0;
@@ -77,12 +77,12 @@ namespace RiftAuthenticator.CommandLine.Commands
                 if (!string.IsNullOrEmpty(securityQuestions[i]))
                 {
                     if (argIndex >= remainingArgs.Count)
-                        throw new CommandArgumentException(this, string.Format("No answer for security question {0} ({1}) given", i + 1, securityQuestions[i]));
+                        throw new CommandArgumentException(this, string.Format(Resources.Strings.opt_recover_error_no_answer, i + 1, securityQuestions[i]));
                     securityAnswers[i] = remainingArgs[argIndex++];
                 }
             }
             if (argIndex < remainingArgs.Count)
-                throw new CommandArgumentException(this, string.Format("Unknown arguments found: {0}", string.Join(" ", remainingArgs.ToArray())));
+                throw new CommandArgumentException(this, string.Format(Resources.Strings.app_unknown_args, string.Join(" ", remainingArgs.ToArray())));
             var cfg = new Library.Configuration
             {
                 DeviceId = deviceId,

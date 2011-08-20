@@ -45,7 +45,7 @@ namespace RiftAuthenticator.CommandLine.Commands
 
         public string Description
         {
-            get { return "Show current login token"; }
+            get { return Resources.Strings.opt_login_token_description; }
         }
 
         public NDesk.Options.OptionSet OptionSet
@@ -60,10 +60,10 @@ namespace RiftAuthenticator.CommandLine.Commands
         {
             var remainingArgs = OptionSet.Parse(args);
             if (remainingArgs.Count != 0)
-                throw new CommandArgumentException(this, string.Format("Unknown arguments found: {0}", string.Join(" ", remainingArgs.ToArray())));
+                throw new CommandArgumentException(this, string.Format(Resources.Strings.app_unknown_args, string.Join(" ", remainingArgs.ToArray())));
             var loginToken = globalOptions.Configuration.CalculateToken();
-            Console.Out.WriteLine("Login token: {0}", loginToken.Token);
-            Console.Out.WriteLine("Remaining time (ms): {0}", loginToken.RemainingMillis);
+            Console.Out.WriteLine(Resources.Strings.opt_login_token_login_token, loginToken.Token);
+            Console.Out.WriteLine(Resources.Strings.opt_login_token_remaining_time, loginToken.RemainingMillis);
         }
     }
 }

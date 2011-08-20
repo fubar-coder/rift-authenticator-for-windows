@@ -38,8 +38,8 @@ namespace RiftAuthenticator.CommandLine
 
         static NDesk.Options.OptionSet GlobalOptionSet = new NDesk.Options.OptionSet
         {
-            { "h|help", "Show help", x => GlobalOptions.ShowHelp = x != null },
-            { "v|verbose", "Set verbose level", x => GlobalOptions.VerboseLevel += (x==null ? -1 : 1) },
+            { "h|help", Resources.Strings.opt_global_help, x => GlobalOptions.ShowHelp = x != null },
+            { "v|verbose", Resources.Strings.opt_global_verbose, x => GlobalOptions.VerboseLevel += (x==null ? -1 : 1) },
         };
 
         static int Main(string[] args)
@@ -86,7 +86,7 @@ namespace RiftAuthenticator.CommandLine
                 }
             }
             if (cmdName == null)
-                throw new ApplicationException("No command name specified.");
+                throw new ApplicationException(Resources.Strings.app_no_command);
             ICommand cmd = null;
             foreach (var supportedCommand in SupportedCommands)
             {
@@ -100,7 +100,7 @@ namespace RiftAuthenticator.CommandLine
                 }
             }
             if (cmd == null)
-                throw new ApplicationException(string.Format("No valid command specified: {0}", cmdName));
+                throw new ApplicationException(string.Format(Resources.Strings.app_invalid_command, cmdName));
             cmd.Execute(GlobalOptions, args.ToArray());
         }
 
@@ -108,17 +108,17 @@ namespace RiftAuthenticator.CommandLine
         {
             var asm = System.Reflection.Assembly.GetEntryAssembly();
             var appName = System.IO.Path.GetFileNameWithoutExtension(asm.Location);
-            Console.WriteLine("{0} [global-options] <command-name> [command-options]", appName);
+            Console.WriteLine(Resources.Strings.app_command_line, appName);
             if ((parts & HelpMessageParts.GlobalOptions) != HelpMessageParts.None)
             {
                 Console.WriteLine();
-                Console.WriteLine("Global options:");
+                Console.WriteLine(Resources.Strings.app_opt_global);
                 GlobalOptionSet.WriteOptionDescriptions(Console.Out);
             }
             if ((parts & HelpMessageParts.CommandList) != HelpMessageParts.None)
             {
                 Console.WriteLine();
-                Console.WriteLine("Commands:");
+                Console.WriteLine(Resources.Strings.app_commands);
                 foreach (var cmd in SupportedCommands)
                     Console.WriteLine("{0,-20}\t{1}", cmd.Commands[0], cmd.Description);
             }
@@ -128,14 +128,14 @@ namespace RiftAuthenticator.CommandLine
         {
             if (config.IsEmpty)
             {
-                Console.Out.WriteLine("Configuration is empty.");
+                Console.Out.WriteLine(Resources.Strings.app_no_config);
             }
             else
             {
-                Console.Out.WriteLine("Device ID: {0}", config.DeviceId);
-                Console.Out.WriteLine("Serial Key: {0}", config.FormattedSerialKey);
-                Console.Out.WriteLine("Encrypted Secret Key: {0}", config.EncryptedSecretKey);
-                Console.Out.WriteLine("Time Offset: {0}", config.TimeOffset);
+                Console.Out.WriteLine(Resources.Strings.app_info_device_id, config.DeviceId);
+                Console.Out.WriteLine(Resources.Strings.app_info_serial_key, config.FormattedSerialKey);
+                Console.Out.WriteLine(Resources.Strings.app_info_encrypted_secret_key, config.EncryptedSecretKey);
+                Console.Out.WriteLine(Resources.Strings.app_info_time_offset, config.TimeOffset);
             }
         }
     }
