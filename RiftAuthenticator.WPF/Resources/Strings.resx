@@ -257,4 +257,7 @@ The device id is {0}.</value>
   <data name="SecurityQuestions.Title" xml:space="preserve">
     <value>Security Questions</value>
   </data>
+  <data name="Status.NoConfig" xml:space="preserve">
+    <value>No configuration found. Initialization required.</value>
+  </data>
 </root>
