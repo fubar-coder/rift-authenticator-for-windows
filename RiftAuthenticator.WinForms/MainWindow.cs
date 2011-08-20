@@ -76,7 +76,7 @@ namespace RiftAuthenticator.WinForms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(this, ex.Message, Resources.Strings.MessageBox_Title_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
         }
@@ -90,12 +90,11 @@ namespace RiftAuthenticator.WinForms
 
         private void ShowLicense_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(this,
-                "This application is distributed under the terms of GNU General Public License Version 3.\n" +
-                "The application is under copyright of the RIFT™ Authenticator for Windows project except for " +
-                "some parts which are under the copyright of the following companies/projects:\n" +
-                "Novell\n" +
-                "The Apache Software Foundation", "License stuff", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(
+                this, 
+                Resources.Strings.MessageBox_Message_License,
+                Resources.Strings.MessageBox_Title_License, 
+                MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void Information_Click(object sender, EventArgs e)
@@ -108,7 +107,11 @@ namespace RiftAuthenticator.WinForms
         {
             if (!Configuration.IsEmpty)
             {
-                if (MessageBox.Show(this, "Authenticator already initialized!\nReinitialization will make you loose your current configuration!\nContinue?", "R U sure?", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) != DialogResult.OK)
+                if (MessageBox.Show(
+                    this, 
+                    Resources.Strings.MessageBox_Message_AlreadyInitialized, 
+                    Resources.Strings.MessageBox_Title_Warning, 
+                    MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) != DialogResult.OK)
                     return;
             }
 
@@ -117,12 +120,13 @@ namespace RiftAuthenticator.WinForms
                 if (ExecuteInit())
                 {
                     Clipboard.SetText(Configuration.DeviceId);
-                    MessageBox.Show(this, string.Format("The device id has been copied into your clipboard.\nSave it!\nIt's required to use the restore functionality!\nThe device id is {0}", Configuration.DeviceId), "Remember you device id", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show(this, 
+                        string.Format(Resources.Strings.MessageBox_Message_RememberDeviceId, Configuration.DeviceId), Resources.Strings.MessageBox_Title_RememberDeviceId, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(this, ex.Message, Resources.Strings.MessageBox_Title_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
         }
@@ -154,7 +158,7 @@ namespace RiftAuthenticator.WinForms
             var deviceId = dlgDeviceId.DeviceId.Text.Trim();
             if (string.IsNullOrEmpty(deviceId))
             {
-                MessageBox.Show(this, "No device ID given.", "Bad boy!", MessageBoxButtons.OK);
+                MessageBox.Show(this, Resources.Strings.MessageBox_Message_NoDeviceId, Resources.Strings.MessageBox_Title_UserInputError, MessageBoxButtons.OK);
                 return;
             }
             var dlgLogin = new Login() { Owner = this };
@@ -166,7 +170,7 @@ namespace RiftAuthenticator.WinForms
 
             if (string.IsNullOrEmpty(userEmail) || string.IsNullOrEmpty(userPassword))
             {
-                MessageBox.Show(this, "No user name or password given.", "Bad boy!", MessageBoxButtons.OK);
+                MessageBox.Show(this, Resources.Strings.MessageBox_Message_LoginInfoIncomplete, Resources.Strings.MessageBox_Title_UserInputError, MessageBoxButtons.OK);
                 return;
             }
 
@@ -213,7 +217,7 @@ namespace RiftAuthenticator.WinForms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(this, ex.Message, Resources.Strings.MessageBox_Title_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
         }

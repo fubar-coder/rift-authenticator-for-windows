@@ -44,95 +44,59 @@
             // 
             // LoginToken
             // 
-            this.LoginToken.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.LoginToken.Location = new System.Drawing.Point(12, 12);
+            resources.ApplyResources(this.LoginToken, "LoginToken");
             this.LoginToken.Name = "LoginToken";
             this.LoginToken.ReadOnly = true;
-            this.LoginToken.Size = new System.Drawing.Size(440, 20);
-            this.LoginToken.TabIndex = 0;
             // 
             // RemainingValidTime
             // 
-            this.RemainingValidTime.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.RemainingValidTime.Location = new System.Drawing.Point(12, 38);
+            resources.ApplyResources(this.RemainingValidTime, "RemainingValidTime");
             this.RemainingValidTime.Maximum = 30000;
             this.RemainingValidTime.Name = "RemainingValidTime";
-            this.RemainingValidTime.Size = new System.Drawing.Size(440, 23);
-            this.RemainingValidTime.TabIndex = 1;
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 70);
+            resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(57, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Serial Key:";
             // 
             // SerialKey
             // 
-            this.SerialKey.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.SerialKey.Location = new System.Drawing.Point(75, 67);
+            resources.ApplyResources(this.SerialKey, "SerialKey");
             this.SerialKey.Name = "SerialKey";
             this.SerialKey.ReadOnly = true;
-            this.SerialKey.Size = new System.Drawing.Size(377, 20);
-            this.SerialKey.TabIndex = 3;
             // 
             // Initialize
             // 
-            this.Initialize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.Initialize.Location = new System.Drawing.Point(15, 101);
+            resources.ApplyResources(this.Initialize, "Initialize");
             this.Initialize.Name = "Initialize";
-            this.Initialize.Size = new System.Drawing.Size(75, 23);
-            this.Initialize.TabIndex = 4;
-            this.Initialize.Text = "Initialize";
             this.Initialize.UseVisualStyleBackColor = true;
             this.Initialize.Click += new System.EventHandler(this.Initialize_Click);
             // 
             // TimeSync
             // 
-            this.TimeSync.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.TimeSync.Location = new System.Drawing.Point(96, 101);
+            resources.ApplyResources(this.TimeSync, "TimeSync");
             this.TimeSync.Name = "TimeSync";
-            this.TimeSync.Size = new System.Drawing.Size(75, 23);
-            this.TimeSync.TabIndex = 5;
-            this.TimeSync.Text = "Time Sync";
             this.TimeSync.UseVisualStyleBackColor = true;
             this.TimeSync.Click += new System.EventHandler(this.TimeSync_Click);
             // 
             // Information
             // 
-            this.Information.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.Information.Location = new System.Drawing.Point(177, 101);
+            resources.ApplyResources(this.Information, "Information");
             this.Information.Name = "Information";
-            this.Information.Size = new System.Drawing.Size(75, 23);
-            this.Information.TabIndex = 6;
-            this.Information.Text = "Info";
             this.Information.UseVisualStyleBackColor = true;
             this.Information.Click += new System.EventHandler(this.Information_Click);
             // 
             // Recover
             // 
-            this.Recover.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.Recover.Location = new System.Drawing.Point(258, 100);
+            resources.ApplyResources(this.Recover, "Recover");
             this.Recover.Name = "Recover";
-            this.Recover.Size = new System.Drawing.Size(75, 23);
-            this.Recover.TabIndex = 7;
-            this.Recover.Text = "Recover";
             this.Recover.UseVisualStyleBackColor = true;
             this.Recover.Click += new System.EventHandler(this.Recover_Click);
             // 
             // ShowLicense
             // 
-            this.ShowLicense.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.ShowLicense.Location = new System.Drawing.Point(376, 100);
+            resources.ApplyResources(this.ShowLicense, "ShowLicense");
             this.ShowLicense.Name = "ShowLicense";
-            this.ShowLicense.Size = new System.Drawing.Size(75, 23);
-            this.ShowLicense.TabIndex = 8;
-            this.ShowLicense.Text = "License";
             this.ShowLicense.UseVisualStyleBackColor = true;
             this.ShowLicense.Click += new System.EventHandler(this.ShowLicense_Click);
             // 
@@ -144,9 +108,8 @@
             // 
             // MainWindow
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(464, 136);
             this.Controls.Add(this.ShowLicense);
             this.Controls.Add(this.Recover);
             this.Controls.Add(this.Information);
@@ -156,10 +119,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.RemainingValidTime);
             this.Controls.Add(this.LoginToken);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainWindow";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "RIFT™ Authenticator";
             this.Load += new System.EventHandler(this.MainWindow_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
