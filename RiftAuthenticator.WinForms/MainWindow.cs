@@ -46,7 +46,7 @@ namespace RiftAuthenticator.WinForms
         {
             if (Configuration.IsEmpty)
             {
-                LoginToken.Text = "No configuration. Initialization required.";
+                LoginToken.Text = Resources.Strings.Status_NoConfig;
                 SerialKey.Text = string.Empty;
                 RemainingValidTime.Value = 0;
             }

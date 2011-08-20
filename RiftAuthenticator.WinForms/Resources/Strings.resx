@@ -155,4 +155,7 @@ The device id is {0}.</value>
   <data name="MessageBox_Title_Warning" xml:space="preserve">
     <value>R U sure?</value>
   </data>
+  <data name="Status_NoConfig" xml:space="preserve">
+    <value>No configuration found. Initialization required.</value>
+  </data>
 </root>
