@@ -34,6 +34,7 @@ along with RIFT™ Authenticator for Windows.  If not, see
 		<Directory Id="TARGETDIR" Name="SourceDir">
 			<Directory Id="ProgramFilesFolder">
 				<Directory Id="APPLICATIONFOLDER" Name="RIFT™ Authenticator">
+          <Directory Id="Localization_de" Name="de" />
           <Directory Id="Sources" Name="Sources">
             <Directory Id="Sources.CommandLine" Name="CommandLine" />
             <Directory Id="Sources.WinForms" Name="WinForms" />
@@ -114,6 +115,12 @@ along with RIFT™ Authenticator for Windows.  If not, see
       </Component>
     </DirectoryRef>
 
+    <DirectoryRef Id="Localization_de">
+      <Component Id="AppWpf.de" Guid="14BF4AE9-D0D9-491D-A2FA-44E6B5271780">
+        <File Id="de.$(var.RiftAuthenticator.WPF.TargetName).resources.dll" Source="$(var.RiftAuthenticator.WPF.TargetDir)de\$(var.RiftAuthenticator.WPF.TargetName).resources.dll" KeyPath="yes" Checksum="yes" />
+      </Component>
+    </DirectoryRef>
+
     <DirectoryRef Id="APPLICATIONFOLDER">
       <Component Id="AppWpf" Guid="AF2B4E13-A46F-4E5F-BB03-BB09B3E7B402">
         <File Id="$(var.RiftAuthenticator.WPF.TargetFileName)" Source="$(var.RiftAuthenticator.WPF.TargetPath)" KeyPath="yes" Checksum="yes" />
@@ -131,6 +138,7 @@ along with RIFT™ Authenticator for Windows.  If not, see
     
     <Feature Id="FeatureAppWPF" Title="RIFT™ Authenticator (WPF)" Level="1" Absent="disallow" AllowAdvertise="no">
       <ComponentRef Id="AppWpf" />
+      <ComponentRef Id="AppWpf.de"/>
       <ComponentRef Id="AppLibs" />
       <ComponentRef Id="AppShortcutWpf"/>
       <ComponentRef Id="AppShortcutUninstall" />
