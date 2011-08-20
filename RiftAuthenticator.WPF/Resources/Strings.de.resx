@@ -142,7 +142,7 @@
     <value>Geheimer Schlüssel:</value>
   </data>
   <data name="Information.SerialKeyLabel.Content" xml:space="preserve">
-    <value>Serienschlüssel:</value>
+    <value>Seriennummer:</value>
   </data>
   <data name="Information.TimeOffsetLabel.Content" xml:space="preserve">
     <value>Zeitabweichung:</value>
@@ -169,13 +169,13 @@
     <value>Information</value>
   </data>
   <data name="MainWindow.Initialize.Content" xml:space="preserve">
-    <value>Initialisieren</value>
+    <value>Einrichtung</value>
   </data>
   <data name="MainWindow.Recover.Content" xml:space="preserve">
     <value>Wiederherstellung</value>
   </data>
   <data name="MainWindow.SerialKeyLabel.Content" xml:space="preserve">
-    <value>Serienschlüssel:</value>
+    <value>Seriennummer:</value>
   </data>
   <data name="MainWindow.ShowLicense.Content" xml:space="preserve">
     <value>Lizenz</value>
