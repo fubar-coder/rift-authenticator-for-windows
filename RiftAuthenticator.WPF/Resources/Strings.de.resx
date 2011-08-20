@@ -257,4 +257,7 @@ Die Geräte-ID lautet {0}.</value>
   <data name="SecurityQuestions.Title" xml:space="preserve">
     <value>Sicherheitsfragen</value>
   </data>
+  <data name="Status.NoConfig" xml:space="preserve">
+    <value>Keine Einstellungen gefunden. Einrichtung notwendig.</value>
+  </data>
 </root>

@@ -61,7 +61,7 @@ namespace RiftAuthenticator
         {
             if (Configuration.IsEmpty)
             {
-                LoginToken.Text = "No configuration. Initialization required.";
+                LoginToken.Text = App.Localization.Get("Status.NoConfig");
                 SerialKey.Text = string.Empty;
                 RemainingValidTime.Value = 0;
             }
