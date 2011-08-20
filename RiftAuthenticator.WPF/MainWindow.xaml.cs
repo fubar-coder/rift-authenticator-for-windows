@@ -91,7 +91,7 @@ namespace RiftAuthenticator
             }
             catch (Exception ex)
             {
-                MessageBox.Show(this, ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(this, ex.Message, App.Localization.Get("MessageBox.Title.Error"), MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
         }
@@ -113,7 +113,7 @@ namespace RiftAuthenticator
         {
             if (!Configuration.IsEmpty)
             {
-                if (MessageBox.Show(this, "Authenticator already initialized!\nReinitialization will make you loose your current configuration!\nContinue?", "R U sure?", MessageBoxButton.OKCancel, MessageBoxImage.Warning) != MessageBoxResult.OK)
+                if (MessageBox.Show(this, App.Localization.Get("MessageBox.Message.AlreadyInitialized"), App.Localization.Get("MessageBox.Title.Warning"), MessageBoxButton.OKCancel, MessageBoxImage.Warning) != MessageBoxResult.OK)
                     return;
             }
 
@@ -122,12 +122,12 @@ namespace RiftAuthenticator
                 if (ExecuteInit())
                 {
                     Clipboard.SetText(Configuration.DeviceId);
-                    MessageBox.Show(this, string.Format("The device id has been copied into your clipboard.\nSave it!\nIt's required to use the restore functionality!\nThe device id is {0}", Configuration.DeviceId), "Remember you device id", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show(this, string.Format(App.Localization.Get("MessageBox.Message.RememberDeviceId"), Configuration.DeviceId), "Remember you device id", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(this, ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(this, ex.Message, App.Localization.Get("MessageBox.Title.Error"), MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
         }
@@ -159,7 +159,7 @@ namespace RiftAuthenticator
             var deviceId = dlgDeviceId.DeviceId.Text.Trim();
             if (string.IsNullOrEmpty(deviceId))
             {
-                MessageBox.Show(this, "No device ID given.", "Bad boy!", MessageBoxButton.OK);
+                MessageBox.Show(this, App.Localization.Get("MessageBox.Message.NoDeviceId"), App.Localization.Get("MessageBox.Title.UserInputError"), MessageBoxButton.OK);
                 return;
             }
             var dlgLogin = new Login() { Owner = this };
@@ -171,7 +171,7 @@ namespace RiftAuthenticator
 
             if (string.IsNullOrEmpty(userEmail) || string.IsNullOrEmpty(userPassword))
             {
-                MessageBox.Show(this, "No user name or password given.", "Bad boy!", MessageBoxButton.OK);
+                MessageBox.Show(this, App.Localization.Get("MessageBox.Message.LoginInfoIncomplete"), App.Localization.Get("MessageBox.Title.UserInputError"), MessageBoxButton.OK);
                 return;
             }
 
@@ -218,7 +218,7 @@ namespace RiftAuthenticator
             }
             catch (Exception ex)
             {
-                MessageBox.Show(this, ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(this, ex.Message, App.Localization.Get("MessageBox.Title.Error"), MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
         }
@@ -226,11 +226,9 @@ namespace RiftAuthenticator
         private void ShowLicense_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show(this,
-                "This application is distributed under the terms of GNU General Public License Version 3.\n" +
-                "The application is under copyright of the RIFT™ Authenticator for Windows project except for " +
-                "some parts which are under the copyright of the following companies/projects:\n" +
-                "Novell\n" +
-                "The Apache Software Foundation", "License stuff", MessageBoxButton.OK, MessageBoxImage.Information);
+                App.Localization.Get("MessageBox.Message.License"),
+                App.Localization.Get("MessageBox.Title.License"),
+                MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
 }
