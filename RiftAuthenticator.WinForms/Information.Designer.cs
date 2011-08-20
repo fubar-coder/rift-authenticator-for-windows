@@ -42,98 +42,62 @@
             // 
             // DeviceId
             // 
-            this.DeviceId.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.DeviceId.Location = new System.Drawing.Point(82, 12);
+            resources.ApplyResources(this.DeviceId, "DeviceId");
             this.DeviceId.Name = "DeviceId";
             this.DeviceId.ReadOnly = true;
-            this.DeviceId.Size = new System.Drawing.Size(310, 20);
-            this.DeviceId.TabIndex = 0;
             // 
             // SerialKey
             // 
-            this.SerialKey.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.SerialKey.Location = new System.Drawing.Point(82, 38);
+            resources.ApplyResources(this.SerialKey, "SerialKey");
             this.SerialKey.Name = "SerialKey";
             this.SerialKey.ReadOnly = true;
-            this.SerialKey.Size = new System.Drawing.Size(310, 20);
-            this.SerialKey.TabIndex = 1;
             // 
             // SecretKey
             // 
-            this.SecretKey.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.SecretKey.Location = new System.Drawing.Point(82, 64);
+            resources.ApplyResources(this.SecretKey, "SecretKey");
             this.SecretKey.Name = "SecretKey";
             this.SecretKey.ReadOnly = true;
-            this.SecretKey.Size = new System.Drawing.Size(310, 20);
-            this.SecretKey.TabIndex = 2;
             // 
             // TimeOffset
             // 
-            this.TimeOffset.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.TimeOffset.Location = new System.Drawing.Point(82, 90);
+            resources.ApplyResources(this.TimeOffset, "TimeOffset");
             this.TimeOffset.Name = "TimeOffset";
             this.TimeOffset.ReadOnly = true;
-            this.TimeOffset.Size = new System.Drawing.Size(310, 20);
-            this.TimeOffset.TabIndex = 3;
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 15);
+            resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(58, 13);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "Device ID:";
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 41);
+            resources.ApplyResources(this.label2, "label2");
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(57, 13);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "Serial Key:";
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 67);
+            resources.ApplyResources(this.label3, "label3");
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(62, 13);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "Secret Key:";
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 93);
+            resources.ApplyResources(this.label4, "label4");
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(64, 13);
-            this.label4.TabIndex = 7;
-            this.label4.Text = "Time Offset:";
             // 
             // CloseButton
             // 
+            resources.ApplyResources(this.CloseButton, "CloseButton");
             this.CloseButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.CloseButton.Location = new System.Drawing.Point(15, 132);
             this.CloseButton.Name = "CloseButton";
-            this.CloseButton.Size = new System.Drawing.Size(75, 23);
-            this.CloseButton.TabIndex = 8;
-            this.CloseButton.Text = "OK";
             this.CloseButton.UseVisualStyleBackColor = true;
             this.CloseButton.Click += new System.EventHandler(this.CloseButton_Click);
             // 
             // Information
             // 
             this.AcceptButton = this.CloseButton;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.CloseButton;
-            this.ClientSize = new System.Drawing.Size(404, 167);
             this.Controls.Add(this.CloseButton);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -143,10 +107,7 @@
             this.Controls.Add(this.SecretKey);
             this.Controls.Add(this.SerialKey);
             this.Controls.Add(this.DeviceId);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Information";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Information";
             this.ResumeLayout(false);
             this.PerformLayout();
 
