@@ -9,4 +9,8 @@
   <String Id="ShortcutAppSource">RIFT™ Authentifikator-Quelltext</String>
   <String Id="LaunchApp">RIFT™ Authentifikator für Windows starten</String>
   <String Id="ErrorNewerVersionInstalled">Es ist bereits eine neuere Version installiert.</String>
+  <String Id="FeatureAppWpf">RIFT™ Authentifikator (WPF)</String>
+  <String Id="FeatureAppWinForms">RIFT™ Authentifikator (WinForms)</String>
+  <String Id="FeatureAppConsole">RIFT™ Authentifikator (Console)</String>
+  <String Id="FeatureAppSource">RIFT™ Authentifikator Quelltext</String>
 </WixLocalization>
