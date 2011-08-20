@@ -1,37 +1,37 @@
-﻿<Window x:Uid="Window_1" x:Class="RiftAuthenticator.Information"
+﻿<Window x:Class="RiftAuthenticator.Information"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Information" Height="186" Width="377" WindowStartupLocation="CenterOwner" Icon="/RiftAuthenticator;component/RiftLogo.ico">
     
-    <Grid x:Uid="Grid_1">
-        <Grid x:Uid="Grid_2" Margin="0,0,0,28">
+    <Grid>
+        <Grid Margin="0,0,0,28">
             <Grid.RowDefinitions>
-                <RowDefinition x:Uid="RowDefinition_1" Height="Auto" />
-                <RowDefinition x:Uid="RowDefinition_2" Height="Auto" />
-                <RowDefinition x:Uid="RowDefinition_3" Height="Auto" />
-                <RowDefinition x:Uid="RowDefinition_4" Height="Auto" />
-                <RowDefinition x:Uid="RowDefinition_5" Height="1*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition x:Uid="ColumnDefinition_1" Width="Auto" />
-                <ColumnDefinition x:Uid="ColumnDefinition_2" Width="1*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
-            <Label x:Uid="label1" Content="Device ID:" HorizontalAlignment="Left" Name="label1" VerticalAlignment="Top" />
-            <Label x:Uid="label2" Content="Serial Key:" Grid.Row="1" HorizontalAlignment="Left" Name="label2" VerticalAlignment="Top" />
-            <Label x:Uid="label3" Content="Secret Key:" Grid.Row="2" HorizontalAlignment="Left" Name="label3" VerticalAlignment="Top" />
-            <Label x:Uid="label4" Content="Time Offset:" Grid.Row="3" HorizontalAlignment="Left" Name="label4" VerticalAlignment="Top" />
-            <TextBox x:Uid="DeviceId" Grid.Column="1" Name="DeviceId" Margin="0,0,0,0" Text="{Binding Path=DeviceId, Mode=OneWay}" IsReadOnly="True" />
-            <TextBox x:Uid="SerialKey" Grid.Column="1" Grid.Row="1" Name="SerialKey" Margin="0,0,0,0" Text="{Binding Path=FormattedSerialKey, Mode=OneWay}" IsReadOnly="True" />
-            <TextBox x:Uid="SecretKey" Grid.Column="1" Grid.Row="2" Name="SecretKey" Margin="0,0,0,0" Text="{Binding Path=SecretKey, Mode=OneWay}" IsReadOnly="True" />
-            <TextBox x:Uid="TimeOffset" Grid.Column="1" Grid.Row="3" Name="TimeOffset" Margin="0,0,0,0" Text="{Binding Path=TimeOffset, Mode=OneWay}" IsReadOnly="True" />
+            <Label Content="Device ID:" HorizontalAlignment="Left" Name="label1" VerticalAlignment="Top" />
+            <Label Content="Serial Key:" Grid.Row="1" HorizontalAlignment="Left" Name="label2" VerticalAlignment="Top" />
+            <Label Content="Secret Key:" Grid.Row="2" HorizontalAlignment="Left" Name="label3" VerticalAlignment="Top" />
+            <Label Content="Time Offset:" Grid.Row="3" HorizontalAlignment="Left" Name="label4" VerticalAlignment="Top" />
+            <TextBox Grid.Column="1" Name="DeviceId" Margin="0,0,0,0" Text="{Binding Path=DeviceId, Mode=OneWay}" IsReadOnly="True" />
+            <TextBox Grid.Column="1" Grid.Row="1" Name="SerialKey" Margin="0,0,0,0" Text="{Binding Path=FormattedSerialKey, Mode=OneWay}" IsReadOnly="True" />
+            <TextBox Grid.Column="1" Grid.Row="2" Name="SecretKey" Margin="0,0,0,0" Text="{Binding Path=SecretKey, Mode=OneWay}" IsReadOnly="True" />
+            <TextBox Grid.Column="1" Grid.Row="3" Name="TimeOffset" Margin="0,0,0,0" Text="{Binding Path=TimeOffset, Mode=OneWay}" IsReadOnly="True" />
         </Grid>
-        <Grid x:Uid="Grid_3" VerticalAlignment="Bottom">
+        <Grid VerticalAlignment="Bottom">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition x:Uid="ColumnDefinition_3" Width="1*" />
-                <ColumnDefinition x:Uid="ColumnDefinition_4" Width="Auto" />
-                <ColumnDefinition x:Uid="ColumnDefinition_5" Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
-            <Button x:Uid="CloseButton" Content="OK" Grid.Column="1" HorizontalAlignment="Left" Name="CloseButton" VerticalAlignment="Top" Margin="6" Width="75" IsDefault="True" IsCancel="True" />
+            <Button Content="OK" Grid.Column="1" HorizontalAlignment="Left" Name="CloseButton" VerticalAlignment="Top" Margin="6" Width="75" IsDefault="True" IsCancel="True" />
         </Grid>
     </Grid>
 </Window>
