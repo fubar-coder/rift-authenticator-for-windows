@@ -154,7 +154,7 @@ along with RIFT™ Authenticator for Windows.  If not, see
       <ComponentRef Id="AppShortcutUninstall" />
     </Feature>
 
-    <Feature Id="FeatureAppWinForms" Title="!(loc.FeatureAppWinForms)" Level="1" AllowAdvertise="no">
+    <Feature Id="FeatureAppWinForms" Title="!(loc.FeatureAppWinForms)" Level="2" AllowAdvertise="no">
       <ComponentRef Id="AppWinForms" />
       <ComponentRef Id="AppWinForms.de"/>
       <ComponentRef Id="AppLibs" />
@@ -163,7 +163,7 @@ along with RIFT™ Authenticator for Windows.  If not, see
       <ComponentRef Id="AppShortcutUninstall" />
     </Feature>
 
-    <Feature Id="FeatureAppConsole" Title="!(loc.FeatureAppConsole)" Level="1" AllowAdvertise="no">
+    <Feature Id="FeatureAppConsole" Title="!(loc.FeatureAppConsole)" Level="2" AllowAdvertise="no">
       <ComponentRef Id="AppConsole" />
       <ComponentRef Id="AppConsole.de" />
       <ComponentRef Id="AppLibs" />
