@@ -15,7 +15,7 @@
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
-    <UICulture>en-US</UICulture>
+    <SupportedCultures>de</SupportedCultures>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
@@ -104,6 +104,7 @@
     <Compile Include="SecurityQuestions.xaml.cs">
       <DependentUpon>SecurityQuestions.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Util\Localization.cs" />
     <Page Include="CreateNewSecretKey.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -164,6 +165,8 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Strings.de.resx" />
+    <EmbeddedResource Include="Resources\Strings.resx" />
     <None Include="app.manifest">
       <SubType>Designer</SubType>
     </None>

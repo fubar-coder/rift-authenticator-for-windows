@@ -1,11 +1,18 @@
 ﻿<Window x:Class="RiftAuthenticator.QueryDeviceId"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Please enter you Device ID" Height="132" Width="297" Loaded="Window_Loaded" WindowStartupLocation="CenterOwner" Icon="/RiftAuthenticator;component/RiftLogo.ico">
+        Title="{Binding Converter={StaticResource Localization}, ConverterParameter=QueryDeviceId.Title}" Height="132" Width="297" Loaded="Window_Loaded" WindowStartupLocation="CenterOwner" Icon="/RiftAuthenticator;component/RiftLogo.ico">
     <Grid>
+        <Label Content="{Binding Converter={StaticResource Localization}, ConverterParameter=QueryDeviceId.DeviceIdLabel.Content}" Height="28" HorizontalAlignment="Left" Margin="12,12,0,0" Name="DeviceIdLabel" VerticalAlignment="Top" />
         <TextBox Height="23" Margin="81,14,12,0" Name="DeviceId" VerticalAlignment="Top" />
-        <Label Content="Device ID:" Height="28" HorizontalAlignment="Left" Margin="12,12,0,0" Name="label1" VerticalAlignment="Top" />
-        <Button Content="OK" Height="23" HorizontalAlignment="Left" Margin="12,0,0,12" Name="CreateSecretKey" VerticalAlignment="Bottom" Width="75" IsDefault="True" Click="CreateSecretKey_Click" />
-        <Button Content="Cancel" Height="23" HorizontalAlignment="Right" Margin="0,0,12,12" Name="button1" VerticalAlignment="Bottom" Width="75" IsCancel="True" />
+        <Grid VerticalAlignment="Bottom" Margin="12,0,12,12" Height="23">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" SharedSizeGroup="GridButton" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="Auto" SharedSizeGroup="GridButton" />
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Content="{Binding Converter={StaticResource Localization}, ConverterParameter=QueryDeviceId.RecoverSecretKey.Content}" Name="RecoverSecretKey" MinWidth="75" IsDefault="True" Click="RecoverSecretKey_Click" />
+            <Button Grid.Column="2" Content="{Binding Converter={StaticResource Localization}, ConverterParameter=QueryDeviceId.AbortCreate.Content}" Name="AbortCreate" MinWidth="75" IsCancel="True" />
+        </Grid>
     </Grid>
 </Window>

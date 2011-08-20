@@ -41,7 +41,7 @@ namespace RiftAuthenticator
             InitializeComponent();
         }
 
-        private void CreateSecretKey_Click(object sender, RoutedEventArgs e)
+        private void RecoverSecretKey_Click(object sender, RoutedEventArgs e)
         {
             DialogResult = true;
             Close();

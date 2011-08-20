@@ -30,5 +30,12 @@ namespace RiftAuthenticator
     /// </summary>
     public partial class App : Application
     {
+        public static Util.Localization Localization
+        {
+            get
+            {
+                return (Util.Localization)App.Current.FindResource("Localization");
+            }
+        }
     }
 }
