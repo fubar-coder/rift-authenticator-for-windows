@@ -22,6 +22,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <OutputPath>bin\$(Configuration)\</OutputPath>
     <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+    <Cultures>en-US;de-DE</Cultures>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="RiftAuthenticator.wxs" />
@@ -75,6 +76,7 @@
     </WixExtension>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="license-de.rtf" />
     <Content Include="license.rtf" />
     <Content Include="RiftLogo.ico" />
     <Content Include="RiftLogoBanner.bmp" />
