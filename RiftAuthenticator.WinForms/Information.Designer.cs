@@ -86,8 +86,8 @@
             // 
             // CloseButton
             // 
-            resources.ApplyResources(this.CloseButton, "CloseButton");
             this.CloseButton.DialogResult = System.Windows.Forms.DialogResult.OK;
+            resources.ApplyResources(this.CloseButton, "CloseButton");
             this.CloseButton.Name = "CloseButton";
             this.CloseButton.UseVisualStyleBackColor = true;
             this.CloseButton.Click += new System.EventHandler(this.CloseButton_Click);
