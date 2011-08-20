@@ -145,7 +145,7 @@ along with RIFT™ Authenticator for Windows.  If not, see
       </Component>
     </DirectoryRef>
     
-    <Feature Id="FeatureAppWPF" Title="RIFT™ Authenticator (WPF)" Level="1" Absent="disallow" AllowAdvertise="no">
+    <Feature Id="FeatureAppWPF" Title="!(loc.FeatureAppWpf)" Level="1" Absent="disallow" AllowAdvertise="no">
       <ComponentRef Id="AppWpf" />
       <ComponentRef Id="AppWpf.de"/>
       <ComponentRef Id="AppLibs" />
@@ -154,7 +154,7 @@ along with RIFT™ Authenticator for Windows.  If not, see
       <ComponentRef Id="AppShortcutUninstall" />
     </Feature>
 
-    <Feature Id="FeatureAppWinForms" Title="RIFT™ Authenticator (WinForms)" Level="1" AllowAdvertise="no">
+    <Feature Id="FeatureAppWinForms" Title="!(loc.FeatureAppWinForms)" Level="1" AllowAdvertise="no">
       <ComponentRef Id="AppWinForms" />
       <ComponentRef Id="AppWinForms.de"/>
       <ComponentRef Id="AppLibs" />
@@ -163,7 +163,7 @@ along with RIFT™ Authenticator for Windows.  If not, see
       <ComponentRef Id="AppShortcutUninstall" />
     </Feature>
 
-    <Feature Id="FeatureAppConsole" Title="RIFT™ Authenticator (Console)" Level="1" AllowAdvertise="no">
+    <Feature Id="FeatureAppConsole" Title="!(loc.FeatureAppConsole)" Level="1" AllowAdvertise="no">
       <ComponentRef Id="AppConsole" />
       <ComponentRef Id="AppConsole.de" />
       <ComponentRef Id="AppLibs" />
@@ -171,7 +171,7 @@ along with RIFT™ Authenticator for Windows.  If not, see
       <ComponentRef Id="AppShortcutUninstall" />
     </Feature>
 
-    <Feature Id="FeatureSources" Title="Sources" Level="2" AllowAdvertise="no">
+    <Feature Id="FeatureSources" Title="!(loc.FeatureAppSource)" Level="2" AllowAdvertise="no">
       <ComponentGroupRef Id="RiftAuthenticator.CommandLine.Sources" />
       <ComponentGroupRef Id="RiftAuthenticator.CommandLine.Content" />
       <ComponentGroupRef Id="RiftAuthenticator.CommandLine.Documents" />
