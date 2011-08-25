@@ -28,6 +28,8 @@ namespace RiftAuthenticator.CommandLine
         internal static List<ICommand> SupportedCommands = new List<ICommand>()
         {
             new Commands.Help(),
+            new Commands.NewAccount(),
+            new Commands.DeleteAccount(),
             new Commands.Info(),
             new Commands.Init(),
             new Commands.LoginToken(),
@@ -70,7 +72,7 @@ namespace RiftAuthenticator.CommandLine
             }
             catch (Exception ex)
             {
-                Console.Error.WriteLine(ex.Message);
+                Console.Error.WriteLine(ex.ToString());
                 return 1;
             }
             return 0;
@@ -113,7 +115,7 @@ namespace RiftAuthenticator.CommandLine
             }
             var accountManagerAssemblyName = accountManagerId;
             var accountManagerTypeName = string.Format("{0}.AccountManager", accountManagerId);
-            GlobalOptions.AccountManager = (RiftAuthenticator.Library.IAccountManager)Activator.CreateInstance(accountManagerAssemblyName, accountManagerTypeName);
+            GlobalOptions.AccountManager = (RiftAuthenticator.Library.IAccountManager)Activator.CreateInstance(accountManagerAssemblyName, accountManagerTypeName).Unwrap();
         }
 
         private static void ProcessCommand(List<string> args)
