@@ -37,6 +37,15 @@
       <DoNotHarvest>
       </DoNotHarvest>
     </ProjectReference>
+    <ProjectReference Include="..\RiftAuthenticator.Library.FileSystem\RiftAuthenticator.Library.FileSystem.csproj">
+      <Name>RiftAuthenticator.Library.FileSystem</Name>
+      <Project>{d463f9a5-e676-47d6-9740-d2548748ebc3}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>
+      </DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Symbols;Sources;Content;Satellites;Documents</RefProjectOutputGroups>
+      <RefTargetDir>Sources.Library.FileSystem</RefTargetDir>
+    </ProjectReference>
     <ProjectReference Include="..\RiftAuthenticator.Library.Registry\RiftAuthenticator.Library.Registry.csproj">
       <Name>RiftAuthenticator.Library.Registry</Name>
       <Project>{488805c2-f094-4ab2-aaf4-0a555f36095a}</Project>
