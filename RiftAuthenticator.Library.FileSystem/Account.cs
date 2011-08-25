@@ -46,7 +46,7 @@ namespace RiftAuthenticator.Library.FileSystem
 
         internal static string GetAccountFolder()
         {
-            var result = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), ".RiftAuthenticator");
+            var result = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "RiftAuthenticator");
             System.IO.Directory.CreateDirectory(result);
             return result;
         }
