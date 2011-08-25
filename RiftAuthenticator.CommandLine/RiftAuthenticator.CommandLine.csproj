@@ -88,10 +88,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommandArgumentException.cs" />
+    <Compile Include="Commands\DeleteAccount.cs" />
     <Compile Include="Commands\Help.cs" />
     <Compile Include="Commands\Info.cs" />
     <Compile Include="Commands\Init.cs" />
     <Compile Include="Commands\LoginToken.cs" />
+    <Compile Include="Commands\NewAccount.cs" />
     <Compile Include="Commands\Recover.cs" />
     <Compile Include="Commands\SecretQuestions.cs" />
     <Compile Include="Commands\TimeSync.cs" />
