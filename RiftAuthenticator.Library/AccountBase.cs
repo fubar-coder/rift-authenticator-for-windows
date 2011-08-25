@@ -10,12 +10,6 @@ namespace RiftAuthenticator.Library
 
         const string SecretKeyDigestSeed = "TrionMasterKey_031611";
 
-        protected const string DescriptionKey = "Description";
-        protected const string DeviceIdKey = "DeviceId";
-        protected const string SerialKeyKey = "SerialKey";
-        protected const string SecretKeyKey = "SecretKey";
-        protected const string TimeOffsetKey = "TimeOffset";
-
         public string Description { get; set; }
         public string DeviceId { get; set; }
         public string SerialKey { get; set; }

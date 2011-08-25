@@ -25,6 +25,12 @@ namespace RiftAuthenticator.Library.Registry
     public class Account : RiftAuthenticator.Library.AccountBase
     {
         const string ConfigVersionKey = "Version";
+        const string DescriptionKey = "Description";
+        const string DeviceIdKey = "DeviceId";
+        const string SerialKeyKey = "SerialKey";
+        const string SecretKeyKey = "SecretKey";
+        const string TimeOffsetKey = "TimeOffset";
+
         internal static readonly string RiftAuthenticatorRegistryKey = "SOFTWARE\\Public Domain\\Rift Authenticator";
 
         internal static string GetAccountRegistryPathPart(int accountIndex)
