@@ -36,7 +36,7 @@ namespace RiftAuthenticator.CommandLine.Commands
         {
             commandOptionSet = new NDesk.Options.OptionSet
             {
-                { "n|name=", "Name of the new account", x => accountName = x },
+                { "n|name=", Resources.Strings.opt_new_account_name, x => accountName = x },
             };
         }
 
@@ -47,7 +47,7 @@ namespace RiftAuthenticator.CommandLine.Commands
 
         public string Description
         {
-            get { return "Create a new account"; }
+            get { return Resources.Strings.opt_new_account_description; }
         }
 
         public NDesk.Options.OptionSet OptionSet
@@ -68,7 +68,8 @@ namespace RiftAuthenticator.CommandLine.Commands
                 globalOptions.Account = globalOptions.AccountManager.CreateAccount();
                 globalOptions.AccountManager.Add(globalOptions.Account);
             }
-            globalOptions.Account.Description = accountName;
+            var newAccountName = accountName ?? string.Format(Resources.Strings.opt_new_account_default_name, globalOptions.AccountManager.IndexOf(globalOptions.Account) + 1);
+            globalOptions.Account.Description = newAccountName;
             globalOptions.AccountManager.SaveAccounts();
         }
     }

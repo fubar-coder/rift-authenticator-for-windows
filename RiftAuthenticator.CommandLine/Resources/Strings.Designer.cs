@@ -61,6 +61,15 @@ namespace RiftAuthenticator.CommandLine.Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Account {0} of {1}: ähnelt.
+        /// </summary>
+        internal static string app_account_n_of_m {
+            get {
+                return ResourceManager.GetString("app_account_n_of_m", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die {0} [global-options] &lt;command-name&gt; [command-options] ähnelt.
         /// </summary>
         internal static string app_command_line {
@@ -75,6 +84,15 @@ namespace RiftAuthenticator.CommandLine.Resources {
         internal static string app_commands {
             get {
                 return ResourceManager.GetString("app_commands", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Description: {0} ähnelt.
+        /// </summary>
+        internal static string app_info_description {
+            get {
+                return ResourceManager.GetString("app_info_description", resourceCulture);
             }
         }
         
@@ -124,6 +142,15 @@ namespace RiftAuthenticator.CommandLine.Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die No account with the id {0} found. ähnelt.
+        /// </summary>
+        internal static string app_no_account_found {
+            get {
+                return ResourceManager.GetString("app_no_account_found", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die No command name specified. ähnelt.
         /// </summary>
         internal static string app_no_command {
@@ -156,6 +183,33 @@ namespace RiftAuthenticator.CommandLine.Resources {
         internal static string app_unknown_args {
             get {
                 return ResourceManager.GetString("app_unknown_args", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Delete a existing account ähnelt.
+        /// </summary>
+        internal static string opt_delete_account_description {
+            get {
+                return ResourceManager.GetString("opt_delete_account_description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Specifiy the account to use ähnelt.
+        /// </summary>
+        internal static string opt_global_account {
+            get {
+                return ResourceManager.GetString("opt_global_account", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Specify the account manager to use ähnelt.
+        /// </summary>
+        internal static string opt_global_account_manager {
+            get {
+                return ResourceManager.GetString("opt_global_account_manager", resourceCulture);
             }
         }
         
@@ -264,6 +318,33 @@ namespace RiftAuthenticator.CommandLine.Resources {
         internal static string opt_login_token_remaining_time {
             get {
                 return ResourceManager.GetString("opt_login_token_remaining_time", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Account {0} ähnelt.
+        /// </summary>
+        internal static string opt_new_account_default_name {
+            get {
+                return ResourceManager.GetString("opt_new_account_default_name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Create a new account ähnelt.
+        /// </summary>
+        internal static string opt_new_account_description {
+            get {
+                return ResourceManager.GetString("opt_new_account_description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Name of the new account ähnelt.
+        /// </summary>
+        internal static string opt_new_account_name {
+            get {
+                return ResourceManager.GetString("opt_new_account_name", resourceCulture);
             }
         }
         

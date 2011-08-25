@@ -42,8 +42,8 @@ namespace RiftAuthenticator.CommandLine
         {
             { "h|help", Resources.Strings.opt_global_help, x => GlobalOptions.ShowHelp = x != null },
             { "v|verbose", Resources.Strings.opt_global_verbose, x => GlobalOptions.VerboseLevel += (x==null ? -1 : 1) },
-            { "m|manager|account-manager=", "Specify the account manager to use", x => SelectAccountManager(x) },
-            { "a|account=", "Specifiy the account to use", x => GlobalOptions.AccountId = x },
+            { "m|manager|account-manager=", Resources.Strings.opt_global_account_manager, x => SelectAccountManager(x) },
+            { "a|account=", Resources.Strings.opt_global_account, x => GlobalOptions.AccountId = x },
         };
 
         static int Main(string[] args)
@@ -91,7 +91,7 @@ namespace RiftAuthenticator.CommandLine
                 }
             }
             if (foundAccount == null)
-                throw new CommandArgumentException(null, string.Format("No account with the id {0} found.", accountId));
+                throw new CommandArgumentException(null, string.Format(Resources.Strings.app_no_account_found, accountId));
             GlobalOptions.Account = foundAccount;
         }
 
@@ -172,12 +172,14 @@ namespace RiftAuthenticator.CommandLine
 
         internal static void ShowConfiguration(Library.IAccount account)
         {
-            if (account.IsEmpty)
+            Console.Out.WriteLine(Resources.Strings.app_account_n_of_m, GlobalOptions.AccountManager.IndexOf(account) + 1, GlobalOptions.AccountManager.Count);
+            if (account.IsEmpty && string.IsNullOrEmpty(account.Description))
             {
                 Console.Out.WriteLine(Resources.Strings.app_no_config);
             }
             else
             {
+                Console.Out.WriteLine(Resources.Strings.app_info_description, account.Description);
                 Console.Out.WriteLine(Resources.Strings.app_info_device_id, account.DeviceId);
                 Console.Out.WriteLine(Resources.Strings.app_info_serial_key, account.FormattedSerialKey);
                 Console.Out.WriteLine(Resources.Strings.app_info_encrypted_secret_key, account.EncryptedSecretKey);
