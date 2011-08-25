@@ -59,24 +59,30 @@ namespace RiftAuthenticator.Library.FileSystem
         internal static Dictionary<string, object> ReadMap(string fileName)
         {
             var result = new Dictionary<string, object>();
-            var doc = new System.Xml.XmlDocument();
-            doc.Load(fileName);
-            foreach (System.Xml.XmlElement xmlSetting in doc.SelectNodes("/map/*"))
+            if (System.IO.File.Exists(fileName))
             {
-                var key = xmlSetting.GetAttribute("name");
-                object value;
-                switch (xmlSetting.LocalName)
+                var doc = new System.Xml.XmlDocument();
+                doc.Load(fileName);
+                foreach (System.Xml.XmlElement xmlSetting in doc.SelectNodes("/map/*"))
                 {
-                    case "string":
-                        value = xmlSetting.InnerText;
-                        break;
-                    case "long":
-                        value = Convert.ToInt32(xmlSetting.GetAttribute("value"));
-                        break;
-                    default:
-                        throw new NotSupportedException(xmlSetting.LocalName);
+                    var key = xmlSetting.GetAttribute("name");
+                    object value;
+                    switch (xmlSetting.LocalName)
+                    {
+                        case "string":
+                            value = xmlSetting.InnerText;
+                            break;
+                        case "long":
+                            value = Convert.ToInt64(xmlSetting.GetAttribute("value"));
+                            break;
+                        case "int":
+                            value = Convert.ToInt32(xmlSetting.GetAttribute("value"));
+                            break;
+                        default:
+                            throw new NotSupportedException(xmlSetting.LocalName);
+                    }
+                    result.Add(key, value);
                 }
-                result.Add(key, value);
             }
             return result;
         }
@@ -103,9 +109,13 @@ namespace RiftAuthenticator.Library.FileSystem
                     {
                         mapType = "string";
                     }
-                    else if (value is int)
+                    else if (value is long)
                     {
                         mapType = "long";
+                    }
+                    else if (value is int)
+                    {
+                        mapType = "int";
                     }
                     else
                         throw new NotSupportedException(value.GetType().FullName);
@@ -116,6 +126,10 @@ namespace RiftAuthenticator.Library.FileSystem
                         writer.WriteString((string)value);
                     }
                     else if (mapType == "long")
+                    {
+                        writer.WriteAttributeString("value", System.Xml.XmlConvert.ToString((long)value));
+                    }
+                    else if (mapType == "int")
                     {
                         writer.WriteAttributeString("value", System.Xml.XmlConvert.ToString((int)value));
                     }
@@ -163,9 +177,9 @@ namespace RiftAuthenticator.Library.FileSystem
                 {
                     map.Add(key, (string)value ?? string.Empty);
                 }
-                else if (propType == typeof(int))
+                else if (propType == typeof(long))
                 {
-                    map.Add(key, (value == null ? 0 : (int)value));
+                    map.Add(key, (value == null ? 0 : (long)value));
                 }
                 else
                     throw new NotSupportedException(propType.FullName);
