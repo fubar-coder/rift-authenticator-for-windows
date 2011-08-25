@@ -124,18 +124,18 @@ namespace RiftAuthenticator.CommandLine
             }
         }
 
-        internal static void ShowConfiguration(Library.Configuration config)
+        internal static void ShowConfiguration(Library.IAccount account)
         {
-            if (config.IsEmpty)
+            if (account.IsEmpty)
             {
                 Console.Out.WriteLine(Resources.Strings.app_no_config);
             }
             else
             {
-                Console.Out.WriteLine(Resources.Strings.app_info_device_id, config.DeviceId);
-                Console.Out.WriteLine(Resources.Strings.app_info_serial_key, config.FormattedSerialKey);
-                Console.Out.WriteLine(Resources.Strings.app_info_encrypted_secret_key, config.EncryptedSecretKey);
-                Console.Out.WriteLine(Resources.Strings.app_info_time_offset, config.TimeOffset);
+                Console.Out.WriteLine(Resources.Strings.app_info_device_id, account.DeviceId);
+                Console.Out.WriteLine(Resources.Strings.app_info_serial_key, account.FormattedSerialKey);
+                Console.Out.WriteLine(Resources.Strings.app_info_encrypted_secret_key, account.EncryptedSecretKey);
+                Console.Out.WriteLine(Resources.Strings.app_info_time_offset, account.TimeOffset);
             }
         }
     }

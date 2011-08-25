@@ -36,14 +36,14 @@ namespace RiftAuthenticator
     /// </summary>
     partial class Information : Window
     {
-        private Library.Configuration Configuration;
+        private Library.IAccount Account;
 
-        internal Information(Library.Configuration config)
+        internal Information(Library.IAccount account)
         {
             InitializeComponent();
 
-            Configuration = config;
-            DataContext = Configuration;
+            Account = account;
+            DataContext = Account;
         }
     }
 }

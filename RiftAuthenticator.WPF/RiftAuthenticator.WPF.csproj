@@ -177,6 +177,10 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\RiftAuthenticator.Library.Registry\RiftAuthenticator.Library.Registry.csproj">
+      <Project>{488805C2-F094-4AB2-AAF4-0A555F36095A}</Project>
+      <Name>RiftAuthenticator.Library.Registry</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RiftAuthenticator.Library\RiftAuthenticator.Library.csproj">
       <Project>{E31E2621-6D52-49A9-B7D4-AC75862518D8}</Project>
       <Name>RiftAuthenticator.Library</Name>

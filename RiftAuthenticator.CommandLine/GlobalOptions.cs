@@ -27,13 +27,17 @@ namespace RiftAuthenticator.CommandLine
         public GlobalOptions()
         {
             // Load default configuration
-            Configuration = new Library.Configuration();
-            Configuration.Load();
+            AccountManager = new Library.Registry.AccountManager();
+            AccountManager.LoadAccounts();
+            if (AccountManager.Count == 0)
+                AccountManager.Add(AccountManager.CreateAccount());
+            Account = AccountManager[0];
         }
 
         public bool ShowHelp { get; set; }
         public int VerboseLevel { get; set; }
 
-        public RiftAuthenticator.Library.Configuration Configuration { get; set; }
+        public RiftAuthenticator.Library.IAccountManager AccountManager { get; set; }
+        public RiftAuthenticator.Library.IAccount Account { get; set; }
     }
 }

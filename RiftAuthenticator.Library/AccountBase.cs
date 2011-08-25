@@ -1,39 +1,22 @@
-﻿/**
- * This file is part of RIFT™ Authenticator for Windows.
- *
- * RIFT™ Authenticator for Windows is free software: you can redistribute 
- * it and/or modify it under the terms of the GNU General Public License 
- * as published by the Free Software Foundation, either version 3 of the 
- * License, or (at your option) any later version.
- *
- * RIFT™ Authenticator for Windows is distributed in the hope that it will 
- * be useful, but WITHOUT ANY WARRANTY; without even the implied warranty 
- * of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU 
- * General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with RIFT™ Authenticator for Windows.  If not, see 
- * <http://www.gnu.org/licenses/>.
- */
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace RiftAuthenticator.Library
 {
-    public class Configuration
+    public abstract class AccountBase : IAccount
     {
         static readonly System.Text.Encoding Encoding = System.Text.Encoding.Default;
 
         const string SecretKeyDigestSeed = "TrionMasterKey_031611";
 
-        const string ConfigVersionKey = "Version";
-        const string DeviceIdKey = "DeviceId";
-        const string SerialKeyKey = "SerialKey";
-        const string SecretKeyKey = "SecretKey";
-        const string TimeOffsetKey = "TimeOffset";
+        protected const string DescriptionKey = "Description";
+        protected const string DeviceIdKey = "DeviceId";
+        protected const string SerialKeyKey = "SerialKey";
+        protected const string SecretKeyKey = "SecretKey";
+        protected const string TimeOffsetKey = "TimeOffset";
 
+        public string Description { get; set; }
         public string DeviceId { get; set; }
         public string SerialKey { get; set; }
         public string SecretKey { get; set; }
@@ -75,52 +58,15 @@ namespace RiftAuthenticator.Library
             }
         }
 
-        string AccountRegistryPath
-        {
-            get
-            {
-                return "SOFTWARE\\Public Domain\\RIFT™ Authenticator\\Account 1";
-            }
-        }
+        public abstract void Load(int accountIndex);
+        public abstract void Save(int accountIndex);
 
-        public void Load()
-        {
-            using (var key = Microsoft.Win32.Registry.CurrentUser.CreateSubKey(AccountRegistryPath))
-            {
-                var configVersion = Convert.ToInt32(key.GetValue(ConfigVersionKey, 0));
-                DeviceId = (string)key.GetValue(DeviceIdKey, string.Empty);
-                SerialKey = (string)key.GetValue(SerialKeyKey, string.Empty);
-                SecretKey = (string)key.GetValue(SecretKeyKey, string.Empty);
-                TimeOffset = Convert.ToInt64(key.GetValue(TimeOffsetKey, 0));
-                switch (configVersion)
-                {
-                    case 0:
-                        break;
-                    case 1:
-                        SecretKey = DecryptSecretKey(SecretKey);
-                        break;
-                }
-            }
-        }
-
-        public void Save()
-        {
-            using (var key = Microsoft.Win32.Registry.CurrentUser.CreateSubKey(AccountRegistryPath))
-            {
-                key.SetValue(ConfigVersionKey, 1);
-                key.SetValue(DeviceIdKey, DeviceId ?? string.Empty);
-                key.SetValue(SerialKeyKey, SerialKey ?? string.Empty);
-                key.SetValue(SecretKeyKey, EncryptSecretKey(SecretKey ?? string.Empty));
-                key.SetValue(TimeOffsetKey, TimeOffset);
-            }
-        }
-
-        private string DecryptSecretKey(string encryptedSecretKey)
+        protected string DecryptSecretKey(string encryptedSecretKey)
         {
             return DecryptSecretKey(Util.HexToBytes(encryptedSecretKey));
         }
 
-        private string DecryptSecretKey(byte[] encryptedSecretKey)
+        protected virtual string DecryptSecretKey(byte[] encryptedSecretKey)
         {
             var aes = CreateCipher();
             var decryptor = aes.CreateDecryptor();
@@ -128,12 +74,12 @@ namespace RiftAuthenticator.Library
             return Encoding.GetString(decryptedSecretKey);
         }
 
-        private string EncryptSecretKey(string decryptedSecretKey)
+        protected string EncryptSecretKey(string decryptedSecretKey)
         {
             return EncryptSecretKey(Encoding.GetBytes(decryptedSecretKey));
         }
 
-        private string EncryptSecretKey(byte[] decryptedSecretKey)
+        protected virtual string EncryptSecretKey(byte[] decryptedSecretKey)
         {
             var aes = CreateCipher();
             var encryptor = aes.CreateEncryptor();
