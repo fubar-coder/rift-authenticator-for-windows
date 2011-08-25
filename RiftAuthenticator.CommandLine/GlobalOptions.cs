@@ -29,12 +29,13 @@ namespace RiftAuthenticator.CommandLine
         public GlobalOptions()
         {
             // Load default configuration
-            AccountManager = new Library.Registry.AccountManager();
+            AccountManagerId = "RiftAuthenticator.Library.Registry";
         }
 
         public bool ShowHelp { get; set; }
         public int VerboseLevel { get; set; }
 
+        public string AccountManagerId { get; set; }
         public string AccountId { get; set; }
 
         public RiftAuthenticator.Library.IAccountManager AccountManager
