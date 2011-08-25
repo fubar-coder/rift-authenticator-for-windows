@@ -23,15 +23,30 @@ namespace RiftAuthenticator.Library.FileSystem
             get
             {
                 var configFileName = GetGlobalSettingsFileName();
-                var map = Account.ReadMap(configFileName);
-                if (!map.ContainsKey(StoredAccountsKey))
+                try
+                {
+                    var map = Account.ReadMap(configFileName);
+                    if (!map.ContainsKey(StoredAccountsKey))
+                        return 0;
+                    return (int)map[StoredAccountsKey];
+                }
+                catch
+                {
                     return 0;
-                return (int)map[StoredAccountsKey];
+                }
             }
             set
             {
                 var configFileName = GetGlobalSettingsFileName();
-                var map = Account.ReadMap(configFileName);
+                Dictionary<string, object> map;
+                try
+                {
+                    map = Account.ReadMap(configFileName);
+                }
+                catch
+                {
+                    map = new Dictionary<string, object>();
+                }
                 map[StoredAccountsKey] = value;
                 Account.WriteMap(configFileName, map);
             }
