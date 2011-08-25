@@ -42,7 +42,7 @@ namespace RiftAuthenticator.CommandLine
         {
             { "h|help", Resources.Strings.opt_global_help, x => GlobalOptions.ShowHelp = x != null },
             { "v|verbose", Resources.Strings.opt_global_verbose, x => GlobalOptions.VerboseLevel += (x==null ? -1 : 1) },
-            { "m|manager|account-manager=", Resources.Strings.opt_global_account_manager, x => SelectAccountManager(x) },
+            { "m|manager|account-manager=", Resources.Strings.opt_global_account_manager, x => GlobalOptions.AccountManagerId = x },
             { "a|account=", Resources.Strings.opt_global_account, x => GlobalOptions.AccountId = x },
         };
 
@@ -60,7 +60,9 @@ namespace RiftAuthenticator.CommandLine
                 }
                 else
                 {
-                    if (GlobalOptions.AccountId != null && GlobalOptions.AccountId != string.Empty)
+                    if (!string.IsNullOrEmpty(GlobalOptions.AccountManagerId))
+                        SelectAccountManager(GlobalOptions.AccountManagerId);
+                    if (!string.IsNullOrEmpty(GlobalOptions.AccountId))
                         SelectAccount(GlobalOptions.AccountId);
                     ProcessCommand(unknownArgs);
                 }
