@@ -36,11 +36,20 @@ namespace RiftAuthenticator.Library
         {
             get
             {
+                if (string.IsNullOrEmpty(SecretKey))
+                    return string.Empty;
                 return EncryptSecretKey(SecretKey);
             }
             set
             {
-                SecretKey = DecryptSecretKey(value);
+                if (string.IsNullOrEmpty(value))
+                {
+                    SecretKey = string.Empty;
+                }
+                else
+                {
+                    SecretKey = DecryptSecretKey(value);
+                }
             }
         }
 
