@@ -27,7 +27,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("RIFT™ Authenticator for Windows Project")]
-[assembly: AssemblyProduct("RiftAuthenticator.Library.Win32")]
+[assembly: AssemblyProduct("RiftAuthenticator.Library.Registry")]
 [assembly: AssemblyCopyright("Copyright © RIFT™ Authenticator for Windows Project 2011")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
