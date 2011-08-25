@@ -40,6 +40,8 @@ namespace RiftAuthenticator.CommandLine
         {
             { "h|help", Resources.Strings.opt_global_help, x => GlobalOptions.ShowHelp = x != null },
             { "v|verbose", Resources.Strings.opt_global_verbose, x => GlobalOptions.VerboseLevel += (x==null ? -1 : 1) },
+            { "m|manager|account-manager=", "Specify the account manager to use", x => SelectAccountManager(x) },
+            { "a|account=", "Specifiy the account to use", x => GlobalOptions.AccountId = x },
         };
 
         static int Main(string[] args)
@@ -56,6 +58,8 @@ namespace RiftAuthenticator.CommandLine
                 }
                 else
                 {
+                    if (GlobalOptions.AccountId != null && GlobalOptions.AccountId != string.Empty)
+                        SelectAccount(GlobalOptions.AccountId);
                     ProcessCommand(unknownArgs);
                 }
             }
@@ -70,6 +74,46 @@ namespace RiftAuthenticator.CommandLine
                 return 1;
             }
             return 0;
+        }
+
+        static void SelectAccount(string accountId)
+        {
+            Library.IAccount foundAccount = null;
+            for (int i = 0; i != GlobalOptions.AccountManager.Count; ++i)
+            {
+                var account = GlobalOptions.AccountManager[i];
+                if (i.ToString() == accountId || account.Description == accountId || account.DeviceId == accountId)
+                {
+                    foundAccount = account;
+                    break;
+                }
+            }
+            if (foundAccount == null)
+                throw new CommandArgumentException(null, string.Format("No account with the id {0} found.", accountId));
+            GlobalOptions.Account = foundAccount;
+        }
+
+        static void SelectAccountManager(string accountManagerId)
+        {
+            switch (accountManagerId)
+            {
+                case "win32":
+                case "registry":
+                case "RiftAuthenticator.Library.Registry":
+                    accountManagerId = "RiftAuthenticator.Library.Registry";
+                    break;
+                case "fs":
+                case "file-system":
+                case "filesystem":
+                case "RiftAuthenticator.Library.FileSystem":
+                    accountManagerId = "RiftAuthenticator.Library.FileSystem";
+                    break;
+                default:
+                    throw new NotSupportedException(accountManagerId);
+            }
+            var accountManagerAssemblyName = accountManagerId;
+            var accountManagerTypeName = string.Format("{0}.AccountManager", accountManagerId);
+            GlobalOptions.AccountManager = (RiftAuthenticator.Library.IAccountManager)Activator.CreateInstance(accountManagerAssemblyName, accountManagerTypeName);
         }
 
         private static void ProcessCommand(List<string> args)

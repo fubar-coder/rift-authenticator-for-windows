@@ -24,20 +24,34 @@ namespace RiftAuthenticator.CommandLine
 {
     class GlobalOptions
     {
+        private RiftAuthenticator.Library.IAccountManager _accountManager;
+
         public GlobalOptions()
         {
             // Load default configuration
             AccountManager = new Library.Registry.AccountManager();
-            AccountManager.LoadAccounts();
-            if (AccountManager.Count == 0)
-                AccountManager.Add(AccountManager.CreateAccount());
-            Account = AccountManager[0];
         }
 
         public bool ShowHelp { get; set; }
         public int VerboseLevel { get; set; }
 
-        public RiftAuthenticator.Library.IAccountManager AccountManager { get; set; }
+        public string AccountId { get; set; }
+
+        public RiftAuthenticator.Library.IAccountManager AccountManager
+        {
+            get
+            {
+                return _accountManager;
+            }
+            set
+            {
+                _accountManager = value;
+                AccountManager.LoadAccounts();
+                if (AccountManager.Count == 0)
+                    AccountManager.Add(AccountManager.CreateAccount());
+                Account = AccountManager[0];
+            }
+        }
         public RiftAuthenticator.Library.IAccount Account { get; set; }
     }
 }

@@ -108,6 +108,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\RiftAuthenticator.Library.FileSystem\RiftAuthenticator.Library.FileSystem.csproj">
+      <Project>{D463F9A5-E676-47D6-9740-D2548748EBC3}</Project>
+      <Name>RiftAuthenticator.Library.FileSystem</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RiftAuthenticator.Library.Registry\RiftAuthenticator.Library.Registry.csproj">
       <Project>{488805C2-F094-4AB2-AAF4-0A555F36095A}</Project>
       <Name>RiftAuthenticator.Library.Registry</Name>
