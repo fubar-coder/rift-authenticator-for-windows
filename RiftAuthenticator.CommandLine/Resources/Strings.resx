@@ -231,4 +231,31 @@
   <data name="opt_time_sync_display" xml:space="preserve">
     <value>New time offset: {0}</value>
   </data>
+  <data name="app_account_n_of_m" xml:space="preserve">
+    <value>Account {0} of {1}:</value>
+  </data>
+  <data name="app_info_description" xml:space="preserve">
+    <value>Description: {0}</value>
+  </data>
+  <data name="app_no_account_found" xml:space="preserve">
+    <value>No account with the id {0} found.</value>
+  </data>
+  <data name="opt_delete_account_description" xml:space="preserve">
+    <value>Delete a existing account</value>
+  </data>
+  <data name="opt_global_account" xml:space="preserve">
+    <value>Specifiy the account to use</value>
+  </data>
+  <data name="opt_global_account_manager" xml:space="preserve">
+    <value>Specify the account manager to use</value>
+  </data>
+  <data name="opt_new_account_default_name" xml:space="preserve">
+    <value>Account {0}</value>
+  </data>
+  <data name="opt_new_account_description" xml:space="preserve">
+    <value>Create a new account</value>
+  </data>
+  <data name="opt_new_account_name" xml:space="preserve">
+    <value>Name of the new account</value>
+  </data>
 </root>

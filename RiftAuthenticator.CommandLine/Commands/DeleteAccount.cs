@@ -44,7 +44,7 @@ namespace RiftAuthenticator.CommandLine.Commands
 
         public string Description
         {
-            get { return "Delete a existing account"; }
+            get { return Resources.Strings.opt_delete_account_description; }
         }
 
         public NDesk.Options.OptionSet OptionSet
