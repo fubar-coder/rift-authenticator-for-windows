@@ -85,6 +85,7 @@ namespace RiftAuthenticator.CommandLine.Commands
                 throw new CommandArgumentException(this, string.Format(Resources.Strings.app_unknown_args, string.Join(" ", remainingArgs.ToArray())));
             Library.TrionServer.RecoverSecurityKey(globalOptions.Account, userName, password, securityAnswers, deviceId);
             globalOptions.Account.TimeOffset = Library.TrionServer.GetTimeOffset();
+            globalOptions.AccountManager.SaveAccounts();
             Program.ShowConfiguration(globalOptions.Account);
         }
     }
