@@ -59,7 +59,7 @@ namespace RiftAuthenticator.CommandLine.Commands
             var remainingArgs = OptionSet.Parse(args);
             if (remainingArgs.Count != 0)
                 throw new CommandArgumentException(this, string.Format(Resources.Strings.app_unknown_args, string.Join(" ", remainingArgs.ToArray())));
-            Program.ShowConfiguration(globalOptions.Configuration);
+            Program.ShowConfiguration(globalOptions.Account);
         }
     }
 }

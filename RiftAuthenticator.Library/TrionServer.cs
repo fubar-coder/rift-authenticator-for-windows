@@ -161,13 +161,13 @@ namespace RiftAuthenticator.Library
             return questions;
         }
 
-        public static void RecoverSecurityKey(string userName, string password, string[] securityQuestionAnswers, Configuration config)
+        public static void RecoverSecurityKey(IAccount account, string userName, string password, string[] securityQuestionAnswers, string deviceId)
         {
             var variables = new Dictionary<string, string>
             {
                 { "emailAddress", userName },
                 { "password", password },
-                { "deviceId", config.DeviceId },
+                { "deviceId", deviceId },
                 { "securityAnswer", securityQuestionAnswers[0] ?? string.Empty },
                 { "secondSecurityAnswer", securityQuestionAnswers[1] ?? string.Empty },
             };
@@ -175,10 +175,11 @@ namespace RiftAuthenticator.Library
             var result = new System.IO.MemoryStream(ExecuteRequest(uri, variables));
             var resultXml = new System.Xml.XmlDocument();
             resultXml.Load(result);
-            ProcessSecretKeyResult(config, resultXml);
+            ProcessSecretKeyResult(account, resultXml);
+            account.DeviceId = deviceId;
         }
 
-        private static void ProcessSecretKeyResult(Configuration config, System.Xml.XmlDocument resultXml)
+        private static void ProcessSecretKeyResult(IAccount account, System.Xml.XmlDocument resultXml)
         {
             foreach (System.Xml.XmlElement itemXml in resultXml.SelectNodes("/DeviceKey/*"))
             {
@@ -186,13 +187,13 @@ namespace RiftAuthenticator.Library
                 switch (itemXml.LocalName)
                 {
                     case "DeviceId":
-                        config.DeviceId = value;
+                        account.DeviceId = value;
                         break;
                     case "SerialKey":
-                        config.SerialKey = value;
+                        account.SerialKey = value;
                         break;
                     case "SecretKey":
-                        config.SecretKey = value;
+                        account.SecretKey = value;
                         break;
                     case "ErrorCode":
                         throw new TrionServerException(value);
@@ -200,17 +201,18 @@ namespace RiftAuthenticator.Library
             }
         }
 
-        public static void CreateSecurityKey(Configuration config)
+        public static void CreateSecurityKey(IAccount account, string deviceId)
         {
             var variables = new Dictionary<string, string>
             {
-                { "deviceId", config.DeviceId },
+                { "deviceId", deviceId },
             };
             var uri = new Uri(string.Format("{0}/external/create-device-key", TrionApiServer));
             var result = new System.IO.MemoryStream(ExecuteRequest(uri, variables));
             var resultXml = new System.Xml.XmlDocument();
             resultXml.Load(result);
-            ProcessSecretKeyResult(config, resultXml);
+            ProcessSecretKeyResult(account, resultXml);
+            account.DeviceId = deviceId;
         }
 
         public static bool CertificateIsValid(object sender, X509Certificate certificate, X509Chain chain, System.Net.Security.SslPolicyErrors sslPolicyErrors)

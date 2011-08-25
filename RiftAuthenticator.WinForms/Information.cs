@@ -28,22 +28,22 @@ namespace RiftAuthenticator.WinForms
 {
     public partial class Information : Form
     {
-        private Library.Configuration Configuration;
+        private Library.IAccount Account;
 
-        public Information(Library.Configuration config)
+        public Information(Library.IAccount account)
         {
             InitializeComponent();
 
-            Configuration = config;
+            Account = account;
             ConfigToControls();
         }
 
         private void ConfigToControls()
         {
-            DeviceId.Text = Configuration.DeviceId;
-            SerialKey.Text = Configuration.FormattedSerialKey;
-            SecretKey.Text = Configuration.SecretKey;
-            TimeOffset.Text = Configuration.TimeOffset.ToString();
+            DeviceId.Text = Account.DeviceId;
+            SerialKey.Text = Account.FormattedSerialKey;
+            SecretKey.Text = Account.SecretKey;
+            TimeOffset.Text = Account.TimeOffset.ToString();
         }
 
         private void CloseButton_Click(object sender, EventArgs e)

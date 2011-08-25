@@ -28,7 +28,8 @@ namespace RiftAuthenticator.WinForms
 {
     public partial class MainWindow : Form
     {
-        Library.Configuration Configuration = new Library.Configuration();
+        Library.IAccountManager AccountManager = new Library.Registry.AccountManager();
+        Library.IAccount Account;
 
         public MainWindow()
         {
@@ -38,13 +39,16 @@ namespace RiftAuthenticator.WinForms
         private void MainWindow_Load(object sender, EventArgs e)
         {
             System.Net.ServicePointManager.ServerCertificateValidationCallback = Library.TrionServer.CertificateIsValid;
-            Configuration.Load();
+            AccountManager.LoadAccounts();
+            if (AccountManager.Count == 0)
+                AccountManager.Add(AccountManager.CreateAccount());
+            Account = AccountManager[0];
             RefreshToken();
         }
 
         void RefreshToken()
         {
-            if (Configuration.IsEmpty)
+            if (Account.IsEmpty)
             {
                 LoginToken.Text = Resources.Strings.Status_NoConfig;
                 SerialKey.Text = string.Empty;
@@ -52,9 +56,9 @@ namespace RiftAuthenticator.WinForms
             }
             else
             {
-                if (SerialKey.Text != Configuration.FormattedSerialKey)
-                    SerialKey.Text = Configuration.FormattedSerialKey;
-                var loginToken = Configuration.CalculateToken();
+                if (SerialKey.Text != Account.FormattedSerialKey)
+                    SerialKey.Text = Account.FormattedSerialKey;
+                var loginToken = Account.CalculateToken();
                 if (LoginToken.Text != loginToken.Token)
                     LoginToken.Text = loginToken.Token;
                 RemainingValidTime.Value = (int)loginToken.RemainingMillis;
@@ -63,7 +67,7 @@ namespace RiftAuthenticator.WinForms
 
         private void TokenUpdateTimer_Tick(object sender, EventArgs e)
         {
-            if (Configuration.IsEmpty)
+            if (Account.IsEmpty)
                 return;
             RefreshToken();
         }
@@ -83,8 +87,8 @@ namespace RiftAuthenticator.WinForms
 
         private void ExecuteTimeSync()
         {
-            Configuration.TimeOffset = Library.TrionServer.GetTimeOffset();
-            Configuration.Save();
+            Account.TimeOffset = Library.TrionServer.GetTimeOffset();
+            AccountManager.SaveAccounts();
             RefreshToken();
         }
 
@@ -99,13 +103,13 @@ namespace RiftAuthenticator.WinForms
 
         private void Information_Click(object sender, EventArgs e)
         {
-            var dlg = new Information(Configuration) { Owner = this };
+            var dlg = new Information(Account) { Owner = this };
             dlg.ShowDialog();
         }
 
         private void Initialize_Click(object sender, EventArgs e)
         {
-            if (!Configuration.IsEmpty)
+            if (!Account.IsEmpty)
             {
                 if (MessageBox.Show(
                     this, 
@@ -119,9 +123,9 @@ namespace RiftAuthenticator.WinForms
             {
                 if (ExecuteInit())
                 {
-                    Clipboard.SetText(Configuration.DeviceId);
-                    MessageBox.Show(this, 
-                        string.Format(Resources.Strings.MessageBox_Message_RememberDeviceId, Configuration.DeviceId), Resources.Strings.MessageBox_Title_RememberDeviceId, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    Clipboard.SetText(Account.DeviceId);
+                    MessageBox.Show(this,
+                        string.Format(Resources.Strings.MessageBox_Message_RememberDeviceId, Account.DeviceId), Resources.Strings.MessageBox_Title_RememberDeviceId, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             catch (Exception ex)
@@ -137,14 +141,10 @@ namespace RiftAuthenticator.WinForms
             if (dlg.ShowDialog() != DialogResult.OK)
                 return false;
 
-            var tempConfig = new Library.Configuration()
-            {
-                DeviceId = dlg.DeviceId.Text,
-            };
-            Library.TrionServer.CreateSecurityKey(tempConfig);
-            tempConfig.TimeOffset = Library.TrionServer.GetTimeOffset();
-            tempConfig.Save();
-            Configuration.Load();
+            var deviceId = dlg.DeviceId.Text;
+            Library.TrionServer.CreateSecurityKey(Account, deviceId);
+            Account.TimeOffset = Library.TrionServer.GetTimeOffset();
+            AccountManager.SaveAccounts();
             RefreshToken();
             return true;
         }
@@ -198,14 +198,9 @@ namespace RiftAuthenticator.WinForms
                 dlgSecurityQuestions.SecurityAnswer1.Text,
                 dlgSecurityQuestions.SecurityAnswer2.Text,
             };
-            var tempConfig = new Library.Configuration()
-            {
-                DeviceId = deviceId,
-            };
-            Library.TrionServer.RecoverSecurityKey(userEmail, userPassword, securityAnswers, tempConfig);
-            tempConfig.TimeOffset = Library.TrionServer.GetTimeOffset();
-            tempConfig.Save();
-            Configuration.Load();
+            Library.TrionServer.RecoverSecurityKey(Account, userEmail, userPassword, securityAnswers, deviceId);
+            Account.TimeOffset = Library.TrionServer.GetTimeOffset();
+            AccountManager.SaveAccounts();
             RefreshToken();
         }
 

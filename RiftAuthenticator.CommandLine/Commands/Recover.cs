@@ -83,15 +83,9 @@ namespace RiftAuthenticator.CommandLine.Commands
             }
             if (argIndex < remainingArgs.Count)
                 throw new CommandArgumentException(this, string.Format(Resources.Strings.app_unknown_args, string.Join(" ", remainingArgs.ToArray())));
-            var cfg = new Library.Configuration
-            {
-                DeviceId = deviceId,
-            };
-            Library.TrionServer.RecoverSecurityKey(userName, password, securityAnswers, cfg);
-            cfg.TimeOffset = Library.TrionServer.GetTimeOffset();
-            cfg.Save();
-            globalOptions.Configuration.Load();
-            Program.ShowConfiguration(globalOptions.Configuration);
+            Library.TrionServer.RecoverSecurityKey(globalOptions.Account, userName, password, securityAnswers, deviceId);
+            globalOptions.Account.TimeOffset = Library.TrionServer.GetTimeOffset();
+            Program.ShowConfiguration(globalOptions.Account);
         }
     }
 }

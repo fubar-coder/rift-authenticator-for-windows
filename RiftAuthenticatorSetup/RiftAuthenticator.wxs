@@ -17,7 +17,7 @@ along with RIFT™ Authenticator for Windows.  If not, see
 <http://www.gnu.org/licenses/>.
 -->
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-  <?define ProductVersion="1.0.6"?>
+  <?define ProductVersion="1.0.7"?>
   <?define UpgradeCode="7336F679-35B0-4BF6-8708-82FBC9E29095"?>
   <?define Manufacturer="RIFT™ Authenticator for Windows Project"?>
   <?define ProductCode="910AE6E2-B43A-473B-98EB-0E48AB341DA7"?>
@@ -40,6 +40,7 @@ along with RIFT™ Authenticator for Windows.  If not, see
             <Directory Id="Sources.WinForms" Name="WinForms" />
             <Directory Id="Sources.WPF" Name="WPF" />
             <Directory Id="Sources.Library" Name="Library" />
+            <Directory Id="Sources.Library.Registry" Name="Library.Registry" />
           </Directory>
 				</Directory>
 			</Directory>
@@ -142,6 +143,7 @@ along with RIFT™ Authenticator for Windows.  If not, see
       </Component>
       <Component Id="AppLibs" Guid="55B45E23-9253-4854-9126-A39038BBB690">
         <File Id="$(var.RiftAuthenticator.Library.TargetFileName)" Source="$(var.RiftAuthenticator.Library.TargetPath)" KeyPath="yes" Checksum="yes" />
+        <File Id="$(var.RiftAuthenticator.Library.Registry.TargetFileName)" Source="$(var.RiftAuthenticator.Library.Registry.TargetPath)" Checksum="yes" />
       </Component>
     </DirectoryRef>
     
@@ -185,6 +187,9 @@ along with RIFT™ Authenticator for Windows.  If not, see
       <ComponentGroupRef Id="RiftAuthenticator.Library.Sources" />
       <ComponentGroupRef Id="RiftAuthenticator.Library.Content" />
       <ComponentGroupRef Id="RiftAuthenticator.Library.Documents" />
+      <ComponentGroupRef Id="RiftAuthenticator.Library.Registry.Sources" />
+      <ComponentGroupRef Id="RiftAuthenticator.Library.Registry.Content" />
+      <ComponentGroupRef Id="RiftAuthenticator.Library.Registry.Documents" />
       <ComponentRef Id="AppShortcutSources"/>
     </Feature>
 
