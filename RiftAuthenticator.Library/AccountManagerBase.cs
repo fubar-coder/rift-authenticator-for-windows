@@ -8,6 +8,12 @@ namespace RiftAuthenticator.Library
     {
         public abstract IAccount CreateAccount();
         public abstract int StoredAccounts { get; set; }
+        public ISecretKeyEncryption SecretKeyEncryption { get; protected set; }
+
+        public AccountManagerBase(ISecretKeyEncryption secretKeyEncryption)
+        {
+            SecretKeyEncryption = secretKeyEncryption;
+        }
 
         public virtual void LoadAccounts()
         {
@@ -15,7 +21,7 @@ namespace RiftAuthenticator.Library
             for (int i = 0; i != StoredAccounts; ++i)
             {
                 var account = CreateAccount();
-                account.Load(i);
+                account.Load(this, i);
                 accounts.Add(account);
             }
             Clear();
@@ -26,7 +32,7 @@ namespace RiftAuthenticator.Library
         {
             for (int i = 0; i != Count; ++i)
             {
-                this[i].Save(i);
+                this[i].Save(this, i);
             }
             StoredAccounts = Count;
         }

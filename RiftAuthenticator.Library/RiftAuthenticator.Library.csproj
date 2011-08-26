@@ -45,9 +45,11 @@
   <ItemGroup>
     <Compile Include="AccountBase.cs" />
     <Compile Include="AccountManagerBase.cs" />
+    <Compile Include="AndroidSecretKeyEncryption.cs" />
     <Compile Include="DataConverter.cs" />
     <Compile Include="IAccount.cs" />
     <Compile Include="IAccountManager.cs" />
+    <Compile Include="ISecretKeyEncryption.cs" />
     <Compile Include="LoginToken.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Strings.Designer.cs">

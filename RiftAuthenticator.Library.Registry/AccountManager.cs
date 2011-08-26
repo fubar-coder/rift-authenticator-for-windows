@@ -26,6 +26,16 @@ namespace RiftAuthenticator.Library.Registry
     {
         const string StoredAccountsKey = "StoredAccounts";
 
+        public AccountManager()
+            : this(new Library.AndroidSecretKeyEncryption())
+        {
+        }
+
+        public AccountManager(ISecretKeyEncryption secretKeyEncryption)
+            : base(secretKeyEncryption)
+        {
+        }
+
         public override IAccount CreateAccount()
         {
             return new Account();

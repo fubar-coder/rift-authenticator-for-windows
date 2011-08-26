@@ -10,5 +10,7 @@ namespace RiftAuthenticator.Library
 
         void LoadAccounts();
         void SaveAccounts();
+
+        ISecretKeyEncryption SecretKeyEncryption { get; }
     }
 }
