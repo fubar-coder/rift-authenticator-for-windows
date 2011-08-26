@@ -119,25 +119,25 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="DeviceId.Location" type="System.Drawing.Point, System.Drawing">
-    <value>121, 12</value>
+    <value>121, 38</value>
   </data>
   <data name="DeviceId.Size" type="System.Drawing.Size, System.Drawing">
     <value>271, 20</value>
   </data>
   <data name="SerialKey.Location" type="System.Drawing.Point, System.Drawing">
-    <value>121, 38</value>
+    <value>121, 64</value>
   </data>
   <data name="SerialKey.Size" type="System.Drawing.Size, System.Drawing">
     <value>271, 20</value>
   </data>
   <data name="SecretKey.Location" type="System.Drawing.Point, System.Drawing">
-    <value>121, 64</value>
+    <value>121, 90</value>
   </data>
   <data name="SecretKey.Size" type="System.Drawing.Size, System.Drawing">
     <value>271, 20</value>
   </data>
   <data name="TimeOffset.Location" type="System.Drawing.Point, System.Drawing">
-    <value>121, 90</value>
+    <value>121, 116</value>
   </data>
   <data name="TimeOffset.Size" type="System.Drawing.Size, System.Drawing">
     <value>271, 20</value>
@@ -146,25 +146,38 @@
     <value>56, 13</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>Geräte-ID:</value>
+    <value>Geräte-&amp;ID:</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>77, 13</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
-    <value>Seriennummer:</value>
+    <value>&amp;Seriennummer:</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>103, 13</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
-    <value>Geheimer Schlüssel:</value>
+    <value>&amp;Geheimer Schlüssel:</value>
   </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>86, 13</value>
   </data>
   <data name="label4.Text" xml:space="preserve">
-    <value>Zeitabweichung:</value>
+    <value>&amp;Zeitabweichung:</value>
+  </data>
+  <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 13</value>
+  </data>
+  <data name="label5.Text" xml:space="preserve">
+    <value>&amp;Beschreibung:</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="Description.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="Description.Size" type="System.Drawing.Size, System.Drawing">
+    <value>271, 20</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

@@ -122,7 +122,7 @@
     <value>593, 20</value>
   </data>
   <data name="RemainingValidTime.Size" type="System.Drawing.Size, System.Drawing">
-    <value>593, 23</value>
+    <value>500, 23</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>83, 13</value>
@@ -131,55 +131,94 @@
     <value>Serienschlüssel:</value>
   </data>
   <data name="SerialKey.Location" type="System.Drawing.Point, System.Drawing">
-    <value>96, 67</value>
+    <value>99, 93</value>
   </data>
   <data name="SerialKey.Size" type="System.Drawing.Size, System.Drawing">
     <value>509, 20</value>
   </data>
-  <data name="Initialize.Size" type="System.Drawing.Size, System.Drawing">
-    <value>105, 23</value>
-  </data>
-  <data name="Initialize.Text" xml:space="preserve">
-    <value>Einrichtung</value>
-  </data>
   <data name="TimeSync.Location" type="System.Drawing.Point, System.Drawing">
-    <value>126, 101</value>
+    <value>521, 64</value>
   </data>
   <data name="TimeSync.Size" type="System.Drawing.Size, System.Drawing">
-    <value>105, 23</value>
+    <value>87, 23</value>
   </data>
   <data name="TimeSync.Text" xml:space="preserve">
     <value>Zeit-Sync</value>
   </data>
-  <data name="Information.Location" type="System.Drawing.Point, System.Drawing">
-    <value>237, 101</value>
+  <data name="FileQuitMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 22</value>
   </data>
-  <data name="Information.Size" type="System.Drawing.Size, System.Drawing">
-    <value>105, 23</value>
+  <data name="FileQuitMenu.Text" xml:space="preserve">
+    <value>&amp;Beenden</value>
   </data>
-  <data name="Information.Text" xml:space="preserve">
-    <value>Information</value>
+  <data name="applicationToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>46, 20</value>
   </data>
-  <data name="Recover.Location" type="System.Drawing.Point, System.Drawing">
-    <value>348, 101</value>
+  <data name="applicationToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Datei</value>
   </data>
-  <data name="Recover.Size" type="System.Drawing.Size, System.Drawing">
-    <value>105, 23</value>
+  <data name="AccountCreateMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>171, 22</value>
   </data>
-  <data name="Recover.Text" xml:space="preserve">
-    <value>Wiederherstellung</value>
+  <data name="AccountCreateMenu.Text" xml:space="preserve">
+    <value>&amp;Erstellen...</value>
   </data>
-  <data name="ShowLicense.Location" type="System.Drawing.Point, System.Drawing">
-    <value>500, 101</value>
+  <data name="AccountRecoverMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>171, 22</value>
   </data>
-  <data name="ShowLicense.Size" type="System.Drawing.Size, System.Drawing">
-    <value>105, 23</value>
+  <data name="AccountRecoverMenu.Text" xml:space="preserve">
+    <value>&amp;Wiederherstellen...</value>
   </data>
-  <data name="ShowLicense.Text" xml:space="preserve">
-    <value>Lizenz</value>
+  <data name="AccountManageMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>171, 22</value>
+  </data>
+  <data name="AccountManageMenu.Text" xml:space="preserve">
+    <value>&amp;Verwalten...</value>
+  </data>
+  <data name="toolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>168, 6</value>
+  </data>
+  <data name="AccountInfoMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>171, 22</value>
+  </data>
+  <data name="toolStripMenuItem3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>168, 6</value>
+  </data>
+  <data name="AccountExportMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>171, 22</value>
+  </data>
+  <data name="AccountExportMenu.Text" xml:space="preserve">
+    <value>E&amp;xportieren...</value>
+  </data>
+  <data name="AccountImportMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>171, 22</value>
+  </data>
+  <data name="AccountImportMenu.Text" xml:space="preserve">
+    <value>&amp;Importieren...</value>
+  </data>
+  <data name="HelpLicenseMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>106, 22</value>
+  </data>
+  <data name="HelpLicenseMenu.Text" xml:space="preserve">
+    <value>&amp;Lizenz</value>
+  </data>
+  <data name="toolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>103, 6</value>
+  </data>
+  <data name="HelpAboutMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>106, 22</value>
+  </data>
+  <data name="HelpAboutMenu.Text" xml:space="preserve">
+    <value>&amp;Über</value>
+  </data>
+  <data name="helpToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Hilfe</value>
+  </data>
+  <data name="MainMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>617, 24</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>617, 136</value>
+    <value>617, 124</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
