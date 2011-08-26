@@ -30,15 +30,6 @@ namespace RiftAuthenticator.Library.FileSystem
         const string SecretKeyKey = "secret_key";
         const string TimeOffsetKey = "time_offset";
 
-        private static Dictionary<string, System.Reflection.PropertyInfo> KeyToPropertyMap = new Dictionary<string, System.Reflection.PropertyInfo>
-        {
-            { DescriptionKey, typeof(IAccount).GetProperty("Description") },
-            { DeviceIdKey, typeof(IAccount).GetProperty("DeviceId") },
-            { SerialKeyKey, typeof(IAccount).GetProperty("SerialKey") },
-            { SecretKeyKey, typeof(IAccount).GetProperty("EncryptedSecretKey") },
-            { TimeOffsetKey, typeof(IAccount).GetProperty("TimeOffset") },
-        };
-
         internal static string GetAccountFileName(int accountIndex)
         {
             return string.Format("Account {0}.xml", accountIndex + 1);
@@ -145,45 +136,37 @@ namespace RiftAuthenticator.Library.FileSystem
             }
         }
 
-        public override void Load(int accountIndex)
+        public override void Load(IAccountManager accountManager, int accountIndex)
         {
             var configFileName = GetAccountPath(accountIndex);
             if (System.IO.File.Exists(configFileName))
             {
                 var map = ReadMap(configFileName);
-                foreach (var mapItem in map)
-                {
-                    var key = mapItem.Key;
-                    var value = mapItem.Value;
-                    if (!KeyToPropertyMap.ContainsKey(key))
-                        throw new NotSupportedException(key);
-                    KeyToPropertyMap[key].SetValue(this, value, null);
-                }
+                if (map.ContainsKey(DeviceIdKey))
+                    DeviceId = (string)map[DeviceIdKey];
+                if (map.ContainsKey(DescriptionKey))
+                    Description = (string)map[DescriptionKey];
+                if (map.ContainsKey(SerialKeyKey))
+                    SerialKey = (string)map[SerialKeyKey];
+                if (map.ContainsKey(TimeOffsetKey))
+                    TimeOffset = Convert.ToInt64(map[TimeOffsetKey]);
+                if (map.ContainsKey(SecretKeyKey))
+                    SecretKey = (string)map[SecretKeyKey];
+                SecretKey = accountManager.SecretKeyEncryption.Decrypt(this, SecretKey);
             }
         }
 
-        public override void Save(int accountIndex)
+        public override void Save(IAccountManager accountManager, int accountIndex)
         {
             var configFileName = GetAccountPath(accountIndex);
-            var map = new Dictionary<string, object>();
-
-            foreach (var keyAndPropertyInfo in KeyToPropertyMap)
+            var map = new Dictionary<string, object>()
             {
-                var key = keyAndPropertyInfo.Key;
-                var prop = keyAndPropertyInfo.Value;
-                var propType = prop.PropertyType;
-                var value = prop.GetValue(this, null);
-                if (propType == typeof(string))
-                {
-                    map.Add(key, (string)value ?? string.Empty);
-                }
-                else if (propType == typeof(long))
-                {
-                    map.Add(key, (value == null ? 0 : (long)value));
-                }
-                else
-                    throw new NotSupportedException(propType.FullName);
-            }
+                { DescriptionKey, Description },
+                { DeviceIdKey, DeviceId },
+                { SerialKeyKey, SerialKey },
+                { TimeOffsetKey, TimeOffset },
+                { SecretKeyKey, accountManager.SecretKeyEncryption.Encrypt(this, SecretKey) },
+            };
 
             WriteMap(configFileName, map);
         }

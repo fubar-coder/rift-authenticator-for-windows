@@ -13,12 +13,11 @@ namespace RiftAuthenticator.Library
         long TimeOffset { get; set; }
 
         string FormattedSerialKey { get; }
-        string EncryptedSecretKey { get; set; }
         bool IsEmpty { get; }
 
         LoginToken CalculateToken();
 
-        void Load(int accountIndex);
-        void Save(int accountIndex);
+        void Load(IAccountManager accountManager, int accountIndex);
+        void Save(IAccountManager accountManager, int accountIndex);
     }
 }

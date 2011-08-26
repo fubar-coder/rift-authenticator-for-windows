@@ -43,7 +43,7 @@ namespace RiftAuthenticator.Library.Registry
             return string.Format("{0}\\{1}", RiftAuthenticatorRegistryKey, GetAccountRegistryPathPart(accountIndex));
         }
 
-        public override void Load(int accountIndex)
+        public override void Load(IAccountManager accountManager, int accountIndex)
         {
             using (var key = Microsoft.Win32.Registry.CurrentUser.CreateSubKey(GetAccountRegistryPath(accountIndex)))
             {
@@ -58,13 +58,13 @@ namespace RiftAuthenticator.Library.Registry
                     case 0:
                         break;
                     case 1:
-                        SecretKey = DecryptSecretKey(SecretKey);
+                        SecretKey = accountManager.SecretKeyEncryption.Decrypt(this, SecretKey);
                         break;
                 }
             }
         }
 
-        public override void Save(int accountIndex)
+        public override void Save(IAccountManager accountManager, int accountIndex)
         {
             using (var key = Microsoft.Win32.Registry.CurrentUser.CreateSubKey(GetAccountRegistryPath(accountIndex)))
             {
@@ -72,7 +72,7 @@ namespace RiftAuthenticator.Library.Registry
                 key.SetValue(DescriptionKey, Description ?? string.Empty);
                 key.SetValue(DeviceIdKey, DeviceId ?? string.Empty);
                 key.SetValue(SerialKeyKey, SerialKey ?? string.Empty);
-                key.SetValue(SecretKeyKey, EncryptSecretKey(SecretKey ?? string.Empty));
+                key.SetValue(SecretKeyKey, accountManager.SecretKeyEncryption.Encrypt(this, SecretKey ?? string.Empty));
                 key.SetValue(TimeOffsetKey, TimeOffset);
             }
         }

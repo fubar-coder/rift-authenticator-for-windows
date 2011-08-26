@@ -8,6 +8,16 @@ namespace RiftAuthenticator.Library.FileSystem
     {
         private const string StoredAccountsKey = "stored_accounts";
 
+        public AccountManager()
+            : this(new Library.AndroidSecretKeyEncryption())
+        {
+        }
+
+        public AccountManager(ISecretKeyEncryption secretKeyEncryption)
+            : base(secretKeyEncryption)
+        {
+        }
+
         private string GetGlobalSettingsFileName()
         {
             return System.IO.Path.Combine(Account.GetAccountFolder(), "settings.xml");
