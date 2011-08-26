@@ -34,14 +34,14 @@ namespace RiftAuthenticator.Library
 
         public override void Load(IAccountManager accountManager, int accountIndex)
         {
-            OriginalAccount.Load(accountManager, accountIndex);
+            //OriginalAccount.Load(accountManager, accountIndex);
             CopyDataFromOriginalAccount();
         }
 
         public override void Save(IAccountManager accountManager, int accountIndex)
         {
             CopyDataToOriginalAccount();
-            OriginalAccount.Save(accountManager, accountIndex);
+            //OriginalAccount.Save(accountManager, accountIndex);
         }
     }
 }
