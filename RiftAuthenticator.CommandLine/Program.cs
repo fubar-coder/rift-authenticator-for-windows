@@ -112,6 +112,11 @@ namespace RiftAuthenticator.CommandLine
                 case "RiftAuthenticator.Library.FileSystem":
                     accountManagerId = "RiftAuthenticator.Library.FileSystem";
                     break;
+                case "is":
+                case "isolated-storage":
+                case "storage":
+                    accountManagerId = "RiftAuthenticator.Library.IsolatedStorage";
+                    break;
                 default:
                     throw new NotSupportedException(accountManagerId);
             }
