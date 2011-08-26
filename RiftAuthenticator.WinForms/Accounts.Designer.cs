@@ -31,14 +31,14 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Accounts));
             this.AccountGrid = new System.Windows.Forms.DataGridView();
-            this.descriptionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.deviceIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.formattedSerialKeyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.iAccountBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.ApplyAccountChanges = new System.Windows.Forms.Button();
             this.CancelAccountChanges = new System.Windows.Forms.Button();
             this.MoceAccountUp = new System.Windows.Forms.Button();
             this.MoveAccountDown = new System.Windows.Forms.Button();
+            this.descriptionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.deviceIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.formattedSerialKeyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.iAccountBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.AccountGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iAccountBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -58,6 +58,35 @@
             this.AccountGrid.MultiSelect = false;
             this.AccountGrid.Name = "AccountGrid";
             this.AccountGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            // 
+            // ApplyAccountChanges
+            // 
+            resources.ApplyResources(this.ApplyAccountChanges, "ApplyAccountChanges");
+            this.ApplyAccountChanges.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.ApplyAccountChanges.Name = "ApplyAccountChanges";
+            this.ApplyAccountChanges.UseVisualStyleBackColor = true;
+            this.ApplyAccountChanges.Click += new System.EventHandler(this.ApplyAccountChanges_Click);
+            // 
+            // CancelAccountChanges
+            // 
+            resources.ApplyResources(this.CancelAccountChanges, "CancelAccountChanges");
+            this.CancelAccountChanges.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.CancelAccountChanges.Name = "CancelAccountChanges";
+            this.CancelAccountChanges.UseVisualStyleBackColor = true;
+            // 
+            // MoceAccountUp
+            // 
+            resources.ApplyResources(this.MoceAccountUp, "MoceAccountUp");
+            this.MoceAccountUp.Name = "MoceAccountUp";
+            this.MoceAccountUp.UseVisualStyleBackColor = true;
+            this.MoceAccountUp.Click += new System.EventHandler(this.MoceAccountUp_Click);
+            // 
+            // MoveAccountDown
+            // 
+            resources.ApplyResources(this.MoveAccountDown, "MoveAccountDown");
+            this.MoveAccountDown.Name = "MoveAccountDown";
+            this.MoveAccountDown.UseVisualStyleBackColor = true;
+            this.MoveAccountDown.Click += new System.EventHandler(this.MoveAccountDown_Click);
             // 
             // descriptionDataGridViewTextBoxColumn
             // 
@@ -82,34 +111,6 @@
             // iAccountBindingSource
             // 
             this.iAccountBindingSource.DataSource = typeof(RiftAuthenticator.Library.IAccount);
-            // 
-            // ApplyAccountChanges
-            // 
-            resources.ApplyResources(this.ApplyAccountChanges, "ApplyAccountChanges");
-            this.ApplyAccountChanges.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.ApplyAccountChanges.Name = "ApplyAccountChanges";
-            this.ApplyAccountChanges.UseVisualStyleBackColor = true;
-            // 
-            // CancelAccountChanges
-            // 
-            resources.ApplyResources(this.CancelAccountChanges, "CancelAccountChanges");
-            this.CancelAccountChanges.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.CancelAccountChanges.Name = "CancelAccountChanges";
-            this.CancelAccountChanges.UseVisualStyleBackColor = true;
-            // 
-            // MoceAccountUp
-            // 
-            resources.ApplyResources(this.MoceAccountUp, "MoceAccountUp");
-            this.MoceAccountUp.Name = "MoceAccountUp";
-            this.MoceAccountUp.UseVisualStyleBackColor = true;
-            this.MoceAccountUp.Click += new System.EventHandler(this.MoceAccountUp_Click);
-            // 
-            // MoveAccountDown
-            // 
-            resources.ApplyResources(this.MoveAccountDown, "MoveAccountDown");
-            this.MoveAccountDown.Name = "MoveAccountDown";
-            this.MoveAccountDown.UseVisualStyleBackColor = true;
-            this.MoveAccountDown.Click += new System.EventHandler(this.MoveAccountDown_Click);
             // 
             // Accounts
             // 
