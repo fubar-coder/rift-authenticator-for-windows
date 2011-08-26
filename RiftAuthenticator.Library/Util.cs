@@ -25,19 +25,19 @@ namespace RiftAuthenticator.Library
     {
         public static long MillisStartTicks = new System.DateTime(1970, 1, 1).Ticks;
 
-        public static long currentTimeMillis()
+        public static long CurrentTimeMillis()
         {
-            return timeToMillis(DateTime.Now);
+            return TimeToMillis(DateTime.Now);
         }
 
-        public static long ticksToMillis(long ticks)
+        public static long TicksToMillis(long ticks)
         {
             var timeStart = MillisStartTicks;
             var timeDiff = ticks - timeStart;
             return timeDiff / 10000L;
         }
 
-        public static long millisToTicks(long millis)
+        public static long MillisToTicks(long millis)
         {
             var timeStart = MillisStartTicks;
             var timeDiff = millis * 10000L;
@@ -45,14 +45,14 @@ namespace RiftAuthenticator.Library
             return timeCurrent;
         }
 
-        public static long timeToMillis(DateTime time)
+        public static long TimeToMillis(DateTime time)
         {
-            return ticksToMillis(time.ToUniversalTime().Ticks);
+            return TicksToMillis(time.ToUniversalTime().Ticks);
         }
 
-        public static DateTime millisToTime(long millis)
+        public static DateTime MillisToTime(long millis)
         {
-            return new DateTime(millisToTicks(millis), DateTimeKind.Utc).ToLocalTime();
+            return new DateTime(MillisToTicks(millis), DateTimeKind.Utc).ToLocalTime();
         }
 
         internal static byte[] HexToBytes(string hexString)
