@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="AccountBase.cs" />
     <Compile Include="AccountManagerBase.cs" />
+    <Compile Include="PlatformUtils\Android\AccountMapFile.cs" />
     <Compile Include="PlatformUtils\Android\AndroidSecretKeyEncryption.cs" />
     <Compile Include="DataConverter.cs" />
     <Compile Include="IAccount.cs" />
