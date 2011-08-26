@@ -63,7 +63,7 @@ namespace RiftAuthenticator.Library
         {
             var secretKey = Encoding.GetBytes(SecretKey);
             var now = DateTime.Now;
-            var nowMillis = Util.timeToMillis(now);
+            var nowMillis = Util.TimeToMillis(now);
             long intervalNumber = (nowMillis + TimeOffset) / 30000;
             // Value must be written as big endian byte buffer
             var intervalByteBuffer = Mono.DataConverter.Pack("^l", intervalNumber);

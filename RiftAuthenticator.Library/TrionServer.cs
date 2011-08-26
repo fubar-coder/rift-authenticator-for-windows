@@ -123,7 +123,7 @@ namespace RiftAuthenticator.Library
         {
             var uri = new Uri(string.Format("{0}{1}", TrionAuthServer, "/time"));
             var requestResult = Encoding.Default.GetString(ExecuteRequest(uri));
-            var currentMillis = Util.currentTimeMillis();
+            var currentMillis = Util.CurrentTimeMillis();
             var serverMillis = long.Parse(requestResult);
             return serverMillis - currentMillis;
         }
