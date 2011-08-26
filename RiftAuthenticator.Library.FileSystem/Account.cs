@@ -22,14 +22,8 @@ using System.Text;
 
 namespace RiftAuthenticator.Library.FileSystem
 {
-    public class Account : RiftAuthenticator.Library.AccountBase
+    public class Account : RiftAuthenticator.Library.PlatformUtils.Android.AccountMapFile
     {
-        const string DescriptionKey = "description";
-        const string DeviceIdKey = "device_id";
-        const string SerialKeyKey = "serial_key";
-        const string SecretKeyKey = "secret_key";
-        const string TimeOffsetKey = "time_offset";
-
         internal static string GetAccountFileName(int accountIndex)
         {
             return string.Format("Account {0}.xml", accountIndex + 1);
@@ -70,39 +64,19 @@ namespace RiftAuthenticator.Library.FileSystem
             }
         }
 
-        public override void Load(IAccountManager accountManager, int accountIndex)
+        protected override string GetFileName(IAccountManager accountManager, int accountIndex)
         {
-            var configFileName = GetAccountPath(accountIndex);
-            if (System.IO.File.Exists(configFileName))
-            {
-                var map = ReadMap(configFileName);
-                if (map.ContainsKey(DeviceIdKey))
-                    DeviceId = (string)map[DeviceIdKey];
-                if (map.ContainsKey(DescriptionKey))
-                    Description = (string)map[DescriptionKey];
-                if (map.ContainsKey(SerialKeyKey))
-                    SerialKey = (string)map[SerialKeyKey];
-                if (map.ContainsKey(TimeOffsetKey))
-                    TimeOffset = Convert.ToInt64(map[TimeOffsetKey]);
-                if (map.ContainsKey(SecretKeyKey))
-                    SecretKey = (string)map[SecretKeyKey];
-                SecretKey = accountManager.SecretKeyEncryption.Decrypt(this, SecretKey);
-            }
+            return GetAccountPath(accountIndex);
         }
 
-        public override void Save(IAccountManager accountManager, int accountIndex)
+        protected override Dictionary<string, object> ReadMapFile(string fileName)
         {
-            var configFileName = GetAccountPath(accountIndex);
-            var map = new Dictionary<string, object>()
-            {
-                { DescriptionKey, Description },
-                { DeviceIdKey, DeviceId },
-                { SerialKeyKey, SerialKey },
-                { TimeOffsetKey, TimeOffset },
-                { SecretKeyKey, accountManager.SecretKeyEncryption.Encrypt(this, SecretKey) },
-            };
+            return ReadMap(fileName);
+        }
 
-            WriteMap(configFileName, map);
+        protected override void WriteMapFile(string fileName, Dictionary<string, object> map)
+        {
+            WriteMap(fileName, map);
         }
     }
 }
