@@ -119,10 +119,10 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="LoginToken.Size" type="System.Drawing.Size, System.Drawing">
-    <value>593, 20</value>
+    <value>345, 20</value>
   </data>
   <data name="RemainingValidTime.Size" type="System.Drawing.Size, System.Drawing">
-    <value>500, 23</value>
+    <value>249, 23</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>83, 13</value>
@@ -131,13 +131,13 @@
     <value>Serienschlüssel:</value>
   </data>
   <data name="SerialKey.Location" type="System.Drawing.Point, System.Drawing">
-    <value>99, 93</value>
+    <value>96, 54</value>
   </data>
   <data name="SerialKey.Size" type="System.Drawing.Size, System.Drawing">
-    <value>509, 20</value>
+    <value>261, 20</value>
   </data>
   <data name="TimeSync.Location" type="System.Drawing.Point, System.Drawing">
-    <value>521, 64</value>
+    <value>270, 105</value>
   </data>
   <data name="TimeSync.Size" type="System.Drawing.Size, System.Drawing">
     <value>87, 23</value>
@@ -145,17 +145,20 @@
   <data name="TimeSync.Text" xml:space="preserve">
     <value>Zeit-Sync</value>
   </data>
-  <data name="FileQuitMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 22</value>
-  </data>
-  <data name="FileQuitMenu.Text" xml:space="preserve">
-    <value>&amp;Beenden</value>
+  <data name="MainMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>369, 24</value>
   </data>
   <data name="applicationToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>46, 20</value>
   </data>
   <data name="applicationToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Datei</value>
+  </data>
+  <data name="FileQuitMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 22</value>
+  </data>
+  <data name="FileQuitMenu.Text" xml:space="preserve">
+    <value>&amp;Beenden</value>
   </data>
   <data name="AccountCreateMenu.Size" type="System.Drawing.Size, System.Drawing">
     <value>171, 22</value>
@@ -196,6 +199,9 @@
   <data name="AccountImportMenu.Text" xml:space="preserve">
     <value>&amp;Importieren...</value>
   </data>
+  <data name="helpToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Hilfe</value>
+  </data>
   <data name="HelpLicenseMenu.Size" type="System.Drawing.Size, System.Drawing">
     <value>106, 22</value>
   </data>
@@ -211,14 +217,14 @@
   <data name="HelpAboutMenu.Text" xml:space="preserve">
     <value>&amp;Über</value>
   </data>
-  <data name="helpToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Hilfe</value>
+  <data name="Accounts.Location" type="System.Drawing.Point, System.Drawing">
+    <value>96, 27</value>
   </data>
-  <data name="MainMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>617, 24</value>
+  <data name="Accounts.Size" type="System.Drawing.Size, System.Drawing">
+    <value>261, 21</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>617, 124</value>
+    <value>369, 143</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

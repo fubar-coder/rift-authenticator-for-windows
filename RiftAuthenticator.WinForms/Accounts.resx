@@ -142,7 +142,7 @@
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="AccountGrid.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;AccountGrid.Name" xml:space="preserve">
     <value>AccountGrid</value>
@@ -169,7 +169,7 @@
     <value>75, 23</value>
   </data>
   <data name="ApplyAccountChanges.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>4</value>
   </data>
   <data name="ApplyAccountChanges.Text" xml:space="preserve">
     <value>OK</value>
@@ -199,7 +199,7 @@
     <value>75, 23</value>
   </data>
   <data name="CancelAccountChanges.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>5</value>
   </data>
   <data name="CancelAccountChanges.Text" xml:space="preserve">
     <value>Cancel</value>
@@ -229,7 +229,7 @@
     <value>29, 25</value>
   </data>
   <data name="MoceAccountUp.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="MoceAccountUp.Text" xml:space="preserve">
     <value>↑</value>
@@ -259,7 +259,7 @@
     <value>29, 25</value>
   </data>
   <data name="MoveAccountDown.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="MoveAccountDown.Text" xml:space="preserve">
     <value>↓</value>
@@ -284,9 +284,6 @@
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>416, 223</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Accounts</value>

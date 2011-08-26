@@ -54,6 +54,8 @@
             this.HelpAboutMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.ImportAccountDialog = new System.Windows.Forms.OpenFileDialog();
             this.ExportAccountDialog = new System.Windows.Forms.SaveFileDialog();
+            this.label2 = new System.Windows.Forms.Label();
+            this.Accounts = new System.Windows.Forms.ComboBox();
             this.MainMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -95,28 +97,29 @@
             // 
             // MainMenu
             // 
+            resources.ApplyResources(this.MainMenu, "MainMenu");
             this.MainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.applicationToolStripMenuItem,
             this.accountToolStripMenuItem,
             this.helpToolStripMenuItem});
-            resources.ApplyResources(this.MainMenu, "MainMenu");
             this.MainMenu.Name = "MainMenu";
             // 
             // applicationToolStripMenuItem
             // 
+            resources.ApplyResources(this.applicationToolStripMenuItem, "applicationToolStripMenuItem");
             this.applicationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.FileQuitMenu});
             this.applicationToolStripMenuItem.Name = "applicationToolStripMenuItem";
-            resources.ApplyResources(this.applicationToolStripMenuItem, "applicationToolStripMenuItem");
             // 
             // FileQuitMenu
             // 
-            this.FileQuitMenu.Name = "FileQuitMenu";
             resources.ApplyResources(this.FileQuitMenu, "FileQuitMenu");
+            this.FileQuitMenu.Name = "FileQuitMenu";
             this.FileQuitMenu.Click += new System.EventHandler(this.FileQuitMenu_Click);
             // 
             // accountToolStripMenuItem
             // 
+            resources.ApplyResources(this.accountToolStripMenuItem, "accountToolStripMenuItem");
             this.accountToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.AccountCreateMenu,
             this.AccountRecoverMenu,
@@ -127,78 +130,77 @@
             this.AccountExportMenu,
             this.AccountImportMenu});
             this.accountToolStripMenuItem.Name = "accountToolStripMenuItem";
-            resources.ApplyResources(this.accountToolStripMenuItem, "accountToolStripMenuItem");
             // 
             // AccountCreateMenu
             // 
-            this.AccountCreateMenu.Name = "AccountCreateMenu";
             resources.ApplyResources(this.AccountCreateMenu, "AccountCreateMenu");
+            this.AccountCreateMenu.Name = "AccountCreateMenu";
             this.AccountCreateMenu.Click += new System.EventHandler(this.AccountCreateMenu_Click);
             // 
             // AccountRecoverMenu
             // 
-            this.AccountRecoverMenu.Name = "AccountRecoverMenu";
             resources.ApplyResources(this.AccountRecoverMenu, "AccountRecoverMenu");
+            this.AccountRecoverMenu.Name = "AccountRecoverMenu";
             this.AccountRecoverMenu.Click += new System.EventHandler(this.AccountRecoverMenu_Click);
             // 
             // AccountManageMenu
             // 
-            this.AccountManageMenu.Name = "AccountManageMenu";
             resources.ApplyResources(this.AccountManageMenu, "AccountManageMenu");
+            this.AccountManageMenu.Name = "AccountManageMenu";
             this.AccountManageMenu.Click += new System.EventHandler(this.AccountManageMenu_Click);
             // 
             // toolStripMenuItem1
             // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             resources.ApplyResources(this.toolStripMenuItem1, "toolStripMenuItem1");
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             // 
             // AccountInfoMenu
             // 
-            this.AccountInfoMenu.Name = "AccountInfoMenu";
             resources.ApplyResources(this.AccountInfoMenu, "AccountInfoMenu");
+            this.AccountInfoMenu.Name = "AccountInfoMenu";
             this.AccountInfoMenu.Click += new System.EventHandler(this.AccountInfoMenu_Click);
             // 
             // toolStripMenuItem3
             // 
-            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
             resources.ApplyResources(this.toolStripMenuItem3, "toolStripMenuItem3");
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
             // 
             // AccountExportMenu
             // 
-            this.AccountExportMenu.Name = "AccountExportMenu";
             resources.ApplyResources(this.AccountExportMenu, "AccountExportMenu");
+            this.AccountExportMenu.Name = "AccountExportMenu";
             this.AccountExportMenu.Click += new System.EventHandler(this.AccountExportMenu_Click);
             // 
             // AccountImportMenu
             // 
-            this.AccountImportMenu.Name = "AccountImportMenu";
             resources.ApplyResources(this.AccountImportMenu, "AccountImportMenu");
+            this.AccountImportMenu.Name = "AccountImportMenu";
             this.AccountImportMenu.Click += new System.EventHandler(this.AccountImportMenu_Click);
             // 
             // helpToolStripMenuItem
             // 
+            resources.ApplyResources(this.helpToolStripMenuItem, "helpToolStripMenuItem");
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.HelpLicenseMenu,
             this.toolStripMenuItem2,
             this.HelpAboutMenu});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            resources.ApplyResources(this.helpToolStripMenuItem, "helpToolStripMenuItem");
             // 
             // HelpLicenseMenu
             // 
-            this.HelpLicenseMenu.Name = "HelpLicenseMenu";
             resources.ApplyResources(this.HelpLicenseMenu, "HelpLicenseMenu");
+            this.HelpLicenseMenu.Name = "HelpLicenseMenu";
             this.HelpLicenseMenu.Click += new System.EventHandler(this.HelpLicenseMenu_Click);
             // 
             // toolStripMenuItem2
             // 
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
             resources.ApplyResources(this.toolStripMenuItem2, "toolStripMenuItem2");
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
             // 
             // HelpAboutMenu
             // 
-            this.HelpAboutMenu.Name = "HelpAboutMenu";
             resources.ApplyResources(this.HelpAboutMenu, "HelpAboutMenu");
+            this.HelpAboutMenu.Name = "HelpAboutMenu";
             this.HelpAboutMenu.Click += new System.EventHandler(this.HelpAboutMenu_Click);
             // 
             // ImportAccountDialog
@@ -211,10 +213,25 @@
             this.ExportAccountDialog.DefaultExt = "xml";
             resources.ApplyResources(this.ExportAccountDialog, "ExportAccountDialog");
             // 
+            // label2
+            // 
+            resources.ApplyResources(this.label2, "label2");
+            this.label2.Name = "label2";
+            // 
+            // Accounts
+            // 
+            resources.ApplyResources(this.Accounts, "Accounts");
+            this.Accounts.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.Accounts.FormattingEnabled = true;
+            this.Accounts.Name = "Accounts";
+            this.Accounts.SelectedIndexChanged += new System.EventHandler(this.Accounts_SelectedIndexChanged);
+            // 
             // MainWindow
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.Accounts);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.TimeSync);
             this.Controls.Add(this.SerialKey);
             this.Controls.Add(this.label1);
@@ -257,6 +274,8 @@
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
         private System.Windows.Forms.OpenFileDialog ImportAccountDialog;
         private System.Windows.Forms.SaveFileDialog ExportAccountDialog;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox Accounts;
     }
 }
 
