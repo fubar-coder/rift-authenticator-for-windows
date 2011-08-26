@@ -24,12 +24,6 @@ namespace RiftAuthenticator.Library.PlatformUtils.Android
 {
     public abstract class AccountMapFile : AccountBase
     {
-        const string DescriptionKey = "description";
-        const string DeviceIdKey = "device_id";
-        const string SerialKeyKey = "serial_key";
-        const string SecretKeyKey = "secret_key";
-        const string TimeOffsetKey = "time_offset";
-
         protected abstract string GetFileName(IAccountManager accountManager, int accountIndex);
         protected abstract Dictionary<string, object> ReadMapFile(string fileName);
         protected abstract void WriteMapFile(string fileName, Dictionary<string, object> map);
@@ -38,31 +32,13 @@ namespace RiftAuthenticator.Library.PlatformUtils.Android
         {
             var configFileName = GetFileName(accountManager, accountIndex);
             var map = ReadMapFile(configFileName);
-            if (map.ContainsKey(DeviceIdKey))
-                DeviceId = (string)map[DeviceIdKey];
-            if (map.ContainsKey(DescriptionKey))
-                Description = (string)map[DescriptionKey];
-            if (map.ContainsKey(SerialKeyKey))
-                SerialKey = (string)map[SerialKeyKey];
-            if (map.ContainsKey(TimeOffsetKey))
-                TimeOffset = Convert.ToInt64(map[TimeOffsetKey]);
-            if (map.ContainsKey(SecretKeyKey))
-                SecretKey = (string)map[SecretKeyKey];
-            SecretKey = accountManager.SecretKeyEncryption.Decrypt(this, SecretKey);
+            AccountMap.SetMap(accountManager, this, map);
         }
 
         public override void Save(IAccountManager accountManager, int accountIndex)
         {
             var configFileName = GetFileName(accountManager, accountIndex);
-            var map = new Dictionary<string, object>()
-            {
-                { DescriptionKey, Description ?? string.Empty },
-                { DeviceIdKey, DeviceId ?? string.Empty },
-                { SerialKeyKey, SerialKey ?? string.Empty },
-                { TimeOffsetKey, TimeOffset },
-                { SecretKeyKey, accountManager.SecretKeyEncryption.Encrypt(this, SecretKey ?? string.Empty) },
-            };
-
+            var map = AccountMap.GetMap(accountManager, this);
             WriteMapFile(configFileName, map);
         }
     }
