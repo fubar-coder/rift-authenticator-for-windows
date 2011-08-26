@@ -24,32 +24,47 @@ namespace RiftAuthenticator.Library.IsolatedStorage
 {
     public class Account : PlatformUtils.Android.AccountMapFile
     {
+        private static System.IO.IsolatedStorage.IsolatedStorageFile CreateIsolatedStorageFile()
+        {
+#if SILVERLIGHT
+            return System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication();
+#else
+            return System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForDomain();
+#endif
+        }
+
         internal static Dictionary<string, object> ReadMap(string fileName)
         {
-            using (var storage = System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication())
+            Dictionary<string, object> result;
+            using (var storage = CreateIsolatedStorageFile())
             {
                 if (storage.GetFileNames(fileName).Length == 1)
                 {
                     using (var stream = new System.IO.IsolatedStorage.IsolatedStorageFileStream(fileName, System.IO.FileMode.Open, System.IO.FileAccess.Read))
                     {
-                        return PlatformUtils.Android.MapFile.ReadMap(stream);
+                        result = PlatformUtils.Android.MapFile.ReadMap(stream);
+                        stream.Close();
                     }
                 }
                 else
                 {
-                    return new Dictionary<string, object>();
+                    result = new Dictionary<string, object>();
                 }
+                storage.Close();
             }
+            return result;
         }
 
         internal static void WriteMap(string fileName, Dictionary<string, object> map)
         {
-            using (var storage = System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication())
+            using (var storage = CreateIsolatedStorageFile())
             {
                 using (var stream = new System.IO.IsolatedStorage.IsolatedStorageFileStream(fileName, System.IO.FileMode.Create, System.IO.FileAccess.Write))
                 {
                     PlatformUtils.Android.MapFile.WriteMap(stream, map);
+                    stream.Close();
                 }
+                storage.Close();
             }
         }
 
