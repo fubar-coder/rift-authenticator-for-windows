@@ -61,6 +61,15 @@ namespace RiftAuthenticator.WinForms.Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die This is the RIFT™ Authenticator for Windows written by the RIFT™ Authenticator for Windows Project. ähnelt.
+        /// </summary>
+        internal static string MessageBox_Message_About {
+            get {
+                return ResourceManager.GetString("MessageBox_Message_About", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Authenticator already initialized!
         ///Reinitialization will make you loose your current configuration!
         ///Continue? ähnelt.
@@ -110,6 +119,15 @@ namespace RiftAuthenticator.WinForms.Resources {
         internal static string MessageBox_Message_RememberDeviceId {
             get {
                 return ResourceManager.GetString("MessageBox_Message_RememberDeviceId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die RIFT™ Authenticator for Windows ähnelt.
+        /// </summary>
+        internal static string MessageBox_Title_About {
+            get {
+                return ResourceManager.GetString("MessageBox_Title_About", resourceCulture);
             }
         }
         

@@ -228,8 +228,8 @@ namespace RiftAuthenticator.WinForms
         {
             MessageBox.Show(
                 this,
-                "This is the RIFT™ Authenticator for Windows written by the RIFT™ Authenticator for Windows Project.",
-                "RIFT™ Authenticator for Windows",
+                Resources.Strings.MessageBox_Message_About,
+                Resources.Strings.MessageBox_Title_About,
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
