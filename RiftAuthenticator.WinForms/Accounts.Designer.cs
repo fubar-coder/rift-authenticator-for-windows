@@ -45,6 +45,8 @@
             // 
             // AccountGrid
             // 
+            this.AccountGrid.AllowUserToAddRows = false;
+            this.AccountGrid.AllowUserToResizeRows = false;
             resources.ApplyResources(this.AccountGrid, "AccountGrid");
             this.AccountGrid.AutoGenerateColumns = false;
             this.AccountGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -53,7 +55,9 @@
             this.deviceIdDataGridViewTextBoxColumn,
             this.formattedSerialKeyDataGridViewTextBoxColumn});
             this.AccountGrid.DataSource = this.iAccountBindingSource;
+            this.AccountGrid.MultiSelect = false;
             this.AccountGrid.Name = "AccountGrid";
+            this.AccountGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             // 
             // descriptionDataGridViewTextBoxColumn
             // 
@@ -98,12 +102,14 @@
             resources.ApplyResources(this.MoceAccountUp, "MoceAccountUp");
             this.MoceAccountUp.Name = "MoceAccountUp";
             this.MoceAccountUp.UseVisualStyleBackColor = true;
+            this.MoceAccountUp.Click += new System.EventHandler(this.MoceAccountUp_Click);
             // 
             // MoveAccountDown
             // 
             resources.ApplyResources(this.MoveAccountDown, "MoveAccountDown");
             this.MoveAccountDown.Name = "MoveAccountDown";
             this.MoveAccountDown.UseVisualStyleBackColor = true;
+            this.MoveAccountDown.Click += new System.EventHandler(this.MoveAccountDown_Click);
             // 
             // Accounts
             // 
