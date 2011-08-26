@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace RiftAuthenticator.Library
+namespace RiftAuthenticator.Library.PlatformUtils.Android
 {
     public class AndroidSecretKeyEncryption : ISecretKeyEncryption
     {
