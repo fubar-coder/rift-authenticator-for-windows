@@ -140,6 +140,9 @@
     <Compile Include="SecurityQuestions.Designer.cs">
       <DependentUpon>SecurityQuestions.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Accounts.de.resx">
+      <DependentUpon>Accounts.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Accounts.resx">
       <DependentUpon>Accounts.cs</DependentUpon>
     </EmbeddedResource>
