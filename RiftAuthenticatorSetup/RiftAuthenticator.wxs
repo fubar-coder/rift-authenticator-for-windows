@@ -42,6 +42,7 @@ along with RIFT™ Authenticator for Windows.  If not, see
             <Directory Id="Sources.Library" Name="Library" />
             <Directory Id="Sources.Library.Registry" Name="Library.Registry" />
             <Directory Id="Sources.Library.FileSystem" Name="Library.FileSystem" />
+            <Directory Id="Sources.Library.IsolatedStorage" Name="Library.IsolatedStorage" />
           </Directory>
 				</Directory>
 			</Directory>
@@ -146,6 +147,7 @@ along with RIFT™ Authenticator for Windows.  If not, see
         <File Id="$(var.RiftAuthenticator.Library.TargetFileName)" Source="$(var.RiftAuthenticator.Library.TargetPath)" KeyPath="yes" Checksum="yes" />
         <File Id="$(var.RiftAuthenticator.Library.Registry.TargetFileName)" Source="$(var.RiftAuthenticator.Library.Registry.TargetPath)" Checksum="yes" />
         <File Id="$(var.RiftAuthenticator.Library.FileSystem.TargetFileName)" Source="$(var.RiftAuthenticator.Library.FileSystem.TargetPath)" Checksum="yes" />
+        <File Id="$(var.RiftAuthenticator.Library.IsolatedStorage.TargetFileName)" Source="$(var.RiftAuthenticator.Library.IsolatedStorage.TargetPath)" Checksum="yes" />
       </Component>
     </DirectoryRef>
     
@@ -195,6 +197,9 @@ along with RIFT™ Authenticator for Windows.  If not, see
       <ComponentGroupRef Id="RiftAuthenticator.Library.FileSystem.Sources" />
       <ComponentGroupRef Id="RiftAuthenticator.Library.FileSystem.Content" />
       <ComponentGroupRef Id="RiftAuthenticator.Library.FileSystem.Documents" />
+      <ComponentGroupRef Id="RiftAuthenticator.Library.IsolatedStorage.Sources" />
+      <ComponentGroupRef Id="RiftAuthenticator.Library.IsolatedStorage.Content" />
+      <ComponentGroupRef Id="RiftAuthenticator.Library.IsolatedStorage.Documents" />
       <ComponentRef Id="AppShortcutSources"/>
     </Feature>
 
