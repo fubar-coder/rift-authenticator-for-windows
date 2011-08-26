@@ -104,5 +104,36 @@ namespace RiftAuthenticator.WinForms
                     row.Selected = true;
             }
         }
+
+        private void ApplyAccountChanges_Click(object sender, EventArgs e)
+        {
+#if FALSE
+            var accountToProxyMap = new Dictionary<Library.IAccount, Library.AccountProxy>();
+            var addedAccounts = new List<Library.IAccount>();
+            foreach (DataGridViewRow row in AccountGrid.Rows)
+            {
+                var item = (Library.AccountProxy)row.DataBoundItem;
+                accountToProxyMap.Add(item.OriginalAccount, item);
+                if (!AccountManager.Contains(item))
+                    addedAccounts.Add(item);
+            }
+
+            var deletedAccounts = new List<Library.IAccount>();
+            foreach (var account in AccountManager)
+            {
+                if (!accountToProxyMap.ContainsKey(account))
+                    deletedAccounts.Add(account);
+            }
+
+            var originalAccounts = new List<Library.IAccount>(AccountManager);
+#endif
+            AccountManager.Clear();
+            foreach (DataGridViewRow row in AccountGrid.Rows)
+            {
+                var item = (Library.AccountProxy)row.DataBoundItem;
+                AccountManager.Add(item);
+            }
+            AccountManager.SaveAccounts();
+        }
     }
 }

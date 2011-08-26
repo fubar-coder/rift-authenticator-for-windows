@@ -159,6 +159,9 @@
   <data name="ApplyAccountChanges.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
   </data>
+  <data name="ApplyAccountChanges.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="ApplyAccountChanges.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 188</value>
   </data>
@@ -185,6 +188,9 @@
   </data>
   <data name="CancelAccountChanges.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
+  </data>
+  <data name="CancelAccountChanges.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="CancelAccountChanges.Location" type="System.Drawing.Point, System.Drawing">
     <value>329, 188</value>
@@ -213,6 +219,9 @@
   <data name="MoceAccountUp.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
+  <data name="MoceAccountUp.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="MoceAccountUp.Location" type="System.Drawing.Point, System.Drawing">
     <value>375, 12</value>
   </data>
@@ -239,6 +248,9 @@
   </data>
   <data name="MoveAccountDown.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
+  </data>
+  <data name="MoveAccountDown.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="MoveAccountDown.Location" type="System.Drawing.Point, System.Drawing">
     <value>375, 157</value>
@@ -272,6 +284,9 @@
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>416, 223</value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Accounts</value>
