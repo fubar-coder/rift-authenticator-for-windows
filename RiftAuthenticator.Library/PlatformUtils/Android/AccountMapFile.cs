@@ -59,11 +59,11 @@ namespace RiftAuthenticator.Library.PlatformUtils.Android
             var configFileName = GetFileName(accountManager, accountIndex);
             var map = new Dictionary<string, object>()
             {
-                { DescriptionKey, Description },
-                { DeviceIdKey, DeviceId },
-                { SerialKeyKey, SerialKey },
+                { DescriptionKey, Description ?? string.Empty },
+                { DeviceIdKey, DeviceId ?? string.Empty },
+                { SerialKeyKey, SerialKey ?? string.Empty },
                 { TimeOffsetKey, TimeOffset },
-                { SecretKeyKey, accountManager.SecretKeyEncryption.Encrypt(this, SecretKey) },
+                { SecretKeyKey, accountManager.SecretKeyEncryption.Encrypt(this, SecretKey ?? string.Empty) },
             };
 
             WriteMapFile(configFileName, map);
