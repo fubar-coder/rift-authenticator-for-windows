@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="MessageBox_Message_About" xml:space="preserve">
+    <value>This is the RIFT™ Authenticator for Windows written by the RIFT™ Authenticator for Windows Project.</value>
+  </data>
   <data name="MessageBox_Message_AlreadyInitialized" xml:space="preserve">
     <value>Authenticator already initialized!
 Reinitialization will make you loose your current configuration!
@@ -139,6 +142,9 @@ The Apache Software Foundation</value>
 Save it!
 The device id is required to use the restore functionality!
 The device id is {0}.</value>
+  </data>
+  <data name="MessageBox_Title_About" xml:space="preserve">
+    <value>RIFT™ Authenticator for Windows</value>
   </data>
   <data name="MessageBox_Title_Error" xml:space="preserve">
     <value>Error</value>
