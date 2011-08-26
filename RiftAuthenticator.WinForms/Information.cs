@@ -40,6 +40,7 @@ namespace RiftAuthenticator.WinForms
 
         private void ConfigToControls()
         {
+            Description.Text = Account.Description;
             DeviceId.Text = Account.DeviceId;
             SerialKey.Text = Account.FormattedSerialKey;
             SecretKey.Text = Account.SecretKey;

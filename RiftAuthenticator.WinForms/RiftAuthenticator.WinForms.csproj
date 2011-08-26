@@ -91,6 +91,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Accounts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Accounts.Designer.cs">
+      <DependentUpon>Accounts.cs</DependentUpon>
+    </Compile>
     <Compile Include="CreateNewSecretKey.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -134,6 +140,9 @@
     <Compile Include="SecurityQuestions.Designer.cs">
       <DependentUpon>SecurityQuestions.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Accounts.resx">
+      <DependentUpon>Accounts.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CreateNewSecretKey.de.resx">
       <DependentUpon>CreateNewSecretKey.cs</DependentUpon>
     </EmbeddedResource>
@@ -185,6 +194,7 @@
     <EmbeddedResource Include="SecurityQuestions.resx">
       <DependentUpon>SecurityQuestions.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="Properties\DataSources\RiftAuthenticator.Library.IAccount.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

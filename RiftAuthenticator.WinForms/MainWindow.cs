@@ -92,66 +92,52 @@ namespace RiftAuthenticator.WinForms
             RefreshToken();
         }
 
-        private void ShowLicense_Click(object sender, EventArgs e)
+        private Library.IAccount CreateNewAccountObject()
         {
-            MessageBox.Show(
-                this, 
-                Resources.Strings.MessageBox_Message_License,
-                Resources.Strings.MessageBox_Title_License, 
-                MessageBoxButtons.OK, MessageBoxIcon.Information);
+            Library.IAccount newAccount;
+            if (Account.IsEmpty)
+            {
+                newAccount = Account;
+            }
+            else
+            {
+                newAccount = AccountManager.CreateAccount();
+            }
+            return newAccount;
         }
 
-        private void Information_Click(object sender, EventArgs e)
+        private void SaveNewAccountObject(Library.IAccount newAccount)
         {
-            var dlg = new Information(Account) { Owner = this };
-            dlg.ShowDialog();
-        }
-
-        private void Initialize_Click(object sender, EventArgs e)
-        {
-            if (!Account.IsEmpty)
+            if (newAccount != Account)
             {
-                if (MessageBox.Show(
-                    this, 
-                    Resources.Strings.MessageBox_Message_AlreadyInitialized, 
-                    Resources.Strings.MessageBox_Title_Warning, 
-                    MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) != DialogResult.OK)
-                    return;
+                AccountManager.Add(newAccount);
+                Account = newAccount;
             }
-
-            try
-            {
-                if (ExecuteInit())
-                {
-                    Clipboard.SetText(Account.DeviceId);
-                    MessageBox.Show(this,
-                        string.Format(Resources.Strings.MessageBox_Message_RememberDeviceId, Account.DeviceId), Resources.Strings.MessageBox_Title_RememberDeviceId, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(this, ex.Message, Resources.Strings.MessageBox_Title_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
+            AccountManager.SaveAccounts();
         }
 
         private bool ExecuteInit()
         {
+            var newAccount = CreateNewAccountObject();
             var dlg = new CreateNewSecretKey() { Owner = this };
+            dlg.Description.Text = newAccount.Description;
             if (dlg.ShowDialog() != DialogResult.OK)
                 return false;
 
             var deviceId = dlg.DeviceId.Text;
-            Library.TrionServer.CreateSecurityKey(Account, deviceId);
-            Account.TimeOffset = Library.TrionServer.GetTimeOffset();
-            AccountManager.SaveAccounts();
+            Library.TrionServer.CreateSecurityKey(newAccount, deviceId);
+            newAccount.TimeOffset = Library.TrionServer.GetTimeOffset();
+            newAccount.Description = dlg.Description.Text;
+            SaveNewAccountObject(newAccount);
             RefreshToken();
             return true;
         }
 
         private void ExecuteRecovery()
         {
+            var newAccount = CreateNewAccountObject();
             var dlgDeviceId = new QueryDeviceId() { Owner = this };
+            dlgDeviceId.Description.Text = newAccount.Description;
             dlgDeviceId.DeviceId.Text = Library.TrionServer.GetDeviceId();
             if (dlgDeviceId.ShowDialog() != DialogResult.OK)
                 return;
@@ -198,13 +184,66 @@ namespace RiftAuthenticator.WinForms
                 dlgSecurityQuestions.SecurityAnswer1.Text,
                 dlgSecurityQuestions.SecurityAnswer2.Text,
             };
-            Library.TrionServer.RecoverSecurityKey(Account, userEmail, userPassword, securityAnswers, deviceId);
-            Account.TimeOffset = Library.TrionServer.GetTimeOffset();
+            Library.TrionServer.RecoverSecurityKey(newAccount, userEmail, userPassword, securityAnswers, deviceId);
+            newAccount.TimeOffset = Library.TrionServer.GetTimeOffset();
+            newAccount.Description = dlgDeviceId.Description.Text;
+            if (newAccount != Account)
+            {
+                AccountManager.Add(newAccount);
+                Account = newAccount;
+            }
             AccountManager.SaveAccounts();
             RefreshToken();
         }
 
-        private void Recover_Click(object sender, EventArgs e)
+        private void HelpAboutMenu_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(
+                this,
+                "This is the RIFT™ Authenticator for Windows written by the RIFT™ Authenticator for Windows Project.",
+                "RIFT™ Authenticator for Windows",
+                MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void HelpLicenseMenu_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(
+                this,
+                Resources.Strings.MessageBox_Message_License,
+                Resources.Strings.MessageBox_Title_License,
+                MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void FileQuitMenu_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void AccountInfoMenu_Click(object sender, EventArgs e)
+        {
+            var dlg = new Information(Account) { Owner = this };
+            dlg.ShowDialog();
+        }
+
+        private void AccountCreateMenu_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (ExecuteInit())
+                {
+                    Clipboard.SetText(Account.DeviceId);
+                    MessageBox.Show(this,
+                        string.Format(Resources.Strings.MessageBox_Message_RememberDeviceId, Account.DeviceId), Resources.Strings.MessageBox_Title_RememberDeviceId, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(this, ex.Message, Resources.Strings.MessageBox_Title_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+        }
+
+        private void AccountRecoverMenu_Click(object sender, EventArgs e)
         {
             try
             {
@@ -215,6 +254,38 @@ namespace RiftAuthenticator.WinForms
                 MessageBox.Show(this, ex.Message, Resources.Strings.MessageBox_Title_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+        }
+
+        private void AccountExportMenu_Click(object sender, EventArgs e)
+        {
+            if (ExportAccountDialog.ShowDialog(this) != System.Windows.Forms.DialogResult.OK)
+                return;
+            var fileName = ExportAccountDialog.FileName;
+            var map = Library.PlatformUtils.Android.AccountMap.GetMap(AccountManager, Account);
+            using (var stream = new System.IO.FileStream(fileName, System.IO.FileMode.Create, System.IO.FileAccess.Write))
+                Library.PlatformUtils.Android.MapFile.WriteMap(stream, map);
+        }
+
+        private void AccountImportMenu_Click(object sender, EventArgs e)
+        {
+            if (ImportAccountDialog.ShowDialog(this) != System.Windows.Forms.DialogResult.OK)
+                return;
+            var fileName = ImportAccountDialog.FileName;
+
+            Dictionary<string, object> map;
+            using (var stream = new System.IO.FileStream(fileName, System.IO.FileMode.Open, System.IO.FileAccess.Read))
+                map = Library.PlatformUtils.Android.MapFile.ReadMap(stream);
+
+            var newAccount = CreateNewAccountObject();
+            Library.PlatformUtils.Android.AccountMap.SetMap(AccountManager, newAccount, map);
+            SaveNewAccountObject(newAccount);
+        }
+
+        private void AccountManageMenu_Click(object sender, EventArgs e)
+        {
+            var dlg = new Accounts(AccountManager, Account);
+            if (dlg.ShowDialog(this) != System.Windows.Forms.DialogResult.OK)
+                return;
         }
     }
 }

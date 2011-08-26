@@ -34,6 +34,8 @@
             this.RecreateDeviceId = new System.Windows.Forms.Button();
             this.CreateSecretKey = new System.Windows.Forms.Button();
             this.CancelDialog = new System.Windows.Forms.Button();
+            this.Description = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -68,12 +70,24 @@
             this.CancelDialog.Name = "CancelDialog";
             this.CancelDialog.UseVisualStyleBackColor = true;
             // 
+            // Description
+            // 
+            resources.ApplyResources(this.Description, "Description");
+            this.Description.Name = "Description";
+            // 
+            // label2
+            // 
+            resources.ApplyResources(this.label2, "label2");
+            this.label2.Name = "label2";
+            // 
             // CreateNewSecretKey
             // 
             this.AcceptButton = this.CreateSecretKey;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.CancelDialog;
+            this.Controls.Add(this.Description);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.CancelDialog);
             this.Controls.Add(this.CreateSecretKey);
             this.Controls.Add(this.RecreateDeviceId);
@@ -93,5 +107,7 @@
         private System.Windows.Forms.Button CreateSecretKey;
         private System.Windows.Forms.Button CancelDialog;
         public System.Windows.Forms.TextBox DeviceId;
+        public System.Windows.Forms.TextBox Description;
+        private System.Windows.Forms.Label label2;
     }
 }
