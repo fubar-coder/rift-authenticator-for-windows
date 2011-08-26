@@ -145,20 +145,17 @@
   <data name="TimeSync.Text" xml:space="preserve">
     <value>Zeit-Sync</value>
   </data>
-  <data name="MainMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>369, 24</value>
+  <data name="FileQuitMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 22</value>
+  </data>
+  <data name="FileQuitMenu.Text" xml:space="preserve">
+    <value>&amp;Beenden</value>
   </data>
   <data name="applicationToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>46, 20</value>
   </data>
   <data name="applicationToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Datei</value>
-  </data>
-  <data name="FileQuitMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 22</value>
-  </data>
-  <data name="FileQuitMenu.Text" xml:space="preserve">
-    <value>&amp;Beenden</value>
   </data>
   <data name="AccountCreateMenu.Size" type="System.Drawing.Size, System.Drawing">
     <value>171, 22</value>
@@ -199,9 +196,6 @@
   <data name="AccountImportMenu.Text" xml:space="preserve">
     <value>&amp;Importieren...</value>
   </data>
-  <data name="helpToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Hilfe</value>
-  </data>
   <data name="HelpLicenseMenu.Size" type="System.Drawing.Size, System.Drawing">
     <value>106, 22</value>
   </data>
@@ -216,6 +210,12 @@
   </data>
   <data name="HelpAboutMenu.Text" xml:space="preserve">
     <value>&amp;Über</value>
+  </data>
+  <data name="helpToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Hilfe</value>
+  </data>
+  <data name="MainMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>369, 24</value>
   </data>
   <data name="Accounts.Location" type="System.Drawing.Point, System.Drawing">
     <value>96, 27</value>
