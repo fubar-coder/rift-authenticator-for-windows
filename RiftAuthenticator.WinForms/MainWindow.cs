@@ -36,19 +36,43 @@ namespace RiftAuthenticator.WinForms
             InitializeComponent();
         }
 
+        private void UpdateAccountList()
+        {
+            Accounts.SuspendLayout();
+            try
+            {
+                Accounts.Items.Clear();
+                var oldSelectedAccount = Account;
+                foreach (var account in AccountManager)
+                    Accounts.Items.Add(string.Format("{0} ({1})", account.Description, account.FormattedSerialKey));
+                if (AccountManager.Count == 0)
+                    AccountManager.Add(AccountManager.CreateAccount());
+                int newSelectedAccountIndex = -1;
+                if (oldSelectedAccount != null)
+                {
+                    newSelectedAccountIndex = AccountManager.IndexOf(oldSelectedAccount);
+                }
+                if (newSelectedAccountIndex == -1)
+                    Accounts.SelectedIndex = 0;
+                else
+                    Accounts.SelectedIndex = newSelectedAccountIndex;
+            }
+            finally
+            {
+                Accounts.ResumeLayout();
+            }
+        }
+
         private void MainWindow_Load(object sender, EventArgs e)
         {
             System.Net.ServicePointManager.ServerCertificateValidationCallback = Library.TrionServer.CertificateIsValid;
             AccountManager.LoadAccounts();
-            if (AccountManager.Count == 0)
-                AccountManager.Add(AccountManager.CreateAccount());
-            Account = AccountManager[0];
-            RefreshToken();
+            UpdateAccountList();
         }
 
         void RefreshToken()
         {
-            if (Account.IsEmpty)
+            if (Account == null || Account.IsEmpty)
             {
                 LoginToken.Text = Resources.Strings.Status_NoConfig;
                 SerialKey.Text = string.Empty;
@@ -89,6 +113,7 @@ namespace RiftAuthenticator.WinForms
         {
             Account.TimeOffset = Library.TrionServer.GetTimeOffset();
             AccountManager.SaveAccounts();
+            UpdateAccountList();
             RefreshToken();
         }
 
@@ -114,6 +139,8 @@ namespace RiftAuthenticator.WinForms
                 Account = newAccount;
             }
             AccountManager.SaveAccounts();
+            UpdateAccountList();
+            RefreshToken();
         }
 
         private bool ExecuteInit()
@@ -193,6 +220,7 @@ namespace RiftAuthenticator.WinForms
                 Account = newAccount;
             }
             AccountManager.SaveAccounts();
+            UpdateAccountList();
             RefreshToken();
         }
 
@@ -283,9 +311,33 @@ namespace RiftAuthenticator.WinForms
 
         private void AccountManageMenu_Click(object sender, EventArgs e)
         {
-            var dlg = new Accounts(AccountManager, Account);
-            if (dlg.ShowDialog(this) != System.Windows.Forms.DialogResult.OK)
+            try
+            {
+                var dlg = new Accounts(AccountManager, Account);
+                if (dlg.ShowDialog(this) != System.Windows.Forms.DialogResult.OK)
+                    return;
+                AccountManager.SaveAccounts();
+                UpdateAccountList();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(this, ex.Message, Resources.Strings.MessageBox_Title_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                AccountManager.LoadAccounts();
                 return;
+            }
+        }
+
+        private void Accounts_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (Accounts.SelectedIndex == -1)
+            {
+                Account = null;
+            }
+            else
+            {
+                Account = (Library.IAccount)AccountManager[Accounts.SelectedIndex];
+            }
+            RefreshToken();
         }
     }
 }
