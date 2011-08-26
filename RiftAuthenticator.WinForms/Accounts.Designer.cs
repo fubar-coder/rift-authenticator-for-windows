@@ -31,23 +31,23 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Accounts));
             this.AccountGrid = new System.Windows.Forms.DataGridView();
-            this.ApplyAccountChanges = new System.Windows.Forms.Button();
-            this.CancelAccountChanges = new System.Windows.Forms.Button();
-            this.MoceAccountUp = new System.Windows.Forms.Button();
-            this.MoveAccountDown = new System.Windows.Forms.Button();
             this.descriptionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.deviceIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.formattedSerialKeyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.iAccountBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.ApplyAccountChanges = new System.Windows.Forms.Button();
+            this.CancelAccountChanges = new System.Windows.Forms.Button();
+            this.MoceAccountUp = new System.Windows.Forms.Button();
+            this.MoveAccountDown = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.AccountGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iAccountBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // AccountGrid
             // 
+            resources.ApplyResources(this.AccountGrid, "AccountGrid");
             this.AccountGrid.AllowUserToAddRows = false;
             this.AccountGrid.AllowUserToResizeRows = false;
-            resources.ApplyResources(this.AccountGrid, "AccountGrid");
             this.AccountGrid.AutoGenerateColumns = false;
             this.AccountGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.AccountGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -58,6 +58,30 @@
             this.AccountGrid.MultiSelect = false;
             this.AccountGrid.Name = "AccountGrid";
             this.AccountGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            // 
+            // descriptionDataGridViewTextBoxColumn
+            // 
+            this.descriptionDataGridViewTextBoxColumn.DataPropertyName = "Description";
+            resources.ApplyResources(this.descriptionDataGridViewTextBoxColumn, "descriptionDataGridViewTextBoxColumn");
+            this.descriptionDataGridViewTextBoxColumn.Name = "descriptionDataGridViewTextBoxColumn";
+            // 
+            // deviceIdDataGridViewTextBoxColumn
+            // 
+            this.deviceIdDataGridViewTextBoxColumn.DataPropertyName = "DeviceId";
+            resources.ApplyResources(this.deviceIdDataGridViewTextBoxColumn, "deviceIdDataGridViewTextBoxColumn");
+            this.deviceIdDataGridViewTextBoxColumn.Name = "deviceIdDataGridViewTextBoxColumn";
+            this.deviceIdDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // formattedSerialKeyDataGridViewTextBoxColumn
+            // 
+            this.formattedSerialKeyDataGridViewTextBoxColumn.DataPropertyName = "FormattedSerialKey";
+            resources.ApplyResources(this.formattedSerialKeyDataGridViewTextBoxColumn, "formattedSerialKeyDataGridViewTextBoxColumn");
+            this.formattedSerialKeyDataGridViewTextBoxColumn.Name = "formattedSerialKeyDataGridViewTextBoxColumn";
+            this.formattedSerialKeyDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // iAccountBindingSource
+            // 
+            this.iAccountBindingSource.DataSource = typeof(RiftAuthenticator.Library.IAccount);
             // 
             // ApplyAccountChanges
             // 
@@ -87,30 +111,6 @@
             this.MoveAccountDown.Name = "MoveAccountDown";
             this.MoveAccountDown.UseVisualStyleBackColor = true;
             this.MoveAccountDown.Click += new System.EventHandler(this.MoveAccountDown_Click);
-            // 
-            // descriptionDataGridViewTextBoxColumn
-            // 
-            this.descriptionDataGridViewTextBoxColumn.DataPropertyName = "Description";
-            resources.ApplyResources(this.descriptionDataGridViewTextBoxColumn, "descriptionDataGridViewTextBoxColumn");
-            this.descriptionDataGridViewTextBoxColumn.Name = "descriptionDataGridViewTextBoxColumn";
-            // 
-            // deviceIdDataGridViewTextBoxColumn
-            // 
-            this.deviceIdDataGridViewTextBoxColumn.DataPropertyName = "DeviceId";
-            resources.ApplyResources(this.deviceIdDataGridViewTextBoxColumn, "deviceIdDataGridViewTextBoxColumn");
-            this.deviceIdDataGridViewTextBoxColumn.Name = "deviceIdDataGridViewTextBoxColumn";
-            this.deviceIdDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // formattedSerialKeyDataGridViewTextBoxColumn
-            // 
-            this.formattedSerialKeyDataGridViewTextBoxColumn.DataPropertyName = "FormattedSerialKey";
-            resources.ApplyResources(this.formattedSerialKeyDataGridViewTextBoxColumn, "formattedSerialKeyDataGridViewTextBoxColumn");
-            this.formattedSerialKeyDataGridViewTextBoxColumn.Name = "formattedSerialKeyDataGridViewTextBoxColumn";
-            this.formattedSerialKeyDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // iAccountBindingSource
-            // 
-            this.iAccountBindingSource.DataSource = typeof(RiftAuthenticator.Library.IAccount);
             // 
             // Accounts
             // 
