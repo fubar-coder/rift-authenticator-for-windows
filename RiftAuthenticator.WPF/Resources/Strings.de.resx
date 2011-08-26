@@ -123,6 +123,9 @@
   <data name="CreateNewSecretKey.CreateSecretKey.Content" xml:space="preserve">
     <value>OK</value>
   </data>
+  <data name="CreateNewSecretKey.DescriptionLabel.Content" xml:space="preserve">
+    <value>Beschreibung:</value>
+  </data>
   <data name="CreateNewSecretKey.DeviceIdLabel.Content" xml:space="preserve">
     <value>Geräte-ID:</value>
   </data>
@@ -130,7 +133,7 @@
     <value>Neu erstellen</value>
   </data>
   <data name="CreateNewSecretKey.Title" xml:space="preserve">
-    <value>Erstelle einen neuen geheimen Schlüssel</value>
+    <value>Erstelle einen neuen Authentifikator</value>
   </data>
   <data name="Information.CloseButton.Content" xml:space="preserve">
     <value>OK</value>
@@ -227,6 +230,9 @@ Die Geräte-ID lautet {0}.</value>
   <data name="QueryDeviceId.AbortCreate.Content" xml:space="preserve">
     <value>Abbrechen</value>
   </data>
+  <data name="QueryDeviceId.DescriptionLabel.Content" xml:space="preserve">
+    <value>Beschreibung:</value>
+  </data>
   <data name="QueryDeviceId.DeviceIdLabel.Content" xml:space="preserve">
     <value>Geräte-ID:</value>
   </data>
@@ -234,7 +240,7 @@ Die Geräte-ID lautet {0}.</value>
     <value>OK</value>
   </data>
   <data name="QueryDeviceId.Title" xml:space="preserve">
-    <value>Bitte geben Sie Ihre Geräte-ID ein</value>
+    <value>Wiederherstellung des Authentifikators</value>
   </data>
   <data name="SecurityQuestions.AbortRecovery.Content" xml:space="preserve">
     <value>Abbrechen</value>

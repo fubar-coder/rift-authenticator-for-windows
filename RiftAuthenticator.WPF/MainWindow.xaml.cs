@@ -63,7 +63,7 @@ namespace RiftAuthenticator
 
         void RefreshToken()
         {
-            if (Account.IsEmpty)
+            if (Account == null || Account.IsEmpty)
             {
                 LoginToken.Text = App.Localization.Get("Status.NoConfig");
                 SerialKey.Text = string.Empty;
@@ -136,15 +136,45 @@ namespace RiftAuthenticator
             }
         }
 
+        private Library.IAccount CreateNewAccountObject()
+        {
+            Library.IAccount newAccount;
+            if (Account.IsEmpty)
+            {
+                newAccount = Account;
+            }
+            else
+            {
+                newAccount = AccountManager.CreateAccount();
+            }
+            return newAccount;
+        }
+
+        private void SaveNewAccountObject(Library.IAccount newAccount)
+        {
+            if (newAccount != Account)
+            {
+                AccountManager.Add(newAccount);
+                Account = newAccount;
+            }
+            AccountManager.SaveAccounts();
+            //UpdateAccountList();
+            RefreshToken();
+        }
+
         private bool ExecuteInit()
         {
+            var newAccount = CreateNewAccountObject();
             var dlg = new CreateNewSecretKey() { Owner = this };
+            dlg.Description.Text = newAccount.Description;
             if (!dlg.ShowDialog().GetValueOrDefault())
                 return false;
 
             var deviceId = dlg.DeviceId.Text;
-            Library.TrionServer.CreateSecurityKey(Account, deviceId);
-            Account.TimeOffset = Library.TrionServer.GetTimeOffset();
+            Library.TrionServer.CreateSecurityKey(newAccount, deviceId);
+            newAccount.TimeOffset = Library.TrionServer.GetTimeOffset();
+            newAccount.Description = dlg.Description.Text;
+            SaveNewAccountObject(newAccount);
             AccountManager.SaveAccounts();
             RefreshToken();
             return true;
@@ -152,7 +182,9 @@ namespace RiftAuthenticator
 
         private void ExecuteRecovery()
         {
+            var newAccount = CreateNewAccountObject();
             var dlgDeviceId = new QueryDeviceId() { Owner = this };
+            dlgDeviceId.Description.Text = newAccount.Description;
             dlgDeviceId.DeviceId.Text = Library.TrionServer.GetDeviceId();
             if (!dlgDeviceId.ShowDialog().GetValueOrDefault())
                 return;
@@ -199,8 +231,10 @@ namespace RiftAuthenticator
                 dlgSecurityQuestions.SecurityAnswer1.Text,
                 dlgSecurityQuestions.SecurityAnswer2.Text,
             };
-            Library.TrionServer.RecoverSecurityKey(Account, userEmail, userPassword, securityAnswers, deviceId);
-            Account.TimeOffset = Library.TrionServer.GetTimeOffset();
+            Library.TrionServer.RecoverSecurityKey(newAccount, userEmail, userPassword, securityAnswers, deviceId);
+            newAccount.TimeOffset = Library.TrionServer.GetTimeOffset();
+            newAccount.Description = dlgDeviceId.Description.Text;
+            SaveNewAccountObject(newAccount);
             AccountManager.SaveAccounts();
             RefreshToken();
         }
