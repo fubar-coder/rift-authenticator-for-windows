@@ -154,7 +154,7 @@
     <value>Zeige Hilfe-Text</value>
   </data>
   <data name="opt_global_verbose" xml:space="preserve">
-    <value>Setze den Detail-Grad der Programm-Meldungen</value>
+    <value>Setze den Detailgrad der Programm-Meldungen</value>
   </data>
   <data name="opt_help_cmd_options" xml:space="preserve">
     <value>Optionen für den Befehl {0} ({1}):</value>
@@ -232,27 +232,27 @@
     <value>Neue Zeitabweichung: {0}</value>
   </data>
   <data name="app_account_n_of_m" xml:space="preserve">
-    <value>Account {0} von {1}:</value>
+    <value>Konto {0} von {1}:</value>
   </data>
   <data name="app_no_account_found" xml:space="preserve">
-    <value>Kein Account mit der ID {0} gefunden.</value>
+    <value>Kein Konto mit der ID {0} gefunden.</value>
   </data>
   <data name="opt_delete_account_description" xml:space="preserve">
-    <value>Löschen eines bestehenden Accounts</value>
+    <value>Löschen eines bestehenden Kontos</value>
   </data>
   <data name="opt_global_account" xml:space="preserve">
-    <value>Angabe des zu verwendenden Accounts</value>
+    <value>Angabe des zu verwendenden Kontos</value>
   </data>
   <data name="opt_global_account_manager" xml:space="preserve">
-    <value>Angabe des zu verwendenden Account-Managers</value>
+    <value>Angabe des zu verwendenden Konto-Verwalters</value>
   </data>
   <data name="opt_new_account_default_name" xml:space="preserve">
     <value>Account {0}</value>
   </data>
   <data name="opt_new_account_description" xml:space="preserve">
-    <value>Erstelle einen neuen Account</value>
+    <value>Erstelle einen neuen Authentifikator für ein RIFT™-Konto</value>
   </data>
   <data name="opt_new_account_name" xml:space="preserve">
-    <value>Name des neuen Accounts</value>
+    <value>Name des neuen Konto-Authentifikators</value>
   </data>
 </root>
