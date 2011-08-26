@@ -37,21 +37,18 @@ namespace RiftAuthenticator.Library.PlatformUtils.Android
         public override void Load(IAccountManager accountManager, int accountIndex)
         {
             var configFileName = GetFileName(accountManager, accountIndex);
-            if (System.IO.File.Exists(configFileName))
-            {
-                var map = ReadMapFile(configFileName);
-                if (map.ContainsKey(DeviceIdKey))
-                    DeviceId = (string)map[DeviceIdKey];
-                if (map.ContainsKey(DescriptionKey))
-                    Description = (string)map[DescriptionKey];
-                if (map.ContainsKey(SerialKeyKey))
-                    SerialKey = (string)map[SerialKeyKey];
-                if (map.ContainsKey(TimeOffsetKey))
-                    TimeOffset = Convert.ToInt64(map[TimeOffsetKey]);
-                if (map.ContainsKey(SecretKeyKey))
-                    SecretKey = (string)map[SecretKeyKey];
-                SecretKey = accountManager.SecretKeyEncryption.Decrypt(this, SecretKey);
-            }
+            var map = ReadMapFile(configFileName);
+            if (map.ContainsKey(DeviceIdKey))
+                DeviceId = (string)map[DeviceIdKey];
+            if (map.ContainsKey(DescriptionKey))
+                Description = (string)map[DescriptionKey];
+            if (map.ContainsKey(SerialKeyKey))
+                SerialKey = (string)map[SerialKeyKey];
+            if (map.ContainsKey(TimeOffsetKey))
+                TimeOffset = Convert.ToInt64(map[TimeOffsetKey]);
+            if (map.ContainsKey(SecretKeyKey))
+                SecretKey = (string)map[SecretKeyKey];
+            SecretKey = accountManager.SecretKeyEncryption.Decrypt(this, SecretKey);
         }
 
         public override void Save(IAccountManager accountManager, int accountIndex)
