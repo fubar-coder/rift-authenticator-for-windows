@@ -27,7 +27,12 @@ namespace RiftAuthenticator.WinForms
 
             InitializeComponent();
 
-            var accounts = new List<Library.AccountProxy>();
+            var accounts = new System.ComponentModel.BindingList<Library.AccountProxy>()
+            {
+                AllowEdit = true,
+                AllowRemove = true,
+                AllowNew = false,
+            };
             foreach (var account in AccountManager)
                 accounts.Add(new Library.AccountProxy(account));
 
@@ -107,33 +112,19 @@ namespace RiftAuthenticator.WinForms
 
         private void ApplyAccountChanges_Click(object sender, EventArgs e)
         {
-#if FALSE
-            var accountToProxyMap = new Dictionary<Library.IAccount, Library.AccountProxy>();
-            var addedAccounts = new List<Library.IAccount>();
+            var accounts = new List<Library.IAccount>();
+            var index = 0;
             foreach (DataGridViewRow row in AccountGrid.Rows)
             {
                 var item = (Library.AccountProxy)row.DataBoundItem;
-                accountToProxyMap.Add(item.OriginalAccount, item);
-                if (!AccountManager.Contains(item))
-                    addedAccounts.Add(item);
+                item.Save(AccountManager, index++);
+                accounts.Add(item.OriginalAccount);
             }
-
-            var deletedAccounts = new List<Library.IAccount>();
-            foreach (var account in AccountManager)
-            {
-                if (!accountToProxyMap.ContainsKey(account))
-                    deletedAccounts.Add(account);
-            }
-
-            var originalAccounts = new List<Library.IAccount>(AccountManager);
-#endif
             AccountManager.Clear();
-            foreach (DataGridViewRow row in AccountGrid.Rows)
-            {
-                var item = (Library.AccountProxy)row.DataBoundItem;
-                AccountManager.Add(item);
-            }
-            AccountManager.SaveAccounts();
+            foreach (var account in accounts)
+                AccountManager.Add(account);
+
+            Close();
         }
     }
 }
