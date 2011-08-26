@@ -129,4 +129,7 @@
   <data name="CancelAccountChanges.Text" xml:space="preserve">
     <value>Abbrechen</value>
   </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Konten</value>
+  </data>
 </root>
