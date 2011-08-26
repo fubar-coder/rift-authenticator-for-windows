@@ -9,7 +9,7 @@ namespace RiftAuthenticator.Library.FileSystem
         private const string StoredAccountsKey = "stored_accounts";
 
         public AccountManager()
-            : this(new Library.AndroidSecretKeyEncryption())
+            : this(new Library.PlatformUtils.Android.AndroidSecretKeyEncryption())
         {
         }
 
