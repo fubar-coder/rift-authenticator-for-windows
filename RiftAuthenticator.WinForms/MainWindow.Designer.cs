@@ -97,29 +97,28 @@
             // 
             // MainMenu
             // 
-            resources.ApplyResources(this.MainMenu, "MainMenu");
             this.MainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.applicationToolStripMenuItem,
             this.accountToolStripMenuItem,
             this.helpToolStripMenuItem});
+            resources.ApplyResources(this.MainMenu, "MainMenu");
             this.MainMenu.Name = "MainMenu";
             // 
             // applicationToolStripMenuItem
             // 
-            resources.ApplyResources(this.applicationToolStripMenuItem, "applicationToolStripMenuItem");
             this.applicationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.FileQuitMenu});
             this.applicationToolStripMenuItem.Name = "applicationToolStripMenuItem";
+            resources.ApplyResources(this.applicationToolStripMenuItem, "applicationToolStripMenuItem");
             // 
             // FileQuitMenu
             // 
-            resources.ApplyResources(this.FileQuitMenu, "FileQuitMenu");
             this.FileQuitMenu.Name = "FileQuitMenu";
+            resources.ApplyResources(this.FileQuitMenu, "FileQuitMenu");
             this.FileQuitMenu.Click += new System.EventHandler(this.FileQuitMenu_Click);
             // 
             // accountToolStripMenuItem
             // 
-            resources.ApplyResources(this.accountToolStripMenuItem, "accountToolStripMenuItem");
             this.accountToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.AccountCreateMenu,
             this.AccountRecoverMenu,
@@ -130,77 +129,78 @@
             this.AccountExportMenu,
             this.AccountImportMenu});
             this.accountToolStripMenuItem.Name = "accountToolStripMenuItem";
+            resources.ApplyResources(this.accountToolStripMenuItem, "accountToolStripMenuItem");
             // 
             // AccountCreateMenu
             // 
-            resources.ApplyResources(this.AccountCreateMenu, "AccountCreateMenu");
             this.AccountCreateMenu.Name = "AccountCreateMenu";
+            resources.ApplyResources(this.AccountCreateMenu, "AccountCreateMenu");
             this.AccountCreateMenu.Click += new System.EventHandler(this.AccountCreateMenu_Click);
             // 
             // AccountRecoverMenu
             // 
-            resources.ApplyResources(this.AccountRecoverMenu, "AccountRecoverMenu");
             this.AccountRecoverMenu.Name = "AccountRecoverMenu";
+            resources.ApplyResources(this.AccountRecoverMenu, "AccountRecoverMenu");
             this.AccountRecoverMenu.Click += new System.EventHandler(this.AccountRecoverMenu_Click);
             // 
             // AccountManageMenu
             // 
-            resources.ApplyResources(this.AccountManageMenu, "AccountManageMenu");
             this.AccountManageMenu.Name = "AccountManageMenu";
+            resources.ApplyResources(this.AccountManageMenu, "AccountManageMenu");
             this.AccountManageMenu.Click += new System.EventHandler(this.AccountManageMenu_Click);
             // 
             // toolStripMenuItem1
             // 
-            resources.ApplyResources(this.toolStripMenuItem1, "toolStripMenuItem1");
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            resources.ApplyResources(this.toolStripMenuItem1, "toolStripMenuItem1");
             // 
             // AccountInfoMenu
             // 
-            resources.ApplyResources(this.AccountInfoMenu, "AccountInfoMenu");
             this.AccountInfoMenu.Name = "AccountInfoMenu";
+            resources.ApplyResources(this.AccountInfoMenu, "AccountInfoMenu");
             this.AccountInfoMenu.Click += new System.EventHandler(this.AccountInfoMenu_Click);
             // 
             // toolStripMenuItem3
             // 
-            resources.ApplyResources(this.toolStripMenuItem3, "toolStripMenuItem3");
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            resources.ApplyResources(this.toolStripMenuItem3, "toolStripMenuItem3");
             // 
             // AccountExportMenu
             // 
-            resources.ApplyResources(this.AccountExportMenu, "AccountExportMenu");
             this.AccountExportMenu.Name = "AccountExportMenu";
+            resources.ApplyResources(this.AccountExportMenu, "AccountExportMenu");
             this.AccountExportMenu.Click += new System.EventHandler(this.AccountExportMenu_Click);
             // 
             // AccountImportMenu
             // 
-            resources.ApplyResources(this.AccountImportMenu, "AccountImportMenu");
             this.AccountImportMenu.Name = "AccountImportMenu";
+            resources.ApplyResources(this.AccountImportMenu, "AccountImportMenu");
             this.AccountImportMenu.Click += new System.EventHandler(this.AccountImportMenu_Click);
             // 
             // helpToolStripMenuItem
             // 
-            resources.ApplyResources(this.helpToolStripMenuItem, "helpToolStripMenuItem");
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.HelpLicenseMenu,
             this.toolStripMenuItem2,
             this.HelpAboutMenu});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            resources.ApplyResources(this.helpToolStripMenuItem, "helpToolStripMenuItem");
             // 
             // HelpLicenseMenu
             // 
-            resources.ApplyResources(this.HelpLicenseMenu, "HelpLicenseMenu");
             this.HelpLicenseMenu.Name = "HelpLicenseMenu";
+            resources.ApplyResources(this.HelpLicenseMenu, "HelpLicenseMenu");
             this.HelpLicenseMenu.Click += new System.EventHandler(this.HelpLicenseMenu_Click);
             // 
             // toolStripMenuItem2
             // 
-            resources.ApplyResources(this.toolStripMenuItem2, "toolStripMenuItem2");
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            resources.ApplyResources(this.toolStripMenuItem2, "toolStripMenuItem2");
             // 
             // HelpAboutMenu
             // 
-            resources.ApplyResources(this.HelpAboutMenu, "HelpAboutMenu");
             this.HelpAboutMenu.Name = "HelpAboutMenu";
+            resources.ApplyResources(this.HelpAboutMenu, "HelpAboutMenu");
             this.HelpAboutMenu.Click += new System.EventHandler(this.HelpAboutMenu_Click);
             // 
             // ImportAccountDialog

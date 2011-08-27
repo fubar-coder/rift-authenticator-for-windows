@@ -209,19 +209,31 @@
     <value>&amp;Hilfe</value>
   </data>
   <data name="HelpLicenseMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>106, 22</value>
   </data>
   <data name="HelpLicenseMenu.Text" xml:space="preserve">
     <value>&amp;Lizenz</value>
   </data>
   <data name="toolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>149, 6</value>
+    <value>103, 6</value>
   </data>
   <data name="HelpAboutMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>106, 22</value>
   </data>
   <data name="HelpAboutMenu.Text" xml:space="preserve">
     <value>&amp;Über</value>
+  </data>
+  <data name="ImportAccountDialog.Filter" xml:space="preserve">
+    <value>Konto-Dateien (*.xml)|*.xml|Alle Dateien (*.*)|*.*</value>
+  </data>
+  <data name="ImportAccountDialog.Title" xml:space="preserve">
+    <value>Konto importieren...</value>
+  </data>
+  <data name="ExportAccountDialog.Filter" xml:space="preserve">
+    <value>Konto-Dateien (*.xml)|*.xml|Alle Dateien (*.*)|*.*</value>
+  </data>
+  <data name="ExportAccountDialog.Title" xml:space="preserve">
+    <value>Konto exportieren...</value>
   </data>
   <data name="Accounts.Location" type="System.Drawing.Point, System.Drawing">
     <value>96, 27</value>
