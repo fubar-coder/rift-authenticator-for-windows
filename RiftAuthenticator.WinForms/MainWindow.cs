@@ -114,7 +114,6 @@ namespace RiftAuthenticator.WinForms
             Account.TimeOffset = Library.TrionServer.GetTimeOffset();
             AccountManager.SaveAccounts();
             UpdateAccountList();
-            RefreshToken();
         }
 
         private Library.IAccount CreateNewAccountObject()
@@ -140,7 +139,6 @@ namespace RiftAuthenticator.WinForms
             }
             AccountManager.SaveAccounts();
             UpdateAccountList();
-            RefreshToken();
         }
 
         private bool ExecuteInit()
@@ -214,14 +212,7 @@ namespace RiftAuthenticator.WinForms
             Library.TrionServer.RecoverSecurityKey(newAccount, userEmail, userPassword, securityAnswers, deviceId);
             newAccount.TimeOffset = Library.TrionServer.GetTimeOffset();
             newAccount.Description = dlgDeviceId.Description.Text;
-            if (newAccount != Account)
-            {
-                AccountManager.Add(newAccount);
-                Account = newAccount;
-            }
-            AccountManager.SaveAccounts();
-            UpdateAccountList();
-            RefreshToken();
+            SaveNewAccountObject(newAccount);
         }
 
         private void HelpAboutMenu_Click(object sender, EventArgs e)
