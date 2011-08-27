@@ -47,6 +47,7 @@
     <Compile Include="AccountManagerBase.cs" />
     <Compile Include="AccountProxy.cs" />
     <Compile Include="IPlatform.cs" />
+    <Compile Include="PlatformBase.cs" />
     <Compile Include="PlatformUtils\Android\AccountMap.cs" />
     <Compile Include="PlatformUtils\Android\AccountMapFile.cs" />
     <Compile Include="PlatformUtils\Android\AndroidSecretKeyEncryption.cs" />

@@ -22,32 +22,34 @@ using System.Text;
 
 namespace RiftAuthenticator.Library.Platform.Windows
 {
-    public class Platform : IPlatform
+    public class Platform : PlatformBase
     {
-        public string DeviceId
+        private string GetDeviceId()
         {
-            get
+            try
             {
-                try
+                using (var regKey = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion"))
                 {
-                    using (var regKey = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion"))
+                    var productId = regKey.GetValue("ProductId");
+                    if (productId != null)
                     {
-                        var productId = regKey.GetValue("ProductId");
-                        if (productId != null)
-                        {
-                            var realProductId = Convert.ToString(productId);
-                            var digest = new System.Security.Cryptography.SHA1Managed();
-                            var productIdBytes = Encoding.Default.GetBytes(realProductId);
-                            digest.TransformFinalBlock(productIdBytes, 0, productIdBytes.Length);
-                            return Util.BytesToHex(digest.Hash);
-                        }
+                        var realProductId = Convert.ToString(productId);
+                        var digest = new System.Security.Cryptography.SHA1Managed();
+                        var productIdBytes = Encoding.Default.GetBytes(realProductId);
+                        digest.TransformFinalBlock(productIdBytes, 0, productIdBytes.Length);
+                        return Util.BytesToHex(digest.Hash);
                     }
                 }
-                catch
-                {
-                }
-                return null;
             }
+            catch
+            {
+            }
+            return null;
+        }
+
+        public override string DeviceId
+        {
+            get { return GetDeviceId(); }
         }
     }
 }

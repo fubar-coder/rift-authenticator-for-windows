@@ -54,5 +54,48 @@ namespace RiftAuthenticator.Library
             }
             StoredAccounts = Count;
         }
+
+        public static IAccountManager LoadAccountManager(string accountManagerId)
+        {
+            switch (accountManagerId)
+            {
+                case "win32":
+                case "registry":
+                case "RiftAuthenticator.Library.Registry":
+                    accountManagerId = "RiftAuthenticator.Library.Registry";
+                    break;
+                case "fs":
+                case "file-system":
+                case "filesystem":
+                case "RiftAuthenticator.Library.FileSystem":
+                    accountManagerId = "RiftAuthenticator.Library.FileSystem";
+                    break;
+                case "is":
+                case "isolated-storage":
+                case "storage":
+                    accountManagerId = "RiftAuthenticator.Library.IsolatedStorage";
+                    break;
+                default:
+                    throw new NotSupportedException(accountManagerId);
+            }
+            var assemblyName = accountManagerId;
+            var typeName = string.Format("{0}.AccountManager", accountManagerId);
+            return (RiftAuthenticator.Library.IAccountManager)Activator.CreateInstance(assemblyName, typeName).Unwrap();
+        }
+
+        public IAccount FindAccount(string accountId)
+        {
+            Library.IAccount foundAccount = null;
+            for (int i = 0; i != Count; ++i)
+            {
+                var account = this[i];
+                if (i.ToString() == accountId || account.Description == accountId || account.DeviceId == accountId)
+                {
+                    foundAccount = account;
+                    break;
+                }
+            }
+            return foundAccount;
+        }
     }
 }

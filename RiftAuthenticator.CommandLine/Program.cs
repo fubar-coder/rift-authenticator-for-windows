@@ -85,65 +85,17 @@ namespace RiftAuthenticator.CommandLine
 
         private static void SelectPlatform(string platformId)
         {
-            switch (platformId)
-            {
-                case "win32":
-                case "windows":
-                case "RiftAuthenticator.Library.Platform.Windows":
-                    platformId = "RiftAuthenticator.Library.Platform.Windows";
-                    break;
-                default:
-                    throw new NotSupportedException(platformId);
-            }
-            var assemblyName = platformId;
-            var typeName = string.Format("{0}.Platform", platformId);
-            Library.TrionServer.Platform = 
-                (RiftAuthenticator.Library.IPlatform)Activator.CreateInstance(assemblyName, typeName).Unwrap();
+            Library.TrionServer.Platform = Library.PlatformBase.LoadPlatform(platformId);
         }
 
         static void SelectAccount(string accountId)
         {
-            Library.IAccount foundAccount = null;
-            for (int i = 0; i != GlobalOptions.AccountManager.Count; ++i)
-            {
-                var account = GlobalOptions.AccountManager[i];
-                if (i.ToString() == accountId || account.Description == accountId || account.DeviceId == accountId)
-                {
-                    foundAccount = account;
-                    break;
-                }
-            }
-            if (foundAccount == null)
-                throw new CommandArgumentException(null, string.Format(Resources.Strings.app_no_account_found, accountId));
-            GlobalOptions.Account = foundAccount;
+            GlobalOptions.Account = GlobalOptions.AccountManager.FindAccount(accountId);
         }
 
         static void SelectAccountManager(string accountManagerId)
         {
-            switch (accountManagerId)
-            {
-                case "win32":
-                case "registry":
-                case "RiftAuthenticator.Library.Registry":
-                    accountManagerId = "RiftAuthenticator.Library.Registry";
-                    break;
-                case "fs":
-                case "file-system":
-                case "filesystem":
-                case "RiftAuthenticator.Library.FileSystem":
-                    accountManagerId = "RiftAuthenticator.Library.FileSystem";
-                    break;
-                case "is":
-                case "isolated-storage":
-                case "storage":
-                    accountManagerId = "RiftAuthenticator.Library.IsolatedStorage";
-                    break;
-                default:
-                    throw new NotSupportedException(accountManagerId);
-            }
-            var assemblyName = accountManagerId;
-            var typeName = string.Format("{0}.AccountManager", accountManagerId);
-            GlobalOptions.AccountManager = (RiftAuthenticator.Library.IAccountManager)Activator.CreateInstance(assemblyName, typeName).Unwrap();
+            GlobalOptions.AccountManager = Library.AccountManagerBase.LoadAccountManager(accountManagerId);
         }
 
         private static void ProcessCommand(List<string> args)
