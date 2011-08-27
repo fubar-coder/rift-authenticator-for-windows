@@ -36,13 +36,13 @@ along with RIFT™ Authenticator for Windows.  If not, see
 				<Directory Id="APPLICATIONFOLDER" Name="!(loc.AppFolder)">
           <Directory Id="Localization_de" Name="de" />
           <Directory Id="Sources" Name="Sources">
-            <Directory Id="Sources.CommandLine" Name="CommandLine" />
-            <Directory Id="Sources.WinForms" Name="WinForms" />
-            <Directory Id="Sources.WPF" Name="WPF" />
-            <Directory Id="Sources.Library" Name="Library" />
-            <Directory Id="Sources.Library.Registry" Name="Library.Registry" />
-            <Directory Id="Sources.Library.FileSystem" Name="Library.FileSystem" />
-            <Directory Id="Sources.Library.IsolatedStorage" Name="Library.IsolatedStorage" />
+            <Directory Id="Sources.CommandLine" Name="RiftAuthenticator.CommandLine" />
+            <Directory Id="Sources.WinForms" Name="RiftAuthenticator.WinForms" />
+            <Directory Id="Sources.WPF" Name="RiftAuthenticator.WPF" />
+            <Directory Id="Sources.Library" Name="RiftAuthenticator.Library" />
+            <Directory Id="Sources.Library.Registry" Name="RiftAuthenticator.Library.Registry" />
+            <Directory Id="Sources.Library.FileSystem" Name="RiftAuthenticator.Library.FileSystem" />
+            <Directory Id="Sources.Library.IsolatedStorage" Name="RiftAuthenticator.Library.IsolatedStorage" />
           </Directory>
 				</Directory>
 			</Directory>
