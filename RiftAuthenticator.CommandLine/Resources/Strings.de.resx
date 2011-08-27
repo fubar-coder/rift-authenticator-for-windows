@@ -255,4 +255,7 @@
   <data name="opt_new_account_name" xml:space="preserve">
     <value>Name des neuen Konto-Authentifikators</value>
   </data>
+  <data name="opt_global_platform" xml:space="preserve">
+    <value>Angabe der zu verwendenden Plattform</value>
+  </data>
 </root>

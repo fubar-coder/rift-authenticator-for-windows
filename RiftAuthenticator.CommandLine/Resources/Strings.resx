@@ -258,4 +258,7 @@
   <data name="opt_new_account_name" xml:space="preserve">
     <value>Name of the new account</value>
   </data>
+  <data name="opt_global_platform" xml:space="preserve">
+    <value>Specify the platform to use</value>
+  </data>
 </root>

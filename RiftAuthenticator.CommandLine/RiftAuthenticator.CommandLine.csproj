@@ -127,6 +127,10 @@
       <Project>{F3EA0BAB-AF7E-4792-A5BB-5DBCA872E161}</Project>
       <Name>RiftAuthenticator.Library.IsolatedStorage</Name>
     </ProjectReference>
+    <ProjectReference Include="..\RiftAuthenticator.Library.Platform.Windows\RiftAuthenticator.Library.Platform.Windows.csproj">
+      <Project>{580DF75F-6D5D-409B-9F4C-64F8F9B0A9C6}</Project>
+      <Name>RiftAuthenticator.Library.Platform.Windows</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RiftAuthenticator.Library.Registry\RiftAuthenticator.Library.Registry.csproj">
       <Project>{488805C2-F094-4AB2-AAF4-0A555F36095A}</Project>
       <Name>RiftAuthenticator.Library.Registry</Name>

@@ -28,13 +28,14 @@ namespace RiftAuthenticator.CommandLine
 
         public GlobalOptions()
         {
-            // Load default configuration
             AccountManagerId = "RiftAuthenticator.Library.Registry";
+            PlatformId = "RiftAuthenticator.Library.Platform.Windows";
         }
 
         public bool ShowHelp { get; set; }
         public int VerboseLevel { get; set; }
 
+        public string PlatformId { get; set; }
         public string AccountManagerId { get; set; }
         public string AccountId { get; set; }
 

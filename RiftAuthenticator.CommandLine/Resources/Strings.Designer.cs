@@ -223,6 +223,15 @@ namespace RiftAuthenticator.CommandLine.Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Specify the platform to use ähnelt.
+        /// </summary>
+        internal static string opt_global_platform {
+            get {
+                return ResourceManager.GetString("opt_global_platform", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Set verbose level ähnelt.
         /// </summary>
         internal static string opt_global_verbose {

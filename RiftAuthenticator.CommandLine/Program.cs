@@ -44,6 +44,7 @@ namespace RiftAuthenticator.CommandLine
             { "v|verbose", Resources.Strings.opt_global_verbose, x => GlobalOptions.VerboseLevel += (x==null ? -1 : 1) },
             { "m|manager|account-manager=", Resources.Strings.opt_global_account_manager, x => GlobalOptions.AccountManagerId = x },
             { "a|account=", Resources.Strings.opt_global_account, x => GlobalOptions.AccountId = x },
+            { "platform=", Resources.Strings.opt_global_platform, x => GlobalOptions.AccountId = x },
         };
 
         static int Main(string[] args)
@@ -60,6 +61,8 @@ namespace RiftAuthenticator.CommandLine
                 }
                 else
                 {
+                    if (!string.IsNullOrEmpty(GlobalOptions.PlatformId))
+                        SelectPlatform(GlobalOptions.PlatformId);
                     if (!string.IsNullOrEmpty(GlobalOptions.AccountManagerId))
                         SelectAccountManager(GlobalOptions.AccountManagerId);
                     if (!string.IsNullOrEmpty(GlobalOptions.AccountId))
@@ -78,6 +81,24 @@ namespace RiftAuthenticator.CommandLine
                 return 1;
             }
             return 0;
+        }
+
+        private static void SelectPlatform(string platformId)
+        {
+            switch (platformId)
+            {
+                case "win32":
+                case "windows":
+                case "RiftAuthenticator.Library.Platform.Windows":
+                    platformId = "RiftAuthenticator.Library.Platform.Windows";
+                    break;
+                default:
+                    throw new NotSupportedException(platformId);
+            }
+            var assemblyName = platformId;
+            var typeName = string.Format("{0}.Platform", platformId);
+            Library.TrionServer.Platform = 
+                (RiftAuthenticator.Library.IPlatform)Activator.CreateInstance(assemblyName, typeName).Unwrap();
         }
 
         static void SelectAccount(string accountId)
@@ -120,9 +141,9 @@ namespace RiftAuthenticator.CommandLine
                 default:
                     throw new NotSupportedException(accountManagerId);
             }
-            var accountManagerAssemblyName = accountManagerId;
-            var accountManagerTypeName = string.Format("{0}.AccountManager", accountManagerId);
-            GlobalOptions.AccountManager = (RiftAuthenticator.Library.IAccountManager)Activator.CreateInstance(accountManagerAssemblyName, accountManagerTypeName).Unwrap();
+            var assemblyName = accountManagerId;
+            var typeName = string.Format("{0}.AccountManager", accountManagerId);
+            GlobalOptions.AccountManager = (RiftAuthenticator.Library.IAccountManager)Activator.CreateInstance(assemblyName, typeName).Unwrap();
         }
 
         private static void ProcessCommand(List<string> args)
