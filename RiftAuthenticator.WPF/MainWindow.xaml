@@ -3,15 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="{Binding Converter={StaticResource Localization}, ConverterParameter=MainWindow.Title}" Height="194" Width="704" Loaded="Window_Loaded" Icon="/RiftAuthenticator;component/RiftLogo.ico">
     <Grid>
-        <TextBox Height="23" Margin="12,91,12,0" Name="LoginToken" VerticalAlignment="Top" IsReadOnly="True" HorizontalContentAlignment="Center" />
-        <Grid VerticalAlignment="Top" Margin="12,120,12,0" Height="23" Grid.IsSharedSizeScope="True">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="Auto" SharedSizeGroup="GridButton" />
-            </Grid.ColumnDefinitions>
-            <ProgressBar Height="26" Name="RemainingValidTime" Maximum="30000" />
-            <Button Grid.Column="1" Content="{Binding Converter={StaticResource Localization}, ConverterParameter=MainWindow.TimeSync.Content}" Margin="6,0,0,0" Name="TimeSync" Click="TimeSync_Click" Padding="12,0" />
-        </Grid>
         <Grid Margin="12,29,12,0" VerticalAlignment="Top">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
@@ -36,6 +27,15 @@
             </ComboBox>
             <Label Grid.Row="1" Grid.Column="0" Content="{Binding Converter={StaticResource Localization}, ConverterParameter=MainWindow.SerialKeyLabel.Content}" Height="28" Name="SerialKeyLabel" VerticalAlignment="Top" />
             <TextBox Grid.Row="1" Grid.Column="1" Height="24" Name="SerialKey" VerticalAlignment="Center" IsReadOnly="True" />
+        </Grid>
+        <TextBox Height="23" Margin="12,91,12,0" Name="LoginToken" VerticalAlignment="Top" IsReadOnly="True" HorizontalContentAlignment="Center" />
+        <Grid VerticalAlignment="Top" Margin="12,120,12,0" Height="23" Grid.IsSharedSizeScope="True">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="Auto" SharedSizeGroup="GridButton" />
+            </Grid.ColumnDefinitions>
+            <ProgressBar Height="26" Name="RemainingValidTime" Maximum="30000" />
+            <Button Grid.Column="1" Content="{Binding Converter={StaticResource Localization}, ConverterParameter=MainWindow.TimeSync.Content}" Margin="6,0,0,0" Name="TimeSync" Click="TimeSync_Click" Padding="12,0" />
         </Grid>
         <Menu Height="23" Name="MainMenu" VerticalAlignment="Top">
             <MenuItem Name="FileMenu" Header="{Binding Converter={StaticResource Localization}, ConverterParameter=MainWindow.FileMenu.Header}">
