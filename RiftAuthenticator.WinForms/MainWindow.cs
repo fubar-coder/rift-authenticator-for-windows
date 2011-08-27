@@ -28,7 +28,7 @@ namespace RiftAuthenticator.WinForms
 {
     public partial class MainWindow : Form
     {
-        Library.IAccountManager AccountManager = new Library.Registry.AccountManager();
+        Library.IAccountManager AccountManager;
         Library.IAccount Account;
 
         public MainWindow()
@@ -63,11 +63,39 @@ namespace RiftAuthenticator.WinForms
             }
         }
 
+        private void SetPlatform(System.Collections.Specialized.NameValueCollection appSettings)
+        {
+            var platformId = appSettings["default-platform"];
+            if (string.IsNullOrEmpty(platformId))
+                platformId = "windows";
+            Library.TrionServer.Platform = Library.PlatformBase.LoadPlatform(platformId);
+        }
+
+        private void SetAccountManager(System.Collections.Specialized.NameValueCollection appSettings)
+        {
+            var accountManagerId = appSettings["default-account-manager"];
+            if (string.IsNullOrEmpty(accountManagerId))
+                accountManagerId = "registry";
+            AccountManager = Library.AccountManagerBase.LoadAccountManager(accountManagerId);
+        }
+
+        private void SetAccount(System.Collections.Specialized.NameValueCollection appSettings)
+        {
+            if (AccountManager.Count == 0)
+                AccountManager.Add(AccountManager.CreateAccount());
+            var accountId = appSettings["default-account"];
+            if (!string.IsNullOrEmpty(accountId))
+                Account = AccountManager.FindAccount(accountId);
+        }
+
         private void MainWindow_Load(object sender, EventArgs e)
         {
-            Library.TrionServer.Platform = new RiftAuthenticator.Library.Platform.Windows.Platform();
+            var appSettings = System.Configuration.ConfigurationManager.AppSettings;
+            SetPlatform(appSettings);
+            SetAccountManager(appSettings);
             System.Net.ServicePointManager.ServerCertificateValidationCallback = Library.TrionServer.CertificateIsValid;
             AccountManager.LoadAccounts();
+            SetAccount(appSettings);
             UpdateAccountList();
         }
 
