@@ -80,6 +80,9 @@ along with RIFT™ Authenticator for Windows.  If not, see
       <Component Id="WPF.SecurityQuestions.xaml" Guid="81464FD9-672F-4EC5-97BA-AD6E97869A41">
         <File Id="SecurityQuestions.xaml" Source="$(var.RiftAuthenticator.WPF.ProjectDir)SecurityQuestions.xaml" />
       </Component>
+      <Component Id="WPF.Accounts.xaml" Guid="43DEE443-0EB8-4864-9197-6A7D771739F7">
+        <File Id="Accounts.xaml" Source="$(var.RiftAuthenticator.WPF.ProjectDir)Accounts.xaml" />
+      </Component>
     </DirectoryRef>
 
     <!-- Duh! Workaround required because heat doesn't add *.xaml files to RiftAuthenticator.WPF.Sources. -->
@@ -93,6 +96,7 @@ along with RIFT™ Authenticator for Windows.  If not, see
       <ComponentRef Id="WPF.MainWindow.xaml"/>
       <ComponentRef Id="WPF.QueryDeviceId.xaml"/>
       <ComponentRef Id="WPF.SecurityQuestions.xaml"/>
+      <ComponentRef Id="WPF.Accounts.xaml"/>
     </ComponentGroup>
 
     <DirectoryRef Id="AppProgramsFolder">
