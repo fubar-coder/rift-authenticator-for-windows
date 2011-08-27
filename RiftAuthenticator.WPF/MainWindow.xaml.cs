@@ -47,14 +47,29 @@ namespace RiftAuthenticator
             InitializeComponent();
         }
 
+        private void UpdateAccountList()
+        {
+            var oldSelectedAccount = Account;
+            Accounts.DataContext = null;
+            Accounts.DataContext = AccountManager;
+            if (AccountManager.Count == 0)
+                AccountManager.Add(AccountManager.CreateAccount());
+            int newSelectedAccountIndex = -1;
+            if (oldSelectedAccount != null)
+            {
+                newSelectedAccountIndex = AccountManager.IndexOf(oldSelectedAccount);
+            }
+            if (newSelectedAccountIndex == -1)
+                Accounts.SelectedIndex = 0;
+            else
+                Accounts.SelectedIndex = newSelectedAccountIndex;
+        }
+
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             System.Net.ServicePointManager.ServerCertificateValidationCallback = Library.TrionServer.CertificateIsValid;
             AccountManager.LoadAccounts();
-            if (AccountManager.Count == 0)
-                AccountManager.Add(AccountManager.CreateAccount());
-            Account = AccountManager[0];
-            RefreshToken();
+            UpdateAccountList();
             Timer = new System.Windows.Threading.DispatcherTimer(System.Windows.Threading.DispatcherPriority.ApplicationIdle, Dispatcher);
             Timer.Interval = new TimeSpan(0, 0, 0, 0, 200);
             Timer.Tick += new EventHandler(Timer_Tick);
@@ -82,7 +97,7 @@ namespace RiftAuthenticator
 
         void Timer_Tick(object sender, EventArgs e)
         {
-            if (Account.IsEmpty)
+            if (Account == null || Account.IsEmpty)
                 return;
             RefreshToken();
         }
@@ -104,36 +119,7 @@ namespace RiftAuthenticator
         {
             Account.TimeOffset = Library.TrionServer.GetTimeOffset();
             AccountManager.SaveAccounts();
-            RefreshToken();
-        }
-
-        private void Information_Click(object sender, RoutedEventArgs e)
-        {
-            var dlg = new Information(Account) { Owner = this };
-            dlg.ShowDialog();
-        }
-
-        private void Initialize_Click(object sender, RoutedEventArgs e)
-        {
-            if (!Account.IsEmpty)
-            {
-                if (MessageBox.Show(this, App.Localization.Get("MessageBox.Message.AlreadyInitialized"), App.Localization.Get("MessageBox.Title.Warning"), MessageBoxButton.OKCancel, MessageBoxImage.Warning) != MessageBoxResult.OK)
-                    return;
-            }
-
-            try
-            {
-                if (ExecuteInit())
-                {
-                    Clipboard.SetText(Account.DeviceId);
-                    MessageBox.Show(this, string.Format(App.Localization.Get("MessageBox.Message.RememberDeviceId"), Account.DeviceId), "Remember you device id", MessageBoxButton.OK, MessageBoxImage.Warning);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(this, ex.Message, App.Localization.Get("MessageBox.Title.Error"), MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
+            UpdateAccountList();
         }
 
         private Library.IAccount CreateNewAccountObject()
@@ -158,8 +144,7 @@ namespace RiftAuthenticator
                 Account = newAccount;
             }
             AccountManager.SaveAccounts();
-            //UpdateAccountList();
-            RefreshToken();
+            UpdateAccountList();
         }
 
         private bool ExecuteInit()
@@ -235,11 +220,39 @@ namespace RiftAuthenticator
             newAccount.TimeOffset = Library.TrionServer.GetTimeOffset();
             newAccount.Description = dlgDeviceId.Description.Text;
             SaveNewAccountObject(newAccount);
-            AccountManager.SaveAccounts();
-            RefreshToken();
         }
 
-        private void Recover_Click(object sender, RoutedEventArgs e)
+        private void HelpLicenseMenu_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show(this,
+                App.Localization.Get("MessageBox.Message.License"),
+                App.Localization.Get("MessageBox.Title.License"),
+                MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        private void FileQuitMenu_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void AccountCreateMenu_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (ExecuteInit())
+                {
+                    Clipboard.SetText(Account.DeviceId);
+                    MessageBox.Show(this, string.Format(App.Localization.Get("MessageBox.Message.RememberDeviceId"), Account.DeviceId), "Remember you device id", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(this, ex.Message, App.Localization.Get("MessageBox.Title.Error"), MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+        }
+
+        private void AccountRecoverMenu_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -252,12 +265,91 @@ namespace RiftAuthenticator
             }
         }
 
-        private void ShowLicense_Click(object sender, RoutedEventArgs e)
+        private void AccountManageMenu_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(this,
-                App.Localization.Get("MessageBox.Message.License"),
-                App.Localization.Get("MessageBox.Title.License"),
+            try
+            {
+                var dlg = new Accounts(AccountManager, Account)
+                {
+                    Owner = this,
+                };
+                if (!dlg.ShowDialog().GetValueOrDefault())
+                    return;
+                AccountManager.SaveAccounts();
+                UpdateAccountList();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(this, ex.Message, App.Localization.Get("MessageBox.Title.Error"), MessageBoxButton.OK, MessageBoxImage.Error);
+                AccountManager.LoadAccounts();
+                return;
+            }
+        }
+
+        private void AccountInformationMenu_Click(object sender, RoutedEventArgs e)
+        {
+            var dlg = new Information(Account) { Owner = this };
+            dlg.ShowDialog();
+        }
+
+        private void HelpAboutMenu_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show(
+                this,
+                App.Localization.Get("MessageBox.Message.About"),
+                App.Localization.Get("MessageBox.Title.About"),
                 MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        private void Accounts_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (Accounts.SelectedIndex == -1)
+            {
+                Account = null;
+            }
+            else
+            {
+                Account = (Library.IAccount)Accounts.SelectedItem;
+            }
+            RefreshToken();
+        }
+
+        private void AccountExportMenu_Click(object sender, RoutedEventArgs e)
+        {
+            var ExportAccountDialog = new Microsoft.Win32.SaveFileDialog()
+            {
+                CheckPathExists = true,
+                DefaultExt = "xml",
+                Filter = App.Localization.Get("MainWindow.ExportAccountDialog.Filter"),
+            };
+            if (!ExportAccountDialog.ShowDialog(this).GetValueOrDefault())
+                return;
+            var fileName = ExportAccountDialog.FileName;
+            var map = Library.PlatformUtils.Android.AccountMap.GetMap(AccountManager, Account);
+            using (var stream = new System.IO.FileStream(fileName, System.IO.FileMode.Create, System.IO.FileAccess.Write))
+                Library.PlatformUtils.Android.MapFile.WriteMap(stream, map);
+        }
+
+        private void AccountImportMenu_Click(object sender, RoutedEventArgs e)
+        {
+            var ImportAccountDialog = new Microsoft.Win32.OpenFileDialog()
+            {
+                CheckFileExists = true,
+                CheckPathExists = true,
+                DefaultExt = "xml",
+                Filter = App.Localization.Get("MainWindow.ExportAccountDialog.Filter"),
+            };
+            if (!ImportAccountDialog.ShowDialog(this).GetValueOrDefault())
+                return;
+            var fileName = ImportAccountDialog.FileName;
+
+            Dictionary<string, object> map;
+            using (var stream = new System.IO.FileStream(fileName, System.IO.FileMode.Open, System.IO.FileAccess.Read))
+                map = Library.PlatformUtils.Android.MapFile.ReadMap(stream);
+
+            var newAccount = CreateNewAccountObject();
+            Library.PlatformUtils.Android.AccountMap.SetMap(AccountManager, newAccount, map);
+            SaveNewAccountObject(newAccount);
         }
     }
 }
