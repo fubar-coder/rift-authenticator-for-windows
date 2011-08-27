@@ -55,6 +55,15 @@
       <RefProjectOutputGroups>Binaries;Symbols;Sources;Content;Satellites;Documents</RefProjectOutputGroups>
       <RefTargetDir>Sources.Library.IsolatedStorage</RefTargetDir>
     </ProjectReference>
+    <ProjectReference Include="..\RiftAuthenticator.Library.Platform.Windows\RiftAuthenticator.Library.Platform.Windows.csproj">
+      <Name>RiftAuthenticator.Library.Platform.Windows</Name>
+      <Project>{580df75f-6d5d-409b-9f4c-64f8f9b0a9c6}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>
+      </DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Symbols;Sources;Content;Satellites;Documents</RefProjectOutputGroups>
+      <RefTargetDir>Sources.Library.Platform.Windows</RefTargetDir>
+    </ProjectReference>
     <ProjectReference Include="..\RiftAuthenticator.Library.Registry\RiftAuthenticator.Library.Registry.csproj">
       <Name>RiftAuthenticator.Library.Registry</Name>
       <Project>{488805c2-f094-4ab2-aaf4-0a555f36095a}</Project>
