@@ -84,6 +84,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
@@ -197,6 +198,7 @@
     <EmbeddedResource Include="SecurityQuestions.resx">
       <DependentUpon>SecurityQuestions.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="App.config" />
     <None Include="Properties\DataSources\RiftAuthenticator.Library.IAccount.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -209,6 +211,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\RiftAuthenticator.Library.FileSystem\RiftAuthenticator.Library.FileSystem.csproj">
+      <Project>{D463F9A5-E676-47D6-9740-D2548748EBC3}</Project>
+      <Name>RiftAuthenticator.Library.FileSystem</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RiftAuthenticator.Library.IsolatedStorage\RiftAuthenticator.Library.IsolatedStorage.csproj">
+      <Project>{F3EA0BAB-AF7E-4792-A5BB-5DBCA872E161}</Project>
+      <Name>RiftAuthenticator.Library.IsolatedStorage</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RiftAuthenticator.Library.Platform.Windows\RiftAuthenticator.Library.Platform.Windows.csproj">
       <Project>{580DF75F-6D5D-409B-9F4C-64F8F9B0A9C6}</Project>
       <Name>RiftAuthenticator.Library.Platform.Windows</Name>
