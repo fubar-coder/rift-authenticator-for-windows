@@ -150,6 +150,21 @@
   <data name="CreateNewSecretKey.Title" xml:space="preserve">
     <value>Erstelle einen neuen Authentifikator</value>
   </data>
+  <data name="FirstAppStart.CreateNewAuthLabel.Text" xml:space="preserve">
+    <value>Erstelle neue Authentifikator-Einstellungen</value>
+  </data>
+  <data name="FirstAppStart.DoNothingLabel.Text" xml:space="preserve">
+    <value>Nichts</value>
+  </data>
+  <data name="FirstAppStart.NoConfigFoundLabel.Text" xml:space="preserve">
+    <value>Keine Einstellungen gefunden. Was möchten Sie machen?</value>
+  </data>
+  <data name="FirstAppStart.RecoverOldAuthLabel.Text" xml:space="preserve">
+    <value>Wiederherstellung der alten Authentifikator- Einstellungen (Geräte-ID wird benötigt)</value>
+  </data>
+  <data name="FirstAppStart.SelectUserAction.Content" xml:space="preserve">
+    <value>OK</value>
+  </data>
   <data name="Information.CloseButton.Content" xml:space="preserve">
     <value>OK</value>
   </data>

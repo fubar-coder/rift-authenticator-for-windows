@@ -99,10 +99,52 @@ namespace RiftAuthenticator
             AccountManager.LoadAccounts();
             SetAccount(appSettings);
             UpdateAccountList();
+            StartWizardIfConfigEmpty();
             Timer = new System.Windows.Threading.DispatcherTimer(System.Windows.Threading.DispatcherPriority.ApplicationIdle, Dispatcher);
             Timer.Interval = new TimeSpan(0, 0, 0, 0, 200);
             Timer.Tick += new EventHandler(Timer_Tick);
             Timer.Start();
+        }
+
+        private bool IsConfigEmpty
+        {
+            get
+            {
+                return (AccountManager.Count == 0)
+                    || (AccountManager.Count == 1 && AccountManager[0].IsEmpty);
+            }
+        }
+
+        private void StartWizardIfConfigEmpty()
+        {
+            if (!IsConfigEmpty)
+                return;
+            var dlg = new FirstAppStart()
+            {
+                Owner = this,
+            };
+            if (!dlg.ShowDialog().GetValueOrDefault())
+                return;
+            try
+            {
+                if (dlg.CreateNewAuth.IsChecked.GetValueOrDefault())
+                {
+                    ExecuteInitWithClipboard();
+                }
+                else if (dlg.RecoverOldAuth.IsChecked.GetValueOrDefault())
+                {
+                    ExecuteRecovery();
+                }
+                else
+                {
+                    // Nothing to do...
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(this, ex.Message, App.Localization.Get("MessageBox.Title.Error"), MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
         }
 
         void RefreshToken()
@@ -174,6 +216,17 @@ namespace RiftAuthenticator
             }
             AccountManager.SaveAccounts();
             UpdateAccountList();
+        }
+
+        private bool ExecuteInitWithClipboard()
+        {
+            var result = ExecuteInit();
+            if (result)
+            {
+                Clipboard.SetText(Account.DeviceId);
+                MessageBox.Show(this, string.Format(App.Localization.Get("MessageBox.Message.RememberDeviceId"), Account.DeviceId), "Remember you device id", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            return result;
         }
 
         private bool ExecuteInit()
@@ -268,11 +321,7 @@ namespace RiftAuthenticator
         {
             try
             {
-                if (ExecuteInit())
-                {
-                    Clipboard.SetText(Account.DeviceId);
-                    MessageBox.Show(this, string.Format(App.Localization.Get("MessageBox.Message.RememberDeviceId"), Account.DeviceId), "Remember you device id", MessageBoxButton.OK, MessageBoxImage.Warning);
-                }
+                ExecuteInitWithClipboard();
             }
             catch (Exception ex)
             {
