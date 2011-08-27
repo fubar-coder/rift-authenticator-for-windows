@@ -223,7 +223,7 @@
     <value>_Lizenz</value>
   </data>
   <data name="MainWindow.HelpMenu.Header" xml:space="preserve">
-    <value>_Help</value>
+    <value>_Hilfe</value>
   </data>
   <data name="MainWindow.SerialKeyLabel.Content" xml:space="preserve">
     <value>Seriennummer:</value>
