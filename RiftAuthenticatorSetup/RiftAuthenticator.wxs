@@ -145,12 +145,15 @@ along with RIFT™ Authenticator for Windows.  If not, see
     <DirectoryRef Id="APPLICATIONFOLDER">
       <Component Id="AppWpf" Guid="AF2B4E13-A46F-4E5F-BB03-BB09B3E7B402">
         <File Id="$(var.RiftAuthenticator.WPF.TargetFileName)" Source="$(var.RiftAuthenticator.WPF.TargetPath)" KeyPath="yes" Checksum="yes" />
+        <File Id="$(var.RiftAuthenticator.WPF.TargetFileName).config" Source="$(var.RiftAuthenticator.WPF.TargetPath).config" Checksum="yes" />
       </Component>
       <Component Id="AppWinForms" Guid="B15A5FA5-F78A-448B-8397-5ED08B2BE267">
         <File Id="$(var.RiftAuthenticator.WinForms.TargetFileName)" Source="$(var.RiftAuthenticator.WinForms.TargetPath)" KeyPath="yes" Checksum="yes" />
+        <File Id="$(var.RiftAuthenticator.WinForms.TargetFileName).config" Source="$(var.RiftAuthenticator.WinForms.TargetPath).config" Checksum="yes" />
       </Component>
       <Component Id="AppConsole" Guid="294A6D37-B0B9-4D44-8E44-CDB1CDC88736">
         <File Id="$(var.RiftAuthenticator.CommandLine.TargetFileName)" Source="$(var.RiftAuthenticator.CommandLine.TargetPath)" KeyPath="yes" Checksum="yes" />
+        <File Id="$(var.RiftAuthenticator.CommandLine.TargetFileName).config" Source="$(var.RiftAuthenticator.CommandLine.TargetPath).config" Checksum="yes" />
       </Component>
       <Component Id="AppLibs" Guid="55B45E23-9253-4854-9126-A39038BBB690">
         <File Id="$(var.RiftAuthenticator.Library.TargetFileName)" Source="$(var.RiftAuthenticator.Library.TargetPath)" KeyPath="yes" Checksum="yes" />
