@@ -116,6 +116,12 @@
     <Compile Include="Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
+    <Compile Include="FirstAppStart.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FirstAppStart.Designer.cs">
+      <DependentUpon>FirstAppStart.cs</DependentUpon>
+    </Compile>
     <Compile Include="QueryDeviceId.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -153,6 +159,9 @@
     <EmbeddedResource Include="CreateNewSecretKey.resx">
       <DependentUpon>CreateNewSecretKey.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FirstAppStart.de.resx">
+      <DependentUpon>FirstAppStart.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Information.de.resx">
       <DependentUpon>Information.cs</DependentUpon>
     </EmbeddedResource>
@@ -167,6 +176,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainWindow.de.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FirstAppStart.resx">
+      <DependentUpon>FirstAppStart.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="QueryDeviceId.de.resx">
       <DependentUpon>QueryDeviceId.cs</DependentUpon>

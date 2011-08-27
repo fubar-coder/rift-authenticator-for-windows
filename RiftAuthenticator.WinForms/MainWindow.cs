@@ -43,6 +43,8 @@ namespace RiftAuthenticator.WinForms
             {
                 Accounts.Items.Clear();
                 var oldSelectedAccount = Account;
+                if (AccountManager.Count == 0)
+                    AccountManager.Add(AccountManager.CreateAccount());
                 foreach (var account in AccountManager)
                     Accounts.Items.Add(string.Format("{0} ({1})", account.Description, account.FormattedSerialKey));
                 if (AccountManager.Count == 0)
@@ -97,6 +99,45 @@ namespace RiftAuthenticator.WinForms
             AccountManager.LoadAccounts();
             SetAccount(appSettings);
             UpdateAccountList();
+            StartWizardIfConfigEmpty();
+        }
+
+        private bool IsConfigEmpty
+        {
+            get
+            {
+                return (AccountManager.Count == 0)
+                    || (AccountManager.Count == 1 && AccountManager[0].IsEmpty);
+            }
+        }
+
+        private void StartWizardIfConfigEmpty()
+        {
+            if (!IsConfigEmpty)
+                return;
+            var dlg = new FirstAppStart();
+            if (dlg.ShowDialog(this) != System.Windows.Forms.DialogResult.OK)
+                return;
+            try
+            {
+                if (dlg.CreateNewAuth.Checked)
+                {
+                    ExecuteInitWithClipboard();
+                }
+                else if (dlg.RecoverOldAuth.Checked)
+                {
+                    ExecuteRecovery();
+                }
+                else
+                {
+                    // Nothing to do...
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(this, ex.Message, Resources.Strings.MessageBox_Title_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
         }
 
         void RefreshToken()
@@ -168,6 +209,18 @@ namespace RiftAuthenticator.WinForms
             }
             AccountManager.SaveAccounts();
             UpdateAccountList();
+        }
+
+        private bool ExecuteInitWithClipboard()
+        {
+            var result = ExecuteInit();
+            if (result)
+            {
+                Clipboard.SetText(Account.DeviceId);
+                MessageBox.Show(this,
+                    string.Format(Resources.Strings.MessageBox_Message_RememberDeviceId, Account.DeviceId), Resources.Strings.MessageBox_Title_RememberDeviceId, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            return result;
         }
 
         private bool ExecuteInit()
@@ -277,12 +330,7 @@ namespace RiftAuthenticator.WinForms
         {
             try
             {
-                if (ExecuteInit())
-                {
-                    Clipboard.SetText(Account.DeviceId);
-                    MessageBox.Show(this,
-                        string.Format(Resources.Strings.MessageBox_Message_RememberDeviceId, Account.DeviceId), Resources.Strings.MessageBox_Title_RememberDeviceId, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
+                ExecuteInitWithClipboard();
             }
             catch (Exception ex)
             {
