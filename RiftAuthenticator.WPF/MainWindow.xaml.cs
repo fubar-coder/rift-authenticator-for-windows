@@ -67,6 +67,7 @@ namespace RiftAuthenticator
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            Library.TrionServer.Platform = new RiftAuthenticator.Library.Platform.Windows.Platform();
             System.Net.ServicePointManager.ServerCertificateValidationCallback = Library.TrionServer.CertificateIsValid;
             AccountManager.LoadAccounts();
             UpdateAccountList();

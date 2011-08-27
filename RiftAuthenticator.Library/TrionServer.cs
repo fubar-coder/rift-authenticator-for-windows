@@ -28,6 +28,8 @@ namespace RiftAuthenticator.Library
         const string TrionApiServer = "https://rift.trionworlds.com";
         const string TrionAuthServer = "https://auth.trionworlds.com";
 
+        public static IPlatform Platform { get; set; }
+
         public static string UserAgent
         {
             get
@@ -217,25 +219,9 @@ namespace RiftAuthenticator.Library
 
         public static string GetDeviceId()
         {
-            try
-            {
-                using (var regKey = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion"))
-                {
-                    var productId = regKey.GetValue("ProductId");
-                    if (productId != null)
-                    {
-                        var realProductId = Convert.ToString(productId);
-                        var digest = new System.Security.Cryptography.SHA1Managed();
-                        var productIdBytes = Encoding.Default.GetBytes(realProductId);
-                        digest.TransformFinalBlock(productIdBytes, 0, productIdBytes.Length);
-                        return Util.BytesToHex(digest.Hash);
-                    }
-                }
-            }
-            catch
-            {
-            }
-            return null;
+            if (Platform == null)
+                return null;
+            return Platform.DeviceId;
         }
     }
 }
