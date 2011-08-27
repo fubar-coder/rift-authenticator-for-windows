@@ -22,14 +22,26 @@ using System.Text;
 
 namespace RiftAuthenticator.Library
 {
-    public interface IAccountManager : IList<IAccount>
+    public abstract class PlatformBase : IPlatform
     {
-        IAccount CreateAccount();
-        IAccount FindAccount(string accountId);
+        public abstract string DeviceId { get; }
 
-        void LoadAccounts();
-        void SaveAccounts();
-
-        ISecretKeyEncryption SecretKeyEncryption { get; }
+        public static IPlatform LoadPlatform(string platformId)
+        {
+            switch (platformId)
+            {
+                case "win32":
+                case "windows":
+                case "RiftAuthenticator.Library.Platform.Windows":
+                    platformId = "RiftAuthenticator.Library.Platform.Windows";
+                    break;
+                default:
+                    throw new NotSupportedException(platformId);
+            }
+            var assemblyName = platformId;
+            var typeName = string.Format("{0}.Platform", platformId);
+            return
+                (RiftAuthenticator.Library.IPlatform)Activator.CreateInstance(assemblyName, typeName).Unwrap();
+        }
     }
 }
