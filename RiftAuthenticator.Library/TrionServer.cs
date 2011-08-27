@@ -16,9 +16,6 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-#define USE_WEB_REQUEST
-#define USE_HTTP_POST
-
 using System;
 using System.Collections.Generic;
 using System.Text;
