@@ -50,6 +50,7 @@ namespace RiftAuthenticator
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             DeviceId.Text = Library.TrionServer.GetOrCreateRandomDeviceId();
+            Description.Focus();
         }
 
         private void RecreateDeviceId_Click(object sender, RoutedEventArgs e)

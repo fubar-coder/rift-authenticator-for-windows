@@ -112,11 +112,26 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Accounts.AccountGrid.Header.Description" xml:space="preserve">
+    <value>Beschreibung</value>
+  </data>
+  <data name="Accounts.AccountGrid.Header.DeviceId" xml:space="preserve">
+    <value>Geräte-ID</value>
+  </data>
+  <data name="Accounts.AccountGrid.Header.SerialKey" xml:space="preserve">
+    <value>Seriennummer</value>
+  </data>
+  <data name="Accounts.ApplyAccountChanges.Content" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="Accounts.CancelAccountChanges.Content" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
   <data name="CreateNewSecretKey.AbortCreate.Content" xml:space="preserve">
     <value>Abbrechen</value>
   </data>
@@ -168,26 +183,59 @@
   <data name="Login.Title" xml:space="preserve">
     <value>Anmeldung</value>
   </data>
-  <data name="MainWindow.Information.Content" xml:space="preserve">
-    <value>Information</value>
+  <data name="MainWindow.AccountCreateMenu.Header" xml:space="preserve">
+    <value>_Erstellen...</value>
   </data>
-  <data name="MainWindow.Initialize.Content" xml:space="preserve">
-    <value>Einrichtung</value>
+  <data name="MainWindow.AccountExportMenu.Header" xml:space="preserve">
+    <value>E_xport...</value>
   </data>
-  <data name="MainWindow.Recover.Content" xml:space="preserve">
-    <value>Wiederherstellung</value>
+  <data name="MainWindow.AccountImportMenu.Header" xml:space="preserve">
+    <value>_Import...</value>
+  </data>
+  <data name="MainWindow.AccountInformationMenu.Header" xml:space="preserve">
+    <value>_Information</value>
+  </data>
+  <data name="MainWindow.AccountLabel.Content" xml:space="preserve">
+    <value>Konten:</value>
+  </data>
+  <data name="MainWindow.AccountManageMenu.Header" xml:space="preserve">
+    <value>_Verwalten...</value>
+  </data>
+  <data name="MainWindow.AccountMenu.Header" xml:space="preserve">
+    <value>_Konto</value>
+  </data>
+  <data name="MainWindow.AccountRecoverMenu.Header" xml:space="preserve">
+    <value>_Wiederherstellung...</value>
+  </data>
+  <data name="MainWindow.ExportAccountDialog.Filter" xml:space="preserve">
+    <value>Konto-Dateien (*.xml)|*.xml|Alle Dateien (*.*)|*.*</value>
+  </data>
+  <data name="MainWindow.FileMenu.Header" xml:space="preserve">
+    <value>_Datei</value>
+  </data>
+  <data name="MainWindow.FileQuitMenu.Header" xml:space="preserve">
+    <value>_Beenden</value>
+  </data>
+  <data name="MainWindow.HelpAboutMenu.Header" xml:space="preserve">
+    <value>_Über</value>
+  </data>
+  <data name="MainWindow.HelpLicenseMenu.Header" xml:space="preserve">
+    <value>_Lizenz</value>
+  </data>
+  <data name="MainWindow.HelpMenu.Header" xml:space="preserve">
+    <value>_Help</value>
   </data>
   <data name="MainWindow.SerialKeyLabel.Content" xml:space="preserve">
     <value>Seriennummer:</value>
-  </data>
-  <data name="MainWindow.ShowLicense.Content" xml:space="preserve">
-    <value>Lizenz</value>
   </data>
   <data name="MainWindow.TimeSync.Content" xml:space="preserve">
     <value>Zeit-Sync</value>
   </data>
   <data name="MainWindow.Title" xml:space="preserve">
     <value>RIFT™ Authentifikator</value>
+  </data>
+  <data name="MessageBox.Message.About" xml:space="preserve">
+    <value>Dies ist der RIFT™ Authentifikator für Windows, geschrieben vom RIFT™ Authentifikator für Windows-Projekt.</value>
   </data>
   <data name="MessageBox.Message.AlreadyInitialized" xml:space="preserve">
     <value>Authentifikator bereits eingerichtet!
@@ -211,6 +259,9 @@ The Apache Software Foundation</value>
 Speichern Sie die Geräte-ID!
 Diese Geräte-ID wird benötigt um die Wiederherstellung nutzen zu können!
 Die Geräte-ID lautet {0}.</value>
+  </data>
+  <data name="MessageBox.Title.About" xml:space="preserve">
+    <value>RIFT™ Authentifikator für Windows</value>
   </data>
   <data name="MessageBox.Title.Error" xml:space="preserve">
     <value>Fehler</value>
