@@ -45,9 +45,9 @@
             // 
             // AccountGrid
             // 
-            resources.ApplyResources(this.AccountGrid, "AccountGrid");
             this.AccountGrid.AllowUserToAddRows = false;
             this.AccountGrid.AllowUserToResizeRows = false;
+            resources.ApplyResources(this.AccountGrid, "AccountGrid");
             this.AccountGrid.AutoGenerateColumns = false;
             this.AccountGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.AccountGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
