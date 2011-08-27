@@ -37,12 +37,15 @@ namespace RiftAuthenticator.Library
             get
             {
                 var result = new StringBuilder();
-                for (int i = 0; i < SerialKey.Length; i += 4)
+                if (!string.IsNullOrEmpty(SerialKey))
                 {
-                    var remaining = Math.Min(SerialKey.Length - i, 4);
-                    if (i != 0)
-                        result.Append("-");
-                    result.Append(SerialKey.Substring(i, remaining));
+                    for (int i = 0; i < SerialKey.Length; i += 4)
+                    {
+                        var remaining = Math.Min(SerialKey.Length - i, 4);
+                        if (i != 0)
+                            result.Append("-");
+                        result.Append(SerialKey.Substring(i, remaining));
+                    }
                 }
                 return result.ToString();
             }
