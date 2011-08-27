@@ -18,19 +18,33 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+using System.Linq;
 using System.Text;
-using System.Windows.Forms;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
 
-namespace RiftAuthenticator.WinForms
+namespace RiftAuthenticator
 {
-    public partial class FirstAppStart : Form
+    /// <summary>
+    /// Interaktionslogik für FirstAppStart.xaml
+    /// </summary>
+    public partial class FirstAppStart : Window
     {
         public FirstAppStart()
         {
             InitializeComponent();
+        }
+
+        private void SelectUserAction_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = true;
+            Close();
         }
     }
 }

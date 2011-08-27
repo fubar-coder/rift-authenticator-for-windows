@@ -103,6 +103,9 @@
     <Compile Include="Accounts.xaml.cs">
       <DependentUpon>Accounts.xaml</DependentUpon>
     </Compile>
+    <Compile Include="FirstAppStart.xaml.cs">
+      <DependentUpon>FirstAppStart.xaml</DependentUpon>
+    </Compile>
     <Compile Include="QueryDeviceId.xaml.cs">
       <DependentUpon>QueryDeviceId.xaml</DependentUpon>
     </Compile>
@@ -115,6 +118,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CreateNewSecretKey.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FirstAppStart.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
