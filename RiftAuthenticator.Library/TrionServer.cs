@@ -85,7 +85,7 @@ namespace RiftAuthenticator.Library
                     requestWriter.Flush();
                 }
             }
-            request.UserAgent = (Platform == null ? DefaultUserAgent : Platform.UserAgent);
+            request.UserAgent = (Platform == null ? DefaultUserAgent : (Platform.UserAgent ?? DefaultUserAgent));
             var response = (System.Net.HttpWebResponse)request.GetResponse();
             using (var responseStream = response.GetResponseStream())
             {
