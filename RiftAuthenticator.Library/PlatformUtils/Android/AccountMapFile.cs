@@ -1,4 +1,4 @@
-﻿/**
+﻿/*
  * This file is part of RIFT™ Authenticator for Windows.
  *
  * RIFT™ Authenticator for Windows is free software: you can redistribute 
@@ -22,12 +22,38 @@ using System.Text;
 
 namespace RiftAuthenticator.Library.PlatformUtils.Android
 {
+    /// <summary>
+    /// This is a generic account base class that uses map objects for account persistance
+    /// </summary>
     public abstract class AccountMapFile : AccountBase
     {
+        /// <summary>
+        /// Creates a file name of the map file to read/write the data from/to
+        /// </summary>
+        /// <param name="accountManager">The account manager for the account at index "accountIndex"</param>
+        /// <param name="accountIndex">The index of the account to create the file name from</param>
+        /// <returns>Map file name</returns>
         protected abstract string GetFileName(IAccountManager accountManager, int accountIndex);
+
+        /// <summary>
+        /// Reads a map file
+        /// </summary>
+        /// <param name="fileName">The name of the map file</param>
+        /// <returns>The map object with the data from the map file</returns>
         protected abstract Dictionary<string, object> ReadMapFile(string fileName);
+
+        /// <summary>
+        /// Writes a map file
+        /// </summary>
+        /// <param name="fileName">The name of the map file</param>
+        /// <param name="map">The map object with the data to write to the map file</param>
         protected abstract void WriteMapFile(string fileName, Dictionary<string, object> map);
 
+        /// <summary>
+        /// Loads the data from the map file
+        /// </summary>
+        /// <param name="accountManager">The account manager that this account is assigned to</param>
+        /// <param name="accountIndex">The index that this account has in the list of accounts in the account manager (must be unique)</param>
         public override void Load(IAccountManager accountManager, int accountIndex)
         {
             var configFileName = GetFileName(accountManager, accountIndex);
@@ -35,6 +61,11 @@ namespace RiftAuthenticator.Library.PlatformUtils.Android
             AccountMap.SetMap(accountManager, this, map);
         }
 
+        /// <summary>
+        /// Writes the data to the map file
+        /// </summary>
+        /// <param name="accountManager">The account manager that this account is assigned to</param>
+        /// <param name="accountIndex">The index that this account has in the list of accounts in the account manager (must be unique)</param>
         public override void Save(IAccountManager accountManager, int accountIndex)
         {
             var configFileName = GetFileName(accountManager, accountIndex);

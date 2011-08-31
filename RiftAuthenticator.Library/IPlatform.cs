@@ -1,4 +1,4 @@
-﻿/**
+﻿/*
  * This file is part of RIFT™ Authenticator for Windows.
  *
  * RIFT™ Authenticator for Windows is free software: you can redistribute 
@@ -22,8 +22,19 @@ using System.Text;
 
 namespace RiftAuthenticator.Library
 {
+    /// <summary>
+    /// This is an interface to platform specific values/functions
+    /// </summary>
     public interface IPlatform
     {
+        /// <summary>
+        /// The ID for the device where this authenticator executes on
+        /// </summary>
         string DeviceId { get; }
+
+        /// <summary>
+        /// This is the user agent used for the HTTP communication
+        /// </summary>
+        string UserAgent { get; }
     }
 }

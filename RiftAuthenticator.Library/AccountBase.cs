@@ -1,4 +1,4 @@
-﻿/**
+﻿/*
  * This file is part of RIFT™ Authenticator for Windows.
  *
  * RIFT™ Authenticator for Windows is free software: you can redistribute 
@@ -22,16 +22,37 @@ using System.Text;
 
 namespace RiftAuthenticator.Library
 {
+    /// <summary>
+    /// This is the base account class where all account objects are derived from
+    /// </summary>
     public abstract class AccountBase : IAccount
     {
         static readonly System.Text.Encoding Encoding = System.Text.Encoding.Default;
 
+        /// <summary>
+        /// Description for the account (any text)
+        /// </summary>
         public string Description { get; set; }
+        /// <summary>
+        /// The device ID where the authenticator account is bound to
+        /// </summary>
         public string DeviceId { get; set; }
+        /// <summary>
+        /// The serial key for the authenticator (created by TRION)
+        /// </summary>
         public string SerialKey { get; set; }
+        /// <summary>
+        /// The shared secret for the authenticator
+        /// </summary>
         public string SecretKey { get; set; }
+        /// <summary>
+        /// Time difference in milliseconds between the client and the TRION server
+        /// </summary>
         public long TimeOffset { get; set; }
 
+        /// <summary>
+        /// Add dashes to the serial key
+        /// </summary>
         public string FormattedSerialKey
         {
             get
@@ -51,6 +72,13 @@ namespace RiftAuthenticator.Library
             }
         }
 
+        /// <summary>
+        /// Is this account empty?
+        /// </summary>
+        /// <remarks>
+        /// Returns true if the authenticator is empty (i.e. not initialized, 
+        /// but may have a description)
+        /// </remarks>
         public bool IsEmpty
         {
             get
@@ -59,9 +87,23 @@ namespace RiftAuthenticator.Library
             }
         }
 
+        /// <summary>
+        /// Load the account information from the underlying storage device
+        /// </summary>
+        /// <param name="accountManager">The account manager that this account is assigned to</param>
+        /// <param name="accountIndex">The index that this account has in the list of accounts in the account manager (must be unique)</param>
         public abstract void Load(IAccountManager accountManager, int accountIndex);
+        /// <summary>
+        /// Save the account information to the underlying storage device
+        /// </summary>
+        /// <param name="accountManager">The account manager that this account is assigned to</param>
+        /// <param name="accountIndex">The index that this account has in the list of accounts in the account manager (must be unique)</param>
         public abstract void Save(IAccountManager accountManager, int accountIndex);
 
+        /// <summary>
+        /// Calculates a login for RIFT
+        /// </summary>
+        /// <returns></returns>
         public LoginToken CalculateToken()
         {
             var secretKey = Encoding.GetBytes(SecretKey);

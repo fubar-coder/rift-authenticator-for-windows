@@ -1,4 +1,4 @@
-/**
+/*
  * This file is part of RIFT™ Authenticator for Windows.
  *
  * RIFT™ Authenticator for Windows is free software: you can redistribute 
@@ -21,40 +21,47 @@ using System.Text;
 
 namespace RiftAuthenticator.Library
 {
+    /// <summary>
+    /// Utility functions
+    /// </summary>
     public static class Util
     {
-        public static long MillisStartTicks = new System.DateTime(1970, 1, 1).Ticks;
+        /// <summary>
+        /// The ticks for the date 1970-01-01
+        /// </summary>
+        private static long MillisStartTicks = new System.DateTime(1970, 1, 1).Ticks;
 
+        /// <summary>
+        /// Get the current time in milliseconds
+        /// </summary>
+        /// <returns>Current time in milliseconds</returns>
         public static long CurrentTimeMillis()
         {
             return TimeToMillis(DateTime.Now);
         }
 
-        public static long TicksToMillis(long ticks)
+        private static long TicksToMillis(long ticks)
         {
             var timeStart = MillisStartTicks;
             var timeDiff = ticks - timeStart;
             return timeDiff / 10000L;
         }
 
-        public static long MillisToTicks(long millis)
-        {
-            var timeStart = MillisStartTicks;
-            var timeDiff = millis * 10000L;
-            var timeCurrent = timeDiff + timeStart;
-            return timeCurrent;
-        }
-
+        /// <summary>
+        /// Convert the given timestamp to milliseconds since 1970-01-01
+        /// </summary>
+        /// <param name="time">The timestamp to convert to milliseconds</param>
+        /// <returns>Returns the timestamp in milliseconds sinze 1970-01-01</returns>
         public static long TimeToMillis(DateTime time)
         {
             return TicksToMillis(time.ToUniversalTime().Ticks);
         }
 
-        public static DateTime MillisToTime(long millis)
-        {
-            return new DateTime(MillisToTicks(millis), DateTimeKind.Utc).ToLocalTime();
-        }
-
+        /// <summary>
+        /// Converts a HEX string to a byte array
+        /// </summary>
+        /// <param name="hexString">The HEX string to convert</param>
+        /// <returns>The byte array created from the HEX string</returns>
         public static byte[] HexToBytes(string hexString)
         {
             System.Diagnostics.Debug.Assert((hexString.Length & 1) == 0);
@@ -65,6 +72,11 @@ namespace RiftAuthenticator.Library
             return result;
         }
 
+        /// <summary>
+        /// Converts a byte array to a HEX string
+        /// </summary>
+        /// <param name="bytes">Array of bytes to convert</param>
+        /// <returns>The resulting HEX string</returns>
         public static string BytesToHex(byte[] bytes)
         {
             var result = new StringBuilder();

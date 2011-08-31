@@ -1,4 +1,4 @@
-﻿/**
+﻿/*
  * This file is part of RIFT™ Authenticator for Windows.
  *
  * RIFT™ Authenticator for Windows is free software: you can redistribute 
@@ -22,14 +22,38 @@ using System.Text;
 
 namespace RiftAuthenticator.Library.PlatformUtils.Android
 {
+    /// <summary>
+    /// Helper class for handling map objects that contain the authenticator configuration.
+    /// </summary>
     public static class AccountMap
     {
+        /// <summary>
+        /// The map key for the description
+        /// </summary>
         public const string DescriptionKey = "description";
+        /// <summary>
+        /// The map key for the device id
+        /// </summary>
         public const string DeviceIdKey = "device_id";
+        /// <summary>
+        /// The map key for the serial key
+        /// </summary>
         public const string SerialKeyKey = "serial_key";
+        /// <summary>
+        /// The map key for the (encrypted) secret key
+        /// </summary>
         public const string SecretKeyKey = "secret_key";
+        /// <summary>
+        /// The map key for the time offset
+        /// </summary>
         public const string TimeOffsetKey = "time_offset";
 
+        /// <summary>
+        /// Reads the authenticator configuration from the map object
+        /// </summary>
+        /// <param name="accountManager">The account manager for the "account"</param>
+        /// <param name="account">The account manager to write the data to</param>
+        /// <param name="map">The map object to write the data to</param>
         public static void SetMap(IAccountManager accountManager, IAccount account, Dictionary<string, object> map)
         {
             if (map.ContainsKey(DeviceIdKey))
@@ -45,6 +69,12 @@ namespace RiftAuthenticator.Library.PlatformUtils.Android
             account.SecretKey = accountManager.SecretKeyEncryption.Decrypt(account, account.SecretKey);
         }
 
+        /// <summary>
+        /// Writes the authenticator configuration into the map object
+        /// </summary>
+        /// <param name="accountManager">The account manager for the "account"</param>
+        /// <param name="account">The account manager to get the data from</param>
+        /// <returns>The newly created map object</returns>
         public static Dictionary<string, object> GetMap(IAccountManager accountManager, IAccount account)
         {
             var map = new Dictionary<string, object>()

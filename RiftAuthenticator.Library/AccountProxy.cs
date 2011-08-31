@@ -1,4 +1,4 @@
-﻿/**
+﻿/*
  * This file is part of RIFT™ Authenticator for Windows.
  *
  * RIFT™ Authenticator for Windows is free software: you can redistribute 
@@ -22,10 +22,24 @@ using System.Text;
 
 namespace RiftAuthenticator.Library
 {
+    /// <summary>
+    /// Proxy object for account objects
+    /// </summary>
+    /// <remarks>
+    /// This object copies the data to and from the underlying account object only when
+    /// the load and save functions are called.
+    /// </remarks>
     public class AccountProxy : Library.AccountBase
     {
+        /// <summary>
+        /// The underlying account object
+        /// </summary>
         public Library.IAccount OriginalAccount { get; private set; }
 
+        /// <summary>
+        /// Create an account proxy object
+        /// </summary>
+        /// <param name="originalAccount">The account object where the data gets loaded/saved from</param>
         public AccountProxy(Library.IAccount originalAccount)
         {
             OriginalAccount = originalAccount;
@@ -50,12 +64,22 @@ namespace RiftAuthenticator.Library
             OriginalAccount.TimeOffset = this.TimeOffset;
         }
 
+        /// <summary>
+        /// Load the account information from the underlying storage device
+        /// </summary>
+        /// <param name="accountManager">The account manager that this account is assigned to</param>
+        /// <param name="accountIndex">The index that this account has in the list of accounts in the account manager (must be unique)</param>
         public override void Load(IAccountManager accountManager, int accountIndex)
         {
             //OriginalAccount.Load(accountManager, accountIndex);
             CopyDataFromOriginalAccount();
         }
 
+        /// <summary>
+        /// Save the account information to the underlying storage device
+        /// </summary>
+        /// <param name="accountManager">The account manager that this account is assigned to</param>
+        /// <param name="accountIndex">The index that this account has in the list of accounts in the account manager (must be unique)</param>
         public override void Save(IAccountManager accountManager, int accountIndex)
         {
             CopyDataToOriginalAccount();

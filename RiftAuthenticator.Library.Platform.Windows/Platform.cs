@@ -51,5 +51,20 @@ namespace RiftAuthenticator.Library.Platform.Windows
         {
             get { return GetDeviceId(); }
         }
+
+        public override string UserAgent
+        {
+            get
+            {
+                return string.Format("RIFT Mobile Authenticator {0}; Android {1} ({2}); {3}, {4}, {5};",
+                    "1.0.4",    // Authenticator version
+                    "2.3.3",    // Android version
+                    10,         // Android SDK version
+                    "GINGERBREAD",  // Android product (don't know if this is correct...)
+                    "HTC Desire",   // Cell phone model (don't know if this is correct...)
+                    "O2"        // Cell phone brand (don't know if this is correct...)
+                );
+            }
+        }
     }
 }
