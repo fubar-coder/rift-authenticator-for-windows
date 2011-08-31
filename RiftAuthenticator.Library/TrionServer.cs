@@ -1,4 +1,4 @@
-﻿/**
+﻿/*
  * This file is part of RIFT™ Authenticator for Windows.
  *
  * RIFT™ Authenticator for Windows is free software: you can redistribute 
@@ -23,25 +23,41 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace RiftAuthenticator.Library
 {
+    /// <summary>
+    /// This class encapsulates the communication with TRIONs servers
+    /// </summary>
     static public class TrionServer
     {
         const string TrionApiServer = "https://rift.trionworlds.com";
         const string TrionAuthServer = "https://auth.trionworlds.com";
 
+        private static string _defaultUserAgent = string.Format(
+            "RIFT Mobile Authenticator {0}; Android {1} ({2}); {3}, {4}, {5};",
+                "1.0.4",    // Authenticator version
+                "2.3.3",    // Android version
+                10,         // Android SDK version
+                "GINGERBREAD",  // Android product (don't know if this is correct...)
+                "HTC Desire",   // Cell phone model (don't know if this is correct...)
+                "O2"        // Cell phone brand (don't know if this is correct...)
+            );
+
+        /// <summary>
+        /// The platform object used to get and use platform specific data and functions
+        /// </summary>
         public static IPlatform Platform { get; set; }
 
-        public static string UserAgent
+        /// <summary>
+        /// The default user agent used for the HTTP requests
+        /// </summary>
+        public static string DefaultUserAgent
         {
             get
             {
-                return string.Format("RIFT Mobile Authenticator {0}; Android {1} ({2}); {3}, {4}, {5};",
-                    "1.0.4",    // Authenticator version
-                    "2.3.3",    // Android version
-                    10,         // Android SDK version
-                    "GINGERBREAD",  // Android product (don't know if this is correct...)
-                    "HTC Desire",   // Cell phone model (don't know if this is correct...)
-                    "O2"        // Cell phone brand (don't know if this is correct...)
-                );
+                return _defaultUserAgent;
+            }
+            set
+            {
+                _defaultUserAgent = value;
             }
         }
 
@@ -69,7 +85,7 @@ namespace RiftAuthenticator.Library
                     requestWriter.Flush();
                 }
             }
-            request.UserAgent = UserAgent;
+            request.UserAgent = (Platform == null ? DefaultUserAgent : Platform.UserAgent);
             var response = (System.Net.HttpWebResponse)request.GetResponse();
             using (var responseStream = response.GetResponseStream())
             {
@@ -88,6 +104,10 @@ namespace RiftAuthenticator.Library
                 dst.Write(buffer, 0, copySize);
         }
 
+        /// <summary>
+        /// Get the time difference between the client and the server
+        /// </summary>
+        /// <returns>Time difference in milliseconds</returns>
         public static long GetTimeOffset()
         {
             var uri = new Uri(string.Format("{0}{1}", TrionAuthServer, "/time"));
@@ -97,6 +117,12 @@ namespace RiftAuthenticator.Library
             return serverMillis - currentMillis;
         }
 
+        /// <summary>
+        /// Gets the security questions assigned to a RIFT account
+        /// </summary>
+        /// <param name="userName">User name for a RIFT account</param>
+        /// <param name="password">Password for a RIFT account</param>
+        /// <returns>Array of security questions. The array has a length of 2.</returns>
         public static string[] GetSecurityQuestions(string userName, string password)
         {
             var variables = new Dictionary<string, string>
@@ -130,6 +156,14 @@ namespace RiftAuthenticator.Library
             return questions;
         }
 
+        /// <summary>
+        /// Recover an authenticator configuration for a given account and device id
+        /// </summary>
+        /// <param name="account">The account to recover</param>
+        /// <param name="userName">User name for the RIFT account</param>
+        /// <param name="password">Password for the RIFT account</param>
+        /// <param name="securityQuestionAnswers">The answers to the security questions</param>
+        /// <param name="deviceId">The device id used to recover the authenticator configuration</param>
         public static void RecoverSecurityKey(IAccount account, string userName, string password, string[] securityQuestionAnswers, string deviceId)
         {
             var variables = new Dictionary<string, string>
@@ -170,6 +204,11 @@ namespace RiftAuthenticator.Library
             }
         }
 
+        /// <summary>
+        /// Creates a new security key (and other account information) for a given device id
+        /// </summary>
+        /// <param name="account">The account object used to write the new data to</param>
+        /// <param name="deviceId">The device id to create the account information</param>
         public static void CreateSecurityKey(IAccount account, string deviceId)
         {
             var variables = new Dictionary<string, string>
@@ -184,6 +223,14 @@ namespace RiftAuthenticator.Library
             account.DeviceId = deviceId;
         }
 
+        /// <summary>
+        /// Tests if the server certificate is valid.
+        /// </summary>
+        /// <param name="sender">An object that contains state information for this validation.</param>
+        /// <param name="certificate">The certificate used to authenticate the remote party.</param>
+        /// <param name="chain">The chain of certificate authorities associated with the remote certificate.</param>
+        /// <param name="sslPolicyErrors">One or more errors associated with the remote certificate.</param>
+        /// <returns>A System.Boolean value that determines whether the specified certificate is accepted for authentication.</returns>
         public static bool CertificateIsValid(object sender, X509Certificate certificate, X509Chain chain, System.Net.Security.SslPolicyErrors sslPolicyErrors)
         {
             if (sslPolicyErrors != System.Net.Security.SslPolicyErrors.None)
@@ -204,6 +251,10 @@ namespace RiftAuthenticator.Library
             return false;
         }
 
+        /// <summary>
+        /// Returns the real device ID or (if none available) a random device ID.
+        /// </summary>
+        /// <returns>The real or random device ID</returns>
         public static string GetOrCreateRandomDeviceId()
         {
             var deviceId = GetDeviceId();
@@ -212,11 +263,19 @@ namespace RiftAuthenticator.Library
             return deviceId;
         }
 
+        /// <summary>
+        /// Creates a random device ID that's accepted by TRION
+        /// </summary>
+        /// <returns>Random device ID</returns>
         public static string CreateRandomDeviceId()
         {
             return Guid.NewGuid().ToString().Replace("-", string.Empty).ToUpper();
         }
 
+        /// <summary>
+        /// Returns the real device ID
+        /// </summary>
+        /// <returns>null if no device ID available</returns>
         public static string GetDeviceId()
         {
             if (Platform == null)

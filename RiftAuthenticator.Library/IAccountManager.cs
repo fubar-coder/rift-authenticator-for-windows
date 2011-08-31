@@ -1,4 +1,4 @@
-﻿/**
+﻿/*
  * This file is part of RIFT™ Authenticator for Windows.
  *
  * RIFT™ Authenticator for Windows is free software: you can redistribute 
@@ -22,14 +22,48 @@ using System.Text;
 
 namespace RiftAuthenticator.Library
 {
+    /// <summary>
+    /// The account manager that manages all accounts for a storage device
+    /// </summary>
     public interface IAccountManager : IList<IAccount>
     {
+        /// <summary>
+        /// Creates a new account object
+        /// </summary>
+        /// <returns>The new account object</returns>
         IAccount CreateAccount();
+
+        /// <summary>
+        /// Find an account object with a given ID
+        /// </summary>
+        /// <remarks>
+        /// A valid account ID is:
+        /// - the index into the account list
+        /// - the description
+        /// - the device ID
+        /// - the authenticator serial key
+        /// </remarks>
+        /// <param name="accountId">The ID to search for</param>
+        /// <returns>The found account object or null</returns>
         IAccount FindAccount(string accountId);
 
+        /// <summary>
+        /// Load all account objects from the underlying storage device
+        /// </summary>
         void LoadAccounts();
+
+        /// <summary>
+        /// Save all account objects to the underlying storage device
+        /// </summary>
         void SaveAccounts();
 
+        /// <summary>
+        /// Get the secret key encryption object
+        /// </summary>
+        /// <remarks>
+        /// This secret key encryption object is used to encrypt and decrypt
+        /// the secret key in a platform specific way.
+        /// </remarks>
         ISecretKeyEncryption SecretKeyEncryption { get; }
     }
 }

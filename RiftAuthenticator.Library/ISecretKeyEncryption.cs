@@ -1,4 +1,4 @@
-﻿/**
+﻿/*
  * This file is part of RIFT™ Authenticator for Windows.
  *
  * RIFT™ Authenticator for Windows is free software: you can redistribute 
@@ -22,9 +22,29 @@ using System.Text;
 
 namespace RiftAuthenticator.Library
 {
+    /// <summary>
+    /// An interface to a secret key encryption/decryption object
+    /// </summary>
+    /// <remarks>
+    /// This secret key encryption object is used to encrypt and decrypt
+    /// the secret key in a platform specific way.
+    /// </remarks>
     public interface ISecretKeyEncryption
     {
+        /// <summary>
+        /// Encrypt a secret key for an account
+        /// </summary>
+        /// <param name="account">The account to encrypt the secret key for</param>
+        /// <param name="secretKey">The secret key to encrypt</param>
+        /// <returns>The encrypted secret key</returns>
         string Encrypt(IAccount account, string secretKey);
+
+        /// <summary>
+        /// Decrypt an encrypted secret key for an account
+        /// </summary>
+        /// <param name="account">The account to decrypt the secret key for</param>
+        /// <param name="encryptedSecretKey">The encrypted secret key to decrypt</param>
+        /// <returns>The decrypted secret key</returns>
         string Decrypt(IAccount account, string encryptedSecretKey);
     }
 }

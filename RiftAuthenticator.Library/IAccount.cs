@@ -1,4 +1,4 @@
-﻿/**
+﻿/*
  * This file is part of RIFT™ Authenticator for Windows.
  *
  * RIFT™ Authenticator for Windows is free software: you can redistribute 
@@ -22,20 +22,64 @@ using System.Text;
 
 namespace RiftAuthenticator.Library
 {
+    /// <summary>
+    /// Interface for Authenticator/RIFT accounts
+    /// </summary>
     public interface IAccount
     {
+        /// <summary>
+        /// Description for the account (any text)
+        /// </summary>
         string Description { get; set; }
+        /// <summary>
+        /// The device ID where the authenticator account is bound to
+        /// </summary>
         string DeviceId { get; set; }
+        /// <summary>
+        /// The serial key for the authenticator (created by TRION)
+        /// </summary>
         string SerialKey { get; set; }
+        /// <summary>
+        /// The shared secret for the authenticator
+        /// </summary>
         string SecretKey { get; set; }
+        /// <summary>
+        /// Time difference in milliseconds between the client and the TRION server
+        /// </summary>
         long TimeOffset { get; set; }
 
+        /// <summary>
+        /// Add dashes to the serial key
+        /// </summary>
         string FormattedSerialKey { get; }
+
+        /// <summary>
+        /// Is this account empty?
+        /// </summary>
+        /// <remarks>
+        /// Returns true if the authenticator is empty (i.e. not initialized, 
+        /// but may have a description)
+        /// </remarks>
         bool IsEmpty { get; }
 
+        /// <summary>
+        /// Calculates a login for RIFT
+        /// </summary>
+        /// <returns></returns>
         LoginToken CalculateToken();
 
+        /// <summary>
+        /// Load the account information from the underlying storage device
+        /// </summary>
+        /// <param name="accountManager">The account manager that this account is assigned to</param>
+        /// <param name="accountIndex">The index that this account has in the list of accounts in the account manager (must be unique)</param>
         void Load(IAccountManager accountManager, int accountIndex);
+
+        /// <summary>
+        /// Save the account information to the underlying storage device
+        /// </summary>
+        /// <param name="accountManager">The account manager that this account is assigned to</param>
+        /// <param name="accountIndex">The index that this account has in the list of accounts in the account manager (must be unique)</param>
         void Save(IAccountManager accountManager, int accountIndex);
     }
 }

@@ -1,4 +1,4 @@
-﻿/**
+﻿/*
  * This file is part of RIFT™ Authenticator for Windows.
  *
  * RIFT™ Authenticator for Windows is free software: you can redistribute 
@@ -22,10 +22,26 @@ using System.Text;
 
 namespace RiftAuthenticator.Library
 {
+    /// <summary>
+    /// This is the abstract base class for all platform objects
+    /// </summary>
     public abstract class PlatformBase : IPlatform
     {
+        /// <summary>
+        /// The device ID where the authenticator executes on
+        /// </summary>
         public abstract string DeviceId { get; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public abstract string UserAgent { get; }
+
+        /// <summary>
+        /// Create a well known platform object for a given platform ID
+        /// </summary>
+        /// <param name="platformId">Platform ID to create a platform object for</param>
+        /// <returns>The newly created platform object</returns>
         public static IPlatform LoadPlatform(string platformId)
         {
             switch (platformId)

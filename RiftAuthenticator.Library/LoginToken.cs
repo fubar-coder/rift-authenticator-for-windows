@@ -1,4 +1,4 @@
-﻿/**
+﻿/*
  * This file is part of RIFT™ Authenticator for Windows.
  *
  * RIFT™ Authenticator for Windows is free software: you can redistribute 
@@ -22,15 +22,30 @@ using System.Text;
 
 namespace RiftAuthenticator.Library
 {
+    /// <summary>
+    /// The login token object
+    /// </summary>
     public class LoginToken
     {
+        /// <summary>
+        /// Creates a new login token object
+        /// </summary>
+        /// <param name="token">The login token</param>
+        /// <param name="remainingMillis">The remaining time in milliseconds this login token is valid</param>
         public LoginToken(string token, long remainingMillis)
         {
             Token = token;
             RemainingMillis = remainingMillis;
         }
 
+        /// <summary>
+        /// The login token
+        /// </summary>
         public string Token { get; private set; }
+
+        /// <summary>
+        /// The remaining time in milliseconds this login token is valid
+        /// </summary>
         public long RemainingMillis { get; private set; }
     }
 }

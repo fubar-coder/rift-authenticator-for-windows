@@ -1,4 +1,4 @@
-﻿/**
+﻿/*
  * This file is part of RIFT™ Authenticator for Windows.
  *
  * RIFT™ Authenticator for Windows is free software: you can redistribute 
@@ -22,17 +22,43 @@ using System.Text;
 
 namespace RiftAuthenticator.Library
 {
+    /// <summary>
+    /// This is the base class for all account manager objects
+    /// </summary>
     public abstract class AccountManagerBase : List<IAccount>, IAccountManager
     {
+        /// <summary>
+        /// Creates a new account object
+        /// </summary>
+        /// <returns>The new account object</returns>
         public abstract IAccount CreateAccount();
-        public abstract int StoredAccounts { get; set; }
+
+        /// <summary>
+        /// Set or get the number of stored accounts
+        /// </summary>
+        protected abstract int StoredAccounts { get; set; }
+
+        /// <summary>
+        /// Get the secret key encryption object
+        /// </summary>
+        /// <remarks>
+        /// This secret key encryption object is used to encrypt and decrypt
+        /// the secret key in a platform specific way.
+        /// </remarks>
         public ISecretKeyEncryption SecretKeyEncryption { get; protected set; }
 
+        /// <summary>
+        /// Creates a new account manager object.
+        /// </summary>
+        /// <param name="secretKeyEncryption">The secret key encryption object used to encrypt/decrypt the secret key when saving/loading the accounts</param>
         public AccountManagerBase(ISecretKeyEncryption secretKeyEncryption)
         {
             SecretKeyEncryption = secretKeyEncryption;
         }
 
+        /// <summary>
+        /// Load all account objects from the underlying storage device
+        /// </summary>
         public virtual void LoadAccounts()
         {
             var accounts = new List<IAccount>();
@@ -46,6 +72,9 @@ namespace RiftAuthenticator.Library
             AddRange(accounts);
         }
 
+        /// <summary>
+        /// Save all account objects to the underlying storage device
+        /// </summary>
         public virtual void SaveAccounts()
         {
             for (int i = 0; i != Count; ++i)
@@ -55,6 +84,11 @@ namespace RiftAuthenticator.Library
             StoredAccounts = Count;
         }
 
+        /// <summary>
+        /// Create a well known account manager object for a given account manager ID
+        /// </summary>
+        /// <param name="accountManagerId">Account manager ID to create an account manager object for</param>
+        /// <returns>The newly created account manager object</returns>
         public static IAccountManager LoadAccountManager(string accountManagerId)
         {
             switch (accountManagerId)
@@ -83,13 +117,25 @@ namespace RiftAuthenticator.Library
             return (RiftAuthenticator.Library.IAccountManager)Activator.CreateInstance(assemblyName, typeName).Unwrap();
         }
 
+        /// <summary>
+        /// Find an account object with a given ID
+        /// </summary>
+        /// <remarks>
+        /// A valid account ID is:
+        /// - the index into the account list
+        /// - the description
+        /// - the device ID
+        /// - the authenticator serial key
+        /// </remarks>
+        /// <param name="accountId">The ID to search for</param>
+        /// <returns>The found account object or null</returns>
         public IAccount FindAccount(string accountId)
         {
             Library.IAccount foundAccount = null;
             for (int i = 0; i != Count; ++i)
             {
                 var account = this[i];
-                if (i.ToString() == accountId || account.Description == accountId || account.DeviceId == accountId)
+                if (i.ToString() == accountId || account.Description == accountId || account.DeviceId == accountId || account.SerialKey == accountId)
                 {
                     foundAccount = account;
                     break;

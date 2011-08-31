@@ -46,7 +46,7 @@ namespace RiftAuthenticator.Library.IsolatedStorage
             return new Account();
         }
 
-        public override int StoredAccounts
+        protected override int StoredAccounts
         {
             get
             {

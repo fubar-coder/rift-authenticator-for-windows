@@ -1,4 +1,4 @@
-﻿/**
+﻿/*
  * This file is part of RIFT™ Authenticator for Windows.
  *
  * RIFT™ Authenticator for Windows is free software: you can redistribute 
@@ -22,8 +22,16 @@ using System.Text;
 
 namespace RiftAuthenticator.Library.PlatformUtils.Android
 {
+    /// <summary>
+    /// Map file helper functions
+    /// </summary>
     public static class MapFile
     {
+        /// <summary>
+        /// Read a map from a stream
+        /// </summary>
+        /// <param name="stream">The stream to read the map data from</param>
+        /// <returns>The map object read from the map file</returns>
         public static Dictionary<string, object> ReadMap(System.IO.Stream stream)
         {
             var result = new Dictionary<string, object>();
@@ -52,6 +60,11 @@ namespace RiftAuthenticator.Library.PlatformUtils.Android
             return result;
         }
 
+        /// <summary>
+        /// Write a map to a stream
+        /// </summary>
+        /// <param name="stream">The stream to write the map data to</param>
+        /// <param name="map">The map object to write to the map file</param>
         public static void WriteMap(System.IO.Stream stream, Dictionary<string, object> map)
         {
             var writerSettings = new System.Xml.XmlWriterSettings()

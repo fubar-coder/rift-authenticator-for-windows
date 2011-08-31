@@ -1,4 +1,4 @@
-﻿/**
+﻿/*
  * This file is part of RIFT™ Authenticator for Windows.
  *
  * RIFT™ Authenticator for Windows is free software: you can redistribute 
@@ -22,12 +22,21 @@ using System.Text;
 
 namespace RiftAuthenticator.Library.PlatformUtils.Android
 {
+    /// <summary>
+    /// The secret key encryption class that's used on the android platform
+    /// </summary>
     public class AndroidSecretKeyEncryption : ISecretKeyEncryption
     {
         static readonly System.Text.Encoding Encoding = System.Text.Encoding.Default;
 
         const string SecretKeyDigestSeed = "TrionMasterKey_031611";
 
+        /// <summary>
+        /// Encrypt a secret key for an account
+        /// </summary>
+        /// <param name="account">The account to encrypt the secret key for</param>
+        /// <param name="secretKey">The secret key to encrypt</param>
+        /// <returns>The encrypted secret key</returns>
         public string Encrypt(IAccount account, string secretKey)
         {
             if (string.IsNullOrEmpty(secretKey))
@@ -35,6 +44,12 @@ namespace RiftAuthenticator.Library.PlatformUtils.Android
             return EncryptSecretKey(secretKey);
         }
 
+        /// <summary>
+        /// Decrypt an encrypted secret key for an account
+        /// </summary>
+        /// <param name="account">The account to decrypt the secret key for</param>
+        /// <param name="encryptedSecretKey">The encrypted secret key to decrypt</param>
+        /// <returns>The decrypted secret key</returns>
         public string Decrypt(IAccount account, string encryptedSecretKey)
         {
             if (string.IsNullOrEmpty(encryptedSecretKey))
@@ -47,11 +62,21 @@ namespace RiftAuthenticator.Library.PlatformUtils.Android
             }
         }
 
+        /// <summary>
+        /// Decrypt an encrypted secret key for an account
+        /// </summary>
+        /// <param name="encryptedSecretKey">The encrypted secret key to decrypt</param>
+        /// <returns>The decrypted secret key</returns>
         protected string DecryptSecretKey(string encryptedSecretKey)
         {
             return DecryptSecretKey(Util.HexToBytes(encryptedSecretKey));
         }
 
+        /// <summary>
+        /// Decrypt an encrypted secret key for an account
+        /// </summary>
+        /// <param name="encryptedSecretKey">The encrypted secret key to decrypt</param>
+        /// <returns>The decrypted secret key</returns>
         protected virtual string DecryptSecretKey(byte[] encryptedSecretKey)
         {
             var aes = CreateCipher();
@@ -60,11 +85,21 @@ namespace RiftAuthenticator.Library.PlatformUtils.Android
             return Encoding.GetString(decryptedSecretKey);
         }
 
+        /// <summary>
+        /// Encrypt a secret key for an account
+        /// </summary>
+        /// <param name="decryptedSecretKey">The secret key to encrypt</param>
+        /// <returns>The encrypted secret key</returns>
         protected string EncryptSecretKey(string decryptedSecretKey)
         {
             return EncryptSecretKey(Encoding.GetBytes(decryptedSecretKey));
         }
 
+        /// <summary>
+        /// Encrypt a secret key for an account
+        /// </summary>
+        /// <param name="decryptedSecretKey">The secret key to encrypt</param>
+        /// <returns>The encrypted secret key</returns>
         protected virtual string EncryptSecretKey(byte[] decryptedSecretKey)
         {
             var aes = CreateCipher();
