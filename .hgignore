@@ -3,6 +3,7 @@ syntax: glob
 *_TemporaryKey.pfx
 *.user
 bin/x86
+Debug WP7
 syntax: regexp
 /bin/Debug$
 /obj/x86$

@@ -22,7 +22,7 @@ using System.Text;
 
 namespace RiftAuthenticator.Library
 {
-    class TrionServerException : ApplicationException
+    class TrionServerException : Exception
     {
         private static string ErrorCodeToMessage(string errorCode)
         {

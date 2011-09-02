@@ -84,6 +84,7 @@ namespace RiftAuthenticator.Library
             StoredAccounts = Count;
         }
 
+#if !WINDOWS_PHONE
         /// <summary>
         /// Create a well known account manager object for a given account manager ID
         /// </summary>
@@ -116,6 +117,7 @@ namespace RiftAuthenticator.Library
             var typeName = string.Format("{0}.AccountManager", accountManagerId);
             return (RiftAuthenticator.Library.IAccountManager)Activator.CreateInstance(assemblyName, typeName).Unwrap();
         }
+#endif
 
         /// <summary>
         /// Find an account object with a given ID

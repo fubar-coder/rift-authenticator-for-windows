@@ -37,6 +37,7 @@ namespace RiftAuthenticator.Library
         /// </summary>
         public abstract string UserAgent { get; }
 
+#if !WINDOWS_PHONE
         /// <summary>
         /// Create a well known platform object for a given platform ID
         /// </summary>
@@ -59,5 +60,6 @@ namespace RiftAuthenticator.Library
             return
                 (RiftAuthenticator.Library.IPlatform)Activator.CreateInstance(assemblyName, typeName).Unwrap();
         }
+#endif
     }
 }

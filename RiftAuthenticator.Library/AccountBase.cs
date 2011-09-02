@@ -27,7 +27,7 @@ namespace RiftAuthenticator.Library
     /// </summary>
     public abstract class AccountBase : IAccount
     {
-        static readonly System.Text.Encoding Encoding = System.Text.Encoding.Default;
+        static readonly System.Text.Encoding Encoding = System.Text.Encoding.UTF8;
 
         /// <summary>
         /// Description for the account (any text)

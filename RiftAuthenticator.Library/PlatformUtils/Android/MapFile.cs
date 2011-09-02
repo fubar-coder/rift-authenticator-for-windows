@@ -35,25 +35,24 @@ namespace RiftAuthenticator.Library.PlatformUtils.Android
         public static Dictionary<string, object> ReadMap(System.IO.Stream stream)
         {
             var result = new Dictionary<string, object>();
-            var doc = new System.Xml.XmlDocument();
-            doc.Load(stream);
-            foreach (System.Xml.XmlElement xmlSetting in doc.SelectNodes("/map/*"))
+            var doc = System.Xml.Linq.XDocument.Load(stream);
+            foreach (var xmlSetting in doc.Element("map").Elements())
             {
-                var key = xmlSetting.GetAttribute("name");
+                var key = xmlSetting.Attribute("name").Value;
                 object value;
-                switch (xmlSetting.LocalName)
+                switch (xmlSetting.Name.LocalName)
                 {
                     case "string":
-                        value = xmlSetting.InnerText;
+                        value = xmlSetting.Value;
                         break;
                     case "long":
-                        value = Convert.ToInt64(xmlSetting.GetAttribute("value"));
+                        value = Convert.ToInt64(xmlSetting.Attribute("value").Value);
                         break;
                     case "int":
-                        value = Convert.ToInt32(xmlSetting.GetAttribute("value"));
+                        value = Convert.ToInt32(xmlSetting.Attribute("value").Value);
                         break;
                     default:
-                        throw new NotSupportedException(xmlSetting.LocalName);
+                        throw new NotSupportedException(xmlSetting.Name.LocalName);
                 }
                 result.Add(key, value);
             }

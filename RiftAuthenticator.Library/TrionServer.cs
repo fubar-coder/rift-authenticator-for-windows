@@ -71,7 +71,7 @@ namespace RiftAuthenticator.Library
             var request = (System.Net.HttpWebRequest)System.Net.WebRequest.Create(uri);
             if (postVariables.Count != 0)
             {
-                request.Method = System.Net.WebRequestMethods.Http.Post;
+                request.Method = "POST";
                 request.ContentType = "application/x-www-form-urlencoded";
                 using (var requestStream = request.GetRequestStream())
                 {
@@ -111,7 +111,8 @@ namespace RiftAuthenticator.Library
         public static long GetTimeOffset()
         {
             var uri = new Uri(string.Format("{0}{1}", TrionAuthServer, "/time"));
-            var requestResult = Encoding.Default.GetString(ExecuteRequest(uri));
+            var requestResultBytes = ExecuteRequest(uri);
+            var requestResult = Encoding.UTF8.GetString(requestResultBytes, 0, requestResultBytes.Length);
             var currentMillis = Util.CurrentTimeMillis();
             var serverMillis = long.Parse(requestResult);
             return serverMillis - currentMillis;
@@ -132,13 +133,12 @@ namespace RiftAuthenticator.Library
             };
             var uri = new Uri(string.Format("{0}/external/get-account-security-questions.action", TrionApiServer));
             var result = new System.IO.MemoryStream(ExecuteRequest(uri, variables));
-            var resultXml = new System.Xml.XmlDocument();
-            resultXml.Load(result);
+            var resultXml = System.Xml.Linq.XDocument.Load(result);
             var questions = new string[2];
-            foreach (System.Xml.XmlElement questionXml in resultXml.SelectNodes("/SecurityQuestions/*"))
+            foreach (var questionXml in resultXml.Element("SecurityQuestions").Elements())
             {
-                var value = (questionXml.InnerText == "null" ? null : questionXml.InnerText);
-                switch (questionXml.LocalName)
+                var value = (questionXml.Value == "null" ? null : questionXml.Value);
+                switch (questionXml.Name.LocalName)
                 {
                     case "EmailAddress":
                         // Ignore
@@ -176,18 +176,17 @@ namespace RiftAuthenticator.Library
             };
             var uri = new Uri(string.Format("{0}/external/retrieve-device-key.action", TrionApiServer));
             var result = new System.IO.MemoryStream(ExecuteRequest(uri, variables));
-            var resultXml = new System.Xml.XmlDocument();
-            resultXml.Load(result);
+            var resultXml = System.Xml.Linq.XDocument.Load(result);
             ProcessSecretKeyResult(account, resultXml);
             account.DeviceId = deviceId;
         }
 
-        private static void ProcessSecretKeyResult(IAccount account, System.Xml.XmlDocument resultXml)
+        private static void ProcessSecretKeyResult(IAccount account, System.Xml.Linq.XDocument resultXml)
         {
-            foreach (System.Xml.XmlElement itemXml in resultXml.SelectNodes("/DeviceKey/*"))
+            foreach (var itemXml in resultXml.Element("DeviceKey").Elements())
             {
-                var value = (itemXml.InnerText == "null" ? null : itemXml.InnerText);
-                switch (itemXml.LocalName)
+                var value = (itemXml.Value == "null" ? null : itemXml.Value);
+                switch (itemXml.Name.LocalName)
                 {
                     case "DeviceId":
                         account.DeviceId = value;
@@ -217,12 +216,12 @@ namespace RiftAuthenticator.Library
             };
             var uri = new Uri(string.Format("{0}/external/create-device-key", TrionApiServer));
             var result = new System.IO.MemoryStream(ExecuteRequest(uri, variables));
-            var resultXml = new System.Xml.XmlDocument();
-            resultXml.Load(result);
+            var resultXml = System.Xml.Linq.XDocument.Load(result);
             ProcessSecretKeyResult(account, resultXml);
             account.DeviceId = deviceId;
         }
 
+#if !WINDOWS_PHONE
         /// <summary>
         /// Tests if the server certificate is valid.
         /// </summary>
@@ -250,6 +249,7 @@ namespace RiftAuthenticator.Library
             }
             return false;
         }
+#endif
 
         /// <summary>
         /// Returns the real device ID or (if none available) a random device ID.

@@ -27,7 +27,7 @@ namespace RiftAuthenticator.Library.PlatformUtils.Android
     /// </summary>
     public class AndroidSecretKeyEncryption : ISecretKeyEncryption
     {
-        static readonly System.Text.Encoding Encoding = System.Text.Encoding.Default;
+        static readonly System.Text.Encoding Encoding = System.Text.Encoding.UTF8;
 
         const string SecretKeyDigestSeed = "TrionMasterKey_031611";
 
@@ -82,7 +82,7 @@ namespace RiftAuthenticator.Library.PlatformUtils.Android
             var aes = CreateCipher();
             var decryptor = aes.CreateDecryptor();
             var decryptedSecretKey = decryptor.TransformFinalBlock(encryptedSecretKey, 0, encryptedSecretKey.Length);
-            return Encoding.GetString(decryptedSecretKey);
+            return Encoding.GetString(decryptedSecretKey, 0, decryptedSecretKey.Length);
         }
 
         /// <summary>
@@ -108,16 +108,16 @@ namespace RiftAuthenticator.Library.PlatformUtils.Android
             return Util.BytesToHex(encryptedSecretKey);
         }
 
-        private static System.Security.Cryptography.RijndaelManaged CreateCipher()
+        private static System.Security.Cryptography.AesManaged CreateCipher()
         {
             var seed = Encoding.GetBytes(SecretKeyDigestSeed);
             var prng = new Org.Apache.Harmony.Security.Provider.Crypto.Sha1Prng();
             prng.AddSeedMaterial(seed);
             var aesKey = new byte[16];
             prng.NextBytes(aesKey);
-            var aes = new System.Security.Cryptography.RijndaelManaged();
+            var aes = new System.Security.Cryptography.AesManaged();
             aes.IV = new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-            aes.Mode = System.Security.Cryptography.CipherMode.ECB;
+            //aes.Mode = System.Security.Cryptography.CipherMode.ECB;
             aes.KeySize = 128;
             aes.Key = aesKey;
             return aes;

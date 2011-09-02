@@ -45,9 +45,9 @@ using System.Text;
 namespace Mono {
 
 #if MONO_DATACONVERTER_PUBLIC
-	unsafe public abstract class DataConverter {
+	public abstract class DataConverter {
 #else
-	unsafe internal abstract class DataConverter {
+	internal abstract class DataConverter {
 
 // Disables the warning: CLS compliance checking will not be performed on
 //  `XXXX' because it is not visible from outside this assembly
@@ -462,23 +462,10 @@ namespace Mono {
 					e = Encoding.Unicode;
 					n = 2;
 					break;
-				case '7':
-					e = Encoding.UTF7;
-					n = 1;
-					break;
 				case 'b':
 					e = Encoding.BigEndianUnicode;
 					n = 2;
 					break;
-				case '3':
-					e = Encoding.GetEncoding (12000);
-					n = 4;
-					break;
-				case '4':
-					e = Encoding.GetEncoding (12001);
-					n = 4;
-					break;
-					
 				default:
 					throw new ArgumentException ("Invalid format for $ specifier", "description");
 				}
@@ -511,7 +498,7 @@ namespace Mono {
 		static public IList Unpack (string description, byte [] buffer, int startIndex)
 		{
 			DataConverter conv = CopyConv;
-			ArrayList result = new ArrayList ();
+			var result = new System.Collections.Generic.List<object>();
 			int idx = startIndex;
 			bool align = false;
 			int repeat = 0, n;
@@ -670,23 +657,10 @@ namespace Mono {
 						e = Encoding.Unicode;
 						n = 2;
 						break;
-					case '7':
-						e = Encoding.UTF7;
-						n = 1;
-						break;
 					case 'b':
 						e = Encoding.BigEndianUnicode;
 						n = 2;
 						break;
-					case '3':
-						e = Encoding.GetEncoding (12000);
-						n = 4;
-						break;
-					case '4':
-						e = Encoding.GetEncoding (12001);
-						n = 4;
-						break;
-					
 					default:
 						throw new ArgumentException ("Invalid format for $ specifier", "description");
 					}
