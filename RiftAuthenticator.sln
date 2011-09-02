@@ -1,0 +1,86 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiftAuthenticator.WPF", "RiftAuthenticator.WPF\RiftAuthenticator.WPF.csproj", "{C0156421-FA95-4631-82C1-85AA7CC65B5E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiftAuthenticator.Library", "RiftAuthenticator.Library\RiftAuthenticator.Library.csproj", "{E31E2621-6D52-49A9-B7D4-AC75862518D8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiftAuthenticator.WinForms", "RiftAuthenticator.WinForms\RiftAuthenticator.WinForms.csproj", "{AC8AE1B0-4423-4FAA-9410-8808FA2E6BE4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiftAuthenticator.CommandLine", "RiftAuthenticator.CommandLine\RiftAuthenticator.CommandLine.csproj", "{D601A1A4-91E2-4870-88C4-2778AC674532}"
+EndProject
+Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "RiftAuthenticatorSetup", "RiftAuthenticatorSetup\RiftAuthenticatorSetup.wixproj", "{E839ABD9-2570-46D3-95D6-B76BC7AE2978}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E31E2621-6D52-49A9-B7D4-AC75862518D8} = {E31E2621-6D52-49A9-B7D4-AC75862518D8}
+		{C0156421-FA95-4631-82C1-85AA7CC65B5E} = {C0156421-FA95-4631-82C1-85AA7CC65B5E}
+		{D601A1A4-91E2-4870-88C4-2778AC674532} = {D601A1A4-91E2-4870-88C4-2778AC674532}
+		{AC8AE1B0-4423-4FAA-9410-8808FA2E6BE4} = {AC8AE1B0-4423-4FAA-9410-8808FA2E6BE4}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{B617ECB2-9836-4AF0-80D6-416CE9F6069A}"
+	ProjectSection(SolutionItems) = preProject
+		Images\RiftLogo.ico = Images\RiftLogo.ico
+		Images\RiftLogo.png = Images\RiftLogo.png
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "LicenseStuff", "LicenseStuff", "{11772DD4-180D-45F3-934F-27CFECEA388C}"
+	ProjectSection(SolutionItems) = preProject
+		copying.txt = copying.txt
+		gpl-3.0.txt = gpl-3.0.txt
+		readme.txt = readme.txt
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiftAuthenticator.Library.Registry", "RiftAuthenticator.Library.Registry\RiftAuthenticator.Library.Registry.csproj", "{488805C2-F094-4AB2-AAF4-0A555F36095A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiftAuthenticator.Library.FileSystem", "RiftAuthenticator.Library.FileSystem\RiftAuthenticator.Library.FileSystem.csproj", "{D463F9A5-E676-47D6-9740-D2548748EBC3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiftAuthenticator.Library.IsolatedStorage", "RiftAuthenticator.Library.IsolatedStorage\RiftAuthenticator.Library.IsolatedStorage.csproj", "{F3EA0BAB-AF7E-4792-A5BB-5DBCA872E161}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiftAuthenticator.Library.Platform.Windows", "RiftAuthenticator.Library.Platform.Windows\RiftAuthenticator.Library.Platform.Windows.csproj", "{580DF75F-6D5D-409B-9F4C-64F8F9B0A9C6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C0156421-FA95-4631-82C1-85AA7CC65B5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0156421-FA95-4631-82C1-85AA7CC65B5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0156421-FA95-4631-82C1-85AA7CC65B5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0156421-FA95-4631-82C1-85AA7CC65B5E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E31E2621-6D52-49A9-B7D4-AC75862518D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E31E2621-6D52-49A9-B7D4-AC75862518D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E31E2621-6D52-49A9-B7D4-AC75862518D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E31E2621-6D52-49A9-B7D4-AC75862518D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC8AE1B0-4423-4FAA-9410-8808FA2E6BE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC8AE1B0-4423-4FAA-9410-8808FA2E6BE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC8AE1B0-4423-4FAA-9410-8808FA2E6BE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC8AE1B0-4423-4FAA-9410-8808FA2E6BE4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D601A1A4-91E2-4870-88C4-2778AC674532}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D601A1A4-91E2-4870-88C4-2778AC674532}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D601A1A4-91E2-4870-88C4-2778AC674532}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D601A1A4-91E2-4870-88C4-2778AC674532}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E839ABD9-2570-46D3-95D6-B76BC7AE2978}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{E839ABD9-2570-46D3-95D6-B76BC7AE2978}.Release|Any CPU.ActiveCfg = Release|x86
+		{E839ABD9-2570-46D3-95D6-B76BC7AE2978}.Release|Any CPU.Build.0 = Release|x86
+		{488805C2-F094-4AB2-AAF4-0A555F36095A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{488805C2-F094-4AB2-AAF4-0A555F36095A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{488805C2-F094-4AB2-AAF4-0A555F36095A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{488805C2-F094-4AB2-AAF4-0A555F36095A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D463F9A5-E676-47D6-9740-D2548748EBC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D463F9A5-E676-47D6-9740-D2548748EBC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D463F9A5-E676-47D6-9740-D2548748EBC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D463F9A5-E676-47D6-9740-D2548748EBC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3EA0BAB-AF7E-4792-A5BB-5DBCA872E161}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3EA0BAB-AF7E-4792-A5BB-5DBCA872E161}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3EA0BAB-AF7E-4792-A5BB-5DBCA872E161}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3EA0BAB-AF7E-4792-A5BB-5DBCA872E161}.Release|Any CPU.Build.0 = Release|Any CPU
+		{580DF75F-6D5D-409B-9F4C-64F8F9B0A9C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{580DF75F-6D5D-409B-9F4C-64F8F9B0A9C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{580DF75F-6D5D-409B-9F4C-64F8F9B0A9C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{580DF75F-6D5D-409B-9F4C-64F8F9B0A9C6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

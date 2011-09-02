@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010 Express for Windows Phone
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiftAuthenticator.WP7", "RiftAuthenticator.WP7.csproj", "{23F0761B-9CD3-4A0B-99E9-0CA23322D62F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiftAuthenticator.Library.WP7", "..\RiftAuthenticator.Library\RiftAuthenticator.Library.WP7.csproj", "{E9D6EDE7-2410-4591-B8A1-BC0B3F3E3E14}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug WP7|Any CPU = Debug WP7|Any CPU
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{23F0761B-9CD3-4A0B-99E9-0CA23322D62F}.Debug WP7|Any CPU.ActiveCfg = Debug WP7|Any CPU
+		{23F0761B-9CD3-4A0B-99E9-0CA23322D62F}.Debug WP7|Any CPU.Build.0 = Debug WP7|Any CPU
+		{23F0761B-9CD3-4A0B-99E9-0CA23322D62F}.Debug WP7|Any CPU.Deploy.0 = Debug WP7|Any CPU
+		{23F0761B-9CD3-4A0B-99E9-0CA23322D62F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23F0761B-9CD3-4A0B-99E9-0CA23322D62F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23F0761B-9CD3-4A0B-99E9-0CA23322D62F}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{23F0761B-9CD3-4A0B-99E9-0CA23322D62F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23F0761B-9CD3-4A0B-99E9-0CA23322D62F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23F0761B-9CD3-4A0B-99E9-0CA23322D62F}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{E9D6EDE7-2410-4591-B8A1-BC0B3F3E3E14}.Debug WP7|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9D6EDE7-2410-4591-B8A1-BC0B3F3E3E14}.Debug WP7|Any CPU.Build.0 = Debug|Any CPU
+		{E9D6EDE7-2410-4591-B8A1-BC0B3F3E3E14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9D6EDE7-2410-4591-B8A1-BC0B3F3E3E14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9D6EDE7-2410-4591-B8A1-BC0B3F3E3E14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9D6EDE7-2410-4591-B8A1-BC0B3F3E3E14}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

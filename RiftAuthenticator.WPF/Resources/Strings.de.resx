@@ -1,0 +1,335 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Accounts.AccountGrid.Header.Description" xml:space="preserve">
+    <value>Beschreibung</value>
+  </data>
+  <data name="Accounts.AccountGrid.Header.DeviceId" xml:space="preserve">
+    <value>Geräte-ID</value>
+  </data>
+  <data name="Accounts.AccountGrid.Header.SerialKey" xml:space="preserve">
+    <value>Seriennummer</value>
+  </data>
+  <data name="Accounts.ApplyAccountChanges.Content" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="Accounts.CancelAccountChanges.Content" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="CreateNewSecretKey.AbortCreate.Content" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="CreateNewSecretKey.CreateSecretKey.Content" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="CreateNewSecretKey.DescriptionLabel.Content" xml:space="preserve">
+    <value>Beschreibung:</value>
+  </data>
+  <data name="CreateNewSecretKey.DeviceIdLabel.Content" xml:space="preserve">
+    <value>Geräte-ID:</value>
+  </data>
+  <data name="CreateNewSecretKey.RecreateDeviceId.Content" xml:space="preserve">
+    <value>Neu erstellen</value>
+  </data>
+  <data name="CreateNewSecretKey.Title" xml:space="preserve">
+    <value>Erstelle einen neuen Authentifikator</value>
+  </data>
+  <data name="FirstAppStart.CreateNewAuthLabel.Text" xml:space="preserve">
+    <value>Erstelle neue Authentifikator-Einstellungen</value>
+  </data>
+  <data name="FirstAppStart.DoNothingLabel.Text" xml:space="preserve">
+    <value>Nichts</value>
+  </data>
+  <data name="FirstAppStart.NoConfigFoundLabel.Text" xml:space="preserve">
+    <value>Keine Einstellungen gefunden. Was möchten Sie machen?</value>
+  </data>
+  <data name="FirstAppStart.RecoverOldAuthLabel.Text" xml:space="preserve">
+    <value>Wiederherstellung der alten Authentifikator- Einstellungen (Geräte-ID wird benötigt)</value>
+  </data>
+  <data name="FirstAppStart.SelectUserAction.Content" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="Information.CloseButton.Content" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="Information.DeviceIdLabel.Content" xml:space="preserve">
+    <value>Geräte-ID:</value>
+  </data>
+  <data name="Information.SecretKeyLabel.Content" xml:space="preserve">
+    <value>Geheimer Schlüssel:</value>
+  </data>
+  <data name="Information.SerialKeyLabel.Content" xml:space="preserve">
+    <value>Seriennummer:</value>
+  </data>
+  <data name="Information.TimeOffsetLabel.Content" xml:space="preserve">
+    <value>Zeitabweichung:</value>
+  </data>
+  <data name="Information.Title" xml:space="preserve">
+    <value>Informationen</value>
+  </data>
+  <data name="Login.AbortLogin.Content" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="Login.DoLogin.Content" xml:space="preserve">
+    <value>Anmelden</value>
+  </data>
+  <data name="Login.EmailLabel.Content" xml:space="preserve">
+    <value>Email:</value>
+  </data>
+  <data name="Login.PasswordLabel.Content" xml:space="preserve">
+    <value>Passwort:</value>
+  </data>
+  <data name="Login.Title" xml:space="preserve">
+    <value>Anmeldung</value>
+  </data>
+  <data name="MainWindow.AccountCreateMenu.Header" xml:space="preserve">
+    <value>_Erstellen...</value>
+  </data>
+  <data name="MainWindow.AccountExportMenu.Header" xml:space="preserve">
+    <value>E_xport...</value>
+  </data>
+  <data name="MainWindow.AccountImportMenu.Header" xml:space="preserve">
+    <value>_Import...</value>
+  </data>
+  <data name="MainWindow.AccountInformationMenu.Header" xml:space="preserve">
+    <value>_Information</value>
+  </data>
+  <data name="MainWindow.AccountLabel.Content" xml:space="preserve">
+    <value>Konten:</value>
+  </data>
+  <data name="MainWindow.AccountManageMenu.Header" xml:space="preserve">
+    <value>_Verwalten...</value>
+  </data>
+  <data name="MainWindow.AccountMenu.Header" xml:space="preserve">
+    <value>_Konto</value>
+  </data>
+  <data name="MainWindow.AccountRecoverMenu.Header" xml:space="preserve">
+    <value>_Wiederherstellung...</value>
+  </data>
+  <data name="MainWindow.ExportAccountDialog.Filter" xml:space="preserve">
+    <value>Konto-Dateien (*.xml)|*.xml|Alle Dateien (*.*)|*.*</value>
+  </data>
+  <data name="MainWindow.FileMenu.Header" xml:space="preserve">
+    <value>_Datei</value>
+  </data>
+  <data name="MainWindow.FileQuitMenu.Header" xml:space="preserve">
+    <value>_Beenden</value>
+  </data>
+  <data name="MainWindow.HelpAboutMenu.Header" xml:space="preserve">
+    <value>_Über</value>
+  </data>
+  <data name="MainWindow.HelpLicenseMenu.Header" xml:space="preserve">
+    <value>_Lizenz</value>
+  </data>
+  <data name="MainWindow.HelpMenu.Header" xml:space="preserve">
+    <value>_Hilfe</value>
+  </data>
+  <data name="MainWindow.SerialKeyLabel.Content" xml:space="preserve">
+    <value>Seriennummer:</value>
+  </data>
+  <data name="MainWindow.TimeSync.Content" xml:space="preserve">
+    <value>Zeit-Sync</value>
+  </data>
+  <data name="MainWindow.Title" xml:space="preserve">
+    <value>RIFT™ Authentifikator</value>
+  </data>
+  <data name="MessageBox.Message.About" xml:space="preserve">
+    <value>Dies ist der RIFT™ Authentifikator für Windows, geschrieben vom RIFT™ Authentifikator für Windows-Projekt.</value>
+  </data>
+  <data name="MessageBox.Message.AlreadyInitialized" xml:space="preserve">
+    <value>Authentifikator bereits eingerichtet!
+Eine erneute Einrichtung überschreibt die aktuellen Einstellungen!
+Wollen Sie fortfahren?</value>
+  </data>
+  <data name="MessageBox.Message.License" xml:space="preserve">
+    <value>Der Vertrieb dieser Anwendung unterliegt den Bedingungen der GNU General Public License Version 3.
+Das Copyright dieser Anwendung liegt bei dem RIFT™ Authenticator for Windows-Projekt mit Ausnahme einiger Teile die dem Copyright der folgenden Firmen/Projekte unterliegen:
+Novell
+The Apache Software Foundation</value>
+  </data>
+  <data name="MessageBox.Message.LoginInfoIncomplete" xml:space="preserve">
+    <value>Kein Benutzername oder Kennwort angegeben.</value>
+  </data>
+  <data name="MessageBox.Message.NoDeviceId" xml:space="preserve">
+    <value>Keine Geräte-ID angegeben.</value>
+  </data>
+  <data name="MessageBox.Message.RememberDeviceId" xml:space="preserve">
+    <value>Die Geräte-ID wurde in die Zwischenablage kopiert.
+Speichern Sie die Geräte-ID!
+Diese Geräte-ID wird benötigt um die Wiederherstellung nutzen zu können!
+Die Geräte-ID lautet {0}.</value>
+  </data>
+  <data name="MessageBox.Title.About" xml:space="preserve">
+    <value>RIFT™ Authentifikator für Windows</value>
+  </data>
+  <data name="MessageBox.Title.Error" xml:space="preserve">
+    <value>Fehler</value>
+  </data>
+  <data name="MessageBox.Title.License" xml:space="preserve">
+    <value>Lizenz-Informationen</value>
+  </data>
+  <data name="MessageBox.Title.RememberDeviceId" xml:space="preserve">
+    <value>Merken Sie sich die Geräte-ID</value>
+  </data>
+  <data name="MessageBox.Title.UserInputError" xml:space="preserve">
+    <value>Fehlerhafte Eingabe</value>
+  </data>
+  <data name="MessageBox.Title.Warning" xml:space="preserve">
+    <value>Sind Sie sicher?</value>
+  </data>
+  <data name="QueryDeviceId.AbortCreate.Content" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="QueryDeviceId.DescriptionLabel.Content" xml:space="preserve">
+    <value>Beschreibung:</value>
+  </data>
+  <data name="QueryDeviceId.DeviceIdLabel.Content" xml:space="preserve">
+    <value>Geräte-ID:</value>
+  </data>
+  <data name="QueryDeviceId.RecoverSecretKey.Content" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="QueryDeviceId.Title" xml:space="preserve">
+    <value>Wiederherstellung des Authentifikators</value>
+  </data>
+  <data name="SecurityQuestions.AbortRecovery.Content" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="SecurityQuestions.Answer1Label.Content" xml:space="preserve">
+    <value>Antwort 1:</value>
+  </data>
+  <data name="SecurityQuestions.Answer2Label.Content" xml:space="preserve">
+    <value>Antwort 2:</value>
+  </data>
+  <data name="SecurityQuestions.DoRecovery.Content" xml:space="preserve">
+    <value>Wiederherstellen</value>
+  </data>
+  <data name="SecurityQuestions.Question1Label.Content" xml:space="preserve">
+    <value>Sicherheitsfrage  1:</value>
+  </data>
+  <data name="SecurityQuestions.Question2Label.Content" xml:space="preserve">
+    <value>Sicherheitsfrage 2:</value>
+  </data>
+  <data name="SecurityQuestions.Title" xml:space="preserve">
+    <value>Sicherheitsfragen</value>
+  </data>
+  <data name="Status.NoConfig" xml:space="preserve">
+    <value>Keine Einstellungen gefunden. Einrichtung notwendig.</value>
+  </data>
+</root>
