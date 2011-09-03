@@ -14,7 +14,7 @@ namespace RiftAuthenticator.Library.Platform.WP7
         {
             DeviceId = GetDeviceUniqueId() ?? GetWindowsLiveAnonymousID();
             UserAgent = userAgent;
-            SecretKeyEncryption = new Library.PlatformUtils.Android.AndroidSecretKeyEncryption();
+            SecretKeyEncryption = new Library.PlatformUtils.WindowsPhone.WindowsPhoneSecretKeyEncryption();
         }
 
         public static string GetDeviceUniqueId()
