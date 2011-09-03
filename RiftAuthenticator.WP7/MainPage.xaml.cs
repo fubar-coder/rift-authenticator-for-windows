@@ -15,10 +15,54 @@ namespace RiftAuthenticator.WP7
 {
     public partial class MainPage : PhoneApplicationPage
     {
+        private Library.IAccountManager AccountManager { get; set; }
+
         // Constructor
         public MainPage()
         {
             InitializeComponent();
+        }
+
+        private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            GetUserAgent();
+        }
+
+        private void GetUserAgent()
+        {
+            WebBrowserForUserAgent.ScriptNotify += (sender, e) =>
+            {
+                InitAuthenticatorStuff(e.Value);
+            };
+            var htmlCode =
+@"<!DOCTYPE HTML PUBLIC ""-//W3C//DTD HTML 4.01 Transitional//EN"">
+<html>
+    <head>
+        <script language=""JavaScript"" type=""text/JavaScript"">
+            function printUserAgent() {
+                window.external.notify(navigator.userAgent);
+            }
+        </script>
+    </head>
+    <body onload=""printUserAgent();"">
+    </body>
+</html>";
+            WebBrowserForUserAgent.NavigateToString(htmlCode);
+        }
+
+        private void InitAuthenticatorStuff(string userAgent)
+        {
+            Library.TrionServer.Platform = new Library.Platform.WP7.Platform(userAgent);
+            AccountManager = new Library.IsolatedStorage.AccountManager();
+            if (AccountManager.Count == 0)
+            {
+                StartNoConfigWizard();
+            }
+        }
+
+        private void StartNoConfigWizard()
+        {
+            NavigationService.Navigate(new Uri("/NoConfigPage.xaml", UriKind.Relative));
         }
     }
 }
