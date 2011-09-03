@@ -85,6 +85,15 @@ namespace RiftAuthenticator.Library
             return ExecuteRequest(uri, new Dictionary<string, string>());
         }
 
+        private static string UrlEncode(string value)
+        {
+#if WINDOWS_PHONE
+            return System.Net.HttpUtility.UrlEncode(value);
+#else
+            return Uri.EscapeDataString(value);
+#endif
+        }
+
         private static byte[] ExecuteRequest(Uri uri, Dictionary<string, string> postVariables)
         {
             var request = (System.Net.HttpWebRequest)System.Net.WebRequest.Create(uri);
@@ -99,7 +108,7 @@ namespace RiftAuthenticator.Library
                     {
                         var name = postVariable.Key;
                         var value = postVariable.Value;
-                        requestWriter.WriteLine("{0}={1}", name, Uri.EscapeDataString(value));
+                        requestWriter.WriteLine("{0}={1}", name, UrlEncode(value));
                     }
                     requestWriter.Flush();
                 }
