@@ -31,6 +31,25 @@ namespace RiftAuthenticator.Library.PlatformUtils.Android
 
         const string SecretKeyDigestSeed = "TrionMasterKey_031611";
 
+        private byte[] _aesInitVector = new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        public AndroidSecretKeyEncryption()
+        {
+        }
+
+        /// <summary>
+        /// Constructs a AndroidSecretKeyEncryption object
+        /// </summary>
+        /// <param name="aesInitVector">The IV for the AES encryption. It must have a length of 16 bytes.</param>
+        public AndroidSecretKeyEncryption(byte[] aesInitVector)
+        {
+            System.Diagnostics.Debug.Assert(aesInitVector == null || aesInitVector.Length == 16);
+            _aesInitVector = aesInitVector ?? _aesInitVector;
+        }
+
         /// <summary>
         /// Encrypt a secret key for an account
         /// </summary>
@@ -108,7 +127,7 @@ namespace RiftAuthenticator.Library.PlatformUtils.Android
             return Util.BytesToHex(encryptedSecretKey);
         }
 
-        private static System.Security.Cryptography.AesManaged CreateCipher()
+        private System.Security.Cryptography.AesManaged CreateCipher()
         {
             var seed = Encoding.GetBytes(SecretKeyDigestSeed);
             var prng = new Org.Apache.Harmony.Security.Provider.Crypto.Sha1Prng();
@@ -116,8 +135,10 @@ namespace RiftAuthenticator.Library.PlatformUtils.Android
             var aesKey = new byte[16];
             prng.NextBytes(aesKey);
             var aes = new System.Security.Cryptography.AesManaged();
-            aes.IV = new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-            //aes.Mode = System.Security.Cryptography.CipherMode.ECB;
+            aes.IV = _aesInitVector;
+#if !WINDOWS_PHONE
+            aes.Mode = System.Security.Cryptography.CipherMode.ECB;
+#endif
             aes.KeySize = 128;
             aes.Key = aesKey;
             return aes;
