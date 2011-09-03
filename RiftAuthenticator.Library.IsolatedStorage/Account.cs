@@ -40,7 +40,7 @@ namespace RiftAuthenticator.Library.IsolatedStorage
             {
                 if (storage.GetFileNames(fileName).Length == 1)
                 {
-                    using (var stream = new System.IO.IsolatedStorage.IsolatedStorageFileStream(fileName, System.IO.FileMode.Open, System.IO.FileAccess.Read))
+                    using (var stream = new System.IO.IsolatedStorage.IsolatedStorageFileStream(fileName, System.IO.FileMode.Open, System.IO.FileAccess.Read, storage))
                     {
                         result = PlatformUtils.Android.MapFile.ReadMap(stream);
                         stream.Close();
@@ -50,7 +50,6 @@ namespace RiftAuthenticator.Library.IsolatedStorage
                 {
                     result = new Dictionary<string, object>();
                 }
-                storage.Close();
             }
             return result;
         }
@@ -59,12 +58,11 @@ namespace RiftAuthenticator.Library.IsolatedStorage
         {
             using (var storage = CreateIsolatedStorageFile())
             {
-                using (var stream = new System.IO.IsolatedStorage.IsolatedStorageFileStream(fileName, System.IO.FileMode.Create, System.IO.FileAccess.Write))
+                using (var stream = new System.IO.IsolatedStorage.IsolatedStorageFileStream(fileName, System.IO.FileMode.Create, System.IO.FileAccess.Write, storage))
                 {
                     PlatformUtils.Android.MapFile.WriteMap(stream, map);
                     stream.Close();
                 }
-                storage.Close();
             }
         }
 
