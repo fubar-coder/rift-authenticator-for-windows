@@ -89,6 +89,9 @@
       <DependentUpon>NoConfigPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RecoverAuthenticator.xaml.cs">
+      <DependentUpon>RecoverAuthenticator.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -107,22 +110,27 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="RecoverAuthenticator.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\AppManifest.xml" />
     <None Include="Properties\WMAppManifest.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ApplicationIcon.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Background.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Resource Include="Images\RiftLogo.png" />
+    <Resource Include="Background.png" />
+    <Content Include="Images\appbar.add.rest.png" />
     <Content Include="Images\appbar.edit.rest.png" />
     <Content Include="Images\appbar.feature.settings.rest.png" />
     <Content Include="Images\appbar.sync.rest.png" />
+    <Resource Include="Images\TRION\icon.png" />
+    <Resource Include="Images\TRION\rift_bg.jpg" />
+    <Resource Include="Images\TRION\rift_logo_full.png" />
+    <Resource Include="Images\TRION\rift_logo_half.png" />
+    <Resource Include="Images\TRION\trion_small.png" />
     <Content Include="SplashScreenImage.jpg" />
   </ItemGroup>
   <ItemGroup>

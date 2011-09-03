@@ -6,12 +6,12 @@ using System.Resources;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("RiftAuthenticator.WP7")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("RIFT™ Authenticator")]
+[assembly: AssemblyDescription("RIFT™ Authenticator for Windows Phone")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Microsoft")]
-[assembly: AssemblyProduct("RiftAuthenticator.WP7")]
-[assembly: AssemblyCopyright("Copyright © Microsoft 2011")]
+[assembly: AssemblyCompany("RIFT Authenticator for Windows Project")]
+[assembly: AssemblyProduct("RIFT™ Authenticator for Windows Phone")]
+[assembly: AssemblyCopyright("Copyright © RIFT Authenticator for Windows Project 2011")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

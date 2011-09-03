@@ -22,13 +22,14 @@ namespace RiftAuthenticator.WP7
 
         private string CreateDefaultAccountDescription()
         {
-            if (App.AccountManager.Count == 0)
+            var activeAccounts = App.AccountManager.Where(x => !x.IsEmpty).Count();
+            if (activeAccounts == 0)
             {
                 return "Default";
             }
             else
             {
-                var accountIndex = App.AccountManager.Count + 1;
+                var accountIndex = activeAccounts + 1;
                 string accountDescription;
                 while (App.AccountManager.FindAccount((accountDescription = string.Format("Account {0}", accountIndex))) != null)
                 {
