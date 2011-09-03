@@ -80,11 +80,6 @@ namespace RiftAuthenticator.Library
             }
         }
 
-        private static byte[] ExecuteRequest(Uri uri)
-        {
-            return ExecuteRequest(uri, new Dictionary<string, string>());
-        }
-
         private static string UrlEncode(string value)
         {
 #if WINDOWS_PHONE
@@ -106,49 +101,98 @@ namespace RiftAuthenticator.Library
             requestWriter.Flush();
         }
 
-        private static byte[] ExecuteRequest(Uri uri, Dictionary<string, string> postVariables)
+        private static void WriteRequest(System.Net.HttpWebRequest request, Dictionary<string, string> postVariables, Action requestSent)
         {
-            var timeoutMillis = 30000;
+            request.Method = "POST";
+            request.ContentType = "application/x-www-form-urlencoded";
+            var asyncRequest = request.BeginGetRequestStream((ar) =>
+            {
+                using (var requestStream = request.EndGetRequestStream(ar))
+                {
+                    WritePostVariables(requestStream, postVariables);
+                }
+                requestSent();
+            }, null);
+        }
+
+        class ExecuteRequestAsyncResult : Helpers.AsyncResult<byte[]>
+        {
+            private Dictionary<string, string> PostVariables { get; set; }
+            public System.Net.HttpWebRequest WebRequest { get; private set; }
+
+            public ExecuteRequestAsyncResult(AsyncCallback userCallback, object stateObject, object owner, string operationId, System.Net.HttpWebRequest request, Dictionary<string, string> postVariables)
+                : base(userCallback, stateObject, owner, operationId)
+            {
+                WebRequest = request;
+                PostVariables = postVariables;
+            }
+
+            private void ReadResponse(bool rethrowExceptions)
+            {
+                try
+                {
+                    var asyncResponse = WebRequest.BeginGetResponse((ar) =>
+                    {
+                        try
+                        {
+                            var response = WebRequest.EndGetResponse(ar);
+                            var buffer = new System.IO.MemoryStream();
+                            using (var responseStream = response.GetResponseStream())
+                            {
+                                CopyTo(responseStream, buffer);
+                            }
+                            SetResult(buffer.ToArray());
+                            Complete(null, ar.CompletedSynchronously);
+                        }
+                        catch (System.Net.WebException ex)
+                        {
+                            Complete(ex);
+                        }
+                    }, null);
+                }
+                catch (System.Net.WebException ex)
+                {
+                    if (rethrowExceptions)
+                        throw;
+                    Complete(ex);
+                }
+            }
+
+            internal override void Process()
+            {
+                if (PostVariables.Count != 0)
+                {
+                    WebRequest.Method = "POST";
+                    WebRequest.ContentType = "application/x-www-form-urlencoded";
+                    WriteRequest(WebRequest, PostVariables, () =>
+                    {
+                        ReadResponse(false);
+                    });
+                }
+                else
+                {
+                    ReadResponse(true);
+                }
+            }
+        }
+
+        private static IAsyncResult BeginExecuteRequest(Uri uri, AsyncCallback userCallback, object stateObject)
+        {
+            return BeginExecuteRequest(uri, new Dictionary<string, string>(), userCallback, stateObject);
+        }
+
+        private static IAsyncResult BeginExecuteRequest(Uri uri, Dictionary<string, string> postVariables, AsyncCallback userCallback, object stateObject)
+        {
             var request = (System.Net.HttpWebRequest)System.Net.WebRequest.Create(uri);
             request.UserAgent = (Platform == null ? DefaultUserAgent : (Platform.UserAgent ?? DefaultUserAgent));
-            if (postVariables.Count != 0)
-            {
-                request.Method = "POST";
-                request.ContentType = "application/x-www-form-urlencoded";
+            var result = new ExecuteRequestAsyncResult(userCallback, stateObject, typeof(TrionServer), "execute-request", request, postVariables);
+            result.Process();
+            return result;
+        }
 
-                var requestSentEvent = new System.Threading.AutoResetEvent(false);
-                var asyncRequest = request.BeginGetRequestStream((ar) =>
-                {
-                    using (var requestStream = request.EndGetRequestStream(ar))
-                    {
-                        WritePostVariables(requestStream, postVariables);
-                    }
-                    requestSentEvent.Set();
-                }, null);
-                if (!requestSentEvent.WaitOne(timeoutMillis))
-                {
-                    request.Abort();
-                }
-            }
-
-            var buffer = new System.IO.MemoryStream();
-
-            var responseReceivedEvent = new System.Threading.AutoResetEvent(false);
-            var asyncResponse = request.BeginGetResponse((ar) =>
-            {
-                var response = request.EndGetResponse(ar);
-                using (var responseStream = response.GetResponseStream())
-                {
-                    CopyTo(responseStream, buffer);
-                }
-                responseReceivedEvent.Set();
-            }, null);
-            if (!responseReceivedEvent.WaitOne(timeoutMillis))
-            {
-                request.Abort();
-            }
-            
-            return buffer.ToArray();
+        private static byte[] EndExecuteRequest(IAsyncResult asyncResult)
+        {
+            return Helpers.AsyncResult<byte[]>.End(asyncResult, typeof(TrionServer), "execute-request");
         }
 
         private static void CopyTo(System.IO.Stream src, System.IO.Stream dst)
@@ -160,18 +204,111 @@ namespace RiftAuthenticator.Library
                 dst.Write(buffer, 0, copySize);
         }
 
+        class ExecuteTimeOffsetAsyncResult : Helpers.AsyncResult<long>
+        {
+            public Uri RequestUri { get; private set; }
+
+            public ExecuteTimeOffsetAsyncResult(Uri uri, AsyncCallback userCallback, object stateObject, object owner, string operationId)
+                : base(userCallback, stateObject, owner, operationId)
+            {
+                RequestUri = uri;
+            }
+
+            internal override void Process()
+            {
+                TrionServer.BeginExecuteRequest(RequestUri, (ar) =>
+                {
+                    try
+                    {
+                        var requestResultBytes = TrionServer.EndExecuteRequest(ar);
+                        var requestResult = Encoding.UTF8.GetString(requestResultBytes, 0, requestResultBytes.Length);
+                        var currentMillis = Util.CurrentTimeMillis();
+                        var serverMillis = long.Parse(requestResult);
+                        SetResult(serverMillis - currentMillis);
+                        Complete(null, ar.CompletedSynchronously);
+                    }
+                    catch (System.Net.WebException ex)
+                    {
+                        Complete(ex, false);
+                    }
+                }, null);
+            }
+        }
+
         /// <summary>
         /// Get the time difference between the client and the server
         /// </summary>
         /// <returns>Time difference in milliseconds</returns>
-        public static long GetTimeOffset()
+        public static IAsyncResult BeginGetTimeOffset(AsyncCallback userCallback, object stateObject)
         {
             var uri = new Uri(string.Format("{0}{1}", TrionAuthServer, "/time"));
-            var requestResultBytes = ExecuteRequest(uri);
-            var requestResult = Encoding.UTF8.GetString(requestResultBytes, 0, requestResultBytes.Length);
-            var currentMillis = Util.CurrentTimeMillis();
-            var serverMillis = long.Parse(requestResult);
-            return serverMillis - currentMillis;
+            var result = new ExecuteTimeOffsetAsyncResult(uri, userCallback, stateObject, typeof(TrionServer), "time-offset");
+            result.Process();
+            return result;
+        }
+
+        public static long EndGetTimeOffset(IAsyncResult asyncResult)
+        {
+            return Helpers.AsyncResult<long>.End(asyncResult, typeof(TrionServer), "time-offset");
+        }
+
+        class ExecuteGetSecurityQuestionsAsyncResult : Helpers.AsyncResult<string[]>
+        {
+            private Uri RequestUri { get; set; }
+            private Dictionary<string, string> PostVariables { get; set; }
+
+            public ExecuteGetSecurityQuestionsAsyncResult(AsyncCallback userCallback, object stateObject, object owner, string operationId, Uri requestUri, Dictionary<string, string> postVariables)
+                : base(userCallback, stateObject, owner, operationId)
+            {
+                RequestUri = requestUri;
+                PostVariables = postVariables;
+            }
+
+            internal override void Process()
+            {
+                TrionServer.BeginExecuteRequest(RequestUri, PostVariables, (ar) =>
+                {
+                    try
+                    {
+                        var requestResultBytes = TrionServer.EndExecuteRequest(ar);
+                        var resultStream = new System.IO.MemoryStream(requestResultBytes);
+                        var resultXml = System.Xml.Linq.XDocument.Load(resultStream);
+                        var questions = new string[2];
+                        foreach (var questionXml in resultXml.Element("SecurityQuestions").Elements())
+                        {
+                            var value = (questionXml.Value == "null" ? null : questionXml.Value);
+                            switch (questionXml.Name.LocalName)
+                            {
+                                case "EmailAddress":
+                                    // Ignore
+                                    break;
+                                case "FirstQuestion":
+                                    questions[0] = value;
+                                    break;
+                                case "SecondQuestion":
+                                    questions[1] = value;
+                                    break;
+                                case "ErrorCode":
+                                    throw new TrionServerException(value);
+                            }
+                        }
+                        SetResult(questions);
+                        Complete(null, ar.CompletedSynchronously);
+                    }
+                    catch (System.Net.WebException ex)
+                    {
+                        Complete(ex, false);
+                    }
+                    catch (System.Xml.XmlException ex)
+                    {
+                        Complete(ex, false);
+                    }
+                    catch (TrionServerException ex)
+                    {
+                        Complete(ex, false);
+                    }
+                }, null);
+            }
         }
 
         /// <summary>
@@ -180,7 +317,7 @@ namespace RiftAuthenticator.Library
         /// <param name="userName">User name for a RIFT account</param>
         /// <param name="password">Password for a RIFT account</param>
         /// <returns>Array of security questions. The array has a length of 2.</returns>
-        public static string[] GetSecurityQuestions(string userName, string password)
+        public static IAsyncResult BeginGetSecurityQuestions(AsyncCallback userCallback, object stateObject, string userName, string password)
         {
             var variables = new Dictionary<string, string>
             {
@@ -188,28 +325,60 @@ namespace RiftAuthenticator.Library
                 { "password", password },
             };
             var uri = new Uri(string.Format("{0}/external/get-account-security-questions.action", TrionApiServer));
-            var result = new System.IO.MemoryStream(ExecuteRequest(uri, variables));
-            var resultXml = System.Xml.Linq.XDocument.Load(result);
-            var questions = new string[2];
-            foreach (var questionXml in resultXml.Element("SecurityQuestions").Elements())
+            var result = new ExecuteGetSecurityQuestionsAsyncResult(userCallback, stateObject, typeof(TrionServer), "get-security-questions", uri, variables);
+            result.Process();
+            return result;
+        }
+
+        public static string[] EndGetSecurityQuestions(IAsyncResult asyncResult)
+        {
+            return Helpers.AsyncResult<string[]>.End(asyncResult, typeof(TrionServer), "get-security-questions");
+        }
+
+        class ExecuteRecoverSecurityKeyAsyncResult : Helpers.AsyncResult<IAccount>
+        {
+            private Uri RequestUri { get; set; }
+            private Dictionary<string, string> PostVariables { get; set; }
+            private IAccount Account { get; set; }
+            private string DeviceId { get; set; }
+
+            public ExecuteRecoverSecurityKeyAsyncResult(AsyncCallback userCallback, object stateObject, object owner, string operationId, Uri requestUri, Dictionary<string, string> postVariables, IAccount account, string deviceId)
+                : base(userCallback, stateObject, owner, operationId)
             {
-                var value = (questionXml.Value == "null" ? null : questionXml.Value);
-                switch (questionXml.Name.LocalName)
-                {
-                    case "EmailAddress":
-                        // Ignore
-                        break;
-                    case "FirstQuestion":
-                        questions[0] = value;
-                        break;
-                    case "SecondQuestion":
-                        questions[1] = value;
-                        break;
-                    case "ErrorCode":
-                        throw new TrionServerException(value);
-                }
+                Account = account;
+                RequestUri = requestUri;
+                PostVariables = postVariables;
+                DeviceId = deviceId;
             }
-            return questions;
+
+            internal override void Process()
+            {
+                TrionServer.BeginExecuteRequest(RequestUri, PostVariables, (ar) =>
+                {
+                    try
+                    {
+                        var requestResultBytes = TrionServer.EndExecuteRequest(ar);
+                        var resultStream = new System.IO.MemoryStream(requestResultBytes);
+                        var resultXml = System.Xml.Linq.XDocument.Load(resultStream);
+                        ProcessSecretKeyResult(Account, resultXml);
+                        Account.DeviceId = DeviceId;
+                        SetResult(Account);
+                        Complete(null, ar.CompletedSynchronously);
+                    }
+                    catch (System.Net.WebException ex)
+                    {
+                        Complete(ex, false);
+                    }
+                    catch (System.Xml.XmlException ex)
+                    {
+                        Complete(ex, false);
+                    }
+                    catch (TrionServerException ex)
+                    {
+                        Complete(ex, false);
+                    }
+                }, null);
+            }
         }
 
         /// <summary>
@@ -220,7 +389,7 @@ namespace RiftAuthenticator.Library
         /// <param name="password">Password for the RIFT account</param>
         /// <param name="securityQuestionAnswers">The answers to the security questions</param>
         /// <param name="deviceId">The device id used to recover the authenticator configuration</param>
-        public static void RecoverSecurityKey(IAccount account, string userName, string password, string[] securityQuestionAnswers, string deviceId)
+        public static IAsyncResult BeginRecoverSecurityKey(AsyncCallback userCallback, object stateObject, IAccount account, string userName, string password, string[] securityQuestionAnswers, string deviceId)
         {
             var variables = new Dictionary<string, string>
             {
@@ -231,10 +400,14 @@ namespace RiftAuthenticator.Library
                 { "secondSecurityAnswer", securityQuestionAnswers[1] ?? string.Empty },
             };
             var uri = new Uri(string.Format("{0}/external/retrieve-device-key.action", TrionApiServer));
-            var result = new System.IO.MemoryStream(ExecuteRequest(uri, variables));
-            var resultXml = System.Xml.Linq.XDocument.Load(result);
-            ProcessSecretKeyResult(account, resultXml);
-            account.DeviceId = deviceId;
+            var result = new ExecuteRecoverSecurityKeyAsyncResult(userCallback, stateObject, typeof(TrionServer), "recover-security-key", uri, variables, account, deviceId);
+            result.Process();
+            return result;
+        }
+
+        public static IAccount EndRecoverSecurityKey(IAsyncResult asyncResult)
+        {
+            return Helpers.AsyncResult<IAccount>.End(asyncResult, typeof(TrionServer), "recover-security-key");
         }
 
         private static void ProcessSecretKeyResult(IAccount account, System.Xml.Linq.XDocument resultXml)
@@ -264,17 +437,21 @@ namespace RiftAuthenticator.Library
         /// </summary>
         /// <param name="account">The account object used to write the new data to</param>
         /// <param name="deviceId">The device id to create the account information</param>
-        public static void CreateSecurityKey(IAccount account, string deviceId)
+        public static IAsyncResult BeginCreateSecurityKey(AsyncCallback userCallback, object stateObject, IAccount account, string deviceId)
         {
             var variables = new Dictionary<string, string>
             {
                 { "deviceId", deviceId },
             };
             var uri = new Uri(string.Format("{0}/external/create-device-key", TrionApiServer));
-            var result = new System.IO.MemoryStream(ExecuteRequest(uri, variables));
-            var resultXml = System.Xml.Linq.XDocument.Load(result);
-            ProcessSecretKeyResult(account, resultXml);
-            account.DeviceId = deviceId;
+            var result = new ExecuteRecoverSecurityKeyAsyncResult(userCallback, stateObject, typeof(TrionServer), "create-security-key", uri, variables, account, deviceId);
+            result.Process();
+            return result;
+        }
+
+        public static IAccount EndCreateSecurityKey(IAsyncResult asyncResult)
+        {
+            return Helpers.AsyncResult<IAccount>.End(asyncResult, typeof(TrionServer), "create-security-key");
         }
 
 #if !WINDOWS_PHONE
