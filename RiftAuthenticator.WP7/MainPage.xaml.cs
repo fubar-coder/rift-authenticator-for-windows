@@ -27,6 +27,20 @@ namespace RiftAuthenticator.WP7
             }
         }
 
+        private Library.IAccount Account
+        {
+            get
+            {
+                return App.Account;
+            }
+            set
+            {
+                App.Account = value;
+            }
+        }
+
+        private System.Windows.Threading.DispatcherTimer Timer;
+
         // Constructor
         public MainPage()
         {
@@ -62,30 +76,84 @@ namespace RiftAuthenticator.WP7
             WebBrowserForUserAgent.NavigateToString(htmlCode);
         }
 
+        private void SetAccount(string accountId)
+        {
+            if (AccountManager.Count == 0)
+                AccountManager.Add(AccountManager.CreateAccount());
+            if (!string.IsNullOrEmpty(accountId))
+            {
+                Account = AccountManager.FindAccount(accountId);
+            }
+            else
+            {
+                Account = AccountManager[0];
+            }
+        }
+
         private void InitAuthenticatorStuff(string userAgent)
         {
-            try
+            Dispatcher.BeginInvoke(() =>
             {
-                Library.TrionServer.Platform = new Library.Platform.WP7.Platform(userAgent);
-                AccountManager = new Library.IsolatedStorage.AccountManager();
-                AccountManager.LoadAccounts();
-                if (AccountManager.Count == 0)
+                try
                 {
-                    StartNoConfigWizard();
+                    Library.TrionServer.Platform = new Library.Platform.WP7.Platform(userAgent);
+                    AccountManager = new Library.IsolatedStorage.AccountManager();
+                    try
+                    {
+                        //AccountManager.LoadAccounts();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK);
+                        AccountManager.Clear();
+                    }
+                    if (AccountManager.Count == 0)
+                    {
+                        StartNoConfigWizard();
+                    }
+                    SetAccount(null);
+                    Timer = new System.Windows.Threading.DispatcherTimer();
+                    Timer.Interval = new TimeSpan(0, 0, 0, 0, 200);
+                    Timer.Tick += new EventHandler(Timer_Tick);
+                    Timer.Start();
                 }
-            }
-            catch (Exception ex)
-            {
-                Dispatcher.BeginInvoke(() =>
+                catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK);
-                });
-            }
+                }
+            });
+        }
+
+        void Timer_Tick(object sender, EventArgs e)
+        {
+            Dispatcher.BeginInvoke(() =>
+            {
+                RefreshToken();
+            });
         }
 
         private void StartNoConfigWizard()
         {
             NavigationService.Navigate(new Uri("/NoConfigPage.xaml", UriKind.Relative));
+        }
+
+        void RefreshToken()
+        {
+            if (Account == null || Account.IsEmpty)
+            {
+                LoginToken.Text = string.Empty;
+                SerialKey.Text = string.Empty;
+                RemainingValidTime.Value = 0;
+            }
+            else
+            {
+                if (SerialKey.Text != Account.FormattedSerialKey)
+                    SerialKey.Text = Account.FormattedSerialKey;
+                var loginToken = Account.CalculateToken();
+                if (LoginToken.Text != loginToken.Token)
+                    LoginToken.Text = loginToken.Token;
+                RemainingValidTime.Value = loginToken.RemainingMillis;
+            }
         }
     }
 }
