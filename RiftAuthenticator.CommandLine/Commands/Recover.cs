@@ -69,7 +69,9 @@ namespace RiftAuthenticator.CommandLine.Commands
                 throw new CommandArgumentException(this, Resources.Strings.opt_recover_error_no_email);
             if (string.IsNullOrEmpty(password))
                 throw new CommandArgumentException(this, Resources.Strings.opt_recover_error_no_password);
-            var securityQuestions = Library.TrionServer.GetSecurityQuestions(userName, password);
+            var ar = Library.TrionServer.BeginGetSecurityQuestions(null, null, userName, password);
+            ar.AsyncWaitHandle.WaitOne();
+            var securityQuestions = Library.TrionServer.EndGetSecurityQuestions(ar);
             var securityAnswers = new string[securityQuestions.Length];
             var argIndex = 0;
             for (int i = 0; i != securityQuestions.Length; ++i)
@@ -83,8 +85,12 @@ namespace RiftAuthenticator.CommandLine.Commands
             }
             if (argIndex < remainingArgs.Count)
                 throw new CommandArgumentException(this, string.Format(Resources.Strings.app_unknown_args, string.Join(" ", remainingArgs.ToArray())));
-            Library.TrionServer.RecoverSecurityKey(globalOptions.Account, userName, password, securityAnswers, deviceId);
-            globalOptions.Account.TimeOffset = Library.TrionServer.GetTimeOffset();
+            ar = Library.TrionServer.BeginRecoverSecurityKey(null, null, globalOptions.Account, userName, password, securityAnswers, deviceId);
+            ar.AsyncWaitHandle.WaitOne();
+            Library.TrionServer.EndRecoverSecurityKey(ar);
+            ar = Library.TrionServer.BeginGetTimeOffset(null, null);
+            ar.AsyncWaitHandle.WaitOne();
+            globalOptions.Account.TimeOffset = Library.TrionServer.EndGetTimeOffset(ar);
             globalOptions.AccountManager.SaveAccounts();
             Program.ShowConfiguration(globalOptions.Account);
         }

@@ -67,8 +67,12 @@ namespace RiftAuthenticator.CommandLine.Commands
                 throw new CommandArgumentException(this, string.Format(Resources.Strings.app_unknown_args, string.Join(" ", remainingArgs.ToArray())));
             if (!globalOptions.Account.IsEmpty && !forceOverwriteConfig)
                 throw new CommandArgumentException(this, Resources.Strings.opt_init_config_found);
-            Library.TrionServer.CreateSecurityKey(globalOptions.Account, deviceId);
-            globalOptions.Account.TimeOffset = Library.TrionServer.GetTimeOffset();
+            var ar = Library.TrionServer.BeginCreateSecurityKey(null, null, globalOptions.Account, deviceId);
+            ar.AsyncWaitHandle.WaitOne();
+            Library.TrionServer.EndCreateSecurityKey(ar);
+            ar = Library.TrionServer.BeginGetTimeOffset(null, null);
+            ar.AsyncWaitHandle.WaitOne();
+            globalOptions.Account.TimeOffset = Library.TrionServer.EndGetTimeOffset(ar);
             globalOptions.AccountManager.SaveAccounts();
             Program.ShowConfiguration(globalOptions.Account);
         }

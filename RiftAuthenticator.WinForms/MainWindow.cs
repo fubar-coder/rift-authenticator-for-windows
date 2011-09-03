@@ -189,7 +189,9 @@ namespace RiftAuthenticator.WinForms
 
         private void ExecuteTimeSync()
         {
-            Account.TimeOffset = Library.TrionServer.GetTimeOffset();
+            var ar = Library.TrionServer.BeginGetTimeOffset(null, null);
+            ar.AsyncWaitHandle.WaitOne();
+            Account.TimeOffset = Library.TrionServer.EndGetTimeOffset(ar);
             AccountManager.SaveAccounts();
             UpdateAccountList();
         }
@@ -240,8 +242,12 @@ namespace RiftAuthenticator.WinForms
                 return false;
 
             var deviceId = dlg.DeviceId.Text;
-            Library.TrionServer.CreateSecurityKey(newAccount, deviceId);
-            newAccount.TimeOffset = Library.TrionServer.GetTimeOffset();
+            var ar = Library.TrionServer.BeginCreateSecurityKey(null, null, newAccount, deviceId);
+            ar.AsyncWaitHandle.WaitOne();
+            Library.TrionServer.EndCreateSecurityKey(ar);
+            ar = Library.TrionServer.BeginGetTimeOffset(null, null);
+            ar.AsyncWaitHandle.WaitOne();
+            newAccount.TimeOffset = Library.TrionServer.EndGetTimeOffset(ar);
             newAccount.Description = dlg.Description.Text;
             SaveNewAccountObject(newAccount);
             RefreshToken();
@@ -275,7 +281,9 @@ namespace RiftAuthenticator.WinForms
                 return;
             }
 
-            var questions = Library.TrionServer.GetSecurityQuestions(userEmail, userPassword);
+            var ar = Library.TrionServer.BeginGetSecurityQuestions(null, null, userEmail, userPassword);
+            ar.AsyncWaitHandle.WaitOne();
+            var questions = Library.TrionServer.EndGetSecurityQuestions(ar);
 
             var dlgSecurityQuestions = new SecurityQuestions() { Owner = this };
             dlgSecurityQuestions.SecurityAnswer1.Enabled =
@@ -299,8 +307,12 @@ namespace RiftAuthenticator.WinForms
                 dlgSecurityQuestions.SecurityAnswer1.Text,
                 dlgSecurityQuestions.SecurityAnswer2.Text,
             };
-            Library.TrionServer.RecoverSecurityKey(newAccount, userEmail, userPassword, securityAnswers, deviceId);
-            newAccount.TimeOffset = Library.TrionServer.GetTimeOffset();
+            ar = Library.TrionServer.BeginRecoverSecurityKey(null, null, newAccount, userEmail, userPassword, securityAnswers, deviceId);
+            ar.AsyncWaitHandle.WaitOne();
+            Library.TrionServer.EndRecoverSecurityKey(ar);
+            ar = Library.TrionServer.BeginGetTimeOffset(null, null);
+            ar.AsyncWaitHandle.WaitOne();
+            newAccount.TimeOffset = Library.TrionServer.EndGetTimeOffset(ar);
             newAccount.Description = dlgDeviceId.Description.Text;
             SaveNewAccountObject(newAccount);
         }
