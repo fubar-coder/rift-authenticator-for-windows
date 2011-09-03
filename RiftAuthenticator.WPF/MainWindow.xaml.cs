@@ -96,7 +96,15 @@ namespace RiftAuthenticator
             SetPlatform(appSettings);
             SetAccountManager(appSettings);
             System.Net.ServicePointManager.ServerCertificateValidationCallback = Library.TrionServer.CertificateIsValid;
-            AccountManager.LoadAccounts();
+            try
+            {
+                AccountManager.LoadAccounts();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(this, ex.Message, App.Localization.Get("MessageBox.Title.Error"), MessageBoxButton.OK, MessageBoxImage.Error);
+                AccountManager.Clear();
+            }
             SetAccount(appSettings);
             UpdateAccountList();
             StartWizardIfConfigEmpty();

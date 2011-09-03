@@ -96,7 +96,15 @@ namespace RiftAuthenticator.WinForms
             SetPlatform(appSettings);
             SetAccountManager(appSettings);
             System.Net.ServicePointManager.ServerCertificateValidationCallback = Library.TrionServer.CertificateIsValid;
-            AccountManager.LoadAccounts();
+            try
+            {
+                AccountManager.LoadAccounts();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(this, ex.Message, Resources.Strings.MessageBox_Title_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                AccountManager.Clear();
+            }
             SetAccount(appSettings);
             UpdateAccountList();
             StartWizardIfConfigEmpty();
@@ -161,7 +169,7 @@ namespace RiftAuthenticator.WinForms
 
         private void TokenUpdateTimer_Tick(object sender, EventArgs e)
         {
-            if (Account.IsEmpty)
+            if (Account == null || Account.IsEmpty)
                 return;
             RefreshToken();
         }
