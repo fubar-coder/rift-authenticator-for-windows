@@ -17,6 +17,9 @@ namespace RiftAuthenticator.WP7
 {
     public partial class App : Application
     {
+        public static Library.IAccountManager AccountManager { get; set; }
+        public static Library.IAccount Account { get; set; }
+
         /// <summary>
         /// Provides easy access to the root frame of the Phone Application.
         /// </summary>

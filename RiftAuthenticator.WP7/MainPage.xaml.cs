@@ -15,7 +15,17 @@ namespace RiftAuthenticator.WP7
 {
     public partial class MainPage : PhoneApplicationPage
     {
-        private Library.IAccountManager AccountManager { get; set; }
+        private Library.IAccountManager AccountManager
+        {
+            get
+            {
+                return App.AccountManager;
+            }
+            set
+            {
+                App.AccountManager = value;
+            }
+        }
 
         // Constructor
         public MainPage()
@@ -25,6 +35,8 @@ namespace RiftAuthenticator.WP7
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
+            while (NavigationService.CanGoBack)
+                NavigationService.RemoveBackEntry();
             GetUserAgent();
         }
 
