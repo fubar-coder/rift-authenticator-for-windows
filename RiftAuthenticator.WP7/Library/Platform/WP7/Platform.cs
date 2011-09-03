@@ -9,11 +9,12 @@ namespace RiftAuthenticator.Library.Platform.WP7
     {
         private static readonly int ANIDLength = 32;
         private static readonly int ANIDOffset = 2;
-        
+
         public Platform(string userAgent)
         {
             DeviceId = GetDeviceUniqueId() ?? GetWindowsLiveAnonymousID();
             UserAgent = userAgent;
+            SecretKeyEncryption = new Library.PlatformUtils.Android.AndroidSecretKeyEncryption();
         }
 
         public static string GetDeviceUniqueId()
@@ -83,9 +84,6 @@ namespace RiftAuthenticator.Library.Platform.WP7
 
         public string UserAgent { get; private set; }
 
-        public ISecretKeyEncryption SecretKeyEncryption
-        {
-            get { throw new NotImplementedException(); }
-        }
+        public ISecretKeyEncryption SecretKeyEncryption { get; private set; }
     }
 }
