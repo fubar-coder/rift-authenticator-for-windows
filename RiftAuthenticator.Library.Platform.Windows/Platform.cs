@@ -59,5 +59,10 @@ namespace RiftAuthenticator.Library.Platform.Windows
                 return null;
             }
         }
+
+        public override ISecretKeyEncryption SecretKeyEncryption
+        {
+            get { return null; }
+        }
     }
 }

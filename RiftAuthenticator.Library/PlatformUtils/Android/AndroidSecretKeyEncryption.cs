@@ -41,16 +41,6 @@ namespace RiftAuthenticator.Library.PlatformUtils.Android
         }
 
         /// <summary>
-        /// Constructs a AndroidSecretKeyEncryption object
-        /// </summary>
-        /// <param name="aesInitVector">The IV for the AES encryption. It must have a length of 16 bytes.</param>
-        public AndroidSecretKeyEncryption(byte[] aesInitVector)
-        {
-            System.Diagnostics.Debug.Assert(aesInitVector == null || aesInitVector.Length == 16);
-            _aesInitVector = aesInitVector ?? _aesInitVector;
-        }
-
-        /// <summary>
         /// Encrypt a secret key for an account
         /// </summary>
         /// <param name="account">The account to encrypt the secret key for</param>
@@ -127,7 +117,11 @@ namespace RiftAuthenticator.Library.PlatformUtils.Android
             return Util.BytesToHex(encryptedSecretKey);
         }
 
-        private System.Security.Cryptography.AesManaged CreateCipher()
+        /// <summary>
+        /// Creates a symmetric cipher used to encrypt and decrypt the secret keys
+        /// </summary>
+        /// <returns>Symmetric cipher used for encryption and decvryption</returns>
+        protected virtual System.Security.Cryptography.SymmetricAlgorithm CreateCipher()
         {
             var seed = Encoding.GetBytes(SecretKeyDigestSeed);
             var prng = new Org.Apache.Harmony.Security.Provider.Crypto.Sha1Prng();

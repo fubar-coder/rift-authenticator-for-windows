@@ -162,7 +162,7 @@ namespace RiftAuthenticator.CommandLine
                 Console.Out.WriteLine(Resources.Strings.app_info_description, account.Description);
                 Console.Out.WriteLine(Resources.Strings.app_info_device_id, account.DeviceId);
                 Console.Out.WriteLine(Resources.Strings.app_info_serial_key, account.FormattedSerialKey);
-                Console.Out.WriteLine(Resources.Strings.app_info_encrypted_secret_key, GlobalOptions.AccountManager.SecretKeyEncryption.Encrypt(account, account.SecretKey));
+                Console.Out.WriteLine(Resources.Strings.app_info_encrypted_secret_key, Library.TrionServer.SecretKeyEncryption.Encrypt(account, account.SecretKey));
                 Console.Out.WriteLine(Resources.Strings.app_info_time_offset, account.TimeOffset);
             }
         }

@@ -36,5 +36,14 @@ namespace RiftAuthenticator.Library
         /// This is the user agent used for the HTTP communication
         /// </summary>
         string UserAgent { get; }
+
+        /// <summary>
+        /// Get the secret key encryption object
+        /// </summary>
+        /// <remarks>
+        /// This secret key encryption object is used to encrypt and decrypt
+        /// the secret key in a platform specific way.
+        /// </remarks>
+        ISecretKeyEncryption SecretKeyEncryption { get; }
     }
 }

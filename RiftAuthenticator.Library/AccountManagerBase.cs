@@ -39,24 +39,6 @@ namespace RiftAuthenticator.Library
         protected abstract int StoredAccounts { get; set; }
 
         /// <summary>
-        /// Get the secret key encryption object
-        /// </summary>
-        /// <remarks>
-        /// This secret key encryption object is used to encrypt and decrypt
-        /// the secret key in a platform specific way.
-        /// </remarks>
-        public ISecretKeyEncryption SecretKeyEncryption { get; protected set; }
-
-        /// <summary>
-        /// Creates a new account manager object.
-        /// </summary>
-        /// <param name="secretKeyEncryption">The secret key encryption object used to encrypt/decrypt the secret key when saving/loading the accounts</param>
-        public AccountManagerBase(ISecretKeyEncryption secretKeyEncryption)
-        {
-            SecretKeyEncryption = secretKeyEncryption;
-        }
-
-        /// <summary>
         /// Load all account objects from the underlying storage device
         /// </summary>
         public virtual void LoadAccounts()
