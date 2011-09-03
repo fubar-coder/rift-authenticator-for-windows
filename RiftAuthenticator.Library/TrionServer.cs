@@ -41,10 +41,29 @@ namespace RiftAuthenticator.Library
                 "O2"        // Cell phone brand (don't know if this is correct...)
             );
 
+        private static ISecretKeyEncryption _defaultSecretKeyEncryption = new PlatformUtils.Android.AndroidSecretKeyEncryption();
+
         /// <summary>
         /// The platform object used to get and use platform specific data and functions
         /// </summary>
         public static IPlatform Platform { get; set; }
+
+        /// <summary>
+        /// Get the secret key encryption object
+        /// </summary>
+        /// <remarks>
+        /// This secret key encryption object is used to encrypt and decrypt
+        /// the secret key in a platform specific way.
+        /// </remarks>
+        public static ISecretKeyEncryption SecretKeyEncryption
+        {
+            get
+            {
+                if (Platform == null || Platform.SecretKeyEncryption == null)
+                    return _defaultSecretKeyEncryption;
+                return Platform.SecretKeyEncryption;
+            }
+        }
 
         /// <summary>
         /// The default user agent used for the HTTP requests

@@ -33,9 +33,18 @@ namespace RiftAuthenticator.Library
         public abstract string DeviceId { get; }
 
         /// <summary>
-        /// 
+        /// This is the user agent used for the HTTP communication
         /// </summary>
         public abstract string UserAgent { get; }
+
+        /// <summary>
+        /// Get the secret key encryption object
+        /// </summary>
+        /// <remarks>
+        /// This secret key encryption object is used to encrypt and decrypt
+        /// the secret key in a platform specific way.
+        /// </remarks>
+        public abstract ISecretKeyEncryption SecretKeyEncryption { get; }
 
 #if !WINDOWS_PHONE
         /// <summary>

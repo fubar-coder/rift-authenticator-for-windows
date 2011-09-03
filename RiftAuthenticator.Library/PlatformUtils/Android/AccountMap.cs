@@ -66,7 +66,7 @@ namespace RiftAuthenticator.Library.PlatformUtils.Android
                 account.TimeOffset = Convert.ToInt64(map[TimeOffsetKey]);
             if (map.ContainsKey(SecretKeyKey))
                 account.SecretKey = (string)map[SecretKeyKey];
-            account.SecretKey = accountManager.SecretKeyEncryption.Decrypt(account, account.SecretKey);
+            account.SecretKey = TrionServer.SecretKeyEncryption.Decrypt(account, account.SecretKey);
         }
 
         /// <summary>
@@ -83,7 +83,7 @@ namespace RiftAuthenticator.Library.PlatformUtils.Android
                 { DeviceIdKey, account.DeviceId ?? string.Empty },
                 { SerialKeyKey, account.SerialKey ?? string.Empty },
                 { TimeOffsetKey, account.TimeOffset },
-                { SecretKeyKey, accountManager.SecretKeyEncryption.Encrypt(account, account.SecretKey ?? string.Empty) },
+                { SecretKeyKey, TrionServer.SecretKeyEncryption.Encrypt(account, account.SecretKey ?? string.Empty) },
             };
             return map;
         }

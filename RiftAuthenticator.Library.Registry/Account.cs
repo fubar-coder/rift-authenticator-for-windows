@@ -58,7 +58,7 @@ namespace RiftAuthenticator.Library.Registry
                     case 0:
                         break;
                     case 1:
-                        SecretKey = accountManager.SecretKeyEncryption.Decrypt(this, SecretKey);
+                        SecretKey = TrionServer.SecretKeyEncryption.Decrypt(this, SecretKey);
                         break;
                 }
             }
@@ -72,7 +72,7 @@ namespace RiftAuthenticator.Library.Registry
                 key.SetValue(DescriptionKey, Description ?? string.Empty);
                 key.SetValue(DeviceIdKey, DeviceId ?? string.Empty);
                 key.SetValue(SerialKeyKey, SerialKey ?? string.Empty);
-                key.SetValue(SecretKeyKey, accountManager.SecretKeyEncryption.Encrypt(this, SecretKey ?? string.Empty));
+                key.SetValue(SecretKeyKey, TrionServer.SecretKeyEncryption.Encrypt(this, SecretKey ?? string.Empty));
                 key.SetValue(TimeOffsetKey, TimeOffset);
             }
         }

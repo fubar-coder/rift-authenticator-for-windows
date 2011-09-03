@@ -56,14 +56,5 @@ namespace RiftAuthenticator.Library
         /// Save all account objects to the underlying storage device
         /// </summary>
         void SaveAccounts();
-
-        /// <summary>
-        /// Get the secret key encryption object
-        /// </summary>
-        /// <remarks>
-        /// This secret key encryption object is used to encrypt and decrypt
-        /// the secret key in a platform specific way.
-        /// </remarks>
-        ISecretKeyEncryption SecretKeyEncryption { get; }
     }
 }

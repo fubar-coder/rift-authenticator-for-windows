@@ -27,12 +27,6 @@ namespace RiftAuthenticator.Library.IsolatedStorage
         private const string StoredAccountsKey = "stored_accounts";
 
         public AccountManager()
-            : this(new Library.PlatformUtils.Android.AndroidSecretKeyEncryption())
-        {
-        }
-
-        public AccountManager(ISecretKeyEncryption secretKeyEncryption)
-            : base(secretKeyEncryption)
         {
         }
 
