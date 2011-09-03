@@ -34,7 +34,7 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <StackPanel Margin="12,6,6,0" VerticalAlignment="Top" Grid.RowSpan="1">
-                <Button Name="AuthCreate" Content="Create new authenticator" />
+                <Button Name="AuthCreate" Content="Create new authenticator" Click="AuthCreate_Click" />
                 <Button Name="AuthRecover" Content="Recover authenticator" />
             </StackPanel>
         </Grid>

@@ -1,0 +1,64 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Animation;
+using System.Windows.Shapes;
+using Microsoft.Phone.Controls;
+
+namespace RiftAuthenticator.WP7
+{
+    public partial class CreateAuthenticator : PhoneApplicationPage
+    {
+        public CreateAuthenticator()
+        {
+            InitializeComponent();
+        }
+
+        private string CreateDefaultAccountDescription()
+        {
+            if (App.AccountManager.Count == 0)
+            {
+                return "Default";
+            }
+            else
+            {
+                var accountIndex = App.AccountManager.Count + 1;
+                string accountDescription;
+                while (App.AccountManager.FindAccount((accountDescription = string.Format("Account {0}", accountIndex))) != null)
+                {
+                    ++accountIndex;
+                }
+                return accountDescription;
+            }
+        }
+
+        private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            AuthDescription.Text = CreateDefaultAccountDescription();
+        }
+
+        private void AuthCreate_Click(object sender, RoutedEventArgs e)
+        {
+            var account = App.AccountManager.CreateAccount();
+            try
+            {
+                Library.TrionServer.CreateSecurityKey(account, Library.TrionServer.GetOrCreateRandomDeviceId());
+                App.AccountManager.Add(account);
+                App.AccountManager.SaveAccounts();
+                App.Account = account;
+                NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK);
+                return;
+            }
+        }
+    }
+}
