@@ -64,11 +64,22 @@ namespace RiftAuthenticator.WP7
 
         private void InitAuthenticatorStuff(string userAgent)
         {
-            Library.TrionServer.Platform = new Library.Platform.WP7.Platform(userAgent);
-            AccountManager = new Library.IsolatedStorage.AccountManager();
-            if (AccountManager.Count == 0)
+            try
             {
-                StartNoConfigWizard();
+                Library.TrionServer.Platform = new Library.Platform.WP7.Platform(userAgent);
+                AccountManager = new Library.IsolatedStorage.AccountManager();
+                AccountManager.LoadAccounts();
+                if (AccountManager.Count == 0)
+                {
+                    StartNoConfigWizard();
+                }
+            }
+            catch (Exception ex)
+            {
+                Dispatcher.BeginInvoke(() =>
+                {
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK);
+                });
             }
         }
 
