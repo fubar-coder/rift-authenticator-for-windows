@@ -56,7 +56,9 @@ namespace RiftAuthenticator.CommandLine.Commands
             var remainingArgs = OptionSet.Parse(args);
             if (remainingArgs.Count != 0)
                 throw new CommandArgumentException(this, string.Format(Resources.Strings.app_unknown_args, string.Join(" ", remainingArgs.ToArray())));
-            globalOptions.Account.TimeOffset = Library.TrionServer.GetTimeOffset();
+            var ar = Library.TrionServer.BeginGetTimeOffset(null, null);
+            ar.AsyncWaitHandle.WaitOne();
+            globalOptions.Account.TimeOffset = Library.TrionServer.EndGetTimeOffset(ar);
             globalOptions.AccountManager.SaveAccounts();
             Console.Out.WriteLine(Resources.Strings.opt_time_sync_display, globalOptions.Account.TimeOffset);
         }

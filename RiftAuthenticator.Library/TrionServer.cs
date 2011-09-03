@@ -176,12 +176,12 @@ namespace RiftAuthenticator.Library
             }
         }
 
-        private static IAsyncResult BeginExecuteRequest(Uri uri, AsyncCallback userCallback, object stateObject)
+        private static IAsyncResult BeginExecuteRequest(AsyncCallback userCallback, object stateObject, Uri uri)
         {
-            return BeginExecuteRequest(uri, new Dictionary<string, string>(), userCallback, stateObject);
+            return BeginExecuteRequest(userCallback, stateObject, uri, new Dictionary<string, string>());
         }
 
-        private static IAsyncResult BeginExecuteRequest(Uri uri, Dictionary<string, string> postVariables, AsyncCallback userCallback, object stateObject)
+        private static IAsyncResult BeginExecuteRequest(AsyncCallback userCallback, object stateObject, Uri uri, Dictionary<string, string> postVariables)
         {
             var request = (System.Net.HttpWebRequest)System.Net.WebRequest.Create(uri);
             request.UserAgent = (Platform == null ? DefaultUserAgent : (Platform.UserAgent ?? DefaultUserAgent));
@@ -216,7 +216,7 @@ namespace RiftAuthenticator.Library
 
             internal override void Process()
             {
-                TrionServer.BeginExecuteRequest(RequestUri, (ar) =>
+                TrionServer.BeginExecuteRequest((ar) =>
                 {
                     try
                     {
@@ -231,14 +231,16 @@ namespace RiftAuthenticator.Library
                     {
                         Complete(ex, false);
                     }
-                }, null);
+                }, null, RequestUri);
             }
         }
 
         /// <summary>
         /// Get the time difference between the client and the server
         /// </summary>
-        /// <returns>Time difference in milliseconds</returns>
+        /// <param name="stateObject">A user defined value</param>
+        /// <param name="userCallback">The function that get's called when the function is finished</param>
+        /// <returns>Object which implements IAsyncResult that allows the caller to wait for the function to return</returns>
         public static IAsyncResult BeginGetTimeOffset(AsyncCallback userCallback, object stateObject)
         {
             var uri = new Uri(string.Format("{0}{1}", TrionAuthServer, "/time"));
@@ -247,6 +249,11 @@ namespace RiftAuthenticator.Library
             return result;
         }
 
+        /// <summary>
+        /// Gets the data for the finished asynchronous call
+        /// </summary>
+        /// <param name="asyncResult">The object from the "Begin..." function</param>
+        /// <returns>The time difference in milliseconds</returns>
         public static long EndGetTimeOffset(IAsyncResult asyncResult)
         {
             return Helpers.AsyncResult<long>.End(asyncResult, typeof(TrionServer), "time-offset");
@@ -266,7 +273,7 @@ namespace RiftAuthenticator.Library
 
             internal override void Process()
             {
-                TrionServer.BeginExecuteRequest(RequestUri, PostVariables, (ar) =>
+                TrionServer.BeginExecuteRequest((ar) =>
                 {
                     try
                     {
@@ -307,16 +314,18 @@ namespace RiftAuthenticator.Library
                     {
                         Complete(ex, false);
                     }
-                }, null);
+                }, null, RequestUri, PostVariables);
             }
         }
 
         /// <summary>
         /// Gets the security questions assigned to a RIFT account
         /// </summary>
+        /// <param name="stateObject">A user defined value</param>
+        /// <param name="userCallback">The function that get's called when the function is finished</param>
         /// <param name="userName">User name for a RIFT account</param>
         /// <param name="password">Password for a RIFT account</param>
-        /// <returns>Array of security questions. The array has a length of 2.</returns>
+        /// <returns>Object which implements IAsyncResult that allows the caller to wait for the function to return</returns>
         public static IAsyncResult BeginGetSecurityQuestions(AsyncCallback userCallback, object stateObject, string userName, string password)
         {
             var variables = new Dictionary<string, string>
@@ -330,19 +339,24 @@ namespace RiftAuthenticator.Library
             return result;
         }
 
+        /// <summary>
+        /// Gets the data for the finished asynchronous call
+        /// </summary>
+        /// <param name="asyncResult">The object from the "Begin..." function</param>
+        /// <returns>The security questions. The array has a length of 2.</returns>
         public static string[] EndGetSecurityQuestions(IAsyncResult asyncResult)
         {
             return Helpers.AsyncResult<string[]>.End(asyncResult, typeof(TrionServer), "get-security-questions");
         }
 
-        class ExecuteRecoverSecurityKeyAsyncResult : Helpers.AsyncResult<IAccount>
+        class ExecuteSecurityKeyAsyncResult : Helpers.AsyncResultNoResult
         {
             private Uri RequestUri { get; set; }
             private Dictionary<string, string> PostVariables { get; set; }
             private IAccount Account { get; set; }
             private string DeviceId { get; set; }
 
-            public ExecuteRecoverSecurityKeyAsyncResult(AsyncCallback userCallback, object stateObject, object owner, string operationId, Uri requestUri, Dictionary<string, string> postVariables, IAccount account, string deviceId)
+            public ExecuteSecurityKeyAsyncResult(AsyncCallback userCallback, object stateObject, object owner, string operationId, Uri requestUri, Dictionary<string, string> postVariables, IAccount account, string deviceId)
                 : base(userCallback, stateObject, owner, operationId)
             {
                 Account = account;
@@ -353,7 +367,7 @@ namespace RiftAuthenticator.Library
 
             internal override void Process()
             {
-                TrionServer.BeginExecuteRequest(RequestUri, PostVariables, (ar) =>
+                TrionServer.BeginExecuteRequest((ar) =>
                 {
                     try
                     {
@@ -362,7 +376,6 @@ namespace RiftAuthenticator.Library
                         var resultXml = System.Xml.Linq.XDocument.Load(resultStream);
                         ProcessSecretKeyResult(Account, resultXml);
                         Account.DeviceId = DeviceId;
-                        SetResult(Account);
                         Complete(null, ar.CompletedSynchronously);
                     }
                     catch (System.Net.WebException ex)
@@ -377,18 +390,21 @@ namespace RiftAuthenticator.Library
                     {
                         Complete(ex, false);
                     }
-                }, null);
+                }, null, RequestUri, PostVariables);
             }
         }
 
         /// <summary>
         /// Recover an authenticator configuration for a given account and device id
         /// </summary>
+        /// <param name="stateObject">A user defined value</param>
+        /// <param name="userCallback">The function that get's called when the function is finished</param>
         /// <param name="account">The account to recover</param>
         /// <param name="userName">User name for the RIFT account</param>
         /// <param name="password">Password for the RIFT account</param>
         /// <param name="securityQuestionAnswers">The answers to the security questions</param>
         /// <param name="deviceId">The device id used to recover the authenticator configuration</param>
+        /// <returns>Object which implements IAsyncResult that allows the caller to wait for the function to return</returns>
         public static IAsyncResult BeginRecoverSecurityKey(AsyncCallback userCallback, object stateObject, IAccount account, string userName, string password, string[] securityQuestionAnswers, string deviceId)
         {
             var variables = new Dictionary<string, string>
@@ -400,14 +416,18 @@ namespace RiftAuthenticator.Library
                 { "secondSecurityAnswer", securityQuestionAnswers[1] ?? string.Empty },
             };
             var uri = new Uri(string.Format("{0}/external/retrieve-device-key.action", TrionApiServer));
-            var result = new ExecuteRecoverSecurityKeyAsyncResult(userCallback, stateObject, typeof(TrionServer), "recover-security-key", uri, variables, account, deviceId);
+            var result = new ExecuteSecurityKeyAsyncResult(userCallback, stateObject, typeof(TrionServer), "recover-security-key", uri, variables, account, deviceId);
             result.Process();
             return result;
         }
 
-        public static IAccount EndRecoverSecurityKey(IAsyncResult asyncResult)
+        /// <summary>
+        /// Gets the data for the finished asynchronous call
+        /// </summary>
+        /// <param name="asyncResult">The object from the "Begin..." function</param>
+        public static void EndRecoverSecurityKey(IAsyncResult asyncResult)
         {
-            return Helpers.AsyncResult<IAccount>.End(asyncResult, typeof(TrionServer), "recover-security-key");
+            Helpers.AsyncResultNoResult.End(asyncResult, typeof(TrionServer), "recover-security-key");
         }
 
         private static void ProcessSecretKeyResult(IAccount account, System.Xml.Linq.XDocument resultXml)
@@ -437,6 +457,9 @@ namespace RiftAuthenticator.Library
         /// </summary>
         /// <param name="account">The account object used to write the new data to</param>
         /// <param name="deviceId">The device id to create the account information</param>
+        /// <param name="stateObject">A user defined value</param>
+        /// <param name="userCallback">The function that get's called when the function is finished</param>
+        /// <returns>Object which implements IAsyncResult that allows the caller to wait for the function to return</returns>
         public static IAsyncResult BeginCreateSecurityKey(AsyncCallback userCallback, object stateObject, IAccount account, string deviceId)
         {
             var variables = new Dictionary<string, string>
@@ -444,14 +467,18 @@ namespace RiftAuthenticator.Library
                 { "deviceId", deviceId },
             };
             var uri = new Uri(string.Format("{0}/external/create-device-key", TrionApiServer));
-            var result = new ExecuteRecoverSecurityKeyAsyncResult(userCallback, stateObject, typeof(TrionServer), "create-security-key", uri, variables, account, deviceId);
+            var result = new ExecuteSecurityKeyAsyncResult(userCallback, stateObject, typeof(TrionServer), "create-security-key", uri, variables, account, deviceId);
             result.Process();
             return result;
         }
 
-        public static IAccount EndCreateSecurityKey(IAsyncResult asyncResult)
+        /// <summary>
+        /// Gets the data for the finished asynchronous call
+        /// </summary>
+        /// <param name="asyncResult">The object from the "Begin..." function</param>
+        public static void EndCreateSecurityKey(IAsyncResult asyncResult)
         {
-            return Helpers.AsyncResult<IAccount>.End(asyncResult, typeof(TrionServer), "create-security-key");
+            Helpers.AsyncResultNoResult.End(asyncResult, typeof(TrionServer), "create-security-key");
         }
 
 #if !WINDOWS_PHONE

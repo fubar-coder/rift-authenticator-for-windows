@@ -70,7 +70,9 @@ namespace RiftAuthenticator.CommandLine.Commands
                 throw new CommandArgumentException(this, Resources.Strings.opt_secret_questions_error_no_email);
             if (string.IsNullOrEmpty(password))
                 throw new CommandArgumentException(this, Resources.Strings.opt_secret_questions_error_no_password);
-            var securityQuestions = Library.TrionServer.GetSecurityQuestions(userName, password);
+            var ar = Library.TrionServer.BeginGetSecurityQuestions(null, null, userName, password);
+            ar.AsyncWaitHandle.WaitOne();
+            var securityQuestions = Library.TrionServer.EndGetSecurityQuestions(ar);
             for (int i = 0; i != securityQuestions.Length; ++i)
             {
                 Console.Out.WriteLine(Resources.Strings.opt_secret_questions_display, i + 1, securityQuestions[i]);

@@ -49,6 +49,8 @@
     <Compile Include="AccountBase.cs" />
     <Compile Include="AccountManagerBase.cs" />
     <Compile Include="AccountProxy.cs" />
+    <Compile Include="Helpers\AsyncResult.cs" />
+    <Compile Include="Helpers\AsyncResultNoResult.cs" />
     <Compile Include="IPlatform.cs" />
     <Compile Include="PlatformBase.cs" />
     <Compile Include="PlatformUtils\Android\AccountMap.cs" />
