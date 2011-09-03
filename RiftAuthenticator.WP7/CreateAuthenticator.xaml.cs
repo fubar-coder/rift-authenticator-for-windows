@@ -48,11 +48,27 @@ namespace RiftAuthenticator.WP7
             var account = App.AccountManager.CreateAccount();
             try
             {
-                Library.TrionServer.CreateSecurityKey(account, Library.TrionServer.GetOrCreateRandomDeviceId());
-                App.AccountManager.Add(account);
-                App.AccountManager.SaveAccounts();
-                App.Account = account;
-                NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
+                Library.TrionServer.BeginCreateSecurityKey((ar) =>
+                {
+                    try
+                    {
+                        Library.TrionServer.EndCreateSecurityKey(ar);
+                        App.AccountManager.Add(account);
+                        App.AccountManager.SaveAccounts();
+                        App.Account = account;
+                        Dispatcher.BeginInvoke(() =>
+                        {
+                            NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
+                        });
+                    }
+                    catch (Exception ex)
+                    {
+                        Dispatcher.BeginInvoke(() =>
+                        {
+                            MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK);
+                        });
+                    }
+                }, null, account, Library.TrionServer.GetOrCreateRandomDeviceId());
             }
             catch (Exception ex)
             {
