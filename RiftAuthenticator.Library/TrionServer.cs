@@ -94,33 +94,61 @@ namespace RiftAuthenticator.Library
 #endif
         }
 
+        private static void WritePostVariables(System.IO.Stream requestStream, Dictionary<string, string> postVariables)
+        {
+            var requestWriter = new System.IO.StreamWriter(requestStream) { NewLine = "&" };
+            foreach (var postVariable in postVariables)
+            {
+                var name = postVariable.Key;
+                var value = postVariable.Value;
+                requestWriter.WriteLine("{0}={1}", name, UrlEncode(value));
+            }
+            requestWriter.Flush();
+        }
+
         private static byte[] ExecuteRequest(Uri uri, Dictionary<string, string> postVariables)
         {
+            var timeoutMillis = 30000;
             var request = (System.Net.HttpWebRequest)System.Net.WebRequest.Create(uri);
+            request.UserAgent = (Platform == null ? DefaultUserAgent : (Platform.UserAgent ?? DefaultUserAgent));
             if (postVariables.Count != 0)
             {
                 request.Method = "POST";
                 request.ContentType = "application/x-www-form-urlencoded";
-                using (var requestStream = request.GetRequestStream())
+
+                var requestSentEvent = new System.Threading.AutoResetEvent(false);
+                var asyncRequest = request.BeginGetRequestStream((ar) =>
                 {
-                    var requestWriter = new System.IO.StreamWriter(requestStream) { NewLine = "&" };
-                    foreach (var postVariable in postVariables)
+                    using (var requestStream = request.EndGetRequestStream(ar))
                     {
-                        var name = postVariable.Key;
-                        var value = postVariable.Value;
-                        requestWriter.WriteLine("{0}={1}", name, UrlEncode(value));
+                        WritePostVariables(requestStream, postVariables);
                     }
-                    requestWriter.Flush();
+                    requestSentEvent.Set();
+                }, null);
+                if (!requestSentEvent.WaitOne(timeoutMillis))
+                {
+                    request.Abort();
                 }
             }
-            request.UserAgent = (Platform == null ? DefaultUserAgent : (Platform.UserAgent ?? DefaultUserAgent));
-            var response = (System.Net.HttpWebResponse)request.GetResponse();
-            using (var responseStream = response.GetResponseStream())
+
+            var buffer = new System.IO.MemoryStream();
+
+            var responseReceivedEvent = new System.Threading.AutoResetEvent(false);
+            var asyncResponse = request.BeginGetResponse((ar) =>
             {
-                var buffer = new System.IO.MemoryStream();
-                CopyTo(responseStream, buffer);
-                return buffer.ToArray();
+                var response = request.EndGetResponse(ar);
+                using (var responseStream = response.GetResponseStream())
+                {
+                    CopyTo(responseStream, buffer);
+                }
+                responseReceivedEvent.Set();
+            }, null);
+            if (!responseReceivedEvent.WaitOne(timeoutMillis))
+            {
+                request.Abort();
             }
+            
+            return buffer.ToArray();
         }
 
         private static void CopyTo(System.IO.Stream src, System.IO.Stream dst)
