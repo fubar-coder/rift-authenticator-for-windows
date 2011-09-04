@@ -55,6 +55,7 @@ namespace RiftAuthenticator.WP7
                 AuthDescription.Text = App.Account.Description;
                 DeviceId.Text = App.Account.DeviceId;
                 DeviceId.IsEnabled = false;
+                LoadSecurityQuestions.Content = "Save";
             }
             else
             {
