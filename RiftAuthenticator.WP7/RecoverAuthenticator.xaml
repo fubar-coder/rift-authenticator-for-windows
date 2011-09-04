@@ -10,8 +10,8 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
-    mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
-    shell:SystemTray.IsVisible="True">
+    mc:Ignorable="d" d:DesignHeight="696" d:DesignWidth="480"
+    shell:SystemTray.IsVisible="True" Loaded="PhoneApplicationPage_Loaded">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot">
@@ -40,17 +40,30 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0" Text="Email:" />
-            <TextBox Grid.Row="1" Name="UserName" />
-            <TextBlock Grid.Row="2" Text="Password:" />
-            <PasswordBox Grid.Row="3" Name="Password" />
-            <Button Grid.Row="5" Content="Continue" Name="QuerySecurityQuestions" />
+            <TextBlock Grid.Row="0" Name="DeviceIdLabel" Text="Device ID:" Visibility="Collapsed" />
+            <TextBox Grid.Row="1" Name="DeviceId" Visibility="Collapsed" />
+            <TextBlock Grid.Row="2" Text="Email:" />
+            <TextBox Grid.Row="3" Name="UserName" />
+            <TextBlock Grid.Row="4" Text="Password:" />
+            <PasswordBox Grid.Row="5" Name="Password" />
+            <Button Grid.Row="7" Content="Continue" Name="QuerySecurityQuestions" Click="QuerySecurityQuestions_Click" />
         </Grid>
         <Grid.Background>
             <ImageBrush ImageSource="/RiftAuthenticator.WP7;component/Images/TRION/rift_bg.jpg" />
         </Grid.Background>
     </Grid>
+
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar Mode="Minimized">
+            <shell:ApplicationBar.Buttons>
+                <shell:ApplicationBarIconButton IconUri="/Images/appbar.add.rest.png" Text="Device ID" x:Name="ShowDeviceId" Click="ShowDeviceId_Click" />
+            </shell:ApplicationBar.Buttons>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+    
 </phone:PhoneApplicationPage>
