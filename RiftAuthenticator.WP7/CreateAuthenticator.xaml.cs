@@ -47,6 +47,7 @@ namespace RiftAuthenticator.WP7
 
         private void AuthCreate_Click(object sender, RoutedEventArgs e)
         {
+            AuthCreate.IsEnabled = false;
             var deviceId = (string.IsNullOrEmpty(DeviceId.Text) ? Library.TrionServer.GetOrCreateRandomDeviceId() : DeviceId.Text);
             var description = AuthDescription.Text;
             var account = App.CreateNewAccountObject();
@@ -70,6 +71,7 @@ namespace RiftAuthenticator.WP7
                     Dispatcher.BeginInvoke(() =>
                     {
                         MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK);
+                        AuthCreate.IsEnabled = true;
                     });
                 }
             }, null, account, deviceId);
