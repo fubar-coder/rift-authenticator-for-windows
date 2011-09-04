@@ -51,29 +51,9 @@ namespace RiftAuthenticator.WP7
         {
             while (NavigationService.CanGoBack)
                 NavigationService.RemoveBackEntry();
-            GetUserAgent();
-        }
-
-        private void GetUserAgent()
-        {
-            WebBrowserForUserAgent.ScriptNotify += (sender, e) =>
-            {
-                InitAuthenticatorStuff(e.Value);
-            };
-            var htmlCode =
-@"<!DOCTYPE HTML PUBLIC ""-//W3C//DTD HTML 4.01 Transitional//EN"">
-<html>
-    <head>
-        <script language=""JavaScript"" type=""text/JavaScript"">
-            function printUserAgent() {
-                window.external.notify(navigator.userAgent);
-            }
-        </script>
-    </head>
-    <body onload=""printUserAgent();"">
-    </body>
-</html>";
-            WebBrowserForUserAgent.NavigateToString(htmlCode);
+            // Use this fake UserAgent because HTTP requests are buggy when the WebBrowser control were instantiated
+            // by this application
+            InitAuthenticatorStuff("Mozilla/4.0 (compatible: MSIE 7.0; Windows Phone OS 7.0; Trident/3.1; IEMobile/7.0; SAMSUNG; SGH-i917)");
         }
 
         private void SetAccount(string accountId)
