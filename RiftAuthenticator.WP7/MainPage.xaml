@@ -67,9 +67,9 @@
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar Mode="Minimized">
             <shell:ApplicationBar.Buttons>
-                <shell:ApplicationBarIconButton IconUri="/Images/appbar.add.rest.png" Text="Add" x:Name="AccountAdd" />
+                <shell:ApplicationBarIconButton IconUri="/Images/appbar.add.rest.png" Text="Add" x:Name="AccountAdd" Click="AccountAdd_Click" />
                 <shell:ApplicationBarIconButton IconUri="/Images/appbar.edit.rest.png" Text="Edit" x:Name="AccountEdit" />
-                <shell:ApplicationBarIconButton IconUri="/Images/appbar.sync.rest.png" Text="Sync" x:Name="AccountSync" />
+                <shell:ApplicationBarIconButton IconUri="/Images/appbar.sync.rest.png" Text="Sync" x:Name="AccountSync" Click="AccountSync_Click" />
             </shell:ApplicationBar.Buttons>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>

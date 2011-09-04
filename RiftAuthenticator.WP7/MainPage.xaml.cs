@@ -159,5 +159,32 @@ namespace RiftAuthenticator.WP7
                 RemainingValidTime.Value = loginToken.RemainingMillis;
             }
         }
+
+        private void AccountSync_Click(object sender, EventArgs e)
+        {
+            if (Account.IsEmpty)
+                return;
+            Library.TrionServer.BeginGetTimeOffset((ar) =>
+            {
+                Dispatcher.BeginInvoke(() =>
+                {
+                    try
+                    {
+                        var timeOffset = Library.TrionServer.EndGetTimeOffset(ar);
+                        Account.TimeOffset = timeOffset;
+                        AccountManager.SaveAccounts();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK);
+                    }
+                });
+            }, null);
+        }
+
+        private void AccountAdd_Click(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/CreateAuthenticator.xaml", UriKind.Relative));
+        }
     }
 }
