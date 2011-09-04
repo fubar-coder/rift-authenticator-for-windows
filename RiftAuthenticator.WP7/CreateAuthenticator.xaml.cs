@@ -42,40 +42,41 @@ namespace RiftAuthenticator.WP7
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
             AuthDescription.Text = CreateDefaultAccountDescription();
+            DeviceId.Text = Library.TrionServer.GetOrCreateRandomDeviceId();
         }
 
         private void AuthCreate_Click(object sender, RoutedEventArgs e)
         {
-            var account = App.AccountManager.CreateAccount();
-            try
+            var deviceId = (string.IsNullOrEmpty(DeviceId.Text) ? Library.TrionServer.GetOrCreateRandomDeviceId() : DeviceId.Text);
+            var description = AuthDescription.Text;
+            var account = App.CreateNewAccountObject();
+            Library.TrionServer.BeginCreateSecurityKey((ar) =>
             {
-                Library.TrionServer.BeginCreateSecurityKey((ar) =>
+                try
                 {
-                    try
+                    Library.TrionServer.EndCreateSecurityKey(ar);
+                    account.Description = description;
+                    App.SaveNewAccountObject(account);
+                    Dispatcher.BeginInvoke(() =>
                     {
-                        Library.TrionServer.EndCreateSecurityKey(ar);
-                        App.AccountManager.Add(account);
-                        App.AccountManager.SaveAccounts();
-                        App.Account = account;
-                        Dispatcher.BeginInvoke(() =>
-                        {
-                            NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
-                        });
-                    }
-                    catch (Exception ex)
+                        NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
+                    });
+                }
+                catch (Exception ex)
+                {
+                    Dispatcher.BeginInvoke(() =>
                     {
-                        Dispatcher.BeginInvoke(() =>
-                        {
-                            MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK);
-                        });
-                    }
-                }, null, account, Library.TrionServer.GetOrCreateRandomDeviceId());
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK);
-                return;
-            }
+                        MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK);
+                    });
+                }
+            }, null, account, deviceId);
+        }
+
+        private void ShowDeviceId_Click(object sender, EventArgs e)
+        {
+            var isHidden = DeviceId.Visibility == System.Windows.Visibility.Collapsed;
+            var newVisibility = (isHidden ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed);
+            DeviceIdLabel.Visibility = DeviceId.Visibility = newVisibility;
         }
     }
 }
