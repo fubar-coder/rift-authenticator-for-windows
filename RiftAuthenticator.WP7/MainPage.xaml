@@ -11,6 +11,7 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     shell:SystemTray.IsVisible="True" Loaded="PhoneApplicationPage_Loaded">
     
     <!--LayoutRoot is the root grid where all page content is placed-->
@@ -38,13 +39,25 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="111*" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <phone:WebBrowser Name="WebBrowserForUserAgent" Visibility="Collapsed" IsScriptEnabled="True" Grid.RowSpan="4" />
-            <TextBlock Grid.Row="0" Text="12345678" FontSize="72" TextAlignment="Center" Name="LoginToken" />
-            <ProgressBar Maximum="30000" Grid.Row="1" SmallChange="1" LargeChange="1000" Name="RemainingValidTime" Height="12" />
-            <TextBlock Grid.Row="3" Name="SerialKey" Text=" " FontSize="24" TextAlignment="Center" />
+            <toolkit:ListPicker Grid.Row="0" Name="Accounts" Visibility="Collapsed" ItemsSource="{Binding}">
+                <toolkit:ListPicker.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Path=Description}" />
+                            <TextBlock Text=" (" />
+                            <TextBlock Text="{Binding Path=FormattedSerialKey}" />
+                            <TextBlock Text=")" />
+                        </StackPanel>
+                    </DataTemplate>
+                </toolkit:ListPicker.ItemTemplate>
+            </toolkit:ListPicker>
+            <TextBlock Grid.Row="1" Text=" " FontSize="72" TextAlignment="Center" Name="LoginToken" />
+            <ProgressBar Grid.Row="2" Maximum="30000" SmallChange="1" LargeChange="1000" Name="RemainingValidTime" Height="12" />
+            <TextBlock Grid.Row="4" Name="SerialKey" Text=" " FontSize="24" TextAlignment="Center" />
         </Grid>
         <Grid.Background>
             <ImageBrush ImageSource="/RiftAuthenticator.WP7;component/Images/TRION/rift_bg.jpg" />
