@@ -135,13 +135,17 @@ namespace RiftAuthenticator.Library
                     {
                         try
                         {
-                            var response = WebRequest.EndGetResponse(ar);
                             var buffer = new System.IO.MemoryStream();
-                            using (var responseStream = response.GetResponseStream())
+                            using (var response = WebRequest.EndGetResponse(ar))
                             {
-                                CopyTo(responseStream, buffer);
+                                using (var responseStream = response.GetResponseStream())
+                                {
+                                    responseStream.CopyTo(buffer);
+                                }
                             }
-                            SetResult(buffer.ToArray());
+                            var bytes = buffer.ToArray();
+                            var test = System.Text.Encoding.UTF8.GetString(bytes, 0, bytes.Length);
+                            SetResult(bytes);
                             Complete(null, ar.CompletedSynchronously);
                         }
                         catch (System.Net.WebException ex)
