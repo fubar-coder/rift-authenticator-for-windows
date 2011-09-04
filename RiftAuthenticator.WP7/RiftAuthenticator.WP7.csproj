@@ -119,7 +119,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\RiftLogo.png" />
-    <Resource Include="Background.png" />
     <Content Include="Images\appbar.add.rest.png" />
     <Content Include="Images\appbar.delete.rest.png" />
     <Content Include="Images\appbar.download.rest.png" />
