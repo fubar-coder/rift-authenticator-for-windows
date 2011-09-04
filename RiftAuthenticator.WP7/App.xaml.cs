@@ -17,8 +17,37 @@ namespace RiftAuthenticator.WP7
 {
     public partial class App : Application
     {
-        public static Library.IAccountManager AccountManager { get; set; }
-        public static Library.IAccount Account { get; set; }
+        internal static Library.IAccountManager AccountManager { get; set; }
+        internal static Library.IAccount Account { get; set; }
+        internal static string AuthCreateUsername { get; set; }
+        internal static string AuthCreatePassword { get; set; }
+        internal static string AuthCreateDeviceId { get; set; }
+        internal static string[] SecurityQuestions { get; set; }
+
+        internal static Library.IAccount CreateNewAccountObject()
+        {
+            Library.IAccount newAccount;
+            if (Account.IsEmpty)
+            {
+                newAccount = Account;
+            }
+            else
+            {
+                newAccount = AccountManager.CreateAccount();
+            }
+            return newAccount;
+        }
+
+        internal static void SaveNewAccountObject(Library.IAccount newAccount)
+        {
+            if (newAccount != Account)
+            {
+                AccountManager.Add(newAccount);
+                Account = newAccount;
+            }
+            AccountManager.SaveAccounts();
+        }
+
 
         /// <summary>
         /// Provides easy access to the root frame of the Phone Application.

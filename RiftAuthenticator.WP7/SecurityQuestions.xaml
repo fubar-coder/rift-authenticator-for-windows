@@ -1,5 +1,5 @@
 ﻿<phone:PhoneApplicationPage 
-    x:Class="RiftAuthenticator.WP7.NoConfigPage"
+    x:Class="RiftAuthenticator.WP7.SecurityQuestions"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
@@ -15,9 +15,6 @@
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot">
-        <Grid.Background>
-            <ImageBrush ImageSource="/RiftAuthenticator.WP7;component/Images/TRION/rift_bg.jpg" />
-        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -33,20 +30,28 @@
                 <TextBlock x:Name="ApplicationTitle" Text="RIFT Authenticator" Style="{StaticResource PhoneTextNormalStyle}" />
                 <Image Grid.Column="1" Source="/RiftAuthenticator.WP7;component/Images/TRION/rift_logo_half.png" />
             </Grid>
-            <TextBlock x:Name="PageTitle" Text="No configuration found" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" FontSize="36" />
+            <TextBlock x:Name="PageTitle" Text="Security questions" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" FontSize="36" />
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <StackPanel Margin="12,6,6,0" VerticalAlignment="Top" Grid.RowSpan="1">
-                <Button Name="AuthCreate" Content="Create new authenticator" Click="AuthCreate_Click" />
-                <Button Name="AuthRecover" Content="Recover authenticator" Click="AuthRecover_Click" />
-            </StackPanel>
+            <TextBlock Name="SecurityQuestion1" Grid.Row="0" Text="Security question 1" TextWrapping="Wrap" />
+            <TextBox Name="SecurityAnswer1" Grid.Row="1" />
+            <TextBlock Name="SecurityQuestion2" Grid.Row="2" Text="Security question 2" TextWrapping="Wrap" />
+            <TextBox Name="SecurityAnswer2" Grid.Row="3" />
+            <Button Content="Recover" Grid.Row="5" Name="RecoverAuthenticator" Click="RecoverAuthenticator_Click" />
         </Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/RiftAuthenticator.WP7;component/Images/TRION/rift_bg.jpg" />
+        </Grid.Background>
     </Grid>
  
     <!--Sample code showing usage of ApplicationBar-->

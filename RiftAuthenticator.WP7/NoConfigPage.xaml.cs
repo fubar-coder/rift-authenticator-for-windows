@@ -29,5 +29,10 @@ namespace RiftAuthenticator.WP7
         {
             NavigationService.Navigate(new Uri("/CreateAuthenticator.xaml", UriKind.Relative));
         }
+
+        private void AuthRecover_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/RecoverAuthenticator.xaml", UriKind.Relative));
+        }
     }
 }
