@@ -25,6 +25,9 @@ namespace RiftAuthenticator.WP7
         internal static string AuthCreateDescription { get; set; }
         internal static string[] SecurityQuestions { get; set; }
 
+        internal static bool ExitApp { get; set; }
+        internal static bool BackToMainPage { get; set; }
+
         internal static Library.IAccount CreateNewAccountObject()
         {
             Library.IAccount newAccount;
@@ -162,6 +165,9 @@ namespace RiftAuthenticator.WP7
         // Code to execute on Unhandled Exceptions
         private void Application_UnhandledException(object sender, ApplicationUnhandledExceptionEventArgs e)
         {
+            if (e.ExceptionObject is QuitException)
+                return;
+
             if (System.Diagnostics.Debugger.IsAttached)
             {
                 // An unhandled exception has occurred; break into the debugger

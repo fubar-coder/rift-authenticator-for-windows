@@ -5,22 +5,22 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{23F0761B-9CD3-4A0B-99E9-0CA23322D62F}</ProjectGuid>
+    <ProjectGuid>{61D6DCD8-CC52-4DB8-BA79-5FED50699B5B}</ProjectGuid>
     <ProjectTypeGuids>{C089C8C0-30E0-4E22-80C0-CE093F111A43};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>RiftAuthenticator.WP7</RootNamespace>
-    <AssemblyName>RiftAuthenticator.WP7</AssemblyName>
+    <AssemblyName>RiftAuthenticator.WP70</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
-    <TargetFrameworkProfile>WindowsPhone71</TargetFrameworkProfile>
+    <TargetFrameworkProfile>WindowsPhone</TargetFrameworkProfile>
     <TargetFrameworkIdentifier>Silverlight</TargetFrameworkIdentifier>
     <SilverlightApplication>true</SilverlightApplication>
     <SupportedCultures>
     </SupportedCultures>
     <XapOutputs>true</XapOutputs>
     <GenerateSilverlightManifest>true</GenerateSilverlightManifest>
-    <XapFilename>RiftAuthenticator.WP7.xap</XapFilename>
+    <XapFilename>RiftAuthenticator.WP70.xap</XapFilename>
     <SilverlightManifestTemplate>Properties\AppManifest.xml</SilverlightManifestTemplate>
     <SilverlightAppEntry>RiftAuthenticator.WP7.App</SilverlightAppEntry>
     <ValidateXaml>true</ValidateXaml>
@@ -31,7 +31,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>Bin\Debug</OutputPath>
-    <DefineConstants>DEBUG;TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;SILVERLIGHT;WINDOWS_PHONE;WP70</DefineConstants>
     <NoStdLib>true</NoStdLib>
     <NoConfig>true</NoConfig>
     <ErrorReport>prompt</ErrorReport>
@@ -49,16 +49,18 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Phone" />
-    <Reference Include="Microsoft.Phone.Controls.Toolkit, Version=7.0.0.0, Culture=neutral, PublicKeyToken=b772ad94eb9ca604, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Phone.Controls.Toolkit, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b772ad94eb9ca604, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Phone.Interop" />
     <Reference Include="System.Windows" />
     <Reference Include="system" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net" />
     <Reference Include="System.Xml" />
-    <Reference Include="mscorlib.extensions" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccountLogin.xaml.cs">
+      <DependentUpon>AccountLogin.xaml</DependentUpon>
+    </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
@@ -76,9 +78,6 @@
       <DependentUpon>NoConfigPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="AccountLogin.xaml.cs">
-      <DependentUpon>AccountLogin.xaml</DependentUpon>
-    </Compile>
     <Compile Include="QuitException.cs" />
     <Compile Include="SecurityQuestions.xaml.cs">
       <DependentUpon>SecurityQuestions.xaml</DependentUpon>
@@ -89,66 +88,65 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
-    <Page Include="AuthenticatorDescription.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="AccountLogin.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="AuthenticatorDescription.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="CreateAuthenticator.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="MainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="NoConfigPage.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="AccountLogin.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SecurityQuestions.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\AppManifest.xml" />
-    <None Include="Properties\WMAppManifest.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\RiftLogo.png" />
     <Content Include="Images\appbar.add.rest.png" />
     <Content Include="Images\appbar.delete.rest.png" />
     <Content Include="Images\appbar.download.rest.png" />
     <Content Include="Images\appbar.edit.rest.png" />
     <Content Include="Images\appbar.feature.settings.rest.png" />
     <Content Include="Images\appbar.sync.rest.png" />
+    <Resource Include="Images\RiftLogo.png" />
     <Resource Include="Images\TRION\icon.png" />
     <Resource Include="Images\TRION\rift_bg.jpg" />
     <Resource Include="Images\TRION\rift_logo_full.png" />
     <Resource Include="Images\TRION\rift_logo_half.png" />
-    <Resource Include="Images\TRION\trion_small.png" />
     <Resource Include="Images\TRION\sync_icon.png" />
-    <Resource Include="Images\TRION\tile-small.png" />
     <Resource Include="Images\TRION\tile-large.png" />
     <Resource Include="Images\TRION\tile-marketplace.png" />
     <Resource Include="Images\TRION\tile-medium.png" />
+    <Resource Include="Images\TRION\tile-small.png" />
+    <Resource Include="Images\TRION\trion_small.png" />
+    <None Include="Properties\WMAppManifest.xml" />
     <Content Include="SplashScreenImage.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RiftAuthenticator.Library.IsolatedStorage\RiftAuthenticator.Library.IsolatedStorage.WP7.csproj">
-      <Project>{A0082E88-4D63-4555-B1D1-455839C8FDEB}</Project>
-      <Name>RiftAuthenticator.Library.IsolatedStorage.WP7</Name>
+    <ProjectReference Include="..\RiftAuthenticator.Library.IsolatedStorage\RiftAuthenticator.Library.IsolatedStorage.WP70.csproj">
+      <Project>{ACC8E344-534D-4CCF-9E4F-9301DDCC3D6C}</Project>
+      <Name>RiftAuthenticator.Library.IsolatedStorage.WP70</Name>
     </ProjectReference>
-    <ProjectReference Include="..\RiftAuthenticator.Library\RiftAuthenticator.Library.WP7.csproj">
-      <Project>{E9D6EDE7-2410-4591-B8A1-BC0B3F3E3E14}</Project>
-      <Name>RiftAuthenticator.Library.WP7</Name>
+    <ProjectReference Include="..\RiftAuthenticator.Library\RiftAuthenticator.Library.WP70.csproj">
+      <Project>{5088302B-1729-4D9E-A5B6-C781CEFA2D93}</Project>
+      <Name>RiftAuthenticator.Library.WP70</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.$(TargetFrameworkProfile).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

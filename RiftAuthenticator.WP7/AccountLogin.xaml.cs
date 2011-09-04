@@ -20,6 +20,18 @@ namespace RiftAuthenticator.WP7
             InitializeComponent();
         }
 
+        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
+        {
+            if (App.BackToMainPage)
+            {
+                NavigationService.GoBack();
+            }
+            else
+            {
+                base.OnNavigatedTo(e);
+            }
+        }
+
         private void QuerySecurityQuestions_Click(object sender, RoutedEventArgs e)
         {
             App.AuthCreateUsername = UserName.Text;

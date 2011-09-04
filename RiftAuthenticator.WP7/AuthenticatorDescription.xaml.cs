@@ -22,6 +22,18 @@ namespace RiftAuthenticator.WP7
             InitializeComponent();
         }
 
+        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
+        {
+            if (App.BackToMainPage)
+            {
+                NavigationService.GoBack();
+            }
+            else
+            {
+                base.OnNavigatedTo(e);
+            }
+        }
+
         private void ShowDeviceId_Click(object sender, EventArgs e)
         {
             var isHidden = DeviceId.Visibility == System.Windows.Visibility.Collapsed;
@@ -31,6 +43,9 @@ namespace RiftAuthenticator.WP7
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
+#if !WP70
+            ApplicationBar.Mode = Microsoft.Phone.Shell.ApplicationBarMode.Minimized;
+#endif
             if (this.NavigationContext.QueryString.ContainsKey("action"))
             {
                 IsEdit = NavigationContext.QueryString["action"] == "edit";
@@ -54,7 +69,9 @@ namespace RiftAuthenticator.WP7
             {
                 App.Account.Description = AuthDescription.Text;
                 App.AccountManager.SaveAccounts();
-                NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
+                App.BackToMainPage = true;
+                NavigationService.GoBack();
+                //NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
             }
             else
             {

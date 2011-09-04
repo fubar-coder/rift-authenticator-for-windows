@@ -28,7 +28,7 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <TextBlock x:Name="ApplicationTitle" Text="RIFT Authenticator" Style="{StaticResource PhoneTextNormalStyle}" />
-                <Image Grid.Column="1" Source="/RiftAuthenticator.WP7;component/Images/TRION/rift_logo_half.png" />
+                <Image Grid.Column="1" Source="Images/TRION/rift_logo_half.png" />
             </Grid>
             <TextBlock x:Name="PageTitle" Text="Recover authenticator" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" FontSize="36" />
         </StackPanel>
@@ -36,7 +36,7 @@
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <Grid.Background>
-                <ImageBrush ImageSource="/RiftAuthenticator.WP7;component/Images/TRION/rift_bg.jpg" />
+                <ImageBrush ImageSource="Images/TRION/rift_bg.jpg" />
             </Grid.Background>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -55,7 +55,7 @@
             <Button Grid.Row="7" Content="Continue" Name="QuerySecurityQuestions" Click="QuerySecurityQuestions_Click" />
         </Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="/RiftAuthenticator.WP7;component/Images/TRION/rift_bg.jpg" />
+            <ImageBrush ImageSource="Images/TRION/rift_bg.jpg" />
         </Grid.Background>
     </Grid>
     

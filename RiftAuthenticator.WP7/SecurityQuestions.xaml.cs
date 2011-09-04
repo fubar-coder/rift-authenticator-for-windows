@@ -22,6 +22,18 @@ namespace RiftAuthenticator.WP7
             InitializeComponent();
         }
 
+        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
+        {
+            if (App.BackToMainPage)
+            {
+                NavigationService.GoBack();
+            }
+            else
+            {
+                base.OnNavigatedTo(e);
+            }
+        }
+
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
             SecurityQuestionPairs = new List<KeyValuePair<TextBlock, TextBox>>
@@ -72,7 +84,10 @@ namespace RiftAuthenticator.WP7
                         {
                             Dispatcher.BeginInvoke(() =>
                             {
-                                NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
+                                App.ExitApp = false;
+                                App.BackToMainPage = true;
+                                NavigationService.GoBack();
+                                //NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
                             });
                         });
                     }

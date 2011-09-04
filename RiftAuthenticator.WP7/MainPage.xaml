@@ -29,7 +29,7 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <TextBlock x:Name="ApplicationTitle" Text="RIFT Authenticator" Style="{StaticResource PhoneTextNormalStyle}" />
-                <Image Grid.Column="1" Source="/RiftAuthenticator.WP7;component/Images/TRION/rift_logo_half.png" />
+                <Image Grid.Column="1" Source="Images/TRION/rift_logo_half.png" />
             </Grid>
             <TextBlock x:Name="PageTitle" Text="Login token" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" FontSize="36" />
         </StackPanel>
@@ -60,19 +60,19 @@
             <ProgressBar Grid.Row="2" Maximum="30000" SmallChange="1" LargeChange="1000" Name="RemainingValidTime" Height="12" />
             <Button Grid.Row="3" BorderThickness="0" Padding="0" HorizontalAlignment="Left" Name="ExecSyncAll" FontSize="16" Click="ExecSyncAll_Click">
                 <StackPanel  Orientation="Horizontal">
-                    <Image Source="/RiftAuthenticator.WP7;component/Images/TRION/sync_icon.png" />
+                    <Image Source="Images/TRION/sync_icon.png" />
                     <TextBlock Margin="12,0,0,0" Text="Synchronize" />
                 </StackPanel>
             </Button>
             <TextBlock Grid.Row="5" Name="SerialKey" Text=" " FontSize="24" TextAlignment="Center" />
         </Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="/RiftAuthenticator.WP7;component/Images/TRION/rift_bg.jpg" />
+            <ImageBrush ImageSource="Images/TRION/rift_bg.jpg" />
         </Grid.Background>
     </Grid>
 
     <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar Mode="Minimized">
+        <shell:ApplicationBar>
             <shell:ApplicationBar.Buttons>
                 <shell:ApplicationBarIconButton IconUri="/Images/appbar.add.rest.png" Text="Add" x:Name="AccountAdd" Click="AccountAdd_Click" />
                 <shell:ApplicationBarIconButton IconUri="/Images/appbar.download.rest.png" Text="Recover" x:Name="AccountRecover" Click="AccountRecover_Click" />
