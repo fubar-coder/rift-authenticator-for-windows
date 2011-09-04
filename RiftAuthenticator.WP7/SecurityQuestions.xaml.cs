@@ -65,7 +65,8 @@ namespace RiftAuthenticator.WP7
                     try
                     {
                         Library.TrionServer.EndRecoverSecurityKey(ar);
-                        App.SaveNewAccountObject(account);
+                        App.AddNewAccountObject(account);
+                        App.ExecuteTimeSync(Dispatcher);
                         Dispatcher.BeginInvoke(() =>
                         {
                             NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));

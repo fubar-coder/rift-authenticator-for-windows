@@ -68,6 +68,7 @@ namespace RiftAuthenticator.WP7
             {
                 Account = AccountManager[0];
             }
+            UpdateAccountList();
         }
 
         private void InitAuthenticatorStuff(string userAgent)
@@ -164,27 +165,41 @@ namespace RiftAuthenticator.WP7
         {
             if (Account.IsEmpty)
                 return;
-            Library.TrionServer.BeginGetTimeOffset((ar) =>
-            {
-                Dispatcher.BeginInvoke(() =>
-                {
-                    try
-                    {
-                        var timeOffset = Library.TrionServer.EndGetTimeOffset(ar);
-                        Account.TimeOffset = timeOffset;
-                        AccountManager.SaveAccounts();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK);
-                    }
-                });
-            }, null);
+            App.ExecuteTimeSync(Dispatcher);
         }
 
         private void AccountAdd_Click(object sender, EventArgs e)
         {
             NavigationService.Navigate(new Uri("/CreateAuthenticator.xaml", UriKind.Relative));
+        }
+
+        private void Accounts_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (Accounts.SelectedIndex == -1)
+            {
+                Account = null;
+            }
+            else
+            {
+                Account = (Library.IAccount)Accounts.SelectedItem;
+            }
+            RefreshToken();
+        }
+
+        private void AccountRecover_Click(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/AuthenticatorDescription.xaml", UriKind.Relative));
+        }
+
+        private void AccountDelete_Click(object sender, EventArgs e)
+        {
+            if (Account == null || Account.IsEmpty)
+                return;
+            if (MessageBox.Show("Delete authenticator?", "Warning", MessageBoxButton.OKCancel) != MessageBoxResult.OK)
+                return;
+            AccountManager.Remove(Account);
+            AccountManager.SaveAccounts();
+            SetAccount(null);
         }
     }
 }
