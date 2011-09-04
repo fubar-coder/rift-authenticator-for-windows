@@ -65,6 +65,7 @@ namespace RiftAuthenticator.WP7
                     try
                     {
                         Library.TrionServer.EndRecoverSecurityKey(ar);
+                        account.Description = App.AuthCreateDescription;
                         App.AddNewAccountObject(account);
                         App.ExecuteTimeSync(Dispatcher);
                         Dispatcher.BeginInvoke(() =>

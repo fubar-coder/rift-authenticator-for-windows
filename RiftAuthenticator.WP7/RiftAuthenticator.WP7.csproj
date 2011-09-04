@@ -148,6 +148,7 @@
     <Resource Include="Images\TRION\rift_logo_full.png" />
     <Resource Include="Images\TRION\rift_logo_half.png" />
     <Resource Include="Images\TRION\trion_small.png" />
+    <Resource Include="Images\TRION\sync_icon.png" />
     <Content Include="SplashScreenImage.jpg" />
   </ItemGroup>
   <ItemGroup>

@@ -40,6 +40,7 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="111*" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
@@ -57,7 +58,13 @@
             </toolkit:ListPicker>
             <TextBlock Grid.Row="1" Text=" " FontSize="72" TextAlignment="Center" Name="LoginToken" />
             <ProgressBar Grid.Row="2" Maximum="30000" SmallChange="1" LargeChange="1000" Name="RemainingValidTime" Height="12" />
-            <TextBlock Grid.Row="4" Name="SerialKey" Text=" " FontSize="24" TextAlignment="Center" />
+            <Button Grid.Row="3" BorderThickness="0" Padding="0" HorizontalAlignment="Left" Name="ExecSyncAll" FontSize="16" Click="ExecSyncAll_Click">
+                <StackPanel  Orientation="Horizontal">
+                    <Image Source="/RiftAuthenticator.WP7;component/Images/TRION/sync_icon.png" />
+                    <TextBlock Margin="12,0,0,0" Text="Synchronize" />
+                </StackPanel>
+            </Button>
+            <TextBlock Grid.Row="5" Name="SerialKey" Text=" " FontSize="24" TextAlignment="Center" />
         </Grid>
         <Grid.Background>
             <ImageBrush ImageSource="/RiftAuthenticator.WP7;component/Images/TRION/rift_bg.jpg" />
@@ -69,8 +76,8 @@
             <shell:ApplicationBar.Buttons>
                 <shell:ApplicationBarIconButton IconUri="/Images/appbar.add.rest.png" Text="Add" x:Name="AccountAdd" Click="AccountAdd_Click" />
                 <shell:ApplicationBarIconButton IconUri="/Images/appbar.download.rest.png" Text="Recover" x:Name="AccountRecover" Click="AccountRecover_Click" />
-                <shell:ApplicationBarIconButton IconUri="/Images/appbar.delete.rest.png" Text="Edit" x:Name="AccountDelete" Click="AccountDelete_Click" />
-                <shell:ApplicationBarIconButton IconUri="/Images/appbar.sync.rest.png" Text="Sync" x:Name="AccountSync" Click="AccountSync_Click" />
+                <shell:ApplicationBarIconButton IconUri="/Images/appbar.delete.rest.png" Text="Delete" x:Name="AccountDelete" Click="AccountDelete_Click" />
+                <shell:ApplicationBarIconButton IconUri="/Images/appbar.edit.rest.png" Text="Edit" x:Name="AccountEdit" Click="AccountEdit_Click" />
             </shell:ApplicationBar.Buttons>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
