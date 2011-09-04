@@ -1,9 +1,6 @@
 <MarketplaceDetails>
-  <SmallAppTile>
-  </SmallAppTile>
-  <LargeAppTile>
-  </LargeAppTile>
-  <PCAppTile>
-  </PCAppTile>
+  <SmallAppTile>tile-medium.png</SmallAppTile>
+  <LargeAppTile>tile-large.png</LargeAppTile>
+  <PCAppTile>tile-marketplace.png</PCAppTile>
   <ScreenShots>login-token.png;create-or-recover.png;multiple-auths.png;;;;;;</ScreenShots>
 </MarketplaceDetails>

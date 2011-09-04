@@ -132,6 +132,10 @@
     <Resource Include="Images\TRION\rift_logo_half.png" />
     <Resource Include="Images\TRION\trion_small.png" />
     <Resource Include="Images\TRION\sync_icon.png" />
+    <Resource Include="Images\TRION\tile-small.png" />
+    <Resource Include="Images\TRION\tile-large.png" />
+    <Resource Include="Images\TRION\tile-marketplace.png" />
+    <Resource Include="Images\TRION\tile-medium.png" />
     <Content Include="SplashScreenImage.jpg" />
   </ItemGroup>
   <ItemGroup>
