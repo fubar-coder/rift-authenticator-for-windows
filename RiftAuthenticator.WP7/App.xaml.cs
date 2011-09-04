@@ -56,6 +56,11 @@ namespace RiftAuthenticator.WP7
 
         internal static void ExecuteTimeSync(System.Windows.Threading.Dispatcher dispatcher)
         {
+            ExecuteTimeSync(dispatcher, null);
+        }
+
+        internal static void ExecuteTimeSync(System.Windows.Threading.Dispatcher dispatcher, Action afterSyncFunc)
+        {
             Library.TrionServer.BeginGetTimeOffset((ar) =>
             {
                 dispatcher.BeginInvoke(() =>
@@ -66,6 +71,8 @@ namespace RiftAuthenticator.WP7
                         foreach (var account in AccountManager)
                             account.TimeOffset = timeOffset;
                         AccountManager.SaveAccounts();
+                        if (afterSyncFunc != null)
+                            afterSyncFunc();
                     }
                     catch (Exception ex)
                     {
