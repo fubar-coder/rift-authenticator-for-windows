@@ -3,19 +3,15 @@
   <App xmlns="" ProductID="{e9fff9ff-fc25-4a35-b99d-12fc26a41abe}" Title="RIFT™ Authenticator" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="RIFT Authenticator for Windows Project" Description="RIFT™ Authenticator" Publisher="RIFT Authenticator for Windows Project">
     <IconPath IsRelative="true" IsResource="false">Images\TRION\icon.png</IconPath>
     <Capabilities>
-      <!--
-      <Capability Name="ID_CAP_GAMERSERVICES" />
-      -->
       <Capability Name="ID_CAP_IDENTITY_DEVICE" />
       <Capability Name="ID_CAP_IDENTITY_USER" />
-      <!--
-      <Capability Name="ID_CAP_LOCATION" />
-      <Capability Name="ID_CAP_MEDIALIB" />
-      <Capability Name="ID_CAP_MICROPHONE" />
-      -->
       <Capability Name="ID_CAP_NETWORKING" />
       <Capability Name="ID_CAP_WEBBROWSERCOMPONENT" />
       <!--
+      <Capability Name="ID_CAP_GAMERSERVICES" />
+      <Capability Name="ID_CAP_LOCATION" />
+      <Capability Name="ID_CAP_MEDIALIB" />
+      <Capability Name="ID_CAP_MICROPHONE" />
       <Capability Name="ID_CAP_PHONEDIALER" />
       <Capability Name="ID_CAP_PUSH_NOTIFICATION" />
       <Capability Name="ID_CAP_SENSORS" />
