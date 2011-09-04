@@ -22,6 +22,7 @@ namespace RiftAuthenticator.WP7
         internal static string AuthCreateUsername { get; set; }
         internal static string AuthCreatePassword { get; set; }
         internal static string AuthCreateDeviceId { get; set; }
+        internal static string AuthCreateDescription { get; set; }
         internal static string[] SecurityQuestions { get; set; }
 
         internal static Library.IAccount CreateNewAccountObject()
@@ -38,14 +39,40 @@ namespace RiftAuthenticator.WP7
             return newAccount;
         }
 
-        internal static void SaveNewAccountObject(Library.IAccount newAccount)
+        internal static void AddNewAccountObject(Library.IAccount newAccount)
         {
             if (newAccount != Account)
             {
                 AccountManager.Add(newAccount);
                 Account = newAccount;
             }
+        }
+
+        internal static void SaveNewAccountObject(Library.IAccount newAccount)
+        {
+            AddNewAccountObject(newAccount);
             AccountManager.SaveAccounts();
+        }
+
+        internal static void ExecuteTimeSync(System.Windows.Threading.Dispatcher dispatcher)
+        {
+            Library.TrionServer.BeginGetTimeOffset((ar) =>
+            {
+                dispatcher.BeginInvoke(() =>
+                {
+                    try
+                    {
+                        var timeOffset = Library.TrionServer.EndGetTimeOffset(ar);
+                        foreach (var account in AccountManager)
+                            account.TimeOffset = timeOffset;
+                        AccountManager.SaveAccounts();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK);
+                    }
+                });
+            }, null);
         }
 
 

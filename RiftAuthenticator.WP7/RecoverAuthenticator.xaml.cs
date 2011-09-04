@@ -22,11 +22,8 @@ namespace RiftAuthenticator.WP7
 
         private void QuerySecurityQuestions_Click(object sender, RoutedEventArgs e)
         {
-            var deviceId = (string.IsNullOrEmpty(DeviceId.Text) ? Library.TrionServer.GetOrCreateRandomDeviceId() : DeviceId.Text);
-
             App.AuthCreateUsername = UserName.Text;
             App.AuthCreatePassword = Password.Password;
-            App.AuthCreateDeviceId = deviceId;
 
             Library.TrionServer.BeginGetSecurityQuestions((ar) =>
             {
@@ -43,18 +40,6 @@ namespace RiftAuthenticator.WP7
                     }
                 });
             }, null, App.AuthCreateUsername, App.AuthCreatePassword);
-        }
-
-        private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
-        {
-            DeviceId.Text = Library.TrionServer.GetOrCreateRandomDeviceId();
-        }
-
-        private void ShowDeviceId_Click(object sender, EventArgs e)
-        {
-            var isHidden = DeviceId.Visibility == System.Windows.Visibility.Collapsed;
-            var newVisibility = (isHidden ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed);
-            DeviceIdLabel.Visibility = DeviceId.Visibility = newVisibility;
         }
     }
 }

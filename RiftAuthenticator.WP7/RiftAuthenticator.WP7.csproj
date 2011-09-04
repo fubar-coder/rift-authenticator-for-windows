@@ -79,6 +79,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AuthenticatorDescription.xaml.cs">
+      <DependentUpon>AuthenticatorDescription.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CreateAuthenticator.xaml.cs">
       <DependentUpon>CreateAuthenticator.xaml</DependentUpon>
     </Compile>
@@ -102,6 +105,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Page Include="AuthenticatorDescription.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CreateAuthenticator.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -131,6 +138,8 @@
     <Resource Include="Images\RiftLogo.png" />
     <Resource Include="Background.png" />
     <Content Include="Images\appbar.add.rest.png" />
+    <Content Include="Images\appbar.delete.rest.png" />
+    <Content Include="Images\appbar.download.rest.png" />
     <Content Include="Images\appbar.edit.rest.png" />
     <Content Include="Images\appbar.feature.settings.rest.png" />
     <Content Include="Images\appbar.sync.rest.png" />

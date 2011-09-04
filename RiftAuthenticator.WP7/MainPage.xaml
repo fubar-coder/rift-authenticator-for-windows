@@ -43,7 +43,7 @@
                 <RowDefinition Height="111*" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <toolkit:ListPicker Grid.Row="0" Name="Accounts" Visibility="Collapsed" ItemsSource="{Binding}">
+            <toolkit:ListPicker Grid.Row="0" Name="Accounts" Visibility="Collapsed" ItemsSource="{Binding}" SelectionChanged="Accounts_SelectionChanged">
                 <toolkit:ListPicker.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
@@ -68,7 +68,8 @@
         <shell:ApplicationBar Mode="Minimized">
             <shell:ApplicationBar.Buttons>
                 <shell:ApplicationBarIconButton IconUri="/Images/appbar.add.rest.png" Text="Add" x:Name="AccountAdd" Click="AccountAdd_Click" />
-                <shell:ApplicationBarIconButton IconUri="/Images/appbar.edit.rest.png" Text="Edit" x:Name="AccountEdit" />
+                <shell:ApplicationBarIconButton IconUri="/Images/appbar.download.rest.png" Text="Recover" x:Name="AccountRecover" Click="AccountRecover_Click" />
+                <shell:ApplicationBarIconButton IconUri="/Images/appbar.delete.rest.png" Text="Edit" x:Name="AccountDelete" Click="AccountDelete_Click" />
                 <shell:ApplicationBarIconButton IconUri="/Images/appbar.sync.rest.png" Text="Sync" x:Name="AccountSync" Click="AccountSync_Click" />
             </shell:ApplicationBar.Buttons>
         </shell:ApplicationBar>
