@@ -13,9 +13,9 @@ using Microsoft.Phone.Controls;
 
 namespace RiftAuthenticator.WP7
 {
-    public partial class RecoverAuthenticator : PhoneApplicationPage
+    public partial class AccountLogin : PhoneApplicationPage
     {
-        public RecoverAuthenticator()
+        public AccountLogin()
         {
             InitializeComponent();
         }

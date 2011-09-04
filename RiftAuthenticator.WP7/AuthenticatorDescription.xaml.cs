@@ -37,7 +37,7 @@ namespace RiftAuthenticator.WP7
             var deviceId = (string.IsNullOrEmpty(DeviceId.Text) ? Library.TrionServer.GetOrCreateRandomDeviceId() : DeviceId.Text);
             App.AuthCreateDeviceId = deviceId;
             App.AuthCreateDescription = AuthDescription.Text;
-            NavigationService.Navigate(new Uri("/RecoverAuthenticator.xaml", UriKind.Relative));
+            NavigationService.Navigate(new Uri("/AccountLogin.xaml", UriKind.Relative));
         }
     }
 }

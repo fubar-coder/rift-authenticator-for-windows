@@ -93,8 +93,8 @@
       <DependentUpon>NoConfigPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RecoverAuthenticator.xaml.cs">
-      <DependentUpon>RecoverAuthenticator.xaml</DependentUpon>
+    <Compile Include="AccountLogin.xaml.cs">
+      <DependentUpon>AccountLogin.xaml</DependentUpon>
     </Compile>
     <Compile Include="SecurityQuestions.xaml.cs">
       <DependentUpon>SecurityQuestions.xaml</DependentUpon>
@@ -121,7 +121,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="RecoverAuthenticator.xaml">
+    <Page Include="AccountLogin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
