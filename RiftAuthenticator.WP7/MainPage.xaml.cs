@@ -76,22 +76,27 @@ namespace RiftAuthenticator.WP7
             {
                 try
                 {
-                    Library.TrionServer.Platform = new Library.Platform.WP7.Platform(userAgent);
-                    AccountManager = new Library.IsolatedStorage.AccountManager();
-                    try
+                    if (Library.TrionServer.Platform == null)
+                        Library.TrionServer.Platform = new Library.Platform.WP7.Platform(userAgent);
+                    if (AccountManager == null)
                     {
-                        //AccountManager.LoadAccounts();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK);
-                        AccountManager.Clear();
+                        AccountManager = new Library.IsolatedStorage.AccountManager();
+                        try
+                        {
+                            AccountManager.LoadAccounts();
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK);
+                            AccountManager.Clear();
+                        }
                     }
                     if (AccountManager.Count == 0)
                     {
                         StartNoConfigWizard();
                     }
                     SetAccount(null);
+                    UpdateAccountList();
                     Timer = new System.Windows.Threading.DispatcherTimer();
                     Timer.Interval = new TimeSpan(0, 0, 0, 0, 200);
                     Timer.Tick += new EventHandler(Timer_Tick);
@@ -115,6 +120,25 @@ namespace RiftAuthenticator.WP7
         private void StartNoConfigWizard()
         {
             NavigationService.Navigate(new Uri("/NoConfigPage.xaml", UriKind.Relative));
+        }
+
+        private void UpdateAccountList()
+        {
+            var oldSelectedAccount = Account;
+            Accounts.DataContext = null;
+            Accounts.DataContext = AccountManager;
+            if (AccountManager.Count == 0)
+                AccountManager.Add(AccountManager.CreateAccount());
+            int newSelectedAccountIndex = -1;
+            if (oldSelectedAccount != null)
+            {
+                newSelectedAccountIndex = AccountManager.IndexOf(oldSelectedAccount);
+            }
+            if (newSelectedAccountIndex == -1)
+                Accounts.SelectedIndex = 0;
+            else
+                Accounts.SelectedIndex = newSelectedAccountIndex;
+            Accounts.Visibility = ((AccountManager.Count > 1) ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed);
         }
 
         void RefreshToken()
