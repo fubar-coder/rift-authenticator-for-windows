@@ -67,8 +67,10 @@ namespace RiftAuthenticator.WP7
             }
             else
             {
+                InitAuthenticatorSystem();
                 base.OnNavigatedTo(e);
             }
+            InitAuthenticatorUI();
         }
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
@@ -76,9 +78,6 @@ namespace RiftAuthenticator.WP7
 #if !WP70
             ApplicationBar.Mode = Microsoft.Phone.Shell.ApplicationBarMode.Minimized;
 #endif
-            // Use this fake UserAgent because HTTP requests are buggy when the WebBrowser control were instantiated
-            // by this application
-            InitAuthenticatorStuff("Mozilla/4.0 (compatible: MSIE 7.0; Windows Phone OS 7.0; Trident/3.1; IEMobile/7.0; SAMSUNG; SGH-i917)");
         }
 
         private void SetAccount(string accountId)
@@ -96,45 +95,58 @@ namespace RiftAuthenticator.WP7
             UpdateAccountList();
         }
 
-        private void InitAuthenticatorStuff(string userAgent)
+        private void InitAuthenticatorUI()
         {
-            Dispatcher.BeginInvoke(() =>
+            if (Account == null)
+                SetAccount(null);
+            UpdateAccountList();
+            if (Timer == null)
             {
-                try
+                Timer = new System.Windows.Threading.DispatcherTimer();
+                Timer.Interval = new TimeSpan(0, 0, 0, 0, 200);
+                Timer.Tick += new EventHandler(Timer_Tick);
+                Timer.Start();
+            }
+        }
+
+        private bool InitAuthenticatorSystem()
+        {
+            // Use this fake UserAgent because HTTP requests are buggy when the WebBrowser control were instantiated
+            // by this application
+            return InitAuthenticatorSystem("Mozilla/4.0 (compatible: MSIE 7.0; Windows Phone OS 7.0; Trident/3.1; IEMobile/7.0; SAMSUNG; SGH-i917)");
+        }
+
+        private bool InitAuthenticatorSystem(string userAgent)
+        {
+            try
+            {
+                if (Library.TrionServer.Platform == null)
+                    Library.TrionServer.Platform = new Library.Platform.WP7.Platform(userAgent);
+                var newAccountManager = AccountManager == null;
+                if (newAccountManager)
                 {
-                    if (Library.TrionServer.Platform == null)
-                        Library.TrionServer.Platform = new Library.Platform.WP7.Platform(userAgent);
-                    var newAccountManager = AccountManager == null;
-                    if (newAccountManager)
+                    AccountManager = new Library.IsolatedStorage.AccountManager();
+                    try
                     {
-                        AccountManager = new Library.IsolatedStorage.AccountManager();
-                        try
-                        {
-                            AccountManager.LoadAccounts();
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK);
-                            AccountManager.Clear();
-                        }
+                        AccountManager.LoadAccounts();
                     }
-                    if (AccountManager.Count == 0)
+                    catch (Exception ex)
                     {
-                        StartNoConfigWizard();
+                        MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK);
+                        AccountManager.Clear();
                     }
-                    if (newAccountManager)
-                        SetAccount(null);
-                    UpdateAccountList();
-                    Timer = new System.Windows.Threading.DispatcherTimer();
-                    Timer.Interval = new TimeSpan(0, 0, 0, 0, 200);
-                    Timer.Tick += new EventHandler(Timer_Tick);
-                    Timer.Start();
                 }
-                catch (Exception ex)
+                if (AccountManager.Count == 0)
                 {
-                    MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK);
+                    NavigationService.Navigate(new Uri("/NoConfigPage.xaml", UriKind.Relative));
                 }
-            });
+                return newAccountManager;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK);
+                return false;
+            }
         }
 
         void Timer_Tick(object sender, EventArgs e)
@@ -143,11 +155,6 @@ namespace RiftAuthenticator.WP7
             {
                 RefreshToken();
             });
-        }
-
-        private void StartNoConfigWizard()
-        {
-            NavigationService.Navigate(new Uri("/NoConfigPage.xaml", UriKind.Relative));
         }
 
         private void UpdateAccountList()
