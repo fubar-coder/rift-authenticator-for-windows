@@ -79,7 +79,8 @@ namespace RiftAuthenticator.WP7
                 {
                     if (Library.TrionServer.Platform == null)
                         Library.TrionServer.Platform = new Library.Platform.WP7.Platform(userAgent);
-                    if (AccountManager == null)
+                    var newAccountManager = AccountManager == null;
+                    if (newAccountManager)
                     {
                         AccountManager = new Library.IsolatedStorage.AccountManager();
                         try
@@ -96,7 +97,8 @@ namespace RiftAuthenticator.WP7
                     {
                         StartNoConfigWizard();
                     }
-                    SetAccount(null);
+                    if (newAccountManager)
+                        SetAccount(null);
                     UpdateAccountList();
                     Timer = new System.Windows.Threading.DispatcherTimer();
                     Timer.Interval = new TimeSpan(0, 0, 0, 0, 200);
@@ -161,13 +163,6 @@ namespace RiftAuthenticator.WP7
             }
         }
 
-        private void AccountSync_Click(object sender, EventArgs e)
-        {
-            if (Account.IsEmpty)
-                return;
-            App.ExecuteTimeSync(Dispatcher);
-        }
-
         private void AccountAdd_Click(object sender, EventArgs e)
         {
             NavigationService.Navigate(new Uri("/CreateAuthenticator.xaml", UriKind.Relative));
@@ -200,6 +195,18 @@ namespace RiftAuthenticator.WP7
             AccountManager.Remove(Account);
             AccountManager.SaveAccounts();
             SetAccount(null);
+        }
+
+        private void ExecSyncAll_Click(object sender, RoutedEventArgs e)
+        {
+            if (Account == null || Account.IsEmpty)
+                return;
+            App.ExecuteTimeSync(Dispatcher);
+        }
+
+        private void AccountEdit_Click(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/AuthenticatorDescription.xaml?action=edit", UriKind.Relative));
         }
     }
 }

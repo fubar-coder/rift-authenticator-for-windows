@@ -15,6 +15,8 @@ namespace RiftAuthenticator.WP7
 {
     public partial class AuthenticatorDescription : PhoneApplicationPage
     {
+        private bool IsEdit { get; set; }
+
         public AuthenticatorDescription()
         {
             InitializeComponent();
@@ -29,15 +31,38 @@ namespace RiftAuthenticator.WP7
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
-            DeviceId.Text = Library.TrionServer.GetOrCreateRandomDeviceId();
+            if (this.NavigationContext.QueryString.ContainsKey("action"))
+            {
+                IsEdit = NavigationContext.QueryString["action"] == "edit";
+            }
+            if (IsEdit)
+            {
+                AuthDescription.Text = App.Account.Description;
+                DeviceId.Text = App.Account.DeviceId;
+                DeviceId.IsEnabled = false;
+            }
+            else
+            {
+                DeviceId.Text = Library.TrionServer.GetOrCreateRandomDeviceId();
+            }
+
         }
 
         private void LoadSecurityQuestions_Click(object sender, RoutedEventArgs e)
         {
-            var deviceId = (string.IsNullOrEmpty(DeviceId.Text) ? Library.TrionServer.GetOrCreateRandomDeviceId() : DeviceId.Text);
-            App.AuthCreateDeviceId = deviceId;
-            App.AuthCreateDescription = AuthDescription.Text;
-            NavigationService.Navigate(new Uri("/AccountLogin.xaml", UriKind.Relative));
+            if (IsEdit)
+            {
+                App.Account.Description = AuthDescription.Text;
+                App.AccountManager.SaveAccounts();
+                NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
+            }
+            else
+            {
+                var deviceId = (string.IsNullOrEmpty(DeviceId.Text) ? Library.TrionServer.GetOrCreateRandomDeviceId() : DeviceId.Text);
+                App.AuthCreateDeviceId = deviceId;
+                App.AuthCreateDescription = AuthDescription.Text;
+                NavigationService.Navigate(new Uri("/AccountLogin.xaml", UriKind.Relative));
+            }
         }
     }
 }
