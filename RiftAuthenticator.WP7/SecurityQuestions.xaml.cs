@@ -57,6 +57,7 @@ namespace RiftAuthenticator.WP7
                     securityQuestionAnswers[i] = SecurityQuestionPairs[i].Value.Text;
                 }
             }
+            RecoverAuthenticator.IsEnabled = false;
             var account = App.CreateNewAccountObject();
             try
             {
@@ -80,6 +81,7 @@ namespace RiftAuthenticator.WP7
                         Dispatcher.BeginInvoke(() =>
                         {
                             MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK);
+                            RecoverAuthenticator.IsEnabled = true;
                         });
                     }
                 }, null, account, App.AuthCreateUsername, App.AuthCreatePassword, securityQuestionAnswers, App.AuthCreateDeviceId);
@@ -87,7 +89,7 @@ namespace RiftAuthenticator.WP7
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK);
-                return;
+                RecoverAuthenticator.IsEnabled = true;
             }
         }
     }
