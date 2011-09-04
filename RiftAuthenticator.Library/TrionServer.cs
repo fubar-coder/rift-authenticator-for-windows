@@ -140,7 +140,7 @@ namespace RiftAuthenticator.Library
                             {
                                 using (var responseStream = response.GetResponseStream())
                                 {
-                                    responseStream.CopyTo(buffer);
+                                    CopyTo(responseStream, buffer);
                                 }
                             }
                             var bytes = buffer.ToArray();

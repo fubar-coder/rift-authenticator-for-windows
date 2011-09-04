@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010 Express for Windows Phone
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiftAuthenticator.WP70", "RiftAuthenticator.WP70.csproj", "{61D6DCD8-CC52-4DB8-BA79-5FED50699B5B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiftAuthenticator.Library.WP70", "..\RiftAuthenticator.Library\RiftAuthenticator.Library.WP70.csproj", "{5088302B-1729-4D9E-A5B6-C781CEFA2D93}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RiftAuthenticator.Library.IsolatedStorage.WP70", "..\RiftAuthenticator.Library.IsolatedStorage\RiftAuthenticator.Library.IsolatedStorage.WP70.csproj", "{ACC8E344-534D-4CCF-9E4F-9301DDCC3D6C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{61D6DCD8-CC52-4DB8-BA79-5FED50699B5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61D6DCD8-CC52-4DB8-BA79-5FED50699B5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61D6DCD8-CC52-4DB8-BA79-5FED50699B5B}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{61D6DCD8-CC52-4DB8-BA79-5FED50699B5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61D6DCD8-CC52-4DB8-BA79-5FED50699B5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61D6DCD8-CC52-4DB8-BA79-5FED50699B5B}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{5088302B-1729-4D9E-A5B6-C781CEFA2D93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5088302B-1729-4D9E-A5B6-C781CEFA2D93}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5088302B-1729-4D9E-A5B6-C781CEFA2D93}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5088302B-1729-4D9E-A5B6-C781CEFA2D93}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACC8E344-534D-4CCF-9E4F-9301DDCC3D6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACC8E344-534D-4CCF-9E4F-9301DDCC3D6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACC8E344-534D-4CCF-9E4F-9301DDCC3D6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACC8E344-534D-4CCF-9E4F-9301DDCC3D6C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

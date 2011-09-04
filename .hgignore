@@ -5,6 +5,7 @@ syntax: glob
 bin/x86
 Debug WP7
 Bin/Release
+Bin/Debug
 syntax: regexp
 /bin/Debug$
 /obj/x86$

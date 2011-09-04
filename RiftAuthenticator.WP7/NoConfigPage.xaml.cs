@@ -20,9 +20,22 @@ namespace RiftAuthenticator.WP7
             InitializeComponent();
         }
 
+        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
+        {
+            if (App.BackToMainPage)
+            {
+                NavigationService.GoBack();
+            }
+            else
+            {
+                base.OnNavigatedTo(e);
+            }
+        }
+
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
-            NavigationService.RemoveBackEntry();
+            if (!App.BackToMainPage)
+                App.ExitApp = true;
         }
 
         private void AuthCreate_Click(object sender, RoutedEventArgs e)

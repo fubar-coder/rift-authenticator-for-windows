@@ -33,12 +33,27 @@ namespace RiftAuthenticator.Library.IsolatedStorage
 #endif
         }
 
+        internal static bool HasFile(System.IO.IsolatedStorage.IsolatedStorageFile storage, string fileName)
+        {
+            var fileNames = storage.GetFileNames();
+            int foundFileNameIndex = -1;
+            for (int i = 0; i != fileNames.Length; ++i)
+            {
+                if (fileNames[i] == fileName)
+                {
+                    foundFileNameIndex = i;
+                    break;
+                }
+            }
+            return foundFileNameIndex != -1;
+        }
+
         internal static Dictionary<string, object> ReadMap(string fileName)
         {
             Dictionary<string, object> result;
             using (var storage = CreateIsolatedStorageFile())
             {
-                if (storage.GetFileNames(fileName).Length == 1)
+                if (HasFile(storage, fileName))
                 {
                     using (var stream = new System.IO.IsolatedStorage.IsolatedStorageFileStream(fileName, System.IO.FileMode.Open, System.IO.FileAccess.Read, storage))
                     {

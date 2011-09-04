@@ -47,10 +47,35 @@ namespace RiftAuthenticator.WP7
             InitializeComponent();
         }
 
+        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
+        {
+            if (App.ExitApp)
+            {
+                throw new QuitException();
+            }
+            else if (App.BackToMainPage)
+            {
+                if (NavigationService.CanGoBack)
+                {
+                    NavigationService.GoBack();
+                }
+                else
+                {
+                    App.BackToMainPage = false;
+                    base.OnNavigatedTo(e);
+                }
+            }
+            else
+            {
+                base.OnNavigatedTo(e);
+            }
+        }
+
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
-            while (NavigationService.CanGoBack)
-                NavigationService.RemoveBackEntry();
+#if !WP70
+            ApplicationBar.Mode = Microsoft.Phone.Shell.ApplicationBarMode.Minimized;
+#endif
             // Use this fake UserAgent because HTTP requests are buggy when the WebBrowser control were instantiated
             // by this application
             InitAuthenticatorStuff("Mozilla/4.0 (compatible: MSIE 7.0; Windows Phone OS 7.0; Trident/3.1; IEMobile/7.0; SAMSUNG; SGH-i917)");

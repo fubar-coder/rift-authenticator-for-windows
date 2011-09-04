@@ -41,6 +41,9 @@ namespace RiftAuthenticator.WP7
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
+#if !WP70
+            ApplicationBar.Mode = Microsoft.Phone.Shell.ApplicationBarMode.Minimized;
+#endif
             AuthDescription.Text = CreateDefaultAccountDescription();
             DeviceId.Text = Library.TrionServer.GetOrCreateRandomDeviceId();
         }
@@ -62,7 +65,10 @@ namespace RiftAuthenticator.WP7
                     {
                         Dispatcher.BeginInvoke(() =>
                         {
-                            NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
+                            App.ExitApp = false;
+                            App.BackToMainPage = true;
+                            NavigationService.GoBack();
+                            //NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
                         });
                     });
                 }
