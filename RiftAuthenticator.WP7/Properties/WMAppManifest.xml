@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2009/deployment" AppPlatformVersion="7.1">
   <App xmlns="" ProductID="{e9fff9ff-fc25-4a35-b99d-12fc26a41abe}" Title="RIFT™ Authenticator" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="RIFT Authenticator for Windows Project" Description="RIFT™ Authenticator" Publisher="RIFT Authenticator for Windows Project">
-    <IconPath IsRelative="true" IsResource="false">Images\TRION\icon.png</IconPath>
+    <IconPath IsRelative="true" IsResource="false">Images\TRION\tile-small.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_IDENTITY_DEVICE" />
       <Capability Name="ID_CAP_IDENTITY_USER" />
@@ -26,7 +26,7 @@
     <Tokens>
       <PrimaryToken TokenID="RiftAuthenticator.WP7Token" TaskName="_default">
         <TemplateType5>
-          <BackgroundImageURI IsRelative="true" IsResource="false">Images\TRION\icon.png</BackgroundImageURI>
+          <BackgroundImageURI IsRelative="true" IsResource="false">Images\TRION\tile-large.png</BackgroundImageURI>
           <Count>0</Count>
           <Title>RIFT™ Authenticator</Title>
         </TemplateType5>
