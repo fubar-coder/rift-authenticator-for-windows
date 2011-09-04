@@ -59,6 +59,7 @@ namespace RiftAuthenticator.WP7
             }
             else
             {
+                AuthDescription.Text = App.CreateDefaultAccountDescription();
                 DeviceId.Text = Library.TrionServer.GetOrCreateRandomDeviceId();
             }
 
