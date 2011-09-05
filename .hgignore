@@ -14,6 +14,7 @@ ipch
 *.aps
 WP7AppTitleLocalizer
 AppResLib.dll.*.mui
+*.orig
 syntax: regexp
 /bin/Debug$
 /obj/x86$
