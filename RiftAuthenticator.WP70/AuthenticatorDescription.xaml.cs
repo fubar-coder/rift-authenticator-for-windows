@@ -56,9 +56,14 @@ namespace RiftAuthenticator.WP7
         {
             var isHidden = DeviceId.Visibility == System.Windows.Visibility.Collapsed;
             var newVisibility = (isHidden ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed);
-            DeviceIdLabel.Visibility = DeviceId.Visibility = newVisibility;
+            SetDeviceIdVisibility(newVisibility);
+        }
+
+        private void SetDeviceIdVisibility(System.Windows.Visibility visibility)
+        {
+            DeviceIdLabel.Visibility = DeviceId.Visibility = DeviceIdWithHelp.Visibility = visibility;
             if (!IsEdit)
-                DeviceIdWarning.Visibility = newVisibility;
+                DeviceIdWarning.Visibility = DeviceIdHelp.Visibility = visibility;
         }
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
@@ -66,6 +71,8 @@ namespace RiftAuthenticator.WP7
 #if !WP70
             ApplicationBar.Mode = Microsoft.Phone.Shell.ApplicationBarMode.Minimized;
 #endif
+
+            SetDeviceIdVisibility(System.Windows.Visibility.Collapsed);
 
             if (ApplicationBar.Buttons.Count == 0)
             {
@@ -113,6 +120,11 @@ namespace RiftAuthenticator.WP7
                 App.AuthCreateDescription = AuthDescription.Text;
                 NavigationService.Navigate(new Uri("/AccountLogin.xaml", UriKind.Relative));
             }
+        }
+
+        private void DeviceIdHelp_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show(WP7.Resources.AppResource.DeviceIdHelp);
         }
     }
 }

@@ -132,6 +132,7 @@
     <Content Include="Images\appbar.download.rest.png" />
     <Content Include="Images\appbar.edit.rest.png" />
     <Content Include="Images\appbar.feature.settings.rest.png" />
+    <Resource Include="Images\appbar.questionmark.rest.png" />
     <Content Include="Images\appbar.sync.rest.png" />
     <Resource Include="Images\RiftLogo.png" />
     <Resource Include="Images\TRION\icon.png" />

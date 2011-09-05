@@ -178,6 +178,15 @@ namespace RiftAuthenticator.WP7.Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die You should only modify your device ID when you recover the authenticator information from a different device. ähnelt.
+        /// </summary>
+        public static string DeviceIdHelp {
+            get {
+                return ResourceManager.GetString("DeviceIdHelp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die It is NOT recommended to change the device ID unless you know exactly what you&apos;re doing! ähnelt.
         /// </summary>
         public static string DeviceIdModificationWarning {

@@ -159,6 +159,9 @@
   <data name="DescriptionPrefix" xml:space="preserve">
     <value>Beschreibung:</value>
   </data>
+  <data name="DeviceIdHelp" xml:space="preserve">
+    <value>Sie sollten Ihre Geräte-ID nur dann ändern, wenn Sie einen Authentifikator eines anderen Gerätes wiederherstellen wollen.</value>
+  </data>
   <data name="DeviceIdModificationWarning" xml:space="preserve">
     <value>Bitte ändern Sie auf keinen Fall die Geräte-ID, ausser Sie wissen genau was Sie machen und welche Auswirkung es hat!</value>
   </data>
