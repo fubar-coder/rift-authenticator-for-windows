@@ -46,6 +46,17 @@ namespace RiftAuthenticator.WP7
 #if !WP70
             ApplicationBar.Mode = Microsoft.Phone.Shell.ApplicationBarMode.Minimized;
 #endif
+
+            if (ApplicationBar.Buttons.Count == 0)
+            {
+                var appBarButton = new Microsoft.Phone.Shell.ApplicationBarIconButton(new Uri("/Images/appbar.add.rest.png", UriKind.Relative))
+                {
+                    Text = WP7.Resources.AppResource.ShowDeviceId,
+                };
+                appBarButton.Click += ShowDeviceId_Click;
+                ApplicationBar.Buttons.Add(appBarButton);
+            }
+            
             if (this.NavigationContext.QueryString.ContainsKey("action"))
             {
                 IsEdit = NavigationContext.QueryString["action"] == "edit";
@@ -55,7 +66,7 @@ namespace RiftAuthenticator.WP7
                 AuthDescription.Text = App.Account.Description;
                 DeviceId.Text = App.Account.DeviceId;
                 DeviceId.IsEnabled = false;
-                LoadSecurityQuestions.Content = "Save";
+                LoadSecurityQuestions.Content = WP7.Resources.AppResource.Save;
             }
             else
             {

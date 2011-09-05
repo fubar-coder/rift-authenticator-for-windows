@@ -48,7 +48,7 @@ namespace RiftAuthenticator.WP7
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK);
+                        MessageBox.Show(ex.Message, WP7.Resources.AppResource.MessageBoxTitleError, MessageBoxButton.OK);
                     }
                 });
             }, null, App.AuthCreateUsername, App.AuthCreatePassword);

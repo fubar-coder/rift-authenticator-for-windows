@@ -28,10 +28,10 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <TextBlock x:Name="ApplicationTitle" Text="RIFT Authenticator" Style="{StaticResource PhoneTextNormalStyle}" />
+                <TextBlock x:Name="ApplicationTitle" Text="{Binding Path=Strings.Title, Source={StaticResource AppRes}}" Style="{StaticResource PhoneTextNormalStyle}" />
                 <Image Grid.Column="1" Source="Images/TRION/rift_logo_half.png" />
             </Grid>
-            <TextBlock x:Name="PageTitle" Text="Login token" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" FontSize="36" />
+            <TextBlock x:Name="PageTitle" Text="{Binding Path=Strings.LoginToken, Source={StaticResource AppRes}}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" FontSize="36" />
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
@@ -61,7 +61,7 @@
             <Button Grid.Row="3" BorderThickness="0" Padding="0" HorizontalAlignment="Left" Name="ExecSyncAll" FontSize="16" Click="ExecSyncAll_Click">
                 <StackPanel  Orientation="Horizontal">
                     <Image Source="Images/TRION/sync_icon.png" />
-                    <TextBlock Margin="12,0,0,0" Text="Synchronize" />
+                    <TextBlock Margin="12,0,0,0" Text="{Binding Path=Strings.Synchronize, Source={StaticResource AppRes}}" />
                 </StackPanel>
             </Button>
             <TextBlock Grid.Row="5" Name="SerialKey" Text=" " FontSize="24" TextAlignment="Center" />
@@ -72,14 +72,7 @@
     </Grid>
 
     <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar>
-            <shell:ApplicationBar.Buttons>
-                <shell:ApplicationBarIconButton IconUri="/Images/appbar.add.rest.png" Text="Add" x:Name="AccountAdd" Click="AccountAdd_Click" />
-                <shell:ApplicationBarIconButton IconUri="/Images/appbar.download.rest.png" Text="Recover" x:Name="AccountRecover" Click="AccountRecover_Click" />
-                <shell:ApplicationBarIconButton IconUri="/Images/appbar.delete.rest.png" Text="Delete" x:Name="AccountDelete" Click="AccountDelete_Click" />
-                <shell:ApplicationBarIconButton IconUri="/Images/appbar.edit.rest.png" Text="Edit" x:Name="AccountEdit" Click="AccountEdit_Click" />
-            </shell:ApplicationBar.Buttons>
-        </shell:ApplicationBar>
+        <shell:ApplicationBar />
     </phone:PhoneApplicationPage.ApplicationBar>
 
 </phone:PhoneApplicationPage>

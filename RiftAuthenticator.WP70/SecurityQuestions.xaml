@@ -27,10 +27,10 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <TextBlock x:Name="ApplicationTitle" Text="RIFT Authenticator" Style="{StaticResource PhoneTextNormalStyle}" />
+                <TextBlock x:Name="ApplicationTitle" Text="{Binding Path=Strings.Title, Source={StaticResource AppRes}}" Style="{StaticResource PhoneTextNormalStyle}" />
                 <Image Grid.Column="1" Source="Images/TRION/rift_logo_half.png" />
             </Grid>
-            <TextBlock x:Name="PageTitle" Text="Security questions" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" FontSize="36" />
+            <TextBlock x:Name="PageTitle" Text="{Binding Path=Strings.SecurityQuestions, Source={StaticResource AppRes}}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" FontSize="36" />
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
@@ -50,7 +50,7 @@
             <TextBox Name="SecurityAnswer1" Grid.Row="1" />
             <TextBlock Name="SecurityQuestion2" Grid.Row="2" Text="Security question 2" TextWrapping="Wrap" />
             <TextBox Name="SecurityAnswer2" Grid.Row="3" />
-            <Button Content="Recover" Grid.Row="5" Name="RecoverAuthenticator" Click="RecoverAuthenticator_Click" />
+            <Button Content="{Binding Path=Strings.CmdRecover, Source={StaticResource AppRes}}" Grid.Row="5" Name="RecoverAuthenticator" Click="RecoverAuthenticator_Click" />
         </Grid>
         <Grid.Background>
             <ImageBrush ImageSource="Images/TRION/rift_bg.jpg" />

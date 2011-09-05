@@ -27,16 +27,16 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <TextBlock x:Name="ApplicationTitle" Text="RIFT Authenticator" Style="{StaticResource PhoneTextNormalStyle}" />
+                <TextBlock x:Name="ApplicationTitle" Text="{Binding Path=Strings.Title, Source={StaticResource AppRes}}" Style="{StaticResource PhoneTextNormalStyle}" />
                 <Image Grid.Column="1" Source="Images/TRION/rift_logo_half.png" />
             </Grid>
-            <TextBlock x:Name="PageTitle" Text="Basic Information" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" FontSize="36" />
+            <TextBlock x:Name="PageTitle" Text="{Binding Path=Strings.BasicInfo, Source={StaticResource AppRes}}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" FontSize="36" />
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <Grid.Background>
-                <ImageBrush ImageSource="/Images/TRION/rift_bg.jpg" />
+                <ImageBrush ImageSource="Images/TRION/rift_bg.jpg" />
             </Grid.Background>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -46,20 +46,16 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0" Text="Description:" />
+            <TextBlock Grid.Row="0" Text="{Binding Path=Strings.DescriptionPrefix, Source={StaticResource AppRes}}" />
             <TextBox Grid.Row="1" Name="AuthDescription" />
-            <TextBlock Grid.Row="2" Name="DeviceIdLabel" Text="Device ID:" Visibility="Collapsed" />
+            <TextBlock Grid.Row="2" Name="DeviceIdLabel" Text="{Binding Path=Strings.DeviceIdPrefix, Source={StaticResource AppRes}}" Visibility="Collapsed" />
             <TextBox Grid.Row="3" Name="DeviceId" Visibility="Collapsed" />
-            <Button Grid.Row="5" Content="Continue" Name="LoadSecurityQuestions" Click="LoadSecurityQuestions_Click" />
+            <Button Grid.Row="5" Content="{Binding Path=Strings.Continue, Source={StaticResource AppRes}}" Name="LoadSecurityQuestions" Click="LoadSecurityQuestions_Click" />
         </Grid>
     </Grid>
 
     <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar>
-            <shell:ApplicationBar.Buttons>
-                <shell:ApplicationBarIconButton IconUri="/Images/appbar.add.rest.png" Text="Device ID" x:Name="ShowDeviceId" Click="ShowDeviceId_Click" />
-            </shell:ApplicationBar.Buttons>
-        </shell:ApplicationBar>
+        <shell:ApplicationBar />
     </phone:PhoneApplicationPage.ApplicationBar>
 
 </phone:PhoneApplicationPage>

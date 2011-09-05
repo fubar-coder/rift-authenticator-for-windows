@@ -33,13 +33,13 @@ namespace RiftAuthenticator.WP7
             var activeAccounts = App.AccountManager.Where(x => !x.IsEmpty).Count();
             if (activeAccounts == 0)
             {
-                return "Default";
+                return WP7.Resources.AppResource.AuthNameDefault;
             }
             else
             {
                 var accountIndex = activeAccounts + 1;
                 string accountDescription;
-                while (App.AccountManager.FindAccount((accountDescription = string.Format("Account {0}", accountIndex))) != null)
+                while (App.AccountManager.FindAccount((accountDescription = string.Format(WP7.Resources.AppResource.AuthNameNumber, accountIndex))) != null)
                 {
                     ++accountIndex;
                 }
@@ -98,7 +98,7 @@ namespace RiftAuthenticator.WP7
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK);
+                        MessageBox.Show(ex.Message, WP7.Resources.AppResource.MessageBoxTitleError, MessageBoxButton.OK);
                     }
                 });
             }, null);
