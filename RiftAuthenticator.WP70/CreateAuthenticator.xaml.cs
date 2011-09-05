@@ -28,7 +28,7 @@ namespace RiftAuthenticator.WP7
 
             if (ApplicationBar.Buttons.Count == 0)
             {
-                var appBarButton = new Microsoft.Phone.Shell.ApplicationBarIconButton(new Uri("/Images/appbar.add.rest.png", UriKind.Relative))
+                var appBarButton = new Microsoft.Phone.Shell.ApplicationBarIconButton(new Uri("/Images/appbar.feature.settings.rest.png", UriKind.Relative))
                 {
                     Text = WP7.Resources.AppResource.ShowDeviceId,
                 };
