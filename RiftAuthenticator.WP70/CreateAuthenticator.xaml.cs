@@ -44,6 +44,8 @@ namespace RiftAuthenticator.WP7
             ApplicationBar.Mode = Microsoft.Phone.Shell.ApplicationBarMode.Minimized;
 #endif
 
+            SetDeviceIdVisibility(System.Windows.Visibility.Collapsed);
+
             if (ApplicationBar.Buttons.Count == 0)
             {
                 var appBarButton = new Microsoft.Phone.Shell.ApplicationBarIconButton(new Uri("/Images/appbar.feature.settings.rest.png", UriKind.Relative))
@@ -97,7 +99,17 @@ namespace RiftAuthenticator.WP7
         {
             var isHidden = DeviceId.Visibility == System.Windows.Visibility.Collapsed;
             var newVisibility = (isHidden ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed);
-            DeviceIdLabel.Visibility = DeviceId.Visibility = DeviceIdWarning.Visibility = newVisibility;
+            SetDeviceIdVisibility(newVisibility);
+        }
+
+        private void SetDeviceIdVisibility(System.Windows.Visibility visibility)
+        {
+            DeviceIdLabel.Visibility = DeviceId.Visibility = DeviceIdWarning.Visibility = DeviceIdWithHelp.Visibility = DeviceIdHelp.Visibility = visibility;
+        }
+
+        private void DeviceIdHelp_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show(WP7.Resources.AppResource.DeviceIdHelp);
         }
     }
 }
