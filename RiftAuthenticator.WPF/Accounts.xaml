@@ -1,0 +1,42 @@
+﻿<!--
+ * This file is part of RIFT™ Authenticator for Windows.
+ *
+ * RIFT™ Authenticator for Windows is free software: you can redistribute 
+ * it and/or modify it under the terms of the GNU General Public License 
+ * as published by the Free Software Foundation, either version 3 of the 
+ * License, or (at your option) any later version.
+ *
+ * RIFT™ Authenticator for Windows is distributed in the hope that it will 
+ * be useful, but WITHOUT ANY WARRANTY; without even the implied warranty 
+ * of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU 
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with RIFT™ Authenticator for Windows.  If not, see 
+ *<http://www.gnu.org/licenses/> .
+-->
+<Window x:Class="RiftAuthenticator.Accounts"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Accounts" Height="263" Width="431" Icon="/RiftAuthenticator;component/RiftLogo.ico" Loaded="Window_Loaded" WindowStartupLocation="CenterOwner">
+    <Grid>
+        <DataGrid Margin="12,12,43,41" Name="AccountGrid" SelectionMode="Extended" ItemsSource="{Binding}" AutoGenerateColumns="False" CanUserReorderColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Accounts.AccountGrid.Header.Description" Binding="{Binding Path=Description}"/>
+                <DataGridTextColumn Header="Accounts.AccountGrid.Header.DeviceId" Binding="{Binding Path=DeviceId}" IsReadOnly="True" />
+                <DataGridTextColumn Header="Accounts.AccountGrid.Header.SerialKey" Binding="{Binding Path=FormattedSerialKey}" IsReadOnly="True" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="↑" Height="23" HorizontalAlignment="Right" Margin="0,12,12,0" Name="MoveAccountUp" VerticalAlignment="Top" Width="25" Click="MoveAccountUp_Click" />
+        <Button Content="↓" Height="23" HorizontalAlignment="Right" Margin="0,0,12,41" Name="MoveAccountDown" VerticalAlignment="Bottom" Width="25" Click="MoveAccountDown_Click" />
+        <Grid VerticalAlignment="Bottom" Margin="12,0,12,12" Height="23" Grid.IsSharedSizeScope="True">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" SharedSizeGroup="GridButton" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="Auto" SharedSizeGroup="GridButton" />
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Content="{Binding Converter={StaticResource Localization}, ConverterParameter=Accounts.ApplyAccountChanges.Content}" Height="23" Name="ApplyAccountChanges" MinWidth="75" IsDefault="True" Click="ApplyAccountChanges_Click" />
+            <Button Grid.Column="2" Content="{Binding Converter={StaticResource Localization}, ConverterParameter=Accounts.CancelAccountChanges.Content}" Height="23" Name="CancelAccountChanges" IsCancel="True" />
+        </Grid>
+    </Grid>
+</Window>

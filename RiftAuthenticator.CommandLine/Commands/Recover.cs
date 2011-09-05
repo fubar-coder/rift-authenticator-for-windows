@@ -1,4 +1,22 @@
-﻿using System;
+﻿/**
+ * This file is part of RIFT™ Authenticator for Windows.
+ *
+ * RIFT™ Authenticator for Windows is free software: you can redistribute 
+ * it and/or modify it under the terms of the GNU General Public License 
+ * as published by the Free Software Foundation, either version 3 of the 
+ * License, or (at your option) any later version.
+ *
+ * RIFT™ Authenticator for Windows is distributed in the hope that it will 
+ * be useful, but WITHOUT ANY WARRANTY; without even the implied warranty 
+ * of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU 
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with RIFT™ Authenticator for Windows.  If not, see 
+ * <http://www.gnu.org/licenses/>.
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -20,9 +38,9 @@ namespace RiftAuthenticator.CommandLine.Commands
         {
             commandOptionSet = new NDesk.Options.OptionSet
             {
-                { "d|device-id=", "Manually specify a device id", x => deviceId = x },
-                { "u|e|email|user|user-name=", "Email address used for login", x => userName = x },
-                { "p|password=", "Password used for login", x => password = x },
+                { "d|device-id=", Resources.Strings.opt_recover_opt_device_id, x => deviceId = x },
+                { "u|e|email|user|user-name=", Resources.Strings.opt_recover_opt_email, x => userName = x },
+                { "p|password=", Resources.Strings.opt_recover_opt_password, x => password = x },
             };
         }
 
@@ -33,7 +51,7 @@ namespace RiftAuthenticator.CommandLine.Commands
 
         public string Description
         {
-            get { return "Show current login token"; }
+            get { return Resources.Strings.opt_recover_description; }
         }
 
         public NDesk.Options.OptionSet OptionSet
@@ -48,10 +66,12 @@ namespace RiftAuthenticator.CommandLine.Commands
         {
             var remainingArgs = OptionSet.Parse(args);
             if (string.IsNullOrEmpty(userName))
-                throw new CommandArgumentException(this, "No email address (user name) for login specified");
+                throw new CommandArgumentException(this, Resources.Strings.opt_recover_error_no_email);
             if (string.IsNullOrEmpty(password))
-                throw new CommandArgumentException(this, "No password for login specified");
-            var securityQuestions = Library.TrionServer.GetSecurityQuestions(userName, password);
+                throw new CommandArgumentException(this, Resources.Strings.opt_recover_error_no_password);
+            var ar = Library.TrionServer.BeginGetSecurityQuestions(null, null, userName, password);
+            ar.AsyncWaitHandle.WaitOne();
+            var securityQuestions = Library.TrionServer.EndGetSecurityQuestions(ar);
             var securityAnswers = new string[securityQuestions.Length];
             var argIndex = 0;
             for (int i = 0; i != securityQuestions.Length; ++i)
@@ -59,21 +79,20 @@ namespace RiftAuthenticator.CommandLine.Commands
                 if (!string.IsNullOrEmpty(securityQuestions[i]))
                 {
                     if (argIndex >= remainingArgs.Count)
-                        throw new CommandArgumentException(this, string.Format("No answer for security question {0} ({1}) given", i + 1, securityQuestions[i]));
+                        throw new CommandArgumentException(this, string.Format(Resources.Strings.opt_recover_error_no_answer, i + 1, securityQuestions[i]));
                     securityAnswers[i] = remainingArgs[argIndex++];
                 }
             }
             if (argIndex < remainingArgs.Count)
-                throw new CommandArgumentException(this, string.Format("Unknown arguments found: {0}", string.Join(" ", remainingArgs.ToArray())));
-            var cfg = new Library.Configuration
-            {
-                DeviceId = deviceId,
-            };
-            Library.TrionServer.RecoverSecurityKey(userName, password, securityAnswers, cfg);
-            cfg.TimeOffset = Library.TrionServer.GetTimeOffset();
-            cfg.Save();
-            globalOptions.Configuration.Load();
-            Program.ShowConfiguration(globalOptions.Configuration);
+                throw new CommandArgumentException(this, string.Format(Resources.Strings.app_unknown_args, string.Join(" ", remainingArgs.ToArray())));
+            ar = Library.TrionServer.BeginRecoverSecurityKey(null, null, globalOptions.Account, userName, password, securityAnswers, deviceId);
+            ar.AsyncWaitHandle.WaitOne();
+            Library.TrionServer.EndRecoverSecurityKey(ar);
+            ar = Library.TrionServer.BeginGetTimeOffset(null, null);
+            ar.AsyncWaitHandle.WaitOne();
+            globalOptions.Account.TimeOffset = Library.TrionServer.EndGetTimeOffset(ar);
+            globalOptions.AccountManager.SaveAccounts();
+            Program.ShowConfiguration(globalOptions.Account);
         }
     }
 }

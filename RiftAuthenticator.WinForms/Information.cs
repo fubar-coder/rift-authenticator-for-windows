@@ -1,18 +1,18 @@
 ﻿/**
- * This file is part of RIFT Authenticator for Windows.
+ * This file is part of RIFT™ Authenticator for Windows.
  *
- * RIFT Authenticator for Windows is free software: you can redistribute 
+ * RIFT™ Authenticator for Windows is free software: you can redistribute 
  * it and/or modify it under the terms of the GNU General Public License 
  * as published by the Free Software Foundation, either version 3 of the 
  * License, or (at your option) any later version.
  *
- * RIFT Authenticator for Windows is distributed in the hope that it will 
+ * RIFT™ Authenticator for Windows is distributed in the hope that it will 
  * be useful, but WITHOUT ANY WARRANTY; without even the implied warranty 
  * of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU 
  * General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with RIFT Authenticator for Windows.  If not, see 
+ * along with RIFT™ Authenticator for Windows.  If not, see 
  * <http://www.gnu.org/licenses/>.
  */
 
@@ -28,22 +28,23 @@ namespace RiftAuthenticator.WinForms
 {
     public partial class Information : Form
     {
-        private Library.Configuration Configuration;
+        private Library.IAccount Account;
 
-        public Information(Library.Configuration config)
+        public Information(Library.IAccount account)
         {
             InitializeComponent();
 
-            Configuration = config;
+            Account = account;
             ConfigToControls();
         }
 
         private void ConfigToControls()
         {
-            DeviceId.Text = Configuration.DeviceId;
-            SerialKey.Text = Configuration.FormattedSerialKey;
-            SecretKey.Text = Configuration.SecretKey;
-            TimeOffset.Text = Configuration.TimeOffset.ToString();
+            Description.Text = Account.Description;
+            DeviceId.Text = Account.DeviceId;
+            SerialKey.Text = Account.FormattedSerialKey;
+            SecretKey.Text = Account.SecretKey;
+            TimeOffset.Text = Account.TimeOffset.ToString();
         }
 
         private void CloseButton_Click(object sender, EventArgs e)

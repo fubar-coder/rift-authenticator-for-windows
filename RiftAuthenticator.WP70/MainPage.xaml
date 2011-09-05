@@ -1,0 +1,95 @@
+﻿<!--
+ * This file is part of RIFT™ Authenticator for Windows.
+ *
+ * RIFT™ Authenticator for Windows is free software: you can redistribute 
+ * it and/or modify it under the terms of the GNU General Public License 
+ * as published by the Free Software Foundation, either version 3 of the 
+ * License, or (at your option) any later version.
+ *
+ * RIFT™ Authenticator for Windows is distributed in the hope that it will 
+ * be useful, but WITHOUT ANY WARRANTY; without even the implied warranty 
+ * of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU 
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with RIFT™ Authenticator for Windows.  If not, see 
+ *<http://www.gnu.org/licenses/> .
+-->
+<phone:PhoneApplicationPage 
+    x:Class="RiftAuthenticator.WP7.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="696"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    shell:SystemTray.IsVisible="True" Loaded="PhoneApplicationPage_Loaded">
+    
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--TitlePanel contains the name of the application and page title-->
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="ApplicationTitle" Text="{Binding Path=Strings.Title, Source={StaticResource AppRes}}" Style="{StaticResource PhoneTextNormalStyle}" />
+                <Image Grid.Column="1" Source="Images/TRION/rift_logo_half.png" />
+            </Grid>
+            <TextBlock x:Name="PageTitle" Text="{Binding Path=Strings.LoginToken, Source={StaticResource AppRes}}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" FontSize="36" />
+        </StackPanel>
+
+        <!--ContentPanel - place additional content here-->
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="111*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <toolkit:ListPicker Grid.Row="0" Name="Accounts" Visibility="Collapsed" ItemsSource="{Binding}" SelectionChanged="Accounts_SelectionChanged">
+                <toolkit:ListPicker.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Path=Description}" />
+                            <TextBlock Text=" (" />
+                            <TextBlock Text="{Binding Path=FormattedSerialKey}" />
+                            <TextBlock Text=")" />
+                        </StackPanel>
+                    </DataTemplate>
+                </toolkit:ListPicker.ItemTemplate>
+            </toolkit:ListPicker>
+            <TextBlock Grid.Row="1" Text=" " FontSize="72" TextAlignment="Center" Name="LoginToken" />
+            <ProgressBar Grid.Row="2" Maximum="30000" SmallChange="1" LargeChange="1000" Name="RemainingValidTime" Height="12" />
+            <Button Grid.Row="3" BorderThickness="0" Padding="0" HorizontalAlignment="Left" Name="ExecSyncAll" FontSize="16" Click="ExecSyncAll_Click">
+                <StackPanel  Orientation="Horizontal">
+                    <Image Source="Images/TRION/sync_icon.png" />
+                    <TextBlock Margin="12,0,0,0" Text="{Binding Path=Strings.Synchronize, Source={StaticResource AppRes}}" />
+                </StackPanel>
+            </Button>
+            <TextBlock Grid.Row="5" Name="SerialKey" Text=" " FontSize="24" TextAlignment="Center" />
+        </Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="Images/TRION/rift_bg.jpg" />
+        </Grid.Background>
+    </Grid>
+
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar />
+    </phone:PhoneApplicationPage.ApplicationBar>
+
+</phone:PhoneApplicationPage>

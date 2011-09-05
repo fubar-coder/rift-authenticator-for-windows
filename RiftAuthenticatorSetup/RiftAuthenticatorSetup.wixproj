@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <EnableProjectHarvesting>True</EnableProjectHarvesting>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>3.5</ProductVersion>
+    <ProjectGuid>{e839abd9-2570-46d3-95d6-b76bc7ae2978}</ProjectGuid>
+    <SchemaVersion>2.0</SchemaVersion>
+    <OutputName>RiftAuthenticatorSetup</OutputName>
+    <OutputType>Package</OutputType>
+    <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' AND '$(MSBuildExtensionsPath32)' != '' ">$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.x\Wix.targets</WixTargetsPath>
+    <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' ">$(MSBuildExtensionsPath)\Microsoft\WiX\v3.x\Wix.targets</WixTargetsPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+    <DefineConstants>Debug</DefineConstants>
+    <LeaveTemporaryFiles>True</LeaveTemporaryFiles>
+    <VerboseOutput>True</VerboseOutput>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+    <Cultures>en-US;de-DE</Cultures>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="RiftAuthenticator.wxs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RiftAuthenticator.CommandLine\RiftAuthenticator.CommandLine.csproj">
+      <Name>RiftAuthenticator.CommandLine</Name>
+      <Project>{d601a1a4-91e2-4870-88c4-2778ac674532}</Project>
+      <Private>True</Private>
+      <RefProjectOutputGroups>Binaries;Symbols;Sources;Content;Satellites;Documents</RefProjectOutputGroups>
+      <RefTargetDir>Sources.CommandLine</RefTargetDir>
+      <DoNotHarvest>
+      </DoNotHarvest>
+    </ProjectReference>
+    <ProjectReference Include="..\RiftAuthenticator.Library.FileSystem\RiftAuthenticator.Library.FileSystem.csproj">
+      <Name>RiftAuthenticator.Library.FileSystem</Name>
+      <Project>{d463f9a5-e676-47d6-9740-d2548748ebc3}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>
+      </DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Symbols;Sources;Content;Satellites;Documents</RefProjectOutputGroups>
+      <RefTargetDir>Sources.Library.FileSystem</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\RiftAuthenticator.Library.IsolatedStorage\RiftAuthenticator.Library.IsolatedStorage.csproj">
+      <Name>RiftAuthenticator.Library.IsolatedStorage</Name>
+      <Project>{f3ea0bab-af7e-4792-a5bb-5dbca872e161}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>
+      </DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Symbols;Sources;Content;Satellites;Documents</RefProjectOutputGroups>
+      <RefTargetDir>Sources.Library.IsolatedStorage</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\RiftAuthenticator.Library.Platform.Windows\RiftAuthenticator.Library.Platform.Windows.csproj">
+      <Name>RiftAuthenticator.Library.Platform.Windows</Name>
+      <Project>{580df75f-6d5d-409b-9f4c-64f8f9b0a9c6}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>
+      </DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Symbols;Sources;Content;Satellites;Documents</RefProjectOutputGroups>
+      <RefTargetDir>Sources.Library.Platform.Windows</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\RiftAuthenticator.Library.Registry\RiftAuthenticator.Library.Registry.csproj">
+      <Name>RiftAuthenticator.Library.Registry</Name>
+      <Project>{488805c2-f094-4ab2-aaf4-0a555f36095a}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>
+      </DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Symbols;Sources;Content;Satellites;Documents</RefProjectOutputGroups>
+      <RefTargetDir>Sources.Library.Registry</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\RiftAuthenticator.Library\RiftAuthenticator.Library.csproj">
+      <Name>RiftAuthenticator.Library</Name>
+      <Project>{e31e2621-6d52-49a9-b7d4-ac75862518d8}</Project>
+      <Private>True</Private>
+      <RefProjectOutputGroups>Binaries;Symbols;Sources;Content;Satellites;Documents</RefProjectOutputGroups>
+      <RefTargetDir>Sources.Library</RefTargetDir>
+      <DoNotHarvest>
+      </DoNotHarvest>
+    </ProjectReference>
+    <ProjectReference Include="..\RiftAuthenticator.WinForms\RiftAuthenticator.WinForms.csproj">
+      <Name>RiftAuthenticator.WinForms</Name>
+      <Project>{ac8ae1b0-4423-4faa-9410-8808fa2e6be4}</Project>
+      <Private>True</Private>
+      <RefProjectOutputGroups>Binaries;Symbols;Sources;Content;Satellites;Documents</RefProjectOutputGroups>
+      <RefTargetDir>Sources.WinForms</RefTargetDir>
+      <DoNotHarvest>
+      </DoNotHarvest>
+    </ProjectReference>
+    <ProjectReference Include="..\RiftAuthenticator.WPF\RiftAuthenticator.WPF.csproj">
+      <Name>RiftAuthenticator.WPF</Name>
+      <Project>{c0156421-fa95-4631-82c1-85aa7cc65b5e}</Project>
+      <Private>True</Private>
+      <RefProjectOutputGroups>Binaries;Symbols;Sources;Content;Satellites;Documents</RefProjectOutputGroups>
+      <RefTargetDir>Sources.WPF</RefTargetDir>
+      <DoNotHarvest>
+      </DoNotHarvest>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WixExtension Include="WixUtilExtension">
+      <HintPath>$(WixExtDir)\WixUtilExtension.dll</HintPath>
+      <Name>WixUtilExtension</Name>
+    </WixExtension>
+    <WixExtension Include="WixUIExtension">
+      <HintPath>$(WixExtDir)\WixUIExtension.dll</HintPath>
+      <Name>WixUIExtension</Name>
+    </WixExtension>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="license-de.rtf" />
+    <Content Include="license.rtf" />
+    <Content Include="RiftLogo.ico" />
+    <Content Include="RiftLogoBanner.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Strings.de-DE.wxl" />
+    <EmbeddedResource Include="Strings.en-US.wxl" />
+  </ItemGroup>
+  <Import Project="$(WixTargetsPath)" />
+  <!--
+	To modify your build process, add your task inside one of the targets below and uncomment it.
+	Other similar extension points exist, see Wix.targets.
+	<Target Name="BeforeBuild">
+	</Target>
+	<Target Name="AfterBuild">
+	</Target>
+	-->
+</Project>
