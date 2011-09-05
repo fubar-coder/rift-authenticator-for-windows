@@ -1,18 +1,18 @@
-﻿/**
- * This file is part of RIFT Authenticator for Windows.
+﻿/*
+ * This file is part of RIFT™ Authenticator for Windows.
  *
- * RIFT Authenticator for Windows is free software: you can redistribute 
+ * RIFT™ Authenticator for Windows is free software: you can redistribute 
  * it and/or modify it under the terms of the GNU General Public License 
  * as published by the Free Software Foundation, either version 3 of the 
  * License, or (at your option) any later version.
  *
- * RIFT Authenticator for Windows is distributed in the hope that it will 
+ * RIFT™ Authenticator for Windows is distributed in the hope that it will 
  * be useful, but WITHOUT ANY WARRANTY; without even the implied warranty 
  * of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU 
  * General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with RIFT Authenticator for Windows.  If not, see 
+ * along with RIFT™ Authenticator for Windows.  If not, see 
  * <http://www.gnu.org/licenses/>.
  */
 
@@ -22,24 +22,24 @@ using System.Text;
 
 namespace RiftAuthenticator.Library
 {
-    class TrionServerException : ApplicationException
+    class TrionServerException : Exception
     {
         private static string ErrorCodeToMessage(string errorCode)
         {
             switch (errorCode)
             {
                 case "account_not_available":
-                    return "Invalid user name or password.";
+                    return Resources.Strings.Error_account_not_available;
                 case "account_missing":
-                    return "No RIFT-Account or Device ID doesn't match.";
+                    return Resources.Strings.Error_account_missing;
                 case "account_securityAnswer_missing":
-                    return "Security answer(s) missing.";
+                    return Resources.Strings.Error_account_securityAnswer_missing;
                 case "account_securityAnswers_incorrect":
-                    return "Security answer(s) incorrect.";
+                    return Resources.Strings.Error_account_securityAnswers_incorrect;
                 case "device_id_missing":
-                    return "Device ID missing.";
+                    return Resources.Strings.Error_device_id_missing;
             }
-            return string.Format("Unknown error code: {0}", errorCode);
+            return string.Format(Resources.Strings.Error_unknown, errorCode);
         }
 
         public TrionServerException(string errorCode)

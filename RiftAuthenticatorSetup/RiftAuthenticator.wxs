@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+This file is part of RIFT™ Authenticator for Windows.
+
+RIFT™ Authenticator for Windows is free software: you can redistribute
+it and/or modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation, either version 3 of the
+License, or (at your option) any later version.
+
+RIFT™ Authenticator for Windows is distributed in the hope that it will
+be useful, but WITHOUT ANY WARRANTY; without even the implied warranty
+of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with RIFT™ Authenticator for Windows.  If not, see
+<http://www.gnu.org/licenses/>.
+-->
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <?define ProductVersion="1.1.1"?>
+  <?define UpgradeCode="7336F679-35B0-4BF6-8708-82FBC9E29095"?>
+  <?define Manufacturer="RIFT™ Authenticator for Windows Project"?>
+  <?define ProductCode="910AE6E2-B43A-473B-98EB-0E48AB341DA7"?>
+  <?define RTMProductVersion="1.0.5"?>
+  
+	<Product Id="$(var.ProductCode)" Name="!(loc.ProductName)" Language="1033" Version="$(var.ProductVersion)" Manufacturer="$(var.Manufacturer)" UpgradeCode="$(var.UpgradeCode)">
+		<Package InstallerVersion="200" Compressed="yes" Manufacturer="$(var.Manufacturer)" />
+
+    <MediaTemplate CabinetTemplate="media{0}.cab" EmbedCab="yes" />
+
+    <Icon Id="rift.ico" SourceFile="RiftLogo.ico"/>
+    <Property Id="ARPPRODUCTICON" Value="rift.ico" />
+
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFilesFolder">
+				<Directory Id="APPLICATIONFOLDER" Name="!(loc.AppFolder)">
+          <Directory Id="Localization_de" Name="de" />
+          <Directory Id="Sources" Name="Sources">
+            <Directory Id="Sources.CommandLine" Name="RiftAuthenticator.CommandLine" />
+            <Directory Id="Sources.WinForms" Name="RiftAuthenticator.WinForms" />
+            <Directory Id="Sources.WPF" Name="RiftAuthenticator.WPF" />
+            <Directory Id="Sources.Library" Name="RiftAuthenticator.Library" />
+            <Directory Id="Sources.Library.Registry" Name="RiftAuthenticator.Library.Registry" />
+            <Directory Id="Sources.Library.FileSystem" Name="RiftAuthenticator.Library.FileSystem" />
+            <Directory Id="Sources.Library.IsolatedStorage" Name="RiftAuthenticator.Library.IsolatedStorage" />
+            <Directory Id="Sources.Library.Platform.Windows" Name="RiftAuthenticator.Library.Platform.Windows" />
+          </Directory>
+				</Directory>
+			</Directory>
+
+      <Directory Id="ProgramMenuFolder">
+        <Directory Id="AppProgramsFolder" Name="!(loc.AppProgramsFolder)" />
+      </Directory>
+		</Directory>
+
+    <DirectoryRef Id="Sources.WPF">
+      <Component Id="WPF.RiftLogo.ico" Guid="D410698E-EA5F-4282-BCB1-7BCCA1492777">
+        <File Id="RiftLogo.ico" Source="$(var.RiftAuthenticator.WPF.ProjectDir)RiftLogo.ico" />
+      </Component>
+      <Component Id="WPF.app.manifest" Guid="FD756985-81A6-4960-96ED-C5215536CB11">
+        <File Id="app.manifest" Source="$(var.RiftAuthenticator.WPF.ProjectDir)app.manifest" />
+      </Component>
+      <Component Id="WPF.App.xaml" Guid="75FB7162-324F-42AA-AA78-6591526663E1">
+        <File Id="App.xaml" Source="$(var.RiftAuthenticator.WPF.ProjectDir)App.xaml" />
+      </Component>
+      <Component Id="WPF.CreateNewSecretKey.xaml" Guid="352A0476-87B3-4829-A40D-C542F9087FDB">
+        <File Id="CreateNewSecretKey.xaml" Source="$(var.RiftAuthenticator.WPF.ProjectDir)CreateNewSecretKey.xaml" />
+      </Component>
+      <Component Id="WPF.Information.xaml" Guid="70A7AD6C-9F5D-4661-A9A4-97159FEB58F7">
+        <File Id="Information.xaml" Source="$(var.RiftAuthenticator.WPF.ProjectDir)Information.xaml" />
+      </Component>
+      <Component Id="WPF.Login.xaml" Guid="03AA60B9-5102-47C6-A54F-3B8C1A2D7947">
+        <File Id="Login.xaml" Source="$(var.RiftAuthenticator.WPF.ProjectDir)Login.xaml" />
+      </Component>
+      <Component Id="WPF.MainWindow.xaml" Guid="B4CC680B-0259-4E8F-AF26-F543CEC29AB1">
+        <File Id="MainWindow.xaml" Source="$(var.RiftAuthenticator.WPF.ProjectDir)MainWindow.xaml" />
+      </Component>
+      <Component Id="WPF.QueryDeviceId.xaml" Guid="C9E4ED6B-DE01-4E29-A68C-B13B8BCAAF0B">
+        <File Id="QueryDeviceId.xaml" Source="$(var.RiftAuthenticator.WPF.ProjectDir)QueryDeviceId.xaml" />
+      </Component>
+      <Component Id="WPF.SecurityQuestions.xaml" Guid="81464FD9-672F-4EC5-97BA-AD6E97869A41">
+        <File Id="SecurityQuestions.xaml" Source="$(var.RiftAuthenticator.WPF.ProjectDir)SecurityQuestions.xaml" />
+      </Component>
+      <Component Id="WPF.Accounts.xaml" Guid="43DEE443-0EB8-4864-9197-6A7D771739F7">
+        <File Id="Accounts.xaml" Source="$(var.RiftAuthenticator.WPF.ProjectDir)Accounts.xaml" />
+      </Component>
+      <Component Id="WPF.FirstAppStart.xaml" Guid="E2DF285B-1463-497C-B5BF-8A171A6F9583">
+        <File Id="FirstAppStart.xaml" Source="$(var.RiftAuthenticator.WPF.ProjectDir)FirstAppStart.xaml" />
+      </Component>
+    </DirectoryRef>
+
+    <!-- Duh! Workaround required because heat doesn't add *.xaml files to RiftAuthenticator.WPF.Sources. -->
+    <ComponentGroup Id="RiftAuthenticator.WPF.MissingContent">
+      <ComponentRef Id="WPF.RiftLogo.ico"/>
+      <ComponentRef Id="WPF.app.manifest"/>
+      <ComponentRef Id="WPF.App.xaml"/>
+      <ComponentRef Id="WPF.CreateNewSecretKey.xaml"/>
+      <ComponentRef Id="WPF.Information.xaml"/>
+      <ComponentRef Id="WPF.Login.xaml"/>
+      <ComponentRef Id="WPF.MainWindow.xaml"/>
+      <ComponentRef Id="WPF.QueryDeviceId.xaml"/>
+      <ComponentRef Id="WPF.SecurityQuestions.xaml"/>
+      <ComponentRef Id="WPF.Accounts.xaml"/>
+      <ComponentRef Id="WPF.FirstAppStart.xaml"/>
+    </ComponentGroup>
+
+    <DirectoryRef Id="AppProgramsFolder">
+      <Component Id="AppShortcutUninstall" Guid="D95E7E04-8C05-49A2-8E39-B98E554E668A">
+        <Shortcut Id="UninstallProduct"
+          Name="!(loc.ShortcutAppUninstall)"
+          Target="[SystemFolder]msiexec.exe"
+          Arguments="/x [ProductCode]" />
+        <RegistryValue Root="HKCU" Key="Software\RIFT Authenticator for Windows Project\RIFT Authenticator for Windows" Name="Installed" Type="integer" Value="1" KeyPath="yes"/>
+        <RemoveFolder Id="AppProgramsFolder" On="uninstall" />
+      </Component>
+      <Component Id="AppShortcutWpf" Guid="D80AA8CD-956D-419A-9250-3BE911863AB8">
+        <Shortcut Id="AppStartMenuShortcut.Wpf" Name="!(loc.ShortcutAppWpf)" Target="[APPLICATIONFOLDER]$(var.RiftAuthenticator.WPF.TargetFileName)" WorkingDirectory="APPLICATIONFOLDER" />
+        <RegistryValue Root="HKCU" Key="Software\RIFT Authenticator for Windows Project\RIFT Authenticator for Windows" Name="WPF.Installed" Type="integer" Value="1" KeyPath="yes"/>
+      </Component>
+      <Component Id="AppShortcutWinForms" Guid="1B88AE99-0D03-4563-9D2F-742563B2AF5F">
+        <Shortcut Id="AppStartMenuShortcut.WinForms" Name="!(loc.ShortcutAppWinForms)" Target="[APPLICATIONFOLDER]$(var.RiftAuthenticator.WinForms.TargetFileName)" WorkingDirectory="APPLICATIONFOLDER" />
+        <RegistryValue Root="HKCU" Key="Software\RIFT Authenticator for Windows Project\RIFT Authenticator for Windows" Name="WinForms.Installed" Type="integer" Value="1" KeyPath="yes"/>
+      </Component>
+      <Component Id="AppShortcutSources" Guid="8983E229-8308-4BCC-9E04-2942444833E7">
+        <Shortcut Id="AppStartMenuShortcut.Sources" Name="!(loc.ShortcutAppSource)" Target="[APPLICATIONFOLDER]Sources" WorkingDirectory="Sources" />
+        <RegistryValue Root="HKCU" Key="Software\RIFT Authenticator for Windows Project\RIFT Authenticator for Windows" Name="Sourcecode.Installed" Type="integer" Value="1" KeyPath="yes"/>
+      </Component>
+    </DirectoryRef>
+
+    <DirectoryRef Id="Localization_de">
+      <Component Id="AppWpf.de" Guid="14BF4AE9-D0D9-491D-A2FA-44E6B5271780">
+        <File Id="de.$(var.RiftAuthenticator.WPF.TargetName).resources.dll" Source="$(var.RiftAuthenticator.WPF.TargetDir)de\$(var.RiftAuthenticator.WPF.TargetName).resources.dll" KeyPath="yes" Checksum="yes" />
+      </Component>
+      <Component Id="AppWinForms.de" Guid="0B439E21-B0BE-4AF8-9B81-D67B40E0ACA3">
+        <File Id="de.$(var.RiftAuthenticator.WinForms.TargetName).resources.dll" Source="$(var.RiftAuthenticator.WinForms.TargetDir)de\$(var.RiftAuthenticator.WinForms.TargetName).resources.dll" KeyPath="yes" Checksum="yes" />
+      </Component>
+      <Component Id="AppLibs.de" Guid="7534B1AD-E385-42C0-9ADB-38325809CF23">
+        <File Id="de.$(var.RiftAuthenticator.Library.TargetName).resources.dll" Source="$(var.RiftAuthenticator.Library.TargetDir)de\$(var.RiftAuthenticator.Library.TargetName).resources.dll" KeyPath="yes" Checksum="yes" />
+      </Component>
+      <Component Id="AppConsole.de" Guid="4A762826-7BA9-4E6C-A57D-119A9AAC2002">
+        <File Id="de.$(var.RiftAuthenticator.CommandLine.TargetName).resources.dll" Source="$(var.RiftAuthenticator.CommandLine.TargetDir)de\$(var.RiftAuthenticator.CommandLine.TargetName).resources.dll" KeyPath="yes" Checksum="yes" />
+      </Component>
+    </DirectoryRef>
+
+    <DirectoryRef Id="APPLICATIONFOLDER">
+      <Component Id="AppWpf" Guid="AF2B4E13-A46F-4E5F-BB03-BB09B3E7B402">
+        <File Id="$(var.RiftAuthenticator.WPF.TargetFileName)" Source="$(var.RiftAuthenticator.WPF.TargetPath)" KeyPath="yes" Checksum="yes" />
+        <File Id="$(var.RiftAuthenticator.WPF.TargetFileName).config" Source="$(var.RiftAuthenticator.WPF.TargetPath).config" Checksum="yes" />
+      </Component>
+      <Component Id="AppWinForms" Guid="B15A5FA5-F78A-448B-8397-5ED08B2BE267">
+        <File Id="$(var.RiftAuthenticator.WinForms.TargetFileName)" Source="$(var.RiftAuthenticator.WinForms.TargetPath)" KeyPath="yes" Checksum="yes" />
+        <File Id="$(var.RiftAuthenticator.WinForms.TargetFileName).config" Source="$(var.RiftAuthenticator.WinForms.TargetPath).config" Checksum="yes" />
+      </Component>
+      <Component Id="AppConsole" Guid="294A6D37-B0B9-4D44-8E44-CDB1CDC88736">
+        <File Id="$(var.RiftAuthenticator.CommandLine.TargetFileName)" Source="$(var.RiftAuthenticator.CommandLine.TargetPath)" KeyPath="yes" Checksum="yes" />
+        <File Id="$(var.RiftAuthenticator.CommandLine.TargetFileName).config" Source="$(var.RiftAuthenticator.CommandLine.TargetPath).config" Checksum="yes" />
+      </Component>
+      <Component Id="AppLibs" Guid="55B45E23-9253-4854-9126-A39038BBB690">
+        <File Id="$(var.RiftAuthenticator.Library.TargetFileName)" Source="$(var.RiftAuthenticator.Library.TargetPath)" KeyPath="yes" Checksum="yes" />
+        <File Id="$(var.RiftAuthenticator.Library.Registry.TargetFileName)" Source="$(var.RiftAuthenticator.Library.Registry.TargetPath)" Checksum="yes" />
+        <File Id="$(var.RiftAuthenticator.Library.FileSystem.TargetFileName)" Source="$(var.RiftAuthenticator.Library.FileSystem.TargetPath)" Checksum="yes" />
+        <File Id="$(var.RiftAuthenticator.Library.IsolatedStorage.TargetFileName)" Source="$(var.RiftAuthenticator.Library.IsolatedStorage.TargetPath)" Checksum="yes" />
+        <File Id="$(var.RiftAuthenticator.Library.Platform.Windows.TargetFileName)" Source="$(var.RiftAuthenticator.Library.Platform.Windows.TargetPath)" Checksum="yes" />
+      </Component>
+    </DirectoryRef>
+    
+    <Feature Id="FeatureAppWPF" Title="!(loc.FeatureAppWpf)" Level="1" Absent="disallow" AllowAdvertise="no">
+      <ComponentRef Id="AppWpf" />
+      <ComponentRef Id="AppWpf.de"/>
+      <ComponentRef Id="AppLibs" />
+      <ComponentRef Id="AppLibs.de" />
+      <ComponentRef Id="AppShortcutWpf"/>
+      <ComponentRef Id="AppShortcutUninstall" />
+    </Feature>
+
+    <Feature Id="FeatureAppWinForms" Title="!(loc.FeatureAppWinForms)" Level="2" AllowAdvertise="no">
+      <ComponentRef Id="AppWinForms" />
+      <ComponentRef Id="AppWinForms.de"/>
+      <ComponentRef Id="AppLibs" />
+      <ComponentRef Id="AppLibs.de" />
+      <ComponentRef Id="AppShortcutWinForms"/>
+      <ComponentRef Id="AppShortcutUninstall" />
+    </Feature>
+
+    <Feature Id="FeatureAppConsole" Title="!(loc.FeatureAppConsole)" Level="2" AllowAdvertise="no">
+      <ComponentRef Id="AppConsole" />
+      <ComponentRef Id="AppConsole.de" />
+      <ComponentRef Id="AppLibs" />
+      <ComponentRef Id="AppLibs.de" />
+      <ComponentRef Id="AppShortcutUninstall" />
+    </Feature>
+
+    <Feature Id="FeatureSources" Title="!(loc.FeatureAppSource)" Level="2" AllowAdvertise="no">
+      <ComponentGroupRef Id="RiftAuthenticator.CommandLine.Sources" />
+      <ComponentGroupRef Id="RiftAuthenticator.CommandLine.Content" />
+      <ComponentGroupRef Id="RiftAuthenticator.CommandLine.Documents" />
+      <ComponentGroupRef Id="RiftAuthenticator.WPF.Sources" />
+      <ComponentGroupRef Id="RiftAuthenticator.WPF.Content" />
+      <ComponentGroupRef Id="RiftAuthenticator.WPF.Documents" />
+      <ComponentGroupRef Id="RiftAuthenticator.WPF.MissingContent" />
+      <ComponentGroupRef Id="RiftAuthenticator.WinForms.Sources" />
+      <ComponentGroupRef Id="RiftAuthenticator.WinForms.Content" />
+      <ComponentGroupRef Id="RiftAuthenticator.WinForms.Documents" />
+      <ComponentGroupRef Id="RiftAuthenticator.Library.Sources" />
+      <ComponentGroupRef Id="RiftAuthenticator.Library.Content" />
+      <ComponentGroupRef Id="RiftAuthenticator.Library.Documents" />
+      <ComponentGroupRef Id="RiftAuthenticator.Library.Registry.Sources" />
+      <ComponentGroupRef Id="RiftAuthenticator.Library.Registry.Content" />
+      <ComponentGroupRef Id="RiftAuthenticator.Library.Registry.Documents" />
+      <ComponentGroupRef Id="RiftAuthenticator.Library.FileSystem.Sources" />
+      <ComponentGroupRef Id="RiftAuthenticator.Library.FileSystem.Content" />
+      <ComponentGroupRef Id="RiftAuthenticator.Library.FileSystem.Documents" />
+      <ComponentGroupRef Id="RiftAuthenticator.Library.IsolatedStorage.Sources" />
+      <ComponentGroupRef Id="RiftAuthenticator.Library.IsolatedStorage.Content" />
+      <ComponentGroupRef Id="RiftAuthenticator.Library.IsolatedStorage.Documents" />
+      <ComponentGroupRef Id="RiftAuthenticator.Library.Platform.Windows.Sources" />
+      <ComponentGroupRef Id="RiftAuthenticator.Library.Platform.Windows.Content" />
+      <ComponentGroupRef Id="RiftAuthenticator.Library.Platform.Windows.Documents" />
+      <ComponentRef Id="AppShortcutSources"/>
+    </Feature>
+
+    <Upgrade Id="$(var.UpgradeCode)">
+      <UpgradeVersion Minimum="$(var.ProductVersion)" IncludeMinimum="no" OnlyDetect="yes" Language="1033" Property="NEWPRODUCTFOUND" />
+      <UpgradeVersion Minimum="$(var.RTMProductVersion)" IncludeMinimum="yes" Maximum="$(var.ProductVersion)" IncludeMaximum="no" Language="1033" Property="UPGRADEFOUND" />
+    </Upgrade>
+
+    <CustomAction Id="PreventDowngrading" Error="!(loc.ErrorNewerVersionInstalled)" />
+
+    <InstallExecuteSequence>
+      <Custom Action="PreventDowngrading" After="FindRelatedProducts">NEWPRODUCTFOUND</Custom>
+      <RemoveExistingProducts After="InstallFinalize" />
+    </InstallExecuteSequence>
+
+    <InstallUISequence>
+      <Custom Action="PreventDowngrading" After="FindRelatedProducts">NEWPRODUCTFOUND</Custom>
+    </InstallUISequence>
+
+    <WixVariable Id="WixUILicenseRtf" Value="license.rtf"/>
+    <WixVariable Id="WixUIBannerBmp" Value="RiftLogoBanner.bmp"/>
+
+    <Property Id="ApplicationFolderName" Value="!(loc.AppFolder)" />
+    <Property Id="WixAppFolder" Value="WixPerUserFolder" />
+
+    <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT" Value="!(loc.LaunchApp)" />
+    <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOX" Value="1" />
+    <UI>
+      <UIRef Id="WixUI_Advanced"/>
+      <Publish Dialog="ExitDialog"
+          Control="Finish"
+          Event="DoAction"
+          Value="LaunchApplication">WIXUI_EXITDIALOGOPTIONALCHECKBOX = 1 and NOT Installed</Publish>
+    </UI>
+
+    <Property Id="WixShellExecTarget" Value="[#$(var.RiftAuthenticator.WPF.TargetFileName)]" />
+    <CustomAction Id="LaunchApplication"
+        BinaryKey="WixCA"
+        DllEntry="WixShellExec"
+        Impersonate="yes" />
+  </Product>
+</Wix>

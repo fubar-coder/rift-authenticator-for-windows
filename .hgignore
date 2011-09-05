@@ -2,6 +2,18 @@ syntax: glob
 *.suo
 *_TemporaryKey.pfx
 *.user
+bin/x86
+Debug WP7
+Bin/Release
+Bin/Debug
+Debug
+Release
+*.sdf
+*.opensdf
+ipch
+*.aps
+WP7AppTitleLocalizer
+AppResLib.dll.*.mui
 syntax: regexp
 /bin/Debug$
 /obj/x86$

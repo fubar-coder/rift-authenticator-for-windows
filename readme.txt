@@ -1,0 +1,1 @@
+RIFT is a registered trademark of Trion Worlds.

@@ -115,7 +115,7 @@ namespace Org.Apache.Harmony.Security.Provider.Crypto
         private const int BYTES_OFFSET = 81;
 
         /**
-         * # of bytes in H0-H4 words; <BR>
+         * # of bytes in H0-H4 words; <BR />
          * in this implementation # is set to 20 (in general # varies from 1 to 20)
          */
         private const int DIGEST_LENGTH = 20;
@@ -186,7 +186,7 @@ namespace Org.Apache.Harmony.Security.Provider.Crypto
          * either NPE or IndexOutOfBoundException gets thrown by JVM.
          *
          * @params
-         *        arrW - integer array; arrW.length >= (BYTES_OFFSET+6); <BR>
+         *        arrW - integer array; arrW.length >= (BYTES_OFFSET+6); <BR />
          *               only first (BYTES_OFFSET+6) words are used
          */
         static void computeHash(uint[] arrW)
@@ -396,7 +396,7 @@ namespace Org.Apache.Harmony.Security.Provider.Crypto
         /**
          * Changes current seed by supplementing a seed argument to the current seed,
          * if this already set;
-         * the argument is used as first seed otherwise. <BR>
+         * the argument is used as first seed otherwise. <BR />
          *
          * The method overrides "engineSetSeed(byte[])" in class SecureRandomSpi.
          *
@@ -418,12 +418,12 @@ namespace Org.Apache.Harmony.Security.Provider.Crypto
 
         /**
          * Writes random bytes into an array supplied.
-         * Bits in a byte are from left to right. <BR>
+         * Bits in a byte are from left to right. <BR />
          *
          * To generate random bytes, the "expansion of source bits" method is used,
          * that is,
          * the current seed with a 64-bit counter appended is used to compute new bits.
-         * The counter is incremented by 1 for each 20-byte output. <BR>
+         * The counter is incremented by 1 for each 20-byte output. <BR />
          *
          * The method overrides engineNextBytes in class SecureRandomSpi.
          *

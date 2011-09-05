@@ -29,111 +29,65 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.LoginToken = new System.Windows.Forms.TextBox();
             this.RemainingValidTime = new System.Windows.Forms.ProgressBar();
             this.label1 = new System.Windows.Forms.Label();
             this.SerialKey = new System.Windows.Forms.TextBox();
-            this.Initialize = new System.Windows.Forms.Button();
             this.TimeSync = new System.Windows.Forms.Button();
-            this.Information = new System.Windows.Forms.Button();
-            this.Recover = new System.Windows.Forms.Button();
-            this.ShowLicense = new System.Windows.Forms.Button();
             this.TokenUpdateTimer = new System.Windows.Forms.Timer(this.components);
+            this.MainMenu = new System.Windows.Forms.MenuStrip();
+            this.applicationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.FileQuitMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.accountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.AccountCreateMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.AccountRecoverMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.AccountManageMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.AccountInfoMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
+            this.AccountExportMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.AccountImportMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.HelpLicenseMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
+            this.HelpAboutMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.ImportAccountDialog = new System.Windows.Forms.OpenFileDialog();
+            this.ExportAccountDialog = new System.Windows.Forms.SaveFileDialog();
+            this.label2 = new System.Windows.Forms.Label();
+            this.Accounts = new System.Windows.Forms.ComboBox();
+            this.MainMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // LoginToken
             // 
-            this.LoginToken.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.LoginToken.Location = new System.Drawing.Point(12, 12);
+            resources.ApplyResources(this.LoginToken, "LoginToken");
             this.LoginToken.Name = "LoginToken";
             this.LoginToken.ReadOnly = true;
-            this.LoginToken.Size = new System.Drawing.Size(440, 20);
-            this.LoginToken.TabIndex = 0;
             // 
             // RemainingValidTime
             // 
-            this.RemainingValidTime.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.RemainingValidTime.Location = new System.Drawing.Point(12, 38);
+            resources.ApplyResources(this.RemainingValidTime, "RemainingValidTime");
             this.RemainingValidTime.Maximum = 30000;
             this.RemainingValidTime.Name = "RemainingValidTime";
-            this.RemainingValidTime.Size = new System.Drawing.Size(440, 23);
-            this.RemainingValidTime.TabIndex = 1;
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 70);
+            resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(57, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Serial Key:";
             // 
             // SerialKey
             // 
-            this.SerialKey.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.SerialKey.Location = new System.Drawing.Point(75, 67);
+            resources.ApplyResources(this.SerialKey, "SerialKey");
             this.SerialKey.Name = "SerialKey";
             this.SerialKey.ReadOnly = true;
-            this.SerialKey.Size = new System.Drawing.Size(377, 20);
-            this.SerialKey.TabIndex = 3;
-            // 
-            // Initialize
-            // 
-            this.Initialize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.Initialize.Location = new System.Drawing.Point(15, 101);
-            this.Initialize.Name = "Initialize";
-            this.Initialize.Size = new System.Drawing.Size(75, 23);
-            this.Initialize.TabIndex = 4;
-            this.Initialize.Text = "Initialize";
-            this.Initialize.UseVisualStyleBackColor = true;
-            this.Initialize.Click += new System.EventHandler(this.Initialize_Click);
             // 
             // TimeSync
             // 
-            this.TimeSync.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.TimeSync.Location = new System.Drawing.Point(96, 101);
+            resources.ApplyResources(this.TimeSync, "TimeSync");
             this.TimeSync.Name = "TimeSync";
-            this.TimeSync.Size = new System.Drawing.Size(75, 23);
-            this.TimeSync.TabIndex = 5;
-            this.TimeSync.Text = "Time Sync";
             this.TimeSync.UseVisualStyleBackColor = true;
             this.TimeSync.Click += new System.EventHandler(this.TimeSync_Click);
-            // 
-            // Information
-            // 
-            this.Information.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.Information.Location = new System.Drawing.Point(177, 101);
-            this.Information.Name = "Information";
-            this.Information.Size = new System.Drawing.Size(75, 23);
-            this.Information.TabIndex = 6;
-            this.Information.Text = "Info";
-            this.Information.UseVisualStyleBackColor = true;
-            this.Information.Click += new System.EventHandler(this.Information_Click);
-            // 
-            // Recover
-            // 
-            this.Recover.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.Recover.Location = new System.Drawing.Point(258, 100);
-            this.Recover.Name = "Recover";
-            this.Recover.Size = new System.Drawing.Size(75, 23);
-            this.Recover.TabIndex = 7;
-            this.Recover.Text = "Recover";
-            this.Recover.UseVisualStyleBackColor = true;
-            this.Recover.Click += new System.EventHandler(this.Recover_Click);
-            // 
-            // ShowLicense
-            // 
-            this.ShowLicense.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.ShowLicense.Location = new System.Drawing.Point(376, 100);
-            this.ShowLicense.Name = "ShowLicense";
-            this.ShowLicense.Size = new System.Drawing.Size(75, 23);
-            this.ShowLicense.TabIndex = 8;
-            this.ShowLicense.Text = "License";
-            this.ShowLicense.UseVisualStyleBackColor = true;
-            this.ShowLicense.Click += new System.EventHandler(this.ShowLicense_Click);
             // 
             // TokenUpdateTimer
             // 
@@ -141,24 +95,154 @@
             this.TokenUpdateTimer.Interval = 200;
             this.TokenUpdateTimer.Tick += new System.EventHandler(this.TokenUpdateTimer_Tick);
             // 
+            // MainMenu
+            // 
+            this.MainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.applicationToolStripMenuItem,
+            this.accountToolStripMenuItem,
+            this.helpToolStripMenuItem});
+            resources.ApplyResources(this.MainMenu, "MainMenu");
+            this.MainMenu.Name = "MainMenu";
+            // 
+            // applicationToolStripMenuItem
+            // 
+            this.applicationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.FileQuitMenu});
+            this.applicationToolStripMenuItem.Name = "applicationToolStripMenuItem";
+            resources.ApplyResources(this.applicationToolStripMenuItem, "applicationToolStripMenuItem");
+            // 
+            // FileQuitMenu
+            // 
+            this.FileQuitMenu.Name = "FileQuitMenu";
+            resources.ApplyResources(this.FileQuitMenu, "FileQuitMenu");
+            this.FileQuitMenu.Click += new System.EventHandler(this.FileQuitMenu_Click);
+            // 
+            // accountToolStripMenuItem
+            // 
+            this.accountToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.AccountCreateMenu,
+            this.AccountRecoverMenu,
+            this.AccountManageMenu,
+            this.toolStripMenuItem1,
+            this.AccountInfoMenu,
+            this.toolStripMenuItem3,
+            this.AccountExportMenu,
+            this.AccountImportMenu});
+            this.accountToolStripMenuItem.Name = "accountToolStripMenuItem";
+            resources.ApplyResources(this.accountToolStripMenuItem, "accountToolStripMenuItem");
+            // 
+            // AccountCreateMenu
+            // 
+            this.AccountCreateMenu.Name = "AccountCreateMenu";
+            resources.ApplyResources(this.AccountCreateMenu, "AccountCreateMenu");
+            this.AccountCreateMenu.Click += new System.EventHandler(this.AccountCreateMenu_Click);
+            // 
+            // AccountRecoverMenu
+            // 
+            this.AccountRecoverMenu.Name = "AccountRecoverMenu";
+            resources.ApplyResources(this.AccountRecoverMenu, "AccountRecoverMenu");
+            this.AccountRecoverMenu.Click += new System.EventHandler(this.AccountRecoverMenu_Click);
+            // 
+            // AccountManageMenu
+            // 
+            this.AccountManageMenu.Name = "AccountManageMenu";
+            resources.ApplyResources(this.AccountManageMenu, "AccountManageMenu");
+            this.AccountManageMenu.Click += new System.EventHandler(this.AccountManageMenu_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            resources.ApplyResources(this.toolStripMenuItem1, "toolStripMenuItem1");
+            // 
+            // AccountInfoMenu
+            // 
+            this.AccountInfoMenu.Name = "AccountInfoMenu";
+            resources.ApplyResources(this.AccountInfoMenu, "AccountInfoMenu");
+            this.AccountInfoMenu.Click += new System.EventHandler(this.AccountInfoMenu_Click);
+            // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            resources.ApplyResources(this.toolStripMenuItem3, "toolStripMenuItem3");
+            // 
+            // AccountExportMenu
+            // 
+            this.AccountExportMenu.Name = "AccountExportMenu";
+            resources.ApplyResources(this.AccountExportMenu, "AccountExportMenu");
+            this.AccountExportMenu.Click += new System.EventHandler(this.AccountExportMenu_Click);
+            // 
+            // AccountImportMenu
+            // 
+            this.AccountImportMenu.Name = "AccountImportMenu";
+            resources.ApplyResources(this.AccountImportMenu, "AccountImportMenu");
+            this.AccountImportMenu.Click += new System.EventHandler(this.AccountImportMenu_Click);
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.HelpLicenseMenu,
+            this.toolStripMenuItem2,
+            this.HelpAboutMenu});
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            resources.ApplyResources(this.helpToolStripMenuItem, "helpToolStripMenuItem");
+            // 
+            // HelpLicenseMenu
+            // 
+            this.HelpLicenseMenu.Name = "HelpLicenseMenu";
+            resources.ApplyResources(this.HelpLicenseMenu, "HelpLicenseMenu");
+            this.HelpLicenseMenu.Click += new System.EventHandler(this.HelpLicenseMenu_Click);
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            resources.ApplyResources(this.toolStripMenuItem2, "toolStripMenuItem2");
+            // 
+            // HelpAboutMenu
+            // 
+            this.HelpAboutMenu.Name = "HelpAboutMenu";
+            resources.ApplyResources(this.HelpAboutMenu, "HelpAboutMenu");
+            this.HelpAboutMenu.Click += new System.EventHandler(this.HelpAboutMenu_Click);
+            // 
+            // ImportAccountDialog
+            // 
+            this.ImportAccountDialog.DefaultExt = "xml";
+            resources.ApplyResources(this.ImportAccountDialog, "ImportAccountDialog");
+            // 
+            // ExportAccountDialog
+            // 
+            this.ExportAccountDialog.DefaultExt = "xml";
+            resources.ApplyResources(this.ExportAccountDialog, "ExportAccountDialog");
+            // 
+            // label2
+            // 
+            resources.ApplyResources(this.label2, "label2");
+            this.label2.Name = "label2";
+            // 
+            // Accounts
+            // 
+            resources.ApplyResources(this.Accounts, "Accounts");
+            this.Accounts.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.Accounts.FormattingEnabled = true;
+            this.Accounts.Name = "Accounts";
+            this.Accounts.SelectedIndexChanged += new System.EventHandler(this.Accounts_SelectedIndexChanged);
+            // 
             // MainWindow
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(464, 136);
-            this.Controls.Add(this.ShowLicense);
-            this.Controls.Add(this.Recover);
-            this.Controls.Add(this.Information);
+            this.Controls.Add(this.Accounts);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.TimeSync);
-            this.Controls.Add(this.Initialize);
             this.Controls.Add(this.SerialKey);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.RemainingValidTime);
             this.Controls.Add(this.LoginToken);
+            this.Controls.Add(this.MainMenu);
+            this.MainMenuStrip = this.MainMenu;
             this.Name = "MainWindow";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "RIFT Authenticator";
             this.Load += new System.EventHandler(this.MainWindow_Load);
+            this.MainMenu.ResumeLayout(false);
+            this.MainMenu.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -170,12 +254,28 @@
         private System.Windows.Forms.ProgressBar RemainingValidTime;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox SerialKey;
-        private System.Windows.Forms.Button Initialize;
         private System.Windows.Forms.Button TimeSync;
-        private System.Windows.Forms.Button Information;
-        private System.Windows.Forms.Button Recover;
-        private System.Windows.Forms.Button ShowLicense;
         private System.Windows.Forms.Timer TokenUpdateTimer;
+        private System.Windows.Forms.MenuStrip MainMenu;
+        private System.Windows.Forms.ToolStripMenuItem applicationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem FileQuitMenu;
+        private System.Windows.Forms.ToolStripMenuItem accountToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem AccountCreateMenu;
+        private System.Windows.Forms.ToolStripMenuItem AccountManageMenu;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem AccountExportMenu;
+        private System.Windows.Forms.ToolStripMenuItem AccountImportMenu;
+        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem HelpAboutMenu;
+        private System.Windows.Forms.ToolStripMenuItem HelpLicenseMenu;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem AccountRecoverMenu;
+        private System.Windows.Forms.ToolStripMenuItem AccountInfoMenu;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
+        private System.Windows.Forms.OpenFileDialog ImportAccountDialog;
+        private System.Windows.Forms.SaveFileDialog ExportAccountDialog;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox Accounts;
     }
 }
 
