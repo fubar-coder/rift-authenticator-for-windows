@@ -1,4 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+ * This file is part of RIFT™ Authenticator for Windows.
+ *
+ * RIFT™ Authenticator for Windows is free software: you can redistribute 
+ * it and/or modify it under the terms of the GNU General Public License 
+ * as published by the Free Software Foundation, either version 3 of the 
+ * License, or (at your option) any later version.
+ *
+ * RIFT™ Authenticator for Windows is distributed in the hope that it will 
+ * be useful, but WITHOUT ANY WARRANTY; without even the implied warranty 
+ * of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU 
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with RIFT™ Authenticator for Windows.  If not, see 
+ *<http://www.gnu.org/licenses/> .
+-->
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2009/deployment" AppPlatformVersion="7.0">
   <App xmlns="" ProductID="{e9fff9ff-fc25-4a35-b99d-12fc26a41abe}" Title="@AppResLib.dll,-100" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="RIFT Authenticator for Windows Project" Description="RIFT™ Authenticator" Publisher="RIFT Authenticator for Windows Project">
     <IconPath IsRelative="true" IsResource="false">Images\TRION\tile-small.png</IconPath>
