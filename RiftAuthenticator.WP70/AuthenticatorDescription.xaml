@@ -43,6 +43,7 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
@@ -50,7 +51,8 @@
             <TextBox Grid.Row="1" Name="AuthDescription" />
             <TextBlock Grid.Row="2" Name="DeviceIdLabel" Text="{Binding Path=Strings.DeviceIdPrefix, Source={StaticResource AppRes}}" Visibility="Collapsed" />
             <TextBox Grid.Row="3" Name="DeviceId" Visibility="Collapsed" />
-            <Button Grid.Row="5" Content="{Binding Path=Strings.Continue, Source={StaticResource AppRes}}" Name="LoadSecurityQuestions" Click="LoadSecurityQuestions_Click" />
+            <TextBlock Grid.Row="4" Name="DeviceIdWarning" Text="{Binding Path=Strings.DeviceIdModificationWarning, Source={StaticResource AppRes}}" Visibility="Collapsed" TextWrapping="Wrap" Foreground="Red" />
+            <Button Grid.Row="6" Content="{Binding Path=Strings.Continue, Source={StaticResource AppRes}}" Name="LoadSecurityQuestions" Click="LoadSecurityQuestions_Click" />
         </Grid>
     </Grid>
 

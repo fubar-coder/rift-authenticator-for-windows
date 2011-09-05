@@ -79,7 +79,7 @@ namespace RiftAuthenticator.WP7
         {
             var isHidden = DeviceId.Visibility == System.Windows.Visibility.Collapsed;
             var newVisibility = (isHidden ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed);
-            DeviceIdLabel.Visibility = DeviceId.Visibility = newVisibility;
+            DeviceIdLabel.Visibility = DeviceId.Visibility = DeviceIdWarning.Visibility = newVisibility;
         }
     }
 }
