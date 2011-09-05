@@ -69,7 +69,7 @@ namespace RiftAuthenticator.WP7
         {
             if (App.ExitApp)
             {
-                throw new QuitException();
+                App.Quit();
             }
             else if (App.BackToMainPage)
             {
