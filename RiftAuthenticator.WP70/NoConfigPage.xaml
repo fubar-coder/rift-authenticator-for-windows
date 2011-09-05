@@ -30,10 +30,10 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <TextBlock x:Name="ApplicationTitle" Text="RIFT Authenticator" Style="{StaticResource PhoneTextNormalStyle}" />
+                <TextBlock x:Name="ApplicationTitle" Text="{Binding Path=Strings.Title, Source={StaticResource AppRes}}" Style="{StaticResource PhoneTextNormalStyle}" />
                 <Image Grid.Column="1" Source="Images/TRION/rift_logo_half.png" />
             </Grid>
-            <TextBlock x:Name="PageTitle" Text="No configuration found" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" FontSize="36" />
+            <TextBlock x:Name="PageTitle" Text="{Binding Path=Strings.NoConfigFound, Source={StaticResource AppRes}}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" FontSize="36" />
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
@@ -43,22 +43,10 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <StackPanel Margin="12,6,6,0" VerticalAlignment="Top" Grid.RowSpan="1">
-                <Button Name="AuthCreate" Content="Create new authenticator" Click="AuthCreate_Click" />
-                <Button Name="AuthRecover" Content="Recover authenticator" Click="AuthRecover_Click" />
+                <Button Name="AuthCreate" Content="{Binding Path=Strings.CreateNewAuth, Source={StaticResource AppRes}}" Click="AuthCreate_Click" />
+                <Button Name="AuthRecover" Content="{Binding Path=Strings.CmdRecoverAuth, Source={StaticResource AppRes}}" Click="AuthRecover_Click" />
             </StackPanel>
         </Grid>
     </Grid>
- 
-    <!--Sample code showing usage of ApplicationBar-->
-    <!--<phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
-            <shell:ApplicationBarIconButton IconUri="/Images/appbar_button1.png" Text="Button 1"/>
-            <shell:ApplicationBarIconButton IconUri="/Images/appbar_button2.png" Text="Button 2"/>
-            <shell:ApplicationBar.MenuItems>
-                <shell:ApplicationBarMenuItem Text="MenuItem 1"/>
-                <shell:ApplicationBarMenuItem Text="MenuItem 2"/>
-            </shell:ApplicationBar.MenuItems>
-        </shell:ApplicationBar>
-    </phone:PhoneApplicationPage.ApplicationBar>-->
 
 </phone:PhoneApplicationPage>

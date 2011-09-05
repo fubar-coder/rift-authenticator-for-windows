@@ -95,7 +95,7 @@ namespace RiftAuthenticator.WP7
                     {
                         Dispatcher.BeginInvoke(() =>
                         {
-                            MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK);
+                            MessageBox.Show(ex.Message, WP7.Resources.AppResource.MessageBoxTitleError, MessageBoxButton.OK);
                             RecoverAuthenticator.IsEnabled = true;
                         });
                     }
@@ -103,7 +103,7 @@ namespace RiftAuthenticator.WP7
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK);
+                MessageBox.Show(ex.Message, WP7.Resources.AppResource.MessageBoxTitleError, MessageBoxButton.OK);
                 RecoverAuthenticator.IsEnabled = true;
             }
         }

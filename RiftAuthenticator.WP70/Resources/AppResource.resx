@@ -117,6 +117,87 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Add" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="AuthNameDefault" xml:space="preserve">
+    <value>Default</value>
+  </data>
+  <data name="AuthNameNumber" xml:space="preserve">
+    <value>Account {0}</value>
+  </data>
+  <data name="BasicInfo" xml:space="preserve">
+    <value>Basic information</value>
+  </data>
+  <data name="CmdRecover" xml:space="preserve">
+    <value>Recover</value>
+  </data>
+  <data name="CmdRecoverAuth" xml:space="preserve">
+    <value>Recover authenticator</value>
+    <comment>Button text to recover an authenticator</comment>
+  </data>
+  <data name="Continue" xml:space="preserve">
+    <value>Continue</value>
+    <comment>Proceed to next page</comment>
+  </data>
+  <data name="Create" xml:space="preserve">
+    <value>Create</value>
+    <comment>Button text to create the new authenticator</comment>
+  </data>
+  <data name="CreateAuth" xml:space="preserve">
+    <value>Create authenticator</value>
+  </data>
+  <data name="CreateNewAuth" xml:space="preserve">
+    <value>Create new authenticator</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="DeleteAuthenticatorQuestion" xml:space="preserve">
+    <value>Delete authenticator?</value>
+  </data>
+  <data name="DescriptionPrefix" xml:space="preserve">
+    <value>Description:</value>
+  </data>
+  <data name="DeviceIdPrefix" xml:space="preserve">
+    <value>Device ID:</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="EmailPrefix" xml:space="preserve">
+    <value>Email:</value>
+  </data>
+  <data name="LoginToken" xml:space="preserve">
+    <value>Login token</value>
+  </data>
+  <data name="MessageBoxTitleError" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="MessageBoxTitleWarning" xml:space="preserve">
+    <value>Warning</value>
+  </data>
+  <data name="NoConfigFound" xml:space="preserve">
+    <value>No authenticator found</value>
+  </data>
+  <data name="PasswordPrefix" xml:space="preserve">
+    <value>Password:</value>
+  </data>
+  <data name="RecoverAuth" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="SecurityQuestions" xml:space="preserve">
+    <value>Security questions</value>
+  </data>
+  <data name="ShowDeviceId" xml:space="preserve">
+    <value>Device ID</value>
+  </data>
+  <data name="Synchronize" xml:space="preserve">
+    <value>Synchronize</value>
+  </data>
   <data name="Title" xml:space="preserve">
     <value>RIFT™ Authenticator</value>
   </data>

@@ -78,6 +78,36 @@ namespace RiftAuthenticator.WP7
 #if !WP70
             ApplicationBar.Mode = Microsoft.Phone.Shell.ApplicationBarMode.Minimized;
 #endif
+            if (ApplicationBar.Buttons.Count == 0)
+            {
+                var appBarButton = new Microsoft.Phone.Shell.ApplicationBarIconButton(new Uri("/Images/appbar.add.rest.png", UriKind.Relative))
+                {
+                    Text = WP7.Resources.AppResource.Add,
+                };
+                appBarButton.Click += AccountAdd_Click;
+                ApplicationBar.Buttons.Add(appBarButton);
+
+                appBarButton = new Microsoft.Phone.Shell.ApplicationBarIconButton(new Uri("/Images/appbar.download.rest.png", UriKind.Relative))
+                {
+                    Text = WP7.Resources.AppResource.CmdRecover,
+                };
+                appBarButton.Click += AccountRecover_Click;
+                ApplicationBar.Buttons.Add(appBarButton);
+
+                appBarButton = new Microsoft.Phone.Shell.ApplicationBarIconButton(new Uri("/Images/appbar.delete.rest.png", UriKind.Relative))
+                {
+                    Text = WP7.Resources.AppResource.Delete,
+                };
+                appBarButton.Click += AccountDelete_Click;
+                ApplicationBar.Buttons.Add(appBarButton);
+
+                appBarButton = new Microsoft.Phone.Shell.ApplicationBarIconButton(new Uri("/Images/appbar.edit.rest.png", UriKind.Relative))
+                {
+                    Text = WP7.Resources.AppResource.Edit,
+                };
+                appBarButton.Click += AccountEdit_Click;
+                ApplicationBar.Buttons.Add(appBarButton);
+            }
         }
 
         private void SetAccount(string accountId)
@@ -132,7 +162,7 @@ namespace RiftAuthenticator.WP7
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK);
+                        MessageBox.Show(ex.Message, WP7.Resources.AppResource.MessageBoxTitleError, MessageBoxButton.OK);
                         AccountManager.Clear();
                     }
                 }
@@ -144,7 +174,7 @@ namespace RiftAuthenticator.WP7
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK);
+                MessageBox.Show(ex.Message, WP7.Resources.AppResource.MessageBoxTitleError, MessageBoxButton.OK);
                 return false;
             }
         }
@@ -222,7 +252,7 @@ namespace RiftAuthenticator.WP7
         {
             if (Account == null || Account.IsEmpty)
                 return;
-            if (MessageBox.Show("Delete authenticator?", "Warning", MessageBoxButton.OKCancel) != MessageBoxResult.OK)
+            if (MessageBox.Show(WP7.Resources.AppResource.DeleteAuthenticatorQuestion, WP7.Resources.AppResource.MessageBoxTitleWarning, MessageBoxButton.OKCancel) != MessageBoxResult.OK)
                 return;
             AccountManager.Remove(Account);
             AccountManager.SaveAccounts();
