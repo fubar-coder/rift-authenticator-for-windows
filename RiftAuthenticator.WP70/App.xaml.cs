@@ -35,6 +35,10 @@ namespace RiftAuthenticator.WP7
 {
     public partial class App : Application
     {
+        private class QuitException : Exception
+        {
+        }
+
         internal static Library.IAccountManager AccountManager { get; set; }
         internal static Library.IAccount Account { get; set; }
         internal static string AuthCreateUsername { get; set; }
@@ -120,6 +124,11 @@ namespace RiftAuthenticator.WP7
                     }
                 });
             }, null);
+        }
+
+        internal static void Quit()
+        {
+            throw new QuitException();
         }
 
 
