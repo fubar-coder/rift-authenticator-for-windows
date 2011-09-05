@@ -39,6 +39,8 @@ namespace RiftAuthenticator.WP7
             var isHidden = DeviceId.Visibility == System.Windows.Visibility.Collapsed;
             var newVisibility = (isHidden ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed);
             DeviceIdLabel.Visibility = DeviceId.Visibility = newVisibility;
+            if (!IsEdit)
+                DeviceIdWarning.Visibility = newVisibility;
         }
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
