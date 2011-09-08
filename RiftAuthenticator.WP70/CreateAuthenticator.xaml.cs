@@ -38,14 +38,11 @@ namespace RiftAuthenticator.WP7
             InitializeComponent();
         }
 
-        private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
+        private void InitPageUI()
         {
 #if !WP70
             ApplicationBar.Mode = Microsoft.Phone.Shell.ApplicationBarMode.Minimized;
 #endif
-
-            SetDeviceIdVisibility(System.Windows.Visibility.Collapsed);
-
             if (ApplicationBar.Buttons.Count == 0)
             {
                 var appBarButton = new Microsoft.Phone.Shell.ApplicationBarIconButton(new Uri("/Images/appbar.feature.settings.rest.png", UriKind.Relative))
@@ -55,15 +52,35 @@ namespace RiftAuthenticator.WP7
                 appBarButton.Click += ShowDeviceId_Click;
                 ApplicationBar.Buttons.Add(appBarButton);
             }
-            
-            AuthDescription.Text = App.CreateDefaultAccountDescription();
-            DeviceId.Text = Library.TrionServer.GetOrCreateRandomDeviceId();
+        }
+
+        private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            InitPageUI();
+
+            SetDeviceIdVisibility(System.Windows.Visibility.Collapsed);
+
+            if (App.AppStartedNormally)
+            {
+                App.AuthCreateDeviceId = Library.TrionServer.GetOrCreateRandomDeviceId();
+                App.AuthCreateDescription = App.CreateDefaultAccountDescription();
+            }
+            AuthDescription.Text = App.AuthCreateDescription;
+            DeviceId.Text = App.AuthCreateDeviceId;
+        }
+
+        private string AuthDeviceId
+        {
+            get
+            {
+                return (string.IsNullOrEmpty(DeviceId.Text) ? Library.TrionServer.GetOrCreateRandomDeviceId() : DeviceId.Text);
+            }
         }
 
         private void AuthCreate_Click(object sender, RoutedEventArgs e)
         {
             AuthCreate.IsEnabled = false;
-            var deviceId = (string.IsNullOrEmpty(DeviceId.Text) ? Library.TrionServer.GetOrCreateRandomDeviceId() : DeviceId.Text);
+            var deviceId = AuthDeviceId;
             var description = AuthDescription.Text;
             var account = App.CreateNewAccountObject();
             Library.TrionServer.BeginCreateSecurityKey((ar) =>
@@ -79,6 +96,7 @@ namespace RiftAuthenticator.WP7
                         {
                             App.ExitApp = false;
                             App.BackToMainPage = true;
+                            App.ResetAuthConfig();
                             NavigationService.GoBack();
                             //NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
                         });
@@ -110,6 +128,16 @@ namespace RiftAuthenticator.WP7
         private void DeviceIdHelp_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show(WP7.Resources.AppResource.DeviceIdHelp);
+        }
+
+        private void AuthDescription_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            App.AuthCreateDescription = AuthDescription.Text;
+        }
+
+        private void DeviceId_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            App.AuthCreateDeviceId = DeviceId.Text;
         }
     }
 }

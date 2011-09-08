@@ -52,41 +52,54 @@ namespace RiftAuthenticator.WP7
             }
         }
 
-        private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
+        private void InitPageUI()
         {
             SecurityQuestionPairs = new List<KeyValuePair<TextBlock, TextBox>>
             {
                 new KeyValuePair<TextBlock, TextBox>(SecurityQuestion1, SecurityAnswer1),
                 new KeyValuePair<TextBlock, TextBox>(SecurityQuestion2, SecurityAnswer2),
             };
-            System.Diagnostics.Debug.Assert(App.SecurityQuestions != null);
-            System.Diagnostics.Debug.Assert(App.SecurityQuestions.Length <= SecurityQuestionPairs.Count);
-            for (int i = 0; i != App.SecurityQuestions.Length; ++i)
+            System.Diagnostics.Debug.Assert(App.AuthCreateSecurityQuestions != null);
+            System.Diagnostics.Debug.Assert(App.AuthCreateSecurityQuestions.Length <= SecurityQuestionPairs.Count);
+            for (int i = 0; i != App.AuthCreateSecurityQuestions.Length; ++i)
             {
                 var securityQuestionPair = SecurityQuestionPairs[i];
-                if (string.IsNullOrEmpty(App.SecurityQuestions[i]))
+                if (string.IsNullOrEmpty(App.AuthCreateSecurityQuestions[i]))
                 {
                     securityQuestionPair.Key.Visibility =
                         securityQuestionPair.Value.Visibility = System.Windows.Visibility.Collapsed;
                 }
                 else
                 {
-                    securityQuestionPair.Key.Text = App.SecurityQuestions[i];
-                    securityQuestionPair.Value.Text = string.Empty;
+                    securityQuestionPair.Key.Text = App.AuthCreateSecurityQuestions[i] ?? string.Empty;
+                    securityQuestionPair.Value.Text = (App.AuthCreateSecurityAnswers == null ? string.Empty : (App.AuthCreateSecurityAnswers[i] ?? string.Empty));
                 }
             }
         }
 
-        private void RecoverAuthenticator_Click(object sender, RoutedEventArgs e)
+        private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
-            var securityQuestionAnswers = new string[App.SecurityQuestions.Length];
-            for (int i = 0; i != App.SecurityQuestions.Length; ++i)
+            InitPageUI();
+
+            App.AuthCreateStep = 3;
+        }
+
+        private void StoreAuthSecurityQuestions()
+        {
+            var securityQuestionAnswers = new string[App.AuthCreateSecurityQuestions.Length];
+            for (int i = 0; i != App.AuthCreateSecurityQuestions.Length; ++i)
             {
-                if (!string.IsNullOrEmpty(App.SecurityQuestions[i]))
+                if (!string.IsNullOrEmpty(App.AuthCreateSecurityQuestions[i]))
                 {
                     securityQuestionAnswers[i] = SecurityQuestionPairs[i].Value.Text;
                 }
             }
+            App.AuthCreateSecurityAnswers = securityQuestionAnswers;
+        }
+
+        private void RecoverAuthenticator_Click(object sender, RoutedEventArgs e)
+        {
+            StoreAuthSecurityQuestions();
             RecoverAuthenticator.IsEnabled = false;
             var account = App.CreateNewAccountObject();
             try
@@ -102,6 +115,7 @@ namespace RiftAuthenticator.WP7
                         {
                             Dispatcher.BeginInvoke(() =>
                             {
+                                App.ResetAuthConfig();
                                 App.ExitApp = false;
                                 App.BackToMainPage = true;
                                 NavigationService.GoBack();
@@ -117,13 +131,23 @@ namespace RiftAuthenticator.WP7
                             RecoverAuthenticator.IsEnabled = true;
                         });
                     }
-                }, null, account, App.AuthCreateUsername, App.AuthCreatePassword, securityQuestionAnswers, App.AuthCreateDeviceId);
+                }, null, account, App.AuthCreateUsername, App.AuthCreatePassword, App.AuthCreateSecurityAnswers, App.AuthCreateDeviceId);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, WP7.Resources.AppResource.MessageBoxTitleError, MessageBoxButton.OK);
                 RecoverAuthenticator.IsEnabled = true;
             }
+        }
+
+        private void SecurityAnswer1_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            StoreAuthSecurityQuestions();
+        }
+
+        private void SecurityAnswer2_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            StoreAuthSecurityQuestions();
         }
     }
 }

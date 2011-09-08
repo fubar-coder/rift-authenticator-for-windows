@@ -61,7 +61,7 @@ namespace RiftAuthenticator.WP7
                 {
                     try
                     {
-                        App.SecurityQuestions = Library.TrionServer.EndGetSecurityQuestions(ar);
+                        App.AuthCreateSecurityQuestions = Library.TrionServer.EndGetSecurityQuestions(ar);
                         NavigationService.Navigate(new Uri("/SecurityQuestions.xaml", UriKind.Relative));
                     }
                     catch (Exception ex)
@@ -70,6 +70,24 @@ namespace RiftAuthenticator.WP7
                     }
                 });
             }, null, App.AuthCreateUsername, App.AuthCreatePassword);
+        }
+
+        private void UserName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            App.AuthCreateUsername = UserName.Text;
+        }
+
+        private void Password_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            App.AuthCreatePassword = Password.Password;
+        }
+
+        private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            App.AuthCreateStep = Math.Max(App.AuthCreateStep, 2);
+
+            UserName.Text = App.AuthCreateUsername ?? string.Empty;
+            Password.Password = App.AuthCreatePassword ?? string.Empty;
         }
     }
 }

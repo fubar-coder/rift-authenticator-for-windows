@@ -52,6 +52,7 @@ namespace RiftAuthenticator.WP7
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
+            App.AuthCreateStep = 1;
             var activeAccounts = App.AccountManager.Where(x => !x.IsEmpty).Count();
             if (!App.BackToMainPage && activeAccounts == 0)
                 App.ExitApp = true;

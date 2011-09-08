@@ -64,9 +64,9 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <TextBlock Name="SecurityQuestion1" Grid.Row="0" Text="Security question 1" TextWrapping="Wrap" />
-            <TextBox Name="SecurityAnswer1" Grid.Row="1" />
+            <TextBox Name="SecurityAnswer1" Grid.Row="1" TextChanged="SecurityAnswer1_TextChanged" />
             <TextBlock Name="SecurityQuestion2" Grid.Row="2" Text="Security question 2" TextWrapping="Wrap" />
-            <TextBox Name="SecurityAnswer2" Grid.Row="3" />
+            <TextBox Name="SecurityAnswer2" Grid.Row="3" TextChanged="SecurityAnswer2_TextChanged" />
             <Button Content="{Binding Path=Strings.CmdRecover, Source={StaticResource AppRes}}" Grid.Row="5" Name="RecoverAuthenticator" Click="RecoverAuthenticator_Click" />
         </Grid>
         <Grid.Background>

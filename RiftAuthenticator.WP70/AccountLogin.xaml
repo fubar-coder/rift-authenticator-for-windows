@@ -28,7 +28,7 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
-    shell:SystemTray.IsVisible="True">
+    shell:SystemTray.IsVisible="True" Loaded="PhoneApplicationPage_Loaded">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot">
@@ -66,9 +66,9 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <TextBlock Grid.Row="2" Text="{Binding Path=Strings.EmailPrefix, Source={StaticResource AppRes}}" />
-            <TextBox Grid.Row="3" Name="UserName" />
+            <TextBox Grid.Row="3" Name="UserName" TextChanged="UserName_TextChanged" />
             <TextBlock Grid.Row="4" Text="{Binding Path=Strings.PasswordPrefix, Source={StaticResource AppRes}}" />
-            <PasswordBox Grid.Row="5" Name="Password" />
+            <PasswordBox Grid.Row="5" Name="Password" PasswordChanged="Password_PasswordChanged" />
             <Button Grid.Row="7" Content="{Binding Path=Strings.Continue, Source={StaticResource AppRes}}" Name="QuerySecurityQuestions" Click="QuerySecurityQuestions_Click" />
         </Grid>
         <Grid.Background>
