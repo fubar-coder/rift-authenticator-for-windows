@@ -26,6 +26,38 @@
     <!--Application Resources-->
     <Application.Resources>
         <local:LocalizedStrings x:Key="AppRes" />
+
+        <Style x:Key="PhoneTextNormalStyle" TargetType="TextBlock" BasedOn="{StaticResource PhoneTextBlockBase}">
+            <Setter Property="Foreground" Value="White" />
+        </Style>
+
+        <Style x:Key="PhoneTextTitle1Style" TargetType="TextBlock" BasedOn="{StaticResource PhoneTextBlockBase}">
+            <Setter Property="FontFamily" Value="{StaticResource PhoneFontFamilySemiLight}"/>
+            <Setter Property="FontSize" Value="{StaticResource PhoneFontSizeExtraExtraLarge}"/>
+            <Setter Property="Foreground" Value="White" />
+        </Style>
+
+        <Color x:Key="PhoneForegroundColor">White</Color>
+        <Color x:Key="PhoneBackgroundColor">Black</Color>
+        <Color x:Key="PhoneDisabledColor">#66FFFFFF</Color>
+        <Color x:Key="PhoneTextCaretColor">#FF000000</Color>
+        <Color x:Key="PhoneTextBoxColor">#BFFFFFFF</Color>
+        <Color x:Key="PhoneTextBoxForegroundColor">#FF000000</Color>
+        <Color x:Key="PhoneTextBoxEditBackgroundColor">#FFFFFFFF</Color>
+        <Color x:Key="PhoneTextBoxEditBorderColor">#FFFFFFFF</Color>
+        <Color x:Key="PhoneTextBoxReadOnlyColor">#77000000</Color>
+
+        <SolidColorBrush x:Key="PhoneForegroundBrush" Color="{StaticResource PhoneForegroundColor}" />
+        <SolidColorBrush x:Key="PhoneBackgroundBrush" Color="{StaticResource PhoneBackgroundColor}" />
+        <SolidColorBrush x:Key="PhoneDisabledBrush" Color="{StaticResource PhoneDisabledColor}"/>
+        <SolidColorBrush x:Key="PhoneTextCaretBrush" Color="{StaticResource PhoneTextCaretColor}"/>
+        <SolidColorBrush x:Key="PhoneTextBoxBrush" Color="{StaticResource PhoneTextBoxColor}"/>
+        <SolidColorBrush x:Key="PhoneTextBoxForegroundBrush" Color="{StaticResource PhoneTextBoxForegroundColor}"/>
+        <SolidColorBrush x:Key="PhoneTextBoxEditBackgroundBrush" Color="{StaticResource PhoneTextBoxEditBackgroundColor}"/>
+        <SolidColorBrush x:Key="PhoneTextBoxEditBorderBrush" Color="{StaticResource PhoneTextBoxEditBorderColor}"/>
+        <SolidColorBrush x:Key="PhoneTextBoxReadOnlyBrush" Color="{StaticResource PhoneTextBoxReadOnlyColor}"/>
+        <SolidColorBrush x:Key="PhoneTextBoxSelectionForegroundBrush" Color="{StaticResource PhoneTextBoxSelectionForegroundColor}"/>
+
     </Application.Resources>
 
     <Application.ApplicationLifetimeObjects>

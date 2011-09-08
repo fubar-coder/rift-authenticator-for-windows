@@ -31,7 +31,7 @@
     shell:SystemTray.IsVisible="True" Loaded="PhoneApplicationPage_Loaded">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
-    <Grid x:Name="LayoutRoot" Background="Transparent">
+    <Grid x:Name="LayoutRoot">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -80,6 +80,9 @@
             <TextBlock Grid.Row="4" Name="DeviceIdWarning" Text="{Binding Path=Strings.DeviceIdModificationWarning, Source={StaticResource AppRes}}" Visibility="Visible" TextWrapping="Wrap" Foreground="Red" />
             <Button Grid.Row="6" Content="{Binding Path=Strings.Continue, Source={StaticResource AppRes}}" Name="LoadSecurityQuestions" Click="LoadSecurityQuestions_Click" />
         </Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/RiftAuthenticator.WP70;component/Images/TRION/rift_bg.jpg" />
+        </Grid.Background>
     </Grid>
 
     <phone:PhoneApplicationPage.ApplicationBar>
