@@ -35,6 +35,17 @@ namespace RiftAuthenticator.Library.PlatformUtils.Android
         public static Dictionary<string, object> ReadMap(System.IO.Stream stream)
         {
             var result = new Dictionary<string, object>();
+            ReadMap(stream, result);
+            return result;
+        }
+
+        /// <summary>
+        /// Read a map from a stream
+        /// </summary>
+        /// <param name="stream">The stream to read the map data from</param>
+        /// <param name="map">The map object where the data from the file gets written to</param>
+        public static void ReadMap(System.IO.Stream stream, Dictionary<string, object> map)
+        {
             var doc = System.Xml.Linq.XDocument.Load(stream);
             foreach (var xmlSetting in doc.Element("map").Elements())
             {
@@ -54,9 +65,8 @@ namespace RiftAuthenticator.Library.PlatformUtils.Android
                     default:
                         throw new NotSupportedException(xmlSetting.Name.LocalName);
                 }
-                result.Add(key, value);
+                map[key] = value;
             }
-            return result;
         }
 
         /// <summary>

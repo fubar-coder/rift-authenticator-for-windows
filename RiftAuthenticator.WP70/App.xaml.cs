@@ -39,6 +39,19 @@ namespace RiftAuthenticator.WP7
         {
         }
 
+        private static readonly string SuspendMapFileName = "suspend-data.xml";
+
+        private static readonly string KeyAccountSerialKey = "account-serial-key";
+        private static readonly string KeyAuthCreateStep = "auth-create-step";
+        private static readonly string KeyAuthCreateUsername = "auth-create-username";
+        private static readonly string KeyAuthCreatePassword = "auth-create-password";
+        private static readonly string KeyAuthCreateDeviceId = "auth-create-device-id";
+        private static readonly string KeyAuthCreateDescription = "auth-create-description";
+        private static readonly string KeyAuthCreateSecurityQuestion1 = "auth-create-security-question-1";
+        private static readonly string KeyAuthCreateSecurityQuestion2 = "auth-create-security-question-2";
+        private static readonly string KeyAuthCreateSecurityAnswer1 = "auth-create-security-answer-1";
+        private static readonly string KeyAuthCreateSecurityAnswer2 = "auth-create-security-answer-2";
+
         internal static Library.IAccountManager AccountManager { get; set; }
         internal static Library.IAccount Account { get; set; }
 
@@ -54,8 +67,14 @@ namespace RiftAuthenticator.WP7
         internal static bool BackToMainPage { get; set; }
         internal static bool AppStartedNormally { get; private set; }
 
-        internal static void ResetAuthConfig()
+        internal static void AuthConfigReset()
         {
+            AuthConfigReset(true);
+        }
+
+        internal static void AuthConfigReset(bool deleteFile)
+        {
+            AppStartedNormally = true;
             AuthCreateStep = -1;
             AuthCreateSecurityQuestions =
                 AuthCreateSecurityAnswers = null;
@@ -63,6 +82,67 @@ namespace RiftAuthenticator.WP7
                 AuthCreateDeviceId =
                 AuthCreatePassword =
                 AuthCreateUsername = null;
+            if (deleteFile)
+            {
+                var map = new ConfigMapFile(SuspendMapFileName);
+                map.Reset();
+            }
+        }
+
+        internal static void AuthConfigSave()
+        {
+            var map = new ConfigMapFile(SuspendMapFileName)
+            {
+                { KeyAccountSerialKey, (Account == null ? null : Account.SerialKey) ?? string.Empty },
+                { KeyAuthCreateStep, AuthCreateStep },
+                { KeyAuthCreateDescription, AuthCreateDescription ?? string.Empty },
+                { KeyAuthCreateDeviceId, AuthCreateDeviceId ?? string.Empty },
+                { KeyAuthCreateUsername, AuthCreateUsername ?? string.Empty },
+                { KeyAuthCreatePassword, AuthCreatePassword ?? string.Empty },
+                { KeyAuthCreateSecurityAnswer1, (AuthCreateSecurityAnswers == null ? null : AuthCreateSecurityAnswers[0]) ?? string.Empty },
+                { KeyAuthCreateSecurityAnswer2, (AuthCreateSecurityAnswers == null ? null : AuthCreateSecurityAnswers[1]) ?? string.Empty },
+                { KeyAuthCreateSecurityQuestion1, (AuthCreateSecurityQuestions == null ? null : AuthCreateSecurityQuestions[0]) ?? string.Empty },
+                { KeyAuthCreateSecurityQuestion2, (AuthCreateSecurityQuestions == null ? null : AuthCreateSecurityQuestions[1]) ?? string.Empty },
+            };
+            map.Save();
+        }
+
+        internal static void AuthConfigLoad()
+        {
+            AuthConfigReset(false);
+            
+            var map = new ConfigMapFile(SuspendMapFileName);
+            map.Load();
+
+            AuthCreateSecurityQuestions = new string[2];
+            AuthCreateSecurityAnswers = new string[2];
+
+            var accountSerialKey = Convert.ToString(map[KeyAccountSerialKey]);
+            SetAccount(accountSerialKey);
+
+            AuthCreateStep = Convert.ToInt32(map[KeyAuthCreateStep]);
+            AuthCreateDescription = Convert.ToString(map[KeyAuthCreateDescription]);
+            AuthCreateDeviceId = Convert.ToString(map[KeyAuthCreateDeviceId]);
+            AuthCreateUsername = Convert.ToString(map[KeyAuthCreateUsername]);
+            AuthCreatePassword = Convert.ToString(map[KeyAuthCreatePassword]);
+            AuthCreateSecurityQuestions[0] = Convert.ToString(map[KeyAuthCreateSecurityQuestion1]);
+            AuthCreateSecurityQuestions[1] = Convert.ToString(map[KeyAuthCreateSecurityQuestion2]);
+            AuthCreateSecurityAnswers[0] = Convert.ToString(map[KeyAuthCreateSecurityAnswer1]);
+            AuthCreateSecurityAnswers[1] = Convert.ToString(map[KeyAuthCreateSecurityAnswer2]);
+        }
+
+        public static void SetAccount(string accountId)
+        {
+            if (AccountManager.Count == 0)
+                AccountManager.Add(AccountManager.CreateAccount());
+            if (!string.IsNullOrEmpty(accountId))
+            {
+                Account = AccountManager.FindAccount(accountId);
+            }
+            else
+            {
+                Account = AccountManager[0];
+            }
         }
 
         internal static string CreateDefaultAccountDescription()
@@ -219,8 +299,8 @@ namespace RiftAuthenticator.WP7
         // This code will not execute when the application is reactivated
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
-            AppStartedNormally = true;
             InitAuthenticatorSystem();
+            AppStartedNormally = true;
         }
 
         // Code to execute when the application is activated (brought to foreground)
@@ -228,12 +308,15 @@ namespace RiftAuthenticator.WP7
         private void Application_Activated(object sender, ActivatedEventArgs e)
         {
             InitAuthenticatorSystem();
+            AuthConfigLoad();
+            AppStartedNormally = false;
         }
 
         // Code to execute when the application is deactivated (sent to background)
         // This code will not execute when the application is closing
         private void Application_Deactivated(object sender, DeactivatedEventArgs e)
         {
+            AuthConfigSave();
         }
 
         // Code to execute when the application is closing (eg, user hit Back)
@@ -245,6 +328,9 @@ namespace RiftAuthenticator.WP7
         // Code to execute if a navigation fails
         private void RootFrame_NavigationFailed(object sender, NavigationFailedEventArgs e)
         {
+            if (e.Exception is QuitException)
+                return;
+
             if (System.Diagnostics.Debugger.IsAttached)
             {
                 // A navigation has failed; break into the debugger
