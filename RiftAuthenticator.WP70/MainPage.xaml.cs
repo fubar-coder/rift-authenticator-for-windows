@@ -97,11 +97,12 @@ namespace RiftAuthenticator.WP7
             InitAuthenticatorUI();
         }
 
-        private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
+        private void InitPageUI()
         {
 #if !WP70
             ApplicationBar.Mode = Microsoft.Phone.Shell.ApplicationBarMode.Minimized;
 #endif
+
             if (ApplicationBar.Buttons.Count == 0)
             {
                 var appBarButton = new Microsoft.Phone.Shell.ApplicationBarIconButton(new Uri("/Images/appbar.add.rest.png", UriKind.Relative))
@@ -132,6 +133,12 @@ namespace RiftAuthenticator.WP7
                 appBarButton.Click += AccountEdit_Click;
                 ApplicationBar.Buttons.Add(appBarButton);
             }
+        }
+
+        private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            App.AuthCreateStep = -1;
+            InitPageUI();
         }
 
         private void SetAccount(string accountId)
@@ -211,6 +218,7 @@ namespace RiftAuthenticator.WP7
 
         private void AccountAdd_Click(object sender, EventArgs e)
         {
+            App.AuthCreateStep = 1;
             NavigationService.Navigate(new Uri("/CreateAuthenticator.xaml", UriKind.Relative));
         }
 
@@ -229,6 +237,7 @@ namespace RiftAuthenticator.WP7
 
         private void AccountRecover_Click(object sender, EventArgs e)
         {
+            App.AuthCreateStep = 1;
             NavigationService.Navigate(new Uri("/AuthenticatorDescription.xaml", UriKind.Relative));
         }
 

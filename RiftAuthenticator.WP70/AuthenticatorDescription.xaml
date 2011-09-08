@@ -65,19 +65,19 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <TextBlock Grid.Row="0" Text="{Binding Path=Strings.DescriptionPrefix, Source={StaticResource AppRes}}" />
-            <TextBox Grid.Row="1" Name="AuthDescription" />
-            <TextBlock Grid.Row="2" Name="DeviceIdLabel" Text="{Binding Path=Strings.DeviceIdPrefix, Source={StaticResource AppRes}}" Visibility="Visible" />
-            <Grid Name="DeviceIdWithHelp" Grid.Row="3" Visibility="Visible">
+            <TextBox Grid.Row="1" Name="AuthDescription" TextChanged="AuthDescription_TextChanged" />
+            <TextBlock Grid.Row="2" Name="DeviceIdLabel" Text="{Binding Path=Strings.DeviceIdPrefix, Source={StaticResource AppRes}}" Visibility="Collapsed" />
+            <Grid Name="DeviceIdWithHelp" Grid.Row="3" Visibility="Collapsed">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <TextBox Name="DeviceId" />
+                <TextBox Name="DeviceId" TextChanged="DeviceId_TextChanged" />
                 <Button Name="DeviceIdHelp" Grid.Column="1" BorderThickness="0" Padding="0" Click="DeviceIdHelp_Click">
                     <Image Source="Images/appbar.questionmark.rest.png" />
                 </Button>
             </Grid>
-            <TextBlock Grid.Row="4" Name="DeviceIdWarning" Text="{Binding Path=Strings.DeviceIdModificationWarning, Source={StaticResource AppRes}}" Visibility="Visible" TextWrapping="Wrap" Foreground="Red" />
+            <TextBlock Grid.Row="4" Name="DeviceIdWarning" Text="{Binding Path=Strings.DeviceIdModificationWarning, Source={StaticResource AppRes}}" Visibility="Collapsed" TextWrapping="Wrap" Foreground="Red" />
             <Button Grid.Row="6" Content="{Binding Path=Strings.Continue, Source={StaticResource AppRes}}" Name="LoadSecurityQuestions" Click="LoadSecurityQuestions_Click" />
         </Grid>
         <Grid.Background>

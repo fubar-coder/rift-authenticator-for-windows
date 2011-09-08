@@ -41,15 +41,29 @@ namespace RiftAuthenticator.WP7
 
         internal static Library.IAccountManager AccountManager { get; set; }
         internal static Library.IAccount Account { get; set; }
+
+        internal static int AuthCreateStep { get; set; }
         internal static string AuthCreateUsername { get; set; }
         internal static string AuthCreatePassword { get; set; }
         internal static string AuthCreateDeviceId { get; set; }
         internal static string AuthCreateDescription { get; set; }
-        internal static string[] SecurityQuestions { get; set; }
+        internal static string[] AuthCreateSecurityAnswers { get; set; }
+        internal static string[] AuthCreateSecurityQuestions { get; set; }
 
         internal static bool ExitApp { get; set; }
         internal static bool BackToMainPage { get; set; }
         internal static bool AppStartedNormally { get; private set; }
+
+        internal static void ResetAuthConfig()
+        {
+            AuthCreateStep = -1;
+            AuthCreateSecurityQuestions =
+                AuthCreateSecurityAnswers = null;
+            AuthCreateDescription =
+                AuthCreateDeviceId =
+                AuthCreatePassword =
+                AuthCreateUsername = null;
+        }
 
         internal static string CreateDefaultAccountDescription()
         {
