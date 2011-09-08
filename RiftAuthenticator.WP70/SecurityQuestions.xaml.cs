@@ -115,7 +115,7 @@ namespace RiftAuthenticator.WP7
                         {
                             Dispatcher.BeginInvoke(() =>
                             {
-                                App.ResetAuthConfig();
+                                App.AuthConfigReset();
                                 App.ExitApp = false;
                                 App.BackToMainPage = true;
                                 NavigationService.GoBack();

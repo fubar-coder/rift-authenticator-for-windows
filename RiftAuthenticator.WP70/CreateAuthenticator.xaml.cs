@@ -65,8 +65,8 @@ namespace RiftAuthenticator.WP7
                 App.AuthCreateDeviceId = Library.TrionServer.GetOrCreateRandomDeviceId();
                 App.AuthCreateDescription = App.CreateDefaultAccountDescription();
             }
-            AuthDescription.Text = App.AuthCreateDescription;
-            DeviceId.Text = App.AuthCreateDeviceId;
+            AuthDescription.Text = App.AuthCreateDescription ?? string.Empty;
+            DeviceId.Text = App.AuthCreateDeviceId ?? string.Empty;
         }
 
         private string AuthDeviceId
@@ -96,7 +96,7 @@ namespace RiftAuthenticator.WP7
                         {
                             App.ExitApp = false;
                             App.BackToMainPage = true;
-                            App.ResetAuthConfig();
+                            App.AuthConfigReset();
                             NavigationService.GoBack();
                             //NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
                         });

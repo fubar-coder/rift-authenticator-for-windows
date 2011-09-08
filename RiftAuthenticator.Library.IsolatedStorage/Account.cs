@@ -48,24 +48,25 @@ namespace RiftAuthenticator.Library.IsolatedStorage
             return foundFileNameIndex != -1;
         }
 
-        internal static Dictionary<string, object> ReadMap(string fileName)
+        internal static void ReadMap(string fileName, Dictionary<string, object> map)
         {
-            Dictionary<string, object> result;
             using (var storage = CreateIsolatedStorageFile())
             {
                 if (HasFile(storage, fileName))
                 {
                     using (var stream = new System.IO.IsolatedStorage.IsolatedStorageFileStream(fileName, System.IO.FileMode.Open, System.IO.FileAccess.Read, storage))
                     {
-                        result = PlatformUtils.Android.MapFile.ReadMap(stream);
+                        PlatformUtils.Android.MapFile.ReadMap(stream, map);
                         stream.Close();
                     }
                 }
-                else
-                {
-                    result = new Dictionary<string, object>();
-                }
             }
+        }
+
+        internal static Dictionary<string, object> ReadMap(string fileName)
+        {
+            var result = new Dictionary<string, object>();
+            ReadMap(fileName, result);
             return result;
         }
 

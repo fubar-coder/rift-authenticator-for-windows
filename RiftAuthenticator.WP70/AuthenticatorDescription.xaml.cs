@@ -121,7 +121,7 @@ namespace RiftAuthenticator.WP7
         {
             if (IsEdit)
             {
-                App.ResetAuthConfig();
+                App.AuthConfigReset();
                 App.Account.Description = AuthDescription.Text;
                 App.AccountManager.SaveAccounts();
                 App.BackToMainPage = true;

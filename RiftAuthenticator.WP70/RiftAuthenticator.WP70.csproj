@@ -68,6 +68,7 @@
     <Compile Include="AuthenticatorDescription.xaml.cs">
       <DependentUpon>AuthenticatorDescription.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ConfigMapFile.cs" />
     <Compile Include="CreateAuthenticator.xaml.cs">
       <DependentUpon>CreateAuthenticator.xaml</DependentUpon>
     </Compile>

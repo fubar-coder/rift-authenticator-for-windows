@@ -137,22 +137,13 @@ namespace RiftAuthenticator.WP7
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
         {
-            App.AuthCreateStep = -1;
+            App.AuthConfigReset();
             InitPageUI();
         }
 
         private void SetAccount(string accountId)
         {
-            if (AccountManager.Count == 0)
-                AccountManager.Add(AccountManager.CreateAccount());
-            if (!string.IsNullOrEmpty(accountId))
-            {
-                Account = AccountManager.FindAccount(accountId);
-            }
-            else
-            {
-                Account = AccountManager[0];
-            }
+            App.SetAccount(accountId);
             UpdateAccountList();
         }
 
