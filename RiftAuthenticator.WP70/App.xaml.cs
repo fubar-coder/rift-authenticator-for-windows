@@ -49,6 +49,7 @@ namespace RiftAuthenticator.WP7
 
         internal static bool ExitApp { get; set; }
         internal static bool BackToMainPage { get; set; }
+        internal static bool AppStartedNormally { get; private set; }
 
         internal static string CreateDefaultAccountDescription()
         {
@@ -131,6 +132,32 @@ namespace RiftAuthenticator.WP7
             throw new QuitException();
         }
 
+        private static void InitAuthenticatorSystem()
+        {
+            // Use this fake UserAgent because HTTP requests are buggy when the WebBrowser control were instantiated
+            // by this application
+            InitAuthenticatorSystem("Mozilla/4.0 (compatible: MSIE 7.0; Windows Phone OS 7.0; Trident/3.1; IEMobile/7.0; SAMSUNG; SGH-i917)");
+        }
+
+        private static void InitAuthenticatorSystem(string userAgent)
+        {
+            if (Library.TrionServer.Platform == null)
+                Library.TrionServer.Platform = new Library.Platform.WP7.Platform(userAgent);
+            var newAccountManager = AccountManager == null;
+            if (newAccountManager)
+            {
+                AccountManager = new Library.IsolatedStorage.AccountManager();
+                try
+                {
+                    AccountManager.LoadAccounts();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, WP7.Resources.AppResource.MessageBoxTitleError, MessageBoxButton.OK);
+                    AccountManager.Clear();
+                }
+            }
+        }
 
         /// <summary>
         /// Provides easy access to the root frame of the Phone Application.
@@ -178,12 +205,15 @@ namespace RiftAuthenticator.WP7
         // This code will not execute when the application is reactivated
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
+            AppStartedNormally = true;
+            InitAuthenticatorSystem();
         }
 
         // Code to execute when the application is activated (brought to foreground)
         // This code will not execute when the application is first launched
         private void Application_Activated(object sender, ActivatedEventArgs e)
         {
+            InitAuthenticatorSystem();
         }
 
         // Code to execute when the application is deactivated (sent to background)

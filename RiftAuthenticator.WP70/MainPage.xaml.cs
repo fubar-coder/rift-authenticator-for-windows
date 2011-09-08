@@ -85,8 +85,14 @@ namespace RiftAuthenticator.WP7
             }
             else
             {
-                InitAuthenticatorSystem();
-                base.OnNavigatedTo(e);
+                if (App.AppStartedNormally && AccountManager.Count == 0)
+                {
+                    NavigationService.Navigate(new Uri("/NoConfigPage.xaml", UriKind.Relative));
+                }
+                else
+                {
+                    base.OnNavigatedTo(e);
+                }
             }
             InitAuthenticatorUI();
         }
@@ -154,46 +160,6 @@ namespace RiftAuthenticator.WP7
                 Timer.Interval = new TimeSpan(0, 0, 0, 0, 200);
                 Timer.Tick += new EventHandler(Timer_Tick);
                 Timer.Start();
-            }
-        }
-
-        private bool InitAuthenticatorSystem()
-        {
-            // Use this fake UserAgent because HTTP requests are buggy when the WebBrowser control were instantiated
-            // by this application
-            return InitAuthenticatorSystem("Mozilla/4.0 (compatible: MSIE 7.0; Windows Phone OS 7.0; Trident/3.1; IEMobile/7.0; SAMSUNG; SGH-i917)");
-        }
-
-        private bool InitAuthenticatorSystem(string userAgent)
-        {
-            try
-            {
-                if (Library.TrionServer.Platform == null)
-                    Library.TrionServer.Platform = new Library.Platform.WP7.Platform(userAgent);
-                var newAccountManager = AccountManager == null;
-                if (newAccountManager)
-                {
-                    AccountManager = new Library.IsolatedStorage.AccountManager();
-                    try
-                    {
-                        AccountManager.LoadAccounts();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message, WP7.Resources.AppResource.MessageBoxTitleError, MessageBoxButton.OK);
-                        AccountManager.Clear();
-                    }
-                }
-                if (AccountManager.Count == 0)
-                {
-                    NavigationService.Navigate(new Uri("/NoConfigPage.xaml", UriKind.Relative));
-                }
-                return newAccountManager;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, WP7.Resources.AppResource.MessageBoxTitleError, MessageBoxButton.OK);
-                return false;
             }
         }
 
