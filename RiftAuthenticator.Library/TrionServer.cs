@@ -104,7 +104,7 @@ namespace RiftAuthenticator.Library
         private static void WriteRequest(System.Net.HttpWebRequest request, Dictionary<string, string> postVariables, Action requestSent)
         {
             request.Method = "POST";
-            request.ContentType = "application/x-www-form-urlencoded";
+            request.ContentType = "application/x-www-form-urlencoded; charset=UTF-8";
             var asyncRequest = request.BeginGetRequestStream((ar) =>
             {
                 using (var requestStream = request.EndGetRequestStream(ar))
