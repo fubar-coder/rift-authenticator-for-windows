@@ -83,7 +83,7 @@ namespace RiftAuthenticator.Library
         {
             get
             {
-                return string.IsNullOrEmpty(DeviceId);
+                return string.IsNullOrEmpty(DeviceId) || string.IsNullOrEmpty(SecretKey);
             }
         }
 
