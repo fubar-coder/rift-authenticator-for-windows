@@ -11,7 +11,8 @@
     <RootNamespace>RiftAuthenticator.WinForms</RootNamespace>
     <AssemblyName>RiftAuthenticator.WinForms</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
@@ -209,7 +210,9 @@
     <EmbeddedResource Include="SecurityQuestions.resx">
       <DependentUpon>SecurityQuestions.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\DataSources\RiftAuthenticator.Library.IAccount.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
