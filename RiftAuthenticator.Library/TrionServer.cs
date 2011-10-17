@@ -42,6 +42,7 @@ namespace RiftAuthenticator.Library
             );
 
         private static ISecretKeyEncryption _defaultSecretKeyEncryption = new PlatformUtils.Android.AndroidSecretKeyEncryption();
+        private static System.Text.Encoding _defaultHttpPostEncoding = System.Text.Encoding.Default;
 
         /// <summary>
         /// The platform object used to get and use platform specific data and functions
@@ -85,18 +86,19 @@ namespace RiftAuthenticator.Library
 #if WINDOWS_PHONE
             return System.Net.HttpUtility.UrlEncode(value);
 #else
-            return Uri.EscapeDataString(value);
+            return System.Web.HttpUtility.UrlEncode(value, _defaultHttpPostEncoding);
 #endif
         }
 
         private static void WritePostVariables(System.IO.Stream requestStream, Dictionary<string, string> postVariables)
         {
-            var requestWriter = new System.IO.StreamWriter(requestStream) { NewLine = "&" };
+            var requestWriter = new System.IO.StreamWriter(requestStream, _defaultHttpPostEncoding) { NewLine = "&" };
             foreach (var postVariable in postVariables)
             {
                 var name = postVariable.Key;
                 var value = postVariable.Value;
-                requestWriter.WriteLine("{0}={1}", name, UrlEncode(value));
+                var line = string.Format("{0}={1}", name, UrlEncode(value));
+                requestWriter.WriteLine(line);
             }
             requestWriter.Flush();
         }
