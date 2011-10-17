@@ -17,7 +17,7 @@ along with RIFT™ Authenticator for Windows.  If not, see
 <http://www.gnu.org/licenses/>.
 -->
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-  <?define ProductVersion="1.1.1"?>
+  <?define ProductVersion="1.1.2"?>
   <?define UpgradeCode="7336F679-35B0-4BF6-8708-82FBC9E29095"?>
   <?define Manufacturer="RIFT™ Authenticator for Windows Project"?>
   <?define ProductCode="910AE6E2-B43A-473B-98EB-0E48AB341DA7"?>
