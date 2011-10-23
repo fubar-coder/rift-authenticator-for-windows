@@ -7,12 +7,9 @@ namespace RiftAuthenticator.Library.Platform.WP7
 {
     public class Platform : IPlatform
     {
-        private static readonly int ANIDLength = 32;
-        private static readonly int ANIDOffset = 2;
-
         public Platform(string userAgent)
         {
-            DeviceId = GetDeviceUniqueId() ?? GetWindowsLiveAnonymousID();
+            DeviceId = GetDeviceUniqueId();
             UserAgent = userAgent;
             SecretKeyEncryption = new Library.PlatformUtils.WindowsPhone.WindowsPhoneSecretKeyEncryption();
         }
@@ -28,21 +25,6 @@ namespace RiftAuthenticator.Library.Platform.WP7
             if (result == null)
                 return null;
             return Util.BytesToHex(result);
-        }
-
-        public static string GetWindowsLiveAnonymousID()
-        {
-            string result = string.Empty;
-            object anid;
-            if (Microsoft.Phone.Info.UserExtendedProperties.TryGetValue("ANID", out anid))
-            {
-                if (anid != null && anid.ToString().Length >= (ANIDLength + ANIDOffset))
-                {
-                    result = anid.ToString().Substring(ANIDOffset, ANIDLength);
-                }
-            }
-
-            return result;
         }
 
         public static string GetUserAgent(Grid contentGrid)
